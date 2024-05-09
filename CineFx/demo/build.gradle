@@ -24,11 +24,11 @@ tasks.withType(JavaCompile) {
 }
 
 application {
-  mainModule = 'JYRS.DEV.CINE'
-  mainClass = 'org.example.demo.HelloApplication'
+  mainModule = 'org.example.demo'
+  mainClass = 'org.example.demo.CineApplication'
 }
 kotlin {
-  jvmToolchain( 21 )
+  jvmToolchain(21)
 }
 
 javafx {
@@ -40,10 +40,18 @@ dependencies {
 
   testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+
+  implementation("com.michael-bull.kotlin-result:kotlin-result:2.0.0")
+
+  implementation(platform("io.insert-koin:koin-bom:3.5.6"))
+  implementation("io.insert-koin:koin-core")
+
+  implementation("com.vaadin:open:8.5.0")
 }
 
 test {
-useJUnitPlatform()}
+  useJUnitPlatform()
+}
 
 jlink {
   imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
@@ -55,4 +63,16 @@ jlink {
 
 jlinkZip {
   group = 'distribution'
+}
+
+tasks.jar {
+  manifest {
+    attributes 'Main-Class': 'org.example.demo.CineApplication'
+  }
+
+  from {
+    configurations["compileClasspath"].collect { it.isDirectory() ? it : zipTree(it) }
+  }
+
+  duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }

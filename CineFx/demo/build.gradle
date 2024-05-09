@@ -24,7 +24,7 @@ tasks.withType(JavaCompile) {
 }
 
 application {
-  mainModule = 'org.example.demo'
+  mainModule = 'JYRS.DEV.CINE'
   mainClass = 'org.example.demo.HelloApplication'
 }
 kotlin {

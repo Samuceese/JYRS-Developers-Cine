@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="700.0" style="-fx-background-color: #061326;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="TOP_CENTER" prefHeight="0.0" prefWidth="700.0">
+         <children>
+            <AnchorPane prefHeight="96.0" prefWidth="700.0">
+               <children>
+                  <Label layoutX="193.0" layoutY="22.0" prefHeight="58.0" prefWidth="314.0" text="ELIGE TUS ASIENTOS" textFill="WHITE" AnchorPane.topAnchor="30.0">
+                     <font>
+                        <Font name="Elephant" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="249.0" layoutY="65.0" prefHeight="18.0" prefWidth="202.0" text="------------------------------------------" textFill="WHITE" AnchorPane.leftAnchor="249.0" AnchorPane.rightAnchor="249.39999999999998" AnchorPane.topAnchor="65.0" />
+                  <MenuBar layoutY="-1.0" prefHeight="18.0" prefWidth="700.0">
+                    <menus>
+                      <Menu mnemonicParsing="false" text="Fichero">
+                        <items>
+                          <MenuItem mnemonicParsing="false" text="Close" />
+                        </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="Ayuda">
+                        <items>
+                          <MenuItem mnemonicParsing="false" text="Delete" />
+                        </items>
+                      </Menu>
+                    </menus>
+                  </MenuBar>
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <HBox alignment="TOP_CENTER" prefHeight="63.0" prefWidth="60.0">
+         <children>
+            <AnchorPane prefHeight="70.0" prefWidth="719.0">
+               <children>
+                  <Separator prefHeight="3.0" prefWidth="700.0" />
+                  <Separator layoutY="66.0" prefHeight="3.0" prefWidth="700.0" />
+                  <Label layoutX="73.0" layoutY="15.0" prefHeight="39.0" prefWidth="94.0" text="Libre" textFill="WHITE" AnchorPane.bottomAnchor="15.400000000000006" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="533.4000000000001" AnchorPane.topAnchor="15.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagesProy%20(1)/imagesProy%20(3).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="209.0" layoutY="15.0" text="Asignada" textFill="WHITE" AnchorPane.bottomAnchor="15.400000000000006" AnchorPane.leftAnchor="205.0" AnchorPane.topAnchor="15.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagesProy%20(1)/imagesProy%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <Label layoutX="410.6" layoutY="16.8" text="Mantenimiento" textFill="WHITE" AnchorPane.bottomAnchor="15.200000000000003" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="15.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagesProy%20(1)/imagesProy%20(2).png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="395.0" layoutY="15.0" text="Vip" textFill="WHITE" AnchorPane.bottomAnchor="15.400000000000006" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="15.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagesProy%20(1)/vip.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+      <HBox alignment="TOP_CENTER" prefHeight="515.0" prefWidth="700.0">
+         <children>
+            <AnchorPane prefHeight="450.0" prefWidth="743.0">
+               <children>
+                  <GridPane alignment="CENTER" layoutX="150.0" layoutY="14.0" prefHeight="381.0" prefWidth="488.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.79999999999995">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <ImageView fx:id="butacaImage1a" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+                        <ImageView fx:id="butacaImage1b" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+                        <ImageView fx:id="butacaImage1c" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
+                        <ImageView fx:id="butacaImage1d" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" />
+                        <ImageView fx:id="butacaImage1e" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" />
+                        <ImageView fx:id="butacaImage1f" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" />
+                        <ImageView fx:id="butacaImage1g" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" />
+                        <CheckBox fx:id="checkBox1a" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="8.0" GridPane.columnIndex="1" />
+                        <CheckBox fx:id="checkBox1b" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="8.0" GridPane.columnIndex="2" />
+                        <CheckBox fx:id="checkBox1c" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="8.0" GridPane.columnIndex="3" />
+                        <CheckBox fx:id="checkBox1d" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="8.0" GridPane.columnIndex="4" />
+                        <CheckBox fx:id="checkBox1e" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="18.0" prefWidth="0.0" GridPane.columnIndex="5" />
+                        <CheckBox fx:id="checkBox1f" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="8.0" GridPane.columnIndex="6" />
+                        <CheckBox fx:id="checkBox1g" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="8.0" GridPane.columnIndex="7" />
+                        <ImageView fx:id="butacaImage2b" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <ImageView fx:id="butacaImage2a" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <ImageView fx:id="butacaImage2c" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <ImageView fx:id="butacaImage2d" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                        <ImageView fx:id="butacaImage2f" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                        <ImageView fx:id="butacaImage2e" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                        <ImageView fx:id="butacaImage2g" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+                        <ImageView fx:id="butacaImage3a" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <ImageView fx:id="butacaImage3b" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <ImageView fx:id="butacaImage3c" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                        <ImageView fx:id="butacaImage3d" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                        <ImageView fx:id="butacaImage3e" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                        <ImageView fx:id="butacaImage3f" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                        <ImageView fx:id="butacaImage3g" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+                        <ImageView fx:id="butacaImage4a" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <ImageView fx:id="butacaImage4b" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                        <ImageView fx:id="butacaImage4c" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                        <ImageView fx:id="butacaImage4d" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                        <ImageView fx:id="butacaImage4e" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                        <ImageView fx:id="butacaImage4f" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+                        <ImageView fx:id="butacaImage4g" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="3" />
+                        <ImageView fx:id="butacaImage5a" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <ImageView fx:id="butacaImage5b" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                        <ImageView fx:id="butacaImage5c" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                        <ImageView fx:id="butacaImage5d" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                        <ImageView fx:id="butacaImage5e" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                        <ImageView fx:id="butacaImage5f" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+                        <ImageView fx:id="butacaImage5g" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="4" />
+                        <ImageView fx:id="butacaImage6a" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <ImageView fx:id="butacaImage6b" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                        <ImageView fx:id="butacaImage6c" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                        <ImageView fx:id="butacaImage6d" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                        <ImageView fx:id="butacaImage6e" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                        <ImageView fx:id="butacaImage6f" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                        <ImageView fx:id="butacaImage6g" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="5" />
+                        <ImageView fx:id="butacaImage7a" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <ImageView fx:id="butacaImage7b" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                        <ImageView fx:id="butacaImage7c" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                        <ImageView fx:id="butacaImage7d" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                        <ImageView fx:id="butacaImage7e" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+                        <ImageView fx:id="butacaImage7f" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+                        <ImageView fx:id="butacaImage7g" fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="7" GridPane.rowIndex="6" />
+                        <CheckBox fx:id="checkBox2a" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="8.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="checkBox2b" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="8.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="checkBox2c" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="8.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="checkBox2d" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="8.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="checkBox2e" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="8.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="checkBox2f" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="8.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="checkBox2g" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="8.0" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="checkBox3a" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="8.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <CheckBox fx:id="checkBox3b" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="8.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <CheckBox fx:id="checkBox3c" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="8.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                        <CheckBox fx:id="checkBox3d" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="8.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                        <CheckBox fx:id="checkBox3e" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="8.0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                        <CheckBox fx:id="checkBox3f" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="8.0" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                        <CheckBox fx:id="checkBox3g" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="8.0" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+                        <CheckBox fx:id="checkBox4a" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="8.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <CheckBox fx:id="checkBox4b" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="8.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                        <CheckBox fx:id="checkBox4c" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="17.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                        <CheckBox fx:id="checkBox4d" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="17.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                        <CheckBox fx:id="checkBox4e" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="17.0" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                        <CheckBox fx:id="checkBox4f" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="17.0" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+                        <CheckBox fx:id="checkBox4g" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="17.0" GridPane.columnIndex="7" GridPane.rowIndex="3" />
+                        <CheckBox fx:id="checkBox5a" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="17.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <CheckBox fx:id="checkBox5b" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="17.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                        <CheckBox fx:id="checkBox5c" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="17.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                        <CheckBox fx:id="checkBox5d" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="17.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                        <CheckBox fx:id="checkBox5e" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="17.0" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                        <CheckBox fx:id="checkBox5f" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="17.0" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+                        <CheckBox fx:id="checkBox5g" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="17.0" GridPane.columnIndex="7" GridPane.rowIndex="4" />
+                        <CheckBox fx:id="checkBox6a" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="17.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <CheckBox fx:id="checkBox6b" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="17.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                        <CheckBox fx:id="checkBox6c" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="17.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                        <CheckBox fx:id="checkBox6d" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="17.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                        <CheckBox fx:id="checkBox6e" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="17.0" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                        <CheckBox fx:id="checkBox6f" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="17.0" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                        <CheckBox fx:id="checkBox6g" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="17.0" GridPane.columnIndex="7" GridPane.rowIndex="5" />
+                        <CheckBox fx:id="checkBox7a" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="17.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <CheckBox fx:id="checkBox7b" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="17.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                        <CheckBox fx:id="checkBox7c" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="17.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                        <CheckBox fx:id="checkBox7d" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="17.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                        <CheckBox fx:id="checkBox7e" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="17.0" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+                        <CheckBox fx:id="checkBox7f" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="17.0" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+                        <CheckBox fx:id="checkBox7g" blendMode="MULTIPLY" mnemonicParsing="false" prefHeight="7.0" prefWidth="17.0" GridPane.columnIndex="7" GridPane.rowIndex="6" />
+                        <Label text="1" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label text="2" textFill="WHITE" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label text="3" textFill="WHITE" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label text="4" textFill="WHITE" GridPane.rowIndex="3">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label text="5" textFill="WHITE" GridPane.rowIndex="4">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label text="6" textFill="WHITE" GridPane.rowIndex="5">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label text="7" textFill="WHITE" GridPane.rowIndex="6">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label text="a" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label text="b" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="7">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label text="c" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="7">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label text="d" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="7">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label text="e" textFill="WHITE" GridPane.columnIndex="5" GridPane.rowIndex="7">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label text="f" textFill="WHITE" GridPane.columnIndex="6" GridPane.rowIndex="7">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label text="g" textFill="WHITE" GridPane.columnIndex="7" GridPane.rowIndex="7">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+   </children>
+</VBox>

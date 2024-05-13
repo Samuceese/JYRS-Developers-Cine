@@ -5,6 +5,7 @@ module org.example.demo {
     requires kotlin.result.jvm;
     requires logging.jvm;
     requires kotlinx.serialization.core;
+    requires sqlite.driver;
 
 
     opens org.example.demo to javafx.fxml;

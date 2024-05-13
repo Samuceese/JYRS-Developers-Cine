@@ -45,7 +45,7 @@ object RoutesManager {
             isResizable=false
             scene=mainScene
             _activeStage=stage
-            icons.add(Image(getResourceAsStream("icons/jyrs-cinema.png")))
+            icons.add(Image(getResourceAsStream("icons/jyrs-cinema.jpeg")))
             setOnCloseRequest { onAppExit(event = it) }
             centerOnScreen()
         }.show()

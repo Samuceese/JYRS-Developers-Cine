@@ -92,7 +92,7 @@ tasks.jar {
 sqldelight {
   databases {
     create("AppDatabase") {
-      packageName.set("dev.javierhvicente.database")
+      packageName.set("org.example.database")
     }
   }
 }

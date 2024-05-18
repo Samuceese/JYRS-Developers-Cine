@@ -1,12 +1,14 @@
-package org.example.demo.productos.butaca
+package org.example.demo.productos.butaca.mappers
 
+import database.ButacaEntity
 import org.example.demo.productos.butaca.dto.ButacaDto
 import org.example.demo.productos.models.Butaca
 import org.example.demo.productos.models.Estado
 import org.example.demo.productos.models.Ocupacion
 import org.example.demo.productos.models.Tipo
+import java.time.LocalDate
 
-/*fun ButacaEntity.toButaca():Butaca{
+fun ButacaEntity.toButaca():Butaca{
     var _id=this.id
     var _estado:Estado?=null
     var _tipo:Tipo?=null
@@ -19,17 +21,9 @@ import org.example.demo.productos.models.Tipo
         "MANTENIMIENTO"-> _estado=Estado.MANTENIMIENTO
         "OUTSERVICE"-> _estado=Estado.OUTSERVICE
     }
-    return Butaca(_id,_estado!!,_tipo!!,LocalDate.parse(this.createAt))
-
+    return Butaca(_id,_estado!!,_tipo!!, LocalDate.parse(this.createAt))
 }
 
- */
-/**
- * El mapper de la butacaDto a una butaca normal
- * @return Butaca
- * @author Yahya el hadri el bakkali
- * @since 1.0
- */
 fun ButacaDto.toButaca():Butaca{
     var _tipo:Tipo?=null
     when(this.tipo){
@@ -44,12 +38,7 @@ fun ButacaDto.toButaca():Butaca{
     }
     return Butaca(this.id,_estado!!,_tipo!!)
 }
-/**
- * El mapper de la butaca normal a butacaDto
- * @return ButacaDto
- * @author Yahya el hadri el bakkali
- * @since 1.0
- */
+
 fun Butaca.toButacaDto(): ButacaDto {
     var _tipo:String?=null
     when(this.tipo){

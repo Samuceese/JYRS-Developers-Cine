@@ -1,11 +1,14 @@
 package org.example.demo.routes
 
+
 import javafx.application.Application
 import javafx.application.Platform
 import javafx.fxml.FXMLLoader
+import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.scene.control.Alert
 import javafx.scene.control.ButtonType
+import javafx.scene.control.ScrollPane
 import javafx.scene.image.Image
 import javafx.scene.layout.Pane
 import javafx.stage.Modality
@@ -27,16 +30,19 @@ object RoutesManager {
         INICIO_SESION("views/inicio-sesion.fxml"),
         REGISTRO("views/registro.fxml"),
         SELECPELICULAS("views/selec-peliculas.fxml"),
-        SELECBUTACAS("views/selec-butacas.fxml"),
+        OLVIDARCONTRA("views/olvidar-contra.fxml"),
+        SELECBUTACAS("views/asientosCine.fxml"),
         SELECCOMPL("views/selec-compl.fxml"),
-        CARRITO("vies/carrito.fxml"),
+        CARRITO("views/carrito.fxml"),
         PAGO("views/pago.fxml"),
         TICKET("views/ticket.fxml"),
+        MENUADMIN("views/menu-admin.fxml"),
+        GESTIONCOMPL("views/gestion-compl.fxml"),
         ACERCA_DE("views/acerca-de.fxml")
     }
     
     fun initMainStage(stage:Stage){
-        val fxmlLoader=FXMLLoader(getResource(View.REGISTRO.fxml))
+        val fxmlLoader=FXMLLoader(getResource(View.INICIO_SESION.fxml))
         val parentRoot = fxmlLoader.load<Pane>()
         val mainScene = Scene(parentRoot,700.0,500.0)
 
@@ -45,7 +51,8 @@ object RoutesManager {
             isResizable=false
             scene=mainScene
             _activeStage=stage
-            icons.add(Image(getResourceAsStream("icons/jyrs-cinema.jpeg")))
+            mainStage=stage
+            icons.add(Image(getResourceAsStream("images/jyrs-cinema.png")))
             setOnCloseRequest { onAppExit(event = it) }
             centerOnScreen()
         }.show()
@@ -58,7 +65,10 @@ object RoutesManager {
         width: Double = 700.0,
         height: Double = 500.0,
     ) {
-        val parentRoot = FXMLLoader.load<Pane>(this.getResource(view.fxml))
+        var parentRoot: Parent
+        if (view==View.SELECPELICULAS) parentRoot = FXMLLoader.load<ScrollPane>(this.getResource(view.fxml))
+        else parentRoot = FXMLLoader.load<Pane>(this.getResource(view.fxml))
+
         val scene = Scene(parentRoot, width, height)
         myStage.scene = scene
         myStage.title= title

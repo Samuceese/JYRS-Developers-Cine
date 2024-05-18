@@ -16,5 +16,11 @@ module org.example.demo {
     opens org.example.demo to javafx.fxml;
     exports org.example.demo;
 
+    opens org.example.demo.routes to javafx.fxml;
+    exports org.example.demo.routes;
+
+    opens org.example.demo.view.controllers to javafx.fxml;
+    exports org.example.demo.view.controllers;
+
 
 }

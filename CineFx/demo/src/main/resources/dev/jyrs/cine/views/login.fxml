@@ -15,8 +15,8 @@
    <right>
       <AnchorPane prefHeight="500.0" prefWidth="350.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField layoutX="121.0" layoutY="200.0" promptText="User Name" style="-fx-border-color: #061326; -fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent;" AnchorPane.leftAnchor="121.0" />
-            <PasswordField layoutX="122.0" layoutY="265.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #061326; -fx-border-width: 0px 0px 2px 0px;" AnchorPane.leftAnchor="121.0" />
+            <TextField fx:id="nombreLogin" layoutX="121.0" layoutY="200.0" promptText="Nombre de usuario" style="-fx-border-color: #061326; -fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent;" AnchorPane.leftAnchor="121.0" />
+            <PasswordField fx:id="contraseñaLogin" layoutX="122.0" layoutY="265.0" promptText="Contraseña" style="-fx-background-color: transparent; -fx-border-color: #061326; -fx-border-width: 0px 0px 2px 0px;" AnchorPane.leftAnchor="121.0" />
             <ImageView fitHeight="31.0" fitWidth="33.0" layoutX="74.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/user.png.png" />
@@ -29,15 +29,15 @@
             </ImageView>
             <Button fx:id="botonLogin" layoutX="91.0" layoutY="342.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #061326;" text="Login" textFill="WHITE" AnchorPane.bottomAnchor="118.0" />
             <Button fx:id="botonRegister" layoutX="183.0" layoutY="342.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #061326;" text="Register" textFill="WHITE" AnchorPane.bottomAnchor="118.0" />
-            <Hyperlink layoutX="118.0" layoutY="437.0" text="Forgot your password?" />
+            <Hyperlink fx:id="olvidaContraseñaLink" layoutX="118.0" layoutY="437.0" text="Forgot your password?" />
             <ImageView fitHeight="63.0" fitWidth="69.0" layoutX="143.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/users.png.png" />
                </image>
             </ImageView>
-            <Text layoutX="123.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Login">
+            <Text layoutX="112.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iniciar sesión">
                <font>
-                  <Font size="22.0" />
+                  <Font name="Cambria Math" size="22.0" />
                </font>
             </Text>
          </children>

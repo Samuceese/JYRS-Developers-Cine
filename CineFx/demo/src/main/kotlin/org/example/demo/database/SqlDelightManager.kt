@@ -1,6 +1,8 @@
 package org.example.demo.database
 
 import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
+import database.DatabaseQueries
+import org.example.database.AppDatabase
 import org.example.demo.config.Config
 import org.lighthousegames.logging.logging
 

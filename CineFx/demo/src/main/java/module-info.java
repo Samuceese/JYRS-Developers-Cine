@@ -10,6 +10,7 @@ module org.example.demo {
     requires sqlite.driver;
     requires runtime.jvm;
     requires java.sql;
+    requires kotlinx.serialization.json;
 
 
     opens org.example.demo to javafx.fxml;

@@ -1,0 +1,34 @@
+CREATE TABLE IF NOT EXISTS UsuariosEntity(
+    id TEXT PRIMARY KEY NOT NULL,
+    email TEXT NOT NULL,
+    nombre TEXT NOT NULL,
+    apellidos TEXT NOT NULL,
+    tipo TEXT NOT NULL,
+    contrasena TEXT NOT NULL
+);
+
+INSERT INTO UsuariosEntity (id, email, nombre, apellidos, tipo, contrasena)
+VALUES ('AAA111', 'adminJYRS@JYRS.es', 'Manager', 'JYRS', 'admin', 'SnlScyowNTAyMDMwMw==');
+
+deleteAllClientes:
+DELETE FROM UsuariosEntity WHERE tipo != 'admin';
+
+selectAll:
+SELECT * FROM UsuariosEntity ORDER BY nombre ASC;
+
+selectByEmail:
+SELECT * FROM UsuariosEntity WHERE email = ?;
+
+selectById:
+SELECT * FROM UsuariosEntity WHERE id = ?;
+
+selectLastInserted:
+SELECT * FROM UsuariosEntity WHERE id = last_inserted_rowid();
+
+insert:
+INSERT INTO UsuariosEntity (id, email, nombre, apellidos, tipo, contrasena)
+VALUES (?, ?, ?, ?, ?, ?);
+
+update:
+UPDATE UsuariosEntity SET contrasena = ?;
+

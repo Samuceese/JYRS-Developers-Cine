@@ -31,7 +31,7 @@ class MenuAdminViewController {
     }
 
     private fun cerrarSesionOnAction() {
-        RoutesManager.changeScene(view = RoutesManager.View.INICIO_SESION, title = "Inicio de Sesion")
+        RoutesManager.changeScene(view = RoutesManager.View.INICIO_SESION, title = "Inicio de Sesion6")
     }
 
     private fun complemenetosOnAction() {

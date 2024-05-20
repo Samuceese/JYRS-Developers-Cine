@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<ScrollPane fx:controller="org.example.demo.view.controllers.SeleccionarPeliculaViewController" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #061326;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #061326;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.view.controllers.SeleccionarPeliculaViewController">
     <content>
         <AnchorPane prefHeight="1050.0" prefWidth="750.0" style="-fx-background-color: #061326;">
             <children>
@@ -19,12 +15,12 @@
                             <children>
                                 <AnchorPane prefHeight="49.0" prefWidth="686.0">
                                     <children>
-                                        <Label layoutX="280.0" layoutY="2.0" text="PELICULAS" textFill="WHITE">
+                                        <Label layoutX="274.0" text="PELICULAS" textFill="WHITE">
                                             <font>
-                                                <Font name="Elephant" size="18.0" />
+                                                <Font name="Arial Rounded MT Bold" size="24.0" />
                                             </font>
                                         </Label>
-                                        <Label layoutX="254.0" layoutY="22.0" text="-------------------------------------" textFill="WHITE" />
+                                        <Label layoutX="254.0" layoutY="19.0" text="-------------------------------------" textFill="WHITE" />
                                     </children>
                                 </AnchorPane>
                             </children>
@@ -62,7 +58,7 @@
                                         <Label layoutX="204.0" layoutY="158.0" text="Los simios tratan a los humanos como esclavos, pero" textFill="WHITE" AnchorPane.leftAnchor="206.0" />
                                         <Label layoutX="203.0" layoutY="177.0" text="pero con la ayuda de una hembra simio llamada Ari, " textFill="WHITE" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="206.0" />
                                         <Label layoutX="204.0" layoutY="195.0" text="Leo iniciara una revolución." textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="206.0" />
-                                        <ImageView fx:id="simioImage" fitHeight="217.0" fitWidth="171.0" layoutX="14.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="502.0" AnchorPane.topAnchor="0.0"/>
+                                        <ImageView fx:id="simioImage" fitHeight="217.0" fitWidth="171.0" layoutX="14.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="502.0" AnchorPane.topAnchor="0.0" />
                                     </children>
                                 </AnchorPane>
                             </children>
@@ -71,7 +67,7 @@
                             <children>
                                 <AnchorPane prefHeight="181.0" prefWidth="686.0" style="-fx-border-color: #061326;">
                                     <children>
-                                        <ImageView fx:id="garfieldImage" fitHeight="226.0" fitWidth="159.0" layoutX="22.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="505.98879089355466" AnchorPane.topAnchor="10.0"/>
+                                        <ImageView fx:id="garfieldImage" fitHeight="226.0" fitWidth="159.0" layoutX="22.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="505.98879089355466" AnchorPane.topAnchor="10.0" />
                                         <Label layoutX="204.0" layoutY="14.0" text="DIRECTORES" textFill="#b1adad" AnchorPane.leftAnchor="206.0" AnchorPane.topAnchor="10.0" />
                                         <Label layoutX="536.0" layoutY="14.0" text="DURACIÓN" textFill="#b1adad" AnchorPane.leftAnchor="536.0" />
                                         <Label layoutX="538.0" layoutY="32.0" text="1h 41m" textFill="WHITE" AnchorPane.leftAnchor="536.0">
@@ -111,7 +107,7 @@
                             <children>
                                 <AnchorPane prefHeight="238.0" prefWidth="702.0">
                                     <children>
-                                        <ImageView fx:id="tarotImage" fitHeight="233.0" fitWidth="161.0" layoutX="21.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true"/>
+                                        <ImageView fx:id="tarotImage" fitHeight="233.0" fitWidth="161.0" layoutX="21.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
                                         <Label layoutX="206.0" layoutY="14.0" text="DIRECTORES" textFill="#b1adad" AnchorPane.leftAnchor="206.0" AnchorPane.topAnchor="14.0" />
                                         <Label layoutX="538.0" layoutY="14.0" text="DURACIÓN" textFill="#b1adad" AnchorPane.leftAnchor="536.0" AnchorPane.topAnchor="14.0" />
                                         <Label layoutX="538.0" layoutY="32.0" text="1h 31m" textFill="WHITE" AnchorPane.leftAnchor="536.0">
@@ -147,7 +143,7 @@
                             <children>
                                 <AnchorPane prefHeight="286.0" prefWidth="737.0">
                                     <children>
-                                        <ImageView fx:id="especialistaImage" fitHeight="255.0" fitWidth="162.0" layoutX="20.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true"/>
+                                        <ImageView fx:id="especialistaImage" fitHeight="255.0" fitWidth="162.0" layoutX="20.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" />
                                         <Label layoutX="537.0" layoutY="15.0" text="DURACIÓN" textFill="#b1adad" AnchorPane.leftAnchor="536.0" />
                                         <Label layoutX="537.0" layoutY="33.0" text="2h 6m " textFill="WHITE" AnchorPane.leftAnchor="536.0">
                                             <font>

@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane  fx:controller="org.example.demo.view.controllers.DetallesCompraViewController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #061326;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #061326;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.view.controllers.DetallesCompraViewController">
     <children>
         <VBox prefHeight="500.0" prefWidth="700.0">
             <children>
@@ -17,12 +13,12 @@
                     <children>
                         <AnchorPane prefHeight="72.0" prefWidth="701.0">
                             <children>
-                                <Label layoutX="238.0" layoutY="7.0" text="DETALLES DE TU COMPRA" textFill="WHITE">
+                                <Label layoutX="238.0" layoutY="3.0" text="DETALLES DE TU COMPRA" textFill="WHITE">
                                     <font>
-                                        <Font name="Elephant" size="14.0" />
+                                        <Font name="Arial Rounded MT Bold" size="18.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="271.0" layoutY="24.0" text="---------------------------------" textFill="WHITE" />
+                                <Label layoutX="279.0" layoutY="21.0" text="---------------------------------" textFill="WHITE" />
                                 <ImageView fx:id="imagenMenu" fitHeight="40.0" fitWidth="40.0" layoutX="18.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@../images/menu.png" />
@@ -40,7 +36,7 @@
                                     <children>
                                         <Label layoutX="27.0" layoutY="5.0" text="INFORMACIÓN DEL CLIENTE" textFill="WHITE" AnchorPane.leftAnchor="28.0">
                                             <font>
-                                                <Font name="Elephant" size="14.0" />
+                                                <Font name="Arial Rounded MT Bold" size="18.0" />
                                             </font>
                                         </Label>
                                         <Label layoutX="26.0" layoutY="29.0" text="Nombre:" textFill="WHITE" AnchorPane.leftAnchor="35.0">
@@ -69,7 +65,7 @@
                                     <children>
                                         <Label layoutX="113.0" layoutY="5.0" text="PELICULA" textFill="WHITE" AnchorPane.leftAnchor="28.0">
                                             <font>
-                                                <Font name="Elephant" size="14.0" />
+                                                <Font name="Arial Rounded MT Bold" size="18.0" />
                                             </font>
                                         </Label>
                                         <Label layoutX="22.0" layoutY="35.0" text="Titulo:" textFill="WHITE" AnchorPane.leftAnchor="35.0">
@@ -90,7 +86,7 @@
                             <children>
                                 <Label layoutX="28.0" layoutY="5.0" text="COMPLEMENTOS" textFill="WHITE" AnchorPane.leftAnchor="28.0">
                                     <font>
-                                        <Font name="Elephant" size="14.0" />
+                                        <Font name="Arial Rounded MT Bold" size="18.0" />
                                     </font>
                                 </Label>
                                 <Label fx:id="complementosLabel" layoutX="88.0" layoutY="35.0" />
@@ -105,7 +101,7 @@
                                 <Label fx:id="fxButacaLabel" layoutX="35.0" layoutY="59.0" />
                                 <Label layoutX="32.0" layoutY="5.0" text="BUTACAS" textFill="WHITE" AnchorPane.leftAnchor="28.0">
                                     <font>
-                                        <Font name="Elephant" size="14.0" />
+                                        <Font name="Arial Rounded MT Bold" size="18.0" />
                                     </font>
                                 </Label>
                                 <Label fx:id="fxButacaLabel2" layoutX="39.0" layoutY="33.0" prefHeight="18.0" prefWidth="0.0" AnchorPane.leftAnchor="35.0" />
@@ -118,7 +114,7 @@
                             <children>
                                 <Label layoutX="31.0" layoutY="5.0" text="TOTAL:" textFill="WHITE" AnchorPane.leftAnchor="28.0">
                                     <font>
-                                        <Font name="Elephant" size="14.0" />
+                                        <Font name="Arial Rounded MT Bold" size="18.0" />
                                     </font>
                                 </Label>
                                 <Label fx:id="fxTotalLabel" layoutX="106.0" layoutY="5.0" />

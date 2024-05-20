@@ -24,7 +24,10 @@ class UserServiceImpl(
     }
 
     override fun cambioContraseña(email: String, contraseña: String): Result<Usuario, UserError> {
-        TODO("Not yet implemented")
+        logger.debug { "Cambiando contraseña en email: $email" }
+        return repository.cambioContraseña(email, contraseña)?.let {
+            Ok(it)
+        } ?: Err(UserError.UserNotFound("No se ha encontrado usuario con email: $email"))
     }
 
     override fun findByEmail(email: String): Result<Usuario, UserError> {
@@ -34,7 +37,7 @@ class UserServiceImpl(
         } ?: Err(UserError.UserNotFound("No se ha encontrado usuario con email $email"))
     }
 
-    override fun findById(id: String): Result<Usuario, UserError> {
+    override fun findById(id: Long): Result<Usuario, UserError> {
         logger.debug { "Buscando Usuario por id: $id" }
         return cacheUsuario.get(id).mapBoth(
             success = {

@@ -13,12 +13,15 @@ import javafx.scene.image.Image
 import javafx.scene.layout.Pane
 import javafx.stage.Modality
 import javafx.stage.Stage
+import javafx.stage.Window
 import javafx.stage.WindowEvent
+import org.koin.core.context.startKoin
+import org.lighthousegames.logging.logging
 import java.io.InputStream
 import java.lang.RuntimeException
 import java.net.URL
 
-
+private val logger= logging()
 object RoutesManager {
     lateinit var mainStage:Stage
     lateinit var _activeStage:Stage
@@ -38,10 +41,16 @@ object RoutesManager {
         TICKET("views/ticket.fxml"),
         MENUADMIN("views/menu-admin.fxml"),
         GESTIONCOMPL("views/gestion-compl.fxml"),
-        ACERCA_DE("views/acerca-de.fxml")
+        ACERCA_DE("views/acerca-de.fxml"),
+        ACTUALIZARCOMPL("views/actualizar-compl.fxml"),
+        NEWCOMPL("views/nuevoCompl.fxml"),
+        GESTIONBUTACA("views/gestionButaca.fxml"),
+        MODBUTACA("views/modButaca.fxml"),
+        ESTADOCINE("views/estadoCine.fxml")
     }
     
     fun initMainStage(stage:Stage){
+        logger.debug { "Inicializando Inicio de sesion" }
         val fxmlLoader=FXMLLoader(getResource(View.INICIO_SESION.fxml))
         val parentRoot = fxmlLoader.load<Pane>()
         val mainScene = Scene(parentRoot,700.0,500.0)
@@ -65,6 +74,7 @@ object RoutesManager {
         width: Double = 700.0,
         height: Double = 500.0,
     ) {
+        logger.debug { "Inicializando $title" }
         var parentRoot: Parent
         if (view==View.SELECPELICULAS) parentRoot = FXMLLoader.load<ScrollPane>(this.getResource(view.fxml))
         else parentRoot = FXMLLoader.load<Pane>(this.getResource(view.fxml))
@@ -72,6 +82,28 @@ object RoutesManager {
         val scene = Scene(parentRoot, width, height)
         myStage.scene = scene
         myStage.title= title
+    }
+
+    fun initDetalle(
+        view: View,
+        title: String
+    ) {
+        logger.debug { "Inicializando Detalle" }
+
+        val fxmlLoader = FXMLLoader(getResource(view.fxml))
+        val parentRoot = fxmlLoader.load<Pane>()
+        val scene = Scene(parentRoot, 230.0, 340.0)
+        val stage = Stage()
+        stage.title = title
+        stage.scene = scene
+        stage.initOwner(mainStage)
+        stage.initModality(Modality.WINDOW_MODAL)
+        stage.isResizable = false
+        stage.icons.add(Image(getResourceAsStream("images/logo.png")))
+        stage.show()
+    }
+
+    fun cerrarVentana(){
     }
 
     fun initAcercaDeStage(){

@@ -26,12 +26,22 @@ class MenuAdminViewController {
 
     private fun initDefaultEvents() {
         gestionComplementos.setOnAction { complemenetosOnAction() }
+        gestionButacas.setOnAction { butacasOnAction() }
+        estadoCine.setOnAction { estadoOnAction() }
         botonCerrarSesion.setOnAction { cerrarSesionOnAction() }
 
     }
 
+    private fun estadoOnAction() {
+        RoutesManager.changeScene(view = RoutesManager.View.ESTADOCINE, title = "Estado de cine", height = 650.0)
+    }
+
+    private fun butacasOnAction() {
+        RoutesManager.changeScene(view = RoutesManager.View.GESTIONBUTACA, title = "Gestion de Butaca")
+    }
+
     private fun cerrarSesionOnAction() {
-        RoutesManager.changeScene(view = RoutesManager.View.INICIO_SESION, title = "Inicio de Sesion6")
+        RoutesManager.changeScene(view = RoutesManager.View.INICIO_SESION, title = "Inicio de Sesion")
     }
 
     private fun complemenetosOnAction() {

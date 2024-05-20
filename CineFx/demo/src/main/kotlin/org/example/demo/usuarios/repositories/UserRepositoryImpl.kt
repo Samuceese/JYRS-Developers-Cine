@@ -9,10 +9,8 @@ import org.lighthousegames.logging.logging
 import kotlin.random.Random
 
 private val logger = logging()
-class UserRepositoryImpl(
-    private val databaseClient: SqlDelightManager
-): UserRepository {
-    private val db = databaseClient.databaseQueries
+class UserRepositoryImpl: UserRepository {
+    private val db = SqlDelightManager.databaseQueries
     override fun save(user: Usuario): Usuario {
         logger.debug { "save: $user" }
         return create(user)

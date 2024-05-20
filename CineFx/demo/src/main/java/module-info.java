@@ -11,6 +11,7 @@ module org.example.demo {
     requires runtime.jvm;
     requires java.sql;
     requires kotlinx.serialization.json;
+    requires koin.core.jvm;
 
 
     opens org.example.demo to javafx.fxml;
@@ -21,6 +22,16 @@ module org.example.demo {
 
     opens org.example.demo.view.controllers to javafx.fxml;
     exports org.example.demo.view.controllers;
+
+    opens org.example.demo.view.viewModel to javafx.fxml;
+    exports org.example.demo.view.viewModel;
+
+    opens org.example.demo.usuarios.models to javafx.fxml;
+    exports org.example.demo.usuarios.models;
+
+    opens org.example.demo.usuarios.services to javafx.fxml;
+    exports org.example.demo.usuarios.services;
+
 
 
 }

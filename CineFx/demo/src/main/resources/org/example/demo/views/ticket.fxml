@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane  fx:controller="org.example.demo.view.controllers.DetallesCompraViewController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #061326;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox prefHeight="500.0" prefWidth="700.0">
+            <children>
+                <HBox prefHeight="72.0" prefWidth="654.0">
+                    <children>
+                        <AnchorPane prefHeight="72.0" prefWidth="701.0">
+                            <children>
+                                <Label layoutX="238.0" layoutY="7.0" text="DETALLES DE TU COMPRA" textFill="WHITE">
+                                    <font>
+                                        <Font name="Elephant" size="14.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="271.0" layoutY="24.0" text="---------------------------------" textFill="WHITE" />
+                                <ImageView fx:id="imagenMenu" fitHeight="40.0" fitWidth="40.0" layoutX="18.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../images/menu.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </HBox>
+                <HBox prefHeight="78.0" prefWidth="341.0">
+                    <children>
+                        <VBox prefHeight="91.0" prefWidth="302.0">
+                            <children>
+                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                    <children>
+                                        <Label layoutX="27.0" layoutY="5.0" text="INFORMACIÓN DEL CLIENTE" textFill="WHITE" AnchorPane.leftAnchor="28.0">
+                                            <font>
+                                                <Font name="Elephant" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label layoutX="26.0" layoutY="29.0" text="Nombre:" textFill="WHITE" AnchorPane.leftAnchor="35.0">
+                                            <font>
+                                                <Font name="Cambria Math" size="12.0" />
+                                            </font>
+                                        </Label>
+                                        <Label layoutX="31.0" layoutY="49.0" text="Correo electrónico:" textFill="WHITE" AnchorPane.leftAnchor="35.0">
+                                            <font>
+                                                <Font name="Cambria Math" size="12.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="nombreLabel" layoutX="112.0" layoutY="28.0" />
+                                        <Label fx:id="correoLabel" layoutX="159.0" layoutY="48.0" />
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+                <HBox prefHeight="69.0" prefWidth="600.0">
+                    <children>
+                        <VBox prefHeight="102.0" prefWidth="314.0">
+                            <children>
+                                <AnchorPane prefHeight="73.0" prefWidth="314.0">
+                                    <children>
+                                        <Label layoutX="113.0" layoutY="5.0" text="PELICULA" textFill="WHITE" AnchorPane.leftAnchor="28.0">
+                                            <font>
+                                                <Font name="Elephant" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label layoutX="22.0" layoutY="35.0" text="Titulo:" textFill="WHITE" AnchorPane.leftAnchor="35.0">
+                                            <font>
+                                                <Font name="Cambria Math" size="12.0" />
+                                            </font>
+                                        </Label>
+                                        <Label fx:id="tituloLabel" layoutX="88.0" layoutY="34.0" />
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+                <HBox prefHeight="87.0" prefWidth="600.0">
+                    <children>
+                        <AnchorPane prefHeight="87.0" prefWidth="600.0">
+                            <children>
+                                <Label layoutX="28.0" layoutY="5.0" text="COMPLEMENTOS" textFill="WHITE" AnchorPane.leftAnchor="28.0">
+                                    <font>
+                                        <Font name="Elephant" size="14.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="complementosLabel" layoutX="88.0" layoutY="35.0" />
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </HBox>
+                <HBox prefHeight="82.0" prefWidth="600.0">
+                    <children>
+                        <AnchorPane prefHeight="82.0" prefWidth="707.0">
+                            <children>
+                                <Label fx:id="fxButacaLabel" layoutX="35.0" layoutY="59.0" />
+                                <Label layoutX="32.0" layoutY="5.0" text="BUTACAS" textFill="WHITE" AnchorPane.leftAnchor="28.0">
+                                    <font>
+                                        <Font name="Elephant" size="14.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="fxButacaLabel2" layoutX="39.0" layoutY="33.0" prefHeight="18.0" prefWidth="0.0" AnchorPane.leftAnchor="35.0" />
+                            </children>
+                        </AnchorPane>
+                    </children></HBox>
+                <HBox prefHeight="58.0" prefWidth="700.0">
+                    <children>
+                        <AnchorPane prefHeight="107.0" prefWidth="703.0">
+                            <children>
+                                <Label layoutX="31.0" layoutY="5.0" text="TOTAL:" textFill="WHITE" AnchorPane.leftAnchor="28.0">
+                                    <font>
+                                        <Font name="Elephant" size="14.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="fxTotalLabel" layoutX="106.0" layoutY="5.0" />
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </HBox>
+                <HBox prefHeight="49.0" prefWidth="700.0">
+                    <children>
+                        <AnchorPane prefHeight="50.0" prefWidth="714.0">
+                            <children>
+                                <Button fx:id="fxBotonCerrarSesion" layoutX="72.0" layoutY="12.0" mnemonicParsing="false" text="CERRAR SESIÓN" />
+                                <Button fx:id="fxBotonSeleccionarPelicula" layoutX="277.0" layoutY="12.0" mnemonicParsing="false" text="SELECCIONAR PELICULA" />
+                                <Button fx:id="fxBotonImprimirPdf" layoutX="535.0" layoutY="12.0" mnemonicParsing="false" text="IMPRIMIR PDF" AnchorPane.leftAnchor="535.0" />
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

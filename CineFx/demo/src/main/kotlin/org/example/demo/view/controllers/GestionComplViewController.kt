@@ -53,6 +53,16 @@ class GestionComplViewController {
 
     private fun initDefaultEvents() {
         menuAdmin.setOnMouseClicked { menuOnAction() }
+        añadirButton.setOnAction { añadirOnAction()  }
+        modificarButton.setOnAction { modificarOnAction() }
+    }
+
+    private fun añadirOnAction() {
+        RoutesManager.initDetalle(view = RoutesManager.View.NEWCOMPL, title = "Añadir Complemento")
+    }
+
+    private fun modificarOnAction() {
+        RoutesManager.initDetalle(view = RoutesManager.View.ACTUALIZARCOMPL, title = "Actualizar Complemento")
     }
 
     private fun menuOnAction() {

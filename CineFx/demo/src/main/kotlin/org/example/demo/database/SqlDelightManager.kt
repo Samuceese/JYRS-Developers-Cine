@@ -40,16 +40,19 @@ object SqlDelightManager {
 
     fun initialize() {
         if (Config.databaseInitData) {
-            removeAllData()
+            initilize()
         }
     }
 
 
-    private fun removeAllData() {
+
+    private fun initilize() {
         logger.debug { "SqlDeLightClient.removeAllData()" }
         databaseQueries.transaction {
             databaseQueries.deleteAllButacaEntity()
             databaseQueries.deleteAllComplemetoEntity()
+            databaseQueries.deleteAllClientes()
+            databaseQueries.InsertTheAdmin()
         }
     }
 }

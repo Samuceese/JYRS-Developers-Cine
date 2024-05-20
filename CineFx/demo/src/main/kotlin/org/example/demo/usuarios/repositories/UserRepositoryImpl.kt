@@ -2,17 +2,16 @@ package org.example.demo.usuarios.repositories
 
 import org.example.demo.database.SqlDelightManager
 import org.example.demo.locale.encodeToBase64
-import org.example.demo.usuarios.errors.UserError
 import org.example.demo.usuarios.mappers.toUsuario
 import org.example.demo.usuarios.models.Usuario
 import org.lighthousegames.logging.logging
 import kotlin.random.Random
 
 private val logger = logging()
-class UserRepositoryImpl(
-    private val databaseClient: SqlDelightManager
-): UserRepository {
-    private val db = databaseClient.databaseQueries
+class UserRepositoryImpl: UserRepository {
+
+    private val db = SqlDelightManager.databaseQueries
+
     override fun save(user: Usuario): Usuario {
         logger.debug { "save: $user" }
         return create(user)

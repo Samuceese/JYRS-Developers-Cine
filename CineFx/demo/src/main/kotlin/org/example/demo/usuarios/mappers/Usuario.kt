@@ -7,8 +7,8 @@ import org.example.demo.usuarios.models.Usuario
 
 fun UsuariosEntity.toUsuario(): Usuario{
     return when(this.tipo){
-        "admin" -> Admin(id, nombre, apellidos, contrasena, email)
-        "cliente" -> Cliente(id, nombre, apellidos, contrasena, email)
+        "admin" -> Admin(nombre, apellidos, contrasena, email)
+        "cliente" -> Cliente(nombre, apellidos, contrasena, email)
         else -> throw IllegalArgumentException("Tipo de usuario no soportado")
     }
 }

@@ -1,5 +1,16 @@
 package org.example.demo.usuarios.models
 
+/**
+ * Representa a un admin.
+ * @property id
+ * @property nombre
+ * @property apellidos
+ * @property contraseña
+ * @property email
+ * @author Raúl Fernández, Javier Hernández, Samuel Cortés, Yahya El Hadri.
+ * @since 1.0
+ */
+
 class Admin(
     id: String,
     nombre: String,

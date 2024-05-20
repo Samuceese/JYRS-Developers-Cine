@@ -10,6 +10,14 @@ import org.example.demo.usuarios.models.Usuario
 import org.example.demo.usuarios.repositories.UserRepository
 import org.lighthousegames.logging.logging
 
+/**
+ * Servicio que maneja el repositorio de usuario y la cache.
+ * @param UserRepository, CacheUsuario el repositorio y la cache de usuario.
+ * @return Se devuelve el objeto usuario estando ya guardado.
+ * @author Yahya El Hadri, Raúl Fernández, Javier Hernández, Samuel Cortés
+ * @since 1.0
+ */
+
 private val logger = logging()
 class UserServiceImpl(
     private val repository: UserRepository,
@@ -23,9 +31,25 @@ class UserServiceImpl(
         }
     }
 
+    /**
+     * Servicio donde nos encargamos de cambiar la contraseña de un usuario en el sistema.
+     * @param email
+     * @param contraseña
+     * @author Yahya El Hadri, Raúl Fernández, Javier Hernández, Samuel Cortés
+     * @since 1.0
+     */
+
     override fun cambioContraseña(email: String, contraseña: String): Result<Usuario, UserError> {
         TODO("Not yet implemented")
     }
+
+    /**
+     * En este servicio buscamos un usuario en el repositorio por su dirección de correo electrónico.
+     * @param email
+     * @return Devuelve el usuario encontrado con su dirección de correo electrónico.
+     * @author Yahya El Hadri, Raúl Fernández, Javier Hernández, Samuel Cortés
+     * @since 1.0
+     */
 
     override fun findByEmail(email: String): Result<Usuario, UserError> {
         logger.debug { "Buscando Usuario por email: $email" }
@@ -33,6 +57,14 @@ class UserServiceImpl(
             Ok(it)
         } ?: Err(UserError.UserNotFound("No se ha encontrado usuario con email $email"))
     }
+
+    /**
+     * En este servicio buscamos un usuario en la cache por su ID.
+     * @param id
+     * @return Devuelve el usuario con su ID.
+     * @author Yahya El Hadri, Raúl Fernández, Javier Hernández, Samuel Cortés
+     * @since 1.0
+     */
 
     override fun findById(id: String): Result<Usuario, UserError> {
         logger.debug { "Buscando Usuario por id: $id" }

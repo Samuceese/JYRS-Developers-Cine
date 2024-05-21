@@ -13,7 +13,9 @@ private val logger= logging()
 
 /**
  * Servicio que maneja el repositorio de usuario y la cache.
- * @param ComplementoRepository
+ * @param repository
+ * @param cache
+ * @param storage
  * @return Devuelve un resultado con la lista de complementos obtenidos.
  * @author Yahya El Hadri, Raúl Fernández, Javier Hernández, Samuel Cortés
  * @since 1.0

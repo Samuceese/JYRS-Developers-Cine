@@ -71,7 +71,6 @@ private fun validateEmail(usuario: Usuario): Result<String, UserError>{
  * @since 1.0
  */
 
-
 private fun validateContraseña(usuario: Usuario): Result<String, UserError>{
     val regex = Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*?&]{12,}$")
     if(!usuario.contraseña.matches(regex)){

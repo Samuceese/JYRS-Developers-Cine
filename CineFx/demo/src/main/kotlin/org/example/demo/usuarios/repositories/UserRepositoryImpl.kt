@@ -12,7 +12,7 @@ import kotlin.random.Random
 /**
  * Repositorio que se comunica con la base de datos de usuario.db
  * @author Raúl Fernández, Javier Hernández, Yahya El Hadri, Samuel Cortés
- * @property databaseClient de la base de datos estudiante.db
+ * @property databaseClient de la base de datos usuario.db
  */
 
 private val logger = logging()

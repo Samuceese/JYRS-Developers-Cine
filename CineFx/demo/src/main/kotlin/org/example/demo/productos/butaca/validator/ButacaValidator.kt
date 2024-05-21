@@ -6,6 +6,15 @@ import com.github.michaelbull.result.Result
 import org.example.demo.productos.butaca.errors.ButacaError
 import org.example.demo.productos.models.Butaca
 
+/**
+ * Validamos una cadena de texto que representa una fecha.
+ * @param fecha
+ * @return Devuelve true si cumple con el formato deseado.
+ * @author Raúl Fernández, Yahya El Hadri, Samuel Cortés, Javier Hernández
+ * @since 1.0
+ */
+
+
 class ButacaValidator {
     fun validarFecha(fecha:String):Boolean{
         if (fecha.length != 10) return false
@@ -17,6 +26,15 @@ class ButacaValidator {
         if (fechaSeparada[1].toInt() !in 1..12) return false
         return true
     }
+
+    /**
+     * Validamos butacas.
+     * @param butaca
+     * @return Devuelve butaca si se valida y si no ButacaError si hay errores.
+     * @author Raúl Fernández, Yahya El Hadri, Samuel Cortés, Javier Hernández
+     * @since 1.0
+     */
+
     fun validarButaca(butaca:Butaca): Result<Butaca, ButacaError> {
         when {
             !validarId(butaca.id) -> Err(ButacaError.IdNoValido("El ID: ${butaca.id} no es valido"))
@@ -24,6 +42,14 @@ class ButacaValidator {
         }
         return Ok(butaca)
     }
+
+    /**
+     * Validamos el id.
+     * @param id
+     * @return Devuelve un boolean que indica si el ID es válido o no.
+     * @author Raúl Fernández, Yahya El Hadri, Samuel Cortés, Javier Hernández
+     * @since 1.0
+     */
 
     private fun validarId(id: String) :Boolean{
         if (id.length != 2) return false

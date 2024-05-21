@@ -5,11 +5,14 @@ import javafx.scene.control.Button
 import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
 import org.example.demo.routes.RoutesManager
+import org.example.demo.view.viewModel.OlvidarContraViewModel
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 
 private val logger= logging()
-class OlvidarContraViewController {
-
+class OlvidarContraViewController :KoinComponent{
+    private val view:OlvidarContraViewModel by inject()
     @FXML
     lateinit var textEmail: TextField
     @FXML
@@ -30,6 +33,22 @@ class OlvidarContraViewController {
     }
 
     private fun restablecerOnAction() {
-        RoutesManager.changeScene(view = RoutesManager.View.INICIO_SESION, title = "Inicio Sesion")
+        if (newPassword.text != confirmPassword.text)RoutesManager.alerta("Contraseña Incorrecta","Las contraseñas deben coincidir")
+        if (textEmail.text.isBlank())RoutesManager.alerta("E-mail","El email no debe estar vacio")
+        if (newPassword.text.isBlank())RoutesManager.alerta("Contraseña","La contraseña no debe estar vacia")
+        if (newPassword.text == confirmPassword.text){
+            if (!view.cambiarContraseña(textEmail.text,confirmPassword.text)){
+                RoutesManager.alerta("Usuario","El usuario debe estar registrado")
+            }
+        }
+        if (
+            textEmail.text.isNotBlank()&&
+            newPassword.text.isNotBlank()&&
+            newPassword.text == confirmPassword.text&&
+            view.cambiarContraseña(textEmail.text,confirmPassword.text)
+        ){
+            RoutesManager.changeScene(view = RoutesManager.View.INICIO_SESION, title = "Inicio Sesion")
+        }
+
     }
 }

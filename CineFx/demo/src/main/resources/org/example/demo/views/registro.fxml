@@ -18,7 +18,7 @@
                 <Button fx:id="botonRegister" layoutX="126.0" layoutY="387.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="95.0" style="-fx-background-color: #061326;" text="Register" textFill="WHITE" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="385.0" />
                 <ImageView fitHeight="63.0" fitWidth="69.0" layoutX="143.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="143.0" AnchorPane.rightAnchor="143.40000000000003">
                     <image>
-                        <Image url="@../images/user.png.png" />
+                        <Image url="@../images/user.png" />
                     </image>
                 </ImageView>
                 <Text layoutX="105.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nuevo Usuario" textAlignment="CENTER">

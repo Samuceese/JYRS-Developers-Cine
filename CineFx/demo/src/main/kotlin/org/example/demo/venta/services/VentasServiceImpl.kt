@@ -1,15 +1,13 @@
 package org.example.demo.venta.services
 
-import com.github.michaelbull.result.Err
-import com.github.michaelbull.result.Ok
-import com.github.michaelbull.result.Result
-import com.github.michaelbull.result.andThen
+import com.github.michaelbull.result.*
 import org.example.demo.productos.butaca.repositories.ButacaRepository
 import org.example.demo.productos.complementos.repositories.ComplementoRepository
 import org.example.demo.productos.models.Butaca
 import org.example.demo.productos.models.Complemento
-import org.example.demo.usuarios.models.Usuario
+import org.example.demo.usuarios.models7.Usuario
 import org.example.demo.usuarios.repositories.UserRepository
+import org.example.demo.usuarios.validator.validate
 import org.example.demo.venta.errors.VentaError
 import org.example.demo.venta.models.LineaVenta
 import org.example.demo.venta.models.Venta
@@ -52,7 +50,7 @@ class VentasServiceImpl(
                 }
                 is Complemento->{
                     complementoRepository.findById(it.producto.id)
-                    ?: return Err(VentaError.VentaNoEncontrada("Complemento no encontrado con id: ${it.producto.id}"))
+                        ?: return Err(VentaError.VentaNoEncontrada("Complemento no encontrado con id: ${it.producto.id}"))
                 }
             }
             if (it.cantidad <= 0) {
@@ -63,9 +61,14 @@ class VentasServiceImpl(
     }
     private fun validateCliente(cliente: Usuario): Result<Usuario, VentaError> {
         logger.debug { "Validando cliente: $cliente" }
-        return clienteRepositoryImpl.save(cliente)
-            ?.let { Ok(it) }
-            ?: Err(VentaError.VentaNoValida("Cliente no encontrado con id: ${cliente.id}"))
+       return cliente.validate().mapBoth(
+            failure = {
+                Err(VentaError.VentaNoValida("El cliente no se ha podido validar"))
+            },
+            success = {
+                Ok(it)
+            }
+        )
     }
     override fun delete(id: UUID): Result<Venta, VentaError> {
         logger.debug { "Eliminando venta : $id" }
@@ -80,8 +83,8 @@ class VentasServiceImpl(
             ?: Err(VentaError.VentaNoEncontrada("No se han encontrado las ventas"))
     }
 
-    override fun exportToHtml(venta: Venta, htmlFile: File): Result<Unit, VentaError> {
+    override fun exportToHtml(venta: Venta, htmlFile: File,pelicula:String): Result<Unit, VentaError> {
         logger.debug { "Exportando venta a fichero html $htmlFile" }
-        return ventasSotrageHtml.export(venta, htmlFile)
+        return ventasSotrageHtml.export(venta, htmlFile, pelicula)
     }
 }

@@ -4,23 +4,38 @@ import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
 import database.DatabaseQueries
 import org.example.database.AppDatabase
 import org.example.demo.config.Config
+import org.example.demo.database.SqlDelightManager.databaseQueries
 import org.lighthousegames.logging.logging
 
 
 private val logger = logging()
 /**
- * manejado de la base datos
- * @author Yahya el hadri el bakkali
+ * Para manejar la base de datos.
+ * @property databaseQueries
+ * @author Yahya El Hadri, Samuel Cortés, Raúl Fernández, Javier Hernández
  * @since 1.0
  */
 
 object SqlDelightManager {
     val databaseQueries: DatabaseQueries by lazy { initQueries() }
 
+    /**
+     * Inicia el gestor de base de datos.
+     * @author Yahya El Hadri, Samuel Cortés, Raúl Fernández, Javier Hernández
+     * @since 1.0
+     */
+
     init {
         logger.debug { "Inicializando el gestor de Base de Datos con SqlDelight" }
         initialize()
     }
+
+    /**
+     * Inicia el gestor de base de datos.
+     * @return databaseQueries
+     * @author Yahya El Hadri, Samuel Cortés, Raúl Fernández, Javier Hernández
+     * @since 1.0
+     */
 
     private fun initQueries(): DatabaseQueries {
 
@@ -38,13 +53,25 @@ object SqlDelightManager {
         }.databaseQueries
     }
 
+    /**
+     * Inicializa.
+     * @author Yahya El Hadri, Samuel Cortés, Raúl Fernández, Javier Hernández
+     * @since 1.0
+     */
+
+
     fun initialize() {
         if (Config.databaseInitData) {
             initilize()
         }
     }
 
-
+    /**
+     * Inicia el gestor de base de datos.
+     * @return databaseQueries
+     * @author Yahya El Hadri, Samuel Cortés, Raúl Fernández, Javier Hernández
+     * @since 1.0
+     */
 
     private fun initilize() {
         logger.debug { "SqlDeLightClient.removeAllData()" }

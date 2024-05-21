@@ -4,7 +4,17 @@ import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import org.example.demo.usuarios.errors.UserError
-import org.example.demo.usuarios.models.Usuario
+import org.example.demo.usuarios.models7.Usuario
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
+
+/**
+ * Realizamos validaciones sobre las propiedades de usuario.
+ * @return Devuelve si todas las validaciones son correctas devuelve un objeto ok.
+ * @author Raúl Fernández, Yahya El Hadri, Samuel Cortés, Javier Hernández
+ * @since 1.0
+ */
 
 fun Usuario.validate(): Result<Usuario, UserError>{
     if (this.nombre.isEmpty() || this.nombre.isBlank()){
@@ -27,32 +37,62 @@ fun Usuario.validate(): Result<Usuario, UserError>{
     return Ok(this)
 }
 
+fun isValidLocalDate(dateString: String): Boolean {
+    return try {
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        LocalDate.parse(dateString, formatter)
+        true
+    } catch (e: DateTimeParseException) {
+        false
+    }
+}
 
 fun validateNombre(nombre: String): Boolean{
-    if (nombre.isEmpty() || nombre.isBlank()){
+    if(nombre.isEmpty() || nombre.isBlank()){
         return false
     }
     return true
 }
 
-fun validateApellidos(apellidos: String): Boolean{
+/**
+ * Valida los apellidos de un usuario.
+ * @return Devuelve un error si el apellido esta vacio y el apellido validado si es válido.
+ * @author Raúl Fernández, Yahya El Hadri, Samuel Cortés, Javier Hernández
+ * @since 1.0
+ */
+
+ fun validateApellidos(apellidos: String): Boolean{
     if (apellidos.isEmpty() || apellidos.isBlank()){
         return false
     }
     return true
 }
 
-fun validateEmail(email: String): Boolean{
+/**
+ * Valida la dirección de correo electrónico de un usuario.
+ * @return Devuelve un error si no sigue el formato esperado y la dirección de correo electrónico validada si es válida.
+ * @author Raúl Fernández, Yahya El Hadri, Samuel Cortés, Javier Hernández
+ * @since 1.0
+ */
+
+fun validateEmail(usuario: Usuario): Boolean{
     val regex = Regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
-    if(!email.matches(regex)){
+    if(!usuario.email.matches(regex)){
         return false
     }
     return true
 }
 
-fun validateContraseña(contraseña: String): Boolean{
-    val regex = Regex("^(?=.[a-z])(?=.[A-Z])(?=.\\d)(?=.[@\$!%?&])[A-Za-z\\d@\$!%?&]{12,}$")
-    if(!contraseña.matches(regex)){
+/**
+ * Valida la contraseña de un usuario utilizando una expresión regular.
+ * @return Devuelve un error si no sigue el formato esperado, y la contraseña validada si es válida.
+ * @author Raúl Fernández, Yahya El Hadri, Samuel Cortés, Javier Hernández
+ * @since 1.0
+ */
+
+fun validateContraseña(usuario: Usuario): Boolean{
+    val regex = Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*?&]{12,}$")
+    if(!usuario.contraseña.matches(regex)){
         return false
     }
     return true

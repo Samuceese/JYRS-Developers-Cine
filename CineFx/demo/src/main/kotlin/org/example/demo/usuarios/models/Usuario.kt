@@ -12,7 +12,7 @@ package org.example.demo.usuarios.models7
  */
 
 abstract class Usuario(
-    val id: String,
+    val id: Long = -1,
     val nombre: String,
     val apellidos: String,
     val email: String,

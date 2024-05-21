@@ -17,6 +17,16 @@ import java.nio.file.Files
 import kotlin.io.path.Path
 
 private val logger=logging()
+
+/**
+ * Guarda una lista de butacas de un archivo JSON para una fecha especifíca.
+ * @param fecha
+ * @param list
+ * @return Devuelve la lista de butacas si ha sido exitosa la operación, en cambio si ha surgido algun contratiempo devuelve un error.
+ * @author Raúl Fernández, Javier Hernández, Yahya El Hadri, Samuel Cortés
+ * @since 1.0
+ */
+
 class ButacaStorageImpl(
     private val validator : ButacaValidator
 ):ButacaStorage {
@@ -36,6 +46,13 @@ class ButacaStorageImpl(
             Err(ButacaError.FicheroNoValido("Error al guardar el fichero json"))
         }
     }
+
+    /**
+     * Cargamos datos de un archivo csv para generar una lista de objetos 'butaca'.
+     * @return Devuelve un resultado encapsulado en un objeto, diciendo si la operación fue exitosa o no.
+     * @author Raúl Fernández, Javier Hernández, Yahya El Hadri, Samuel Cortés
+     * @since 1.0
+     */
 
     override fun load(file: File): Result<List<Butaca>, ButacaError> {
         logger.debug { "Carganado butacas desde fichero Csv" }

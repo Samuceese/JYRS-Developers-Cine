@@ -12,15 +12,15 @@ import kotlin.random.Random
 /**
  * Repositorio que se comunica con la base de datos de usuario.db
  * @author Raúl Fernández, Javier Hernández, Yahya El Hadri, Samuel Cortés
- * @property databaseClient de la base de datos estudiante.db
+ * @property databaseClient de la base de datos usuario.db
  */
 
 private val logger = logging()
 class UserRepositoryImpl(
-    private val databaseClient: SqlDelightManager
+
 ): UserRepository {
 
-    private val db = databaseClient.databaseQueries
+    private val db = SqlDelightManager.databaseQueries
 
     /**
      * Se encarga de guardar todos los datos que guardemos del usuario en la base de datos.
@@ -30,7 +30,16 @@ class UserRepositoryImpl(
 
     override fun save(user: Usuario): Usuario {
         logger.debug { "save: $user" }
-        return create(user)
+        db.transaction {
+            db.insertUser(
+                email = user.email,
+                nombre = user.nombre,
+                apellidos = user.apellidos,
+                tipo = "cliente",
+                contrasena = user.contraseña.encodeToBase64(),
+            )
+        }
+        return user
     }
 
     /**
@@ -47,47 +56,6 @@ class UserRepositoryImpl(
             it?.contraseña = contraseña
         }
         return findByEmail(email)
-    }
-
-    /**
-     * Se encarga de generar un nuevo ID para un cliente en el sistema.
-     * @return Devuelve un usuario que representa al usuario recien creado en la base de datos.
-     * @author Yahya El Hadri, Raúl Fernández, Javier Hernández, Samuel Cortés
-     * @since 1.0
-     */
-
-    private fun newID(): String{
-        logger.debug { "Generando nuevo id para cliente" }
-        var id: String
-        do {
-            var letras = ""
-            letras = List(3){('A'..'Z').random()}.joinToString { "" }
-            val numeros = List(3){ Random.nextInt(0,10)}.joinToString { "" }
-            id = letras + numeros
-        }while (findById(id) != null)
-        return id
-    }
-
-    /**
-     * Se encarga de crear un nuevo registro en la base de datos.
-     * @return Devuelve un usuario una vez hecho el registro.
-     * @author Yahya El Hadri, Raúl Fernández, Javier Hernández, Samuel Cortés
-     * @since 1.0
-     */
-
-    private fun create(user: Usuario): Usuario{
-        logger.debug { "create: $user" }
-        db.transaction {
-            db.insert(
-                id = newID(),
-                email = user.email,
-                nombre = user.nombre,
-                apellidos = user.apellidos,
-                tipo = "cliente",
-                contrasena = user.contraseña.encodeToBase64()
-            )
-        }
-        return db.selectLastInserted().executeAsOne().toUsuario()
     }
 
     /**

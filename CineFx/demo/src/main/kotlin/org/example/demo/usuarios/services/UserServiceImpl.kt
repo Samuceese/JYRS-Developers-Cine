@@ -43,7 +43,10 @@ class UserServiceImpl(
      */
 
     override fun cambioContraseña(email: String, contraseña: String): Result<Usuario, UserError> {
-        TODO("Not yet implemented")
+        logger.debug { "Cambiando contraseña en email: $email" }
+        return repository.cambioContraseña(email, contraseña)?.let {
+            Ok(it)
+        } ?: Err(UserError.UserNotFound("No se ha encontrado usuario con email: $email"))
     }
 
     /**

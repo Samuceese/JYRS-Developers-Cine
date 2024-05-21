@@ -53,18 +53,33 @@ object SqlDelightManager {
         }.databaseQueries
     }
 
+    /**
+     * Inicializa.
+     * @author Yahya El Hadri, Samuel Cortés, Raúl Fernández, Javier Hernández
+     * @since 1.0
+     */
+
+
     fun initialize() {
         if (Config.databaseInitData) {
-            removeAllData()
+            initilize()
         }
     }
 
+    /**
+     * Inicia el gestor de base de datos.
+     * @return databaseQueries
+     * @author Yahya El Hadri, Samuel Cortés, Raúl Fernández, Javier Hernández
+     * @since 1.0
+     */
 
-    private fun removeAllData() {
+    private fun initilize() {
         logger.debug { "SqlDeLightClient.removeAllData()" }
         databaseQueries.transaction {
             databaseQueries.deleteAllButacaEntity()
             databaseQueries.deleteAllComplemetoEntity()
+            databaseQueries.deleteAllClientes()
+            databaseQueries.InsertTheAdmin()
         }
     }
 }

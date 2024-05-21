@@ -134,4 +134,14 @@ class ButacaRepositoryImpl:ButacaRepository {
             .executeAsList()
             .map { it.toButaca() }
     }
+
+    /**
+     * Borra todos los datos de la tabla butacaEntity.
+     * @since 1.0
+     * @author Javier Hernández, Yahya El Hadri, Samuel Cortés, Raúl Fernández
+     */
+
+    override fun deleteAll() {
+        db.deleteAllButacaEntity()
+    }
 }

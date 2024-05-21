@@ -39,6 +39,7 @@ class Butaca(
 enum class Estado {
     ACTIVA,
     MANTENIMIENTO,
+    OCUPADA,
 }
 
 enum class Ocupacion{

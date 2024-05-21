@@ -12,8 +12,8 @@ import java.util.*
  * @author Raúl Fernández, Javier Hernández, Samuel Cortés, Yahya El Hadri
  */
 
-fun LocalDateTime.toDefaultDateTimeString():String{
-    return DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss", Locale.getDefault()).format(this)
+fun LocalDate.toDefaultDateTimeString():String{
+    return DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.getDefault()).format(this)
 }
 
 /**

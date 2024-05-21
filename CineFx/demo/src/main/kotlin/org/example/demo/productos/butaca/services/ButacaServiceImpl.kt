@@ -133,6 +133,16 @@ class ButacaServiceImpl(
     }
 
     /**
+     * Borramos la butaca que hayamos encontrado en el repositorio.
+     * @author Yahya El Hadri, Raúl Fernández, Javier Hernández, Samuel Cortés
+     * @since 1.0
+     */
+
+    override fun deleteAll() {
+        repository.deleteAll()
+    }
+
+    /**
      * Importamos datos de un archivo CSV para crear butacas en el sistema.
      * @param csvFile
      * @return Devuelve el resultado encapsulado en un objeto (result).

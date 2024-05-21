@@ -1,5 +1,7 @@
 package org.example.demo.usuarios.models
 
+import org.example.demo.usuarios.models7.Usuario
+
 /**
  * Representa a un cliente.
  * @property id
@@ -17,4 +19,4 @@ class Cliente(
     apellidos: String,
     contraseña: String,
     email: String
-) : Usuario(id, nombre, apellidos, email, contraseña) 
+) : Usuario(id, nombre, apellidos, email, contraseña)

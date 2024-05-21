@@ -2,11 +2,9 @@ package org.example.demo.usuarios.repositories
 
 import org.example.demo.database.SqlDelightManager
 import org.example.demo.locale.encodeToBase64
-import org.example.demo.usuarios.errors.UserError
 import org.example.demo.usuarios.mappers.toUsuario
-import org.example.demo.usuarios.models.Usuario
+import org.example.demo.usuarios.models7.Usuario
 import org.lighthousegames.logging.logging
-import kotlin.random.Random
 
 private val logger = logging()
 

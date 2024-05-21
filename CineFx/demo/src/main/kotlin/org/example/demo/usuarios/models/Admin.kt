@@ -1,5 +1,7 @@
 package org.example.demo.usuarios.models
 
+import org.example.demo.usuarios.models7.Usuario
+
 /**
  * Representa a un admin.
  * @property id

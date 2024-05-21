@@ -27,7 +27,7 @@ class VentasRepositoryImpl(
         logger.debug { "Obteniendo venta por id: $id" }
         if (db.existsVenta(id.toString()).executeAsOne()){
             val venta = db.selectVentaById(id.toString()).executeAsOne()
-            val cliente = clienteRepository.findById(venta.cliente_id)!!
+            val cliente = clienteRepository.findById(venta.cliente_id.toLong())!!
             val lineas = allLineas(venta.id)
             return venta.toVenta(cliente,lineas)
         }
@@ -48,7 +48,7 @@ class VentasRepositoryImpl(
         db.transaction {
             db.insertVenta(
                 id = venta.id.toString(),
-                cliente_id = venta.cliente.id,
+                cliente_id = venta.cliente.id.toString(),
                 total = venta.total,
                 created_at = venta.createdAt.toString(),
                 updated_at = venta.updatedAt.toString()
@@ -91,7 +91,7 @@ class VentasRepositoryImpl(
         logger.debug { "Obteniendo todas la ventas registradas" }
         return db.selectAllVentas().executeAsList().map {
             it.toVenta(
-                cliente = clienteRepository.findById(it.cliente_id)!!,
+                cliente = clienteRepository.findById(it.cliente_id.toLong())!!,
                 lineas = allLineas(it.id)
             )
         }
@@ -103,7 +103,7 @@ class VentasRepositoryImpl(
             db.transaction {
                 db.updateVenta(
                     id = venta.id.toString(),
-                    cliente_id = venta.cliente.id,
+                    cliente_id = venta.cliente.id.toString(),
                     total = venta.total,
                     updated_at = venta.updatedAt.toString(),
                     is_deleted = 0

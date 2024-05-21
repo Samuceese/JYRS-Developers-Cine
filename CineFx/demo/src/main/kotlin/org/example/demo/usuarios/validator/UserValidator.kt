@@ -4,7 +4,7 @@ import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import org.example.demo.usuarios.errors.UserError
-import org.example.demo.usuarios.models.Usuario
+import org.example.demo.usuarios.models7.Usuario
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
@@ -47,6 +47,13 @@ fun isValidLocalDate(dateString: String): Boolean {
     }
 }
 
+fun validateNombre(nombre: String): Boolean{
+    if(nombre.isEmpty() || nombre.isBlank()){
+        return false
+    }
+    return true
+}
+
 /**
  * Valida los apellidos de un usuario.
  * @return Devuelve un error si el apellido esta vacio y el apellido validado si es válido.
@@ -68,9 +75,9 @@ fun isValidLocalDate(dateString: String): Boolean {
  * @since 1.0
  */
 
-fun validateEmail(usuario: Usuario): Result<String, UserError>{
+fun validateEmail(usuario: Usuario): Boolean{
     val regex = Regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
-    if(!email.matches(regex)){
+    if(!usuario.email.matches(regex)){
         return false
     }
     return true
@@ -83,11 +90,10 @@ fun validateEmail(usuario: Usuario): Result<String, UserError>{
  * @since 1.0
  */
 
-fun validateContraseña(usuario: Usuario): Result<String, UserError>{
+fun validateContraseña(usuario: Usuario): Boolean{
     val regex = Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*?&]{12,}$")
-    if(!contraseña.matches(regex)){
+    if(!usuario.contraseña.matches(regex)){
         return false
     }
     return true
 }
->>>>>>> 2c8424b9c51ffdd2eb4047b0596f9fb101d56e26

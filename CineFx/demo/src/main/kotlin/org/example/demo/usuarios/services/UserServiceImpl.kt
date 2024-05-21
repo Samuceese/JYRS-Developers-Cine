@@ -6,8 +6,9 @@ import com.github.michaelbull.result.Result
 import com.github.michaelbull.result.mapBoth
 import org.example.demo.usuarios.cache.CacheUsuario
 import org.example.demo.usuarios.errors.UserError
-import org.example.demo.usuarios.models.Usuario
+import org.example.demo.usuarios.models7.Usuario
 import org.example.demo.usuarios.repositories.UserRepository
+import org.example.demo.usuarios.repositories.UserRepositoryImpl
 import org.lighthousegames.logging.logging
 
 
@@ -21,9 +22,9 @@ private val logger = logging()
  * @author Yahya El Hadri, Raúl Fernández, Javier Hernández, Samuel Cortés
  * @since 1.0
  */
-
+// TODO repository debe ser del tipo de la interfaz no de la clase pero falla ahora mismo y ns por q por q en el otro ordenador sale perfecto
 class UserServiceImpl(
-    private val repository: UserRepository,
+    private val repository: UserRepositoryImpl,
     private val cacheUsuario: CacheUsuario
 ): UserService {
     override fun save(user: Usuario): Result<Usuario, UserError> {
@@ -33,6 +34,7 @@ class UserServiceImpl(
             return Ok(it)
         }
     }
+
 
     /**
      * Servicio donde nos encargamos de cambiar la contraseña de un usuario en el sistema.

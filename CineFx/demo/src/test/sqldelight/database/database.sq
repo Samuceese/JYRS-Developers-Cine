@@ -7,6 +7,9 @@ CREATE TABLE IF NOT EXISTS UsuariosEntity(
     contrasena TEXT NOT NULL
 );
 
+deleteAll:
+DELETE FROM UsuariosEntity;
+
 deleteAllClientes:
 DELETE FROM UsuariosEntity WHERE tipo != 'admin';
 

@@ -1,6 +1,6 @@
 package org.example.demo.usuarios.repositories
 
-import org.example.demo.usuarios.models.Usuario
+import org.example.demo.usuarios.models7.Usuario
 
 interface UserRepository {
     fun save(user: Usuario): Usuario

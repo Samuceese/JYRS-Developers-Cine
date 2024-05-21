@@ -80,8 +80,8 @@ class VentasServiceImpl(
             ?: Err(VentaError.VentaNoEncontrada("No se han encontrado las ventas"))
     }
 
-    override fun exportToHtml(venta: Venta, htmlFile: File): Result<Unit, VentaError> {
+    override fun exportToHtml(venta: Venta, htmlFile: File,pelicula:String): Result<Unit, VentaError> {
         logger.debug { "Exportando venta a fichero html $htmlFile" }
-        return ventasSotrageHtml.export(venta, htmlFile)
+        return ventasSotrageHtml.export(venta, htmlFile,pelicula)
     }
 }

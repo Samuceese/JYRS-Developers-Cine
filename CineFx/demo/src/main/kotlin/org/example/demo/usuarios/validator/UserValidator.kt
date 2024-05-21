@@ -28,7 +28,6 @@ fun Usuario.validate(): Result<Usuario, UserError>{
 }
 
 
-
  fun validateNombre(nombre: String): Boolean{
     if (nombre.isEmpty() || nombre.isBlank()){
         return false
@@ -39,13 +38,11 @@ fun Usuario.validate(): Result<Usuario, UserError>{
  fun validateApellidos(apellidos: String): Boolean{
     if (apellidos.isEmpty() || apellidos.isBlank()){
         return false
-
     }
     return true
 }
 
-
-fun validateEmail(usuario: Usuario): Result<String, UserError>{
+ fun validateEmail(email: String): Boolean{
     val regex = Regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
     if(!email.matches(regex)){
         return false
@@ -53,7 +50,7 @@ fun validateEmail(usuario: Usuario): Result<String, UserError>{
     return true
 }
 
-fun validateContraseña(usuario: Usuario): Result<String, UserError>{
+ fun validateContraseña(contraseña: String): Boolean{
     val regex = Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*?&]{12,}$")
     if(!contraseña.matches(regex)){
         return false

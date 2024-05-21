@@ -38,6 +38,7 @@ module org.example.demo {
     opens org.example.demo.productos.butaca.services to javafx.fxml;
     exports org.example.demo.productos.butaca.services;
 
-
+    opens org.example.demo.productos.complementos.services to javafx.fxml;
+    exports org.example.demo.productos.complementos.services;
 
 }

@@ -11,7 +11,7 @@ import java.io.File
 
 private val logger = logging()
 class VentaStorageHtml:VentasStorage {
-    override fun export(venta: Venta, file: File): Result<Unit, VentaError> {
+    override fun export(venta: Venta, file: File,pelicula:String): Result<Unit, VentaError> {
         return try {
             val html = """
                 <!DOCTYPE html>
@@ -26,6 +26,7 @@ class VentaStorageHtml:VentasStorage {
                         <h1>Venta</h1>
                         <p>Fecha: ${venta.createdAt}</p>
                         <p>Cliente: ${venta.cliente.nombre}</p>
+                        <p>Pelcula:$pelicula</p>
                         <p>Productos:</p>
                         <table border="2px">
                             <thead>
@@ -39,7 +40,7 @@ class VentaStorageHtml:VentasStorage {
                             </thead>
                             <tbody>
                                 ${
-                venta.lineas.forEach {
+                            venta.lineas.forEach {
                             "<tr>" +
                             "<td>${it.id}</td>" +
                             "<td>${it.precio.toDefaultMoneyString()}</td>" +

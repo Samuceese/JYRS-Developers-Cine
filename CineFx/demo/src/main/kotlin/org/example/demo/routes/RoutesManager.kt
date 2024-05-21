@@ -138,6 +138,13 @@ object RoutesManager {
         }
 
     }
+    fun alerta(mensaje:String,contenido:String){
+        Alert(Alert.AlertType.ERROR).apply {
+            this.title="Error Inicio Sesion"
+            this.headerText="$mensaje Incorrecto/Invalido"
+            this.contentText=contenido
+        }.showAndWait()
+    }
 
     fun getResourceAsStream(icon: String): InputStream {
         return app::class.java.getResourceAsStream(icon)

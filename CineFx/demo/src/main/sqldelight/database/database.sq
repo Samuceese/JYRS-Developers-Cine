@@ -1,15 +1,11 @@
 CREATE TABLE IF NOT EXISTS UsuariosEntity(
-    id TEXT PRIMARY KEY NOT NULL,
+    id INTEGER PRIMARY KEY AUTOINCREMENT ,
     email TEXT NOT NULL,
     nombre TEXT NOT NULL,
     apellidos TEXT NOT NULL,
     tipo TEXT NOT NULL,
     contrasena TEXT NOT NULL
 );
-
-INSERT INTO UsuariosEntity (id, email, nombre, apellidos, tipo, contrasena)
-VALUES ('AAA111', 'adminJYRS@JYRS.es', 'Manager', 'JYRS', 'admin', 'SnlScyowNTAyMDMwMw==');
-
 deleteAllClientes:
 DELETE FROM UsuariosEntity WHERE tipo != 'admin';
 
@@ -22,12 +18,16 @@ SELECT * FROM UsuariosEntity WHERE email = ?;
 selectById:
 SELECT * FROM UsuariosEntity WHERE id = ?;
 
-selectLastInserted:
-SELECT * FROM UsuariosEntity WHERE id = last_inserted_rowid();
+InsertTheAdmin:
+INSERT INTO UsuariosEntity (email, nombre, apellidos, tipo, contrasena)
+VALUES ("SomosJYRS@gmail.com", "JYRS", "Dev", "admin", "SnlScyowNTAyMDMwMw==");
 
-insert:
-INSERT INTO UsuariosEntity (id, email, nombre, apellidos, tipo, contrasena)
-VALUES (?, ?, ?, ?, ?, ?);
+insertUser:
+INSERT INTO UsuariosEntity (email, nombre, apellidos, tipo, contrasena)
+VALUES (?, ?, ?, ?, ?);
+
+selectClienteLastInserted:
+SELECT * FROM UsuariosEntity WHERE id = last_insert_rowid();
 
 update:
 UPDATE UsuariosEntity SET contrasena = ?;
@@ -61,7 +61,7 @@ insertarbutaca:
 INSERT INTO ButacaEntity (id,estado,tipo,ocupacion,precio,createAt) VALUES (?,?,?,?,?,?);
 
 updateButacaEntity:
-UPDATE ButacaEntity SET id=?, estado=?, tipo=?, ocupacion=?, precio=? ;
+UPDATE ButacaEntity SET  estado=?, tipo=?, ocupacion=?, precio=? WHERE id =?;
 
 deleteAllButacaEntity:
 DELETE FROM ButacaEntity;
@@ -100,4 +100,127 @@ CREATE TABLE IF NOT EXISTS PeliculaEntity(
     id INTEGER PRIMARY KEY NOT NULL,
     nombre TEXT NOT NULL
 );
+--Tabla ventas
+CREATE TABLE IF NOT EXISTS VentaEntity (
+    id TEXT PRIMARY KEY,
+    cliente_id TEXT NOT NULL REFERENCES UsuariosEntity(id),
+    total REAL NOT NULL,
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL,
+    is_deleted INTEGER NOT NULL DEFAULT 0
+);
+-- Operaciones CRUD para la tabla de Ventas
+removeAllVentas:
+DELETE FROM VentaEntity;
+
+selectAllVentas:
+SELECT * FROM VentaEntity;
+
+selectVentaById:
+SELECT * FROM VentaEntity WHERE id = ?;
+
+existsVenta:
+SELECT COUNT(*) > 0 AS es_mayor_cero FROM VentaEntity WHERE id = ?;
+
+selectAllVentasByIsDeleted:
+SELECT * FROM VentaEntity WHERE is_deleted = ?;
+
+selectVentaLastInserted:
+SELECT * FROM VentaEntity WHERE id = last_insert_rowid();
+
+insertVenta:
+INSERT INTO VentaEntity (id, cliente_id, total, created_at, updated_at) VALUES (?, ?, ?, ?, ?);
+
+updateVenta:
+UPDATE VentaEntity SET cliente_id = ?, total = ?, updated_at = ?, is_deleted = ? WHERE id = ?;
+
+deleteVenta:
+DELETE FROM VentaEntity WHERE id = ?;
+
+-- Tabla de Lineas de Ventas
+CREATE TABLE IF NOT EXISTS LineaVentaEntityButaca (
+     id TEXT PRIMARY KEY,
+     venta_id TEXT NOT NULL REFERENCES VentaEntity(id),
+     butaca_id TEXT NOT NULL REFERENCES ButacaEntity(id),
+     cantidad INTEGER NOT NULL,
+     precio REAL NOT NULL,
+     created_at TEXT NOT NULL,
+     updated_at TEXT NOT NULL,
+     is_deleted INTEGER NOT NULL DEFAULT 0
+);
+
+-- Operaciones CRUD para la tabla de Lineas de Ventas
+removeAllLineaVentaEntityButaca:
+DELETE FROM LineaVentaEntityButaca;
+
+selectAllLineaVentaEntityButaca:
+SELECT * FROM LineaVentaEntityButaca;
+
+selectLineaVentaEntityButacaById:
+SELECT * FROM LineaVentaEntityButaca WHERE id = ?;
+
+selectAllLineaVentaEntityButacaByVentaId:
+SELECT * FROM LineaVentaEntityButaca WHERE venta_id = ?;
+
+selectAllLineaVentaEntityButacaByIsDeleted:
+SELECT * FROM LineaVentaEntityButaca WHERE is_deleted = ?;
+
+selectLineaVentaEntityButacaLastInserted:
+SELECT * FROM LineaVentaEntityButaca WHERE id = last_insert_rowid();
+
+insertLineaVentaEntityButaca:
+INSERT INTO LineaVentaEntityButaca (id, venta_id, butaca_id, cantidad, precio, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?,?);
+updateLineaVentaEntityButaca:
+UPDATE LineaVentaEntityButaca SET venta_id = ?, butaca_id = ?, cantidad = ?, precio = ?, updated_at = ?, is_deleted = ? WHERE id = ?;
+
+deleteLineaVentaEntityButaca:
+DELETE FROM LineaVentaEntityButaca WHERE id = ?;
+
+-- Tabla de Lineas de Ventas
+CREATE TABLE IF NOT EXISTS LineaVentaEntityComplemento(
+     id TEXT PRIMARY KEY,
+     venta_id TEXT NOT NULL REFERENCES VentaEntity(id),
+     complemento_id TEXT NOT NULL REFERENCES ComplementoEntity(id),
+     cantidad INTEGER NOT NULL,
+     precio REAL NOT NULL,
+     created_at TEXT NOT NULL,
+     updated_at TEXT NOT NULL,
+     is_deleted INTEGER NOT NULL DEFAULT 0
+);
+
+-- Operaciones CRUD para la tabla de Lineas de Ventas
+removeAllLineaVentaEntityComplemento:
+DELETE FROM LineaVentaEntityComplemento;
+
+selectAllLineaVentaEntityComplemento:
+SELECT * FROM LineaVentaEntityComplemento;
+
+selectLineaVentaEntityComplementoaById:
+SELECT * FROM LineaVentaEntityComplemento WHERE id = ?;
+
+selectAllLineaVentaEntityComplementoByVentaId:
+SELECT * FROM LineaVentaEntityComplemento WHERE venta_id = ?;
+
+selectAllLineaVentaEntityComplementoByIsDeleted:
+SELECT * FROM LineaVentaEntityComplemento WHERE is_deleted = ?;
+
+selectLineaVentaEntityComplementoLastInserted:
+SELECT * FROM LineaVentaEntityComplemento WHERE id = last_insert_rowid();
+
+insertLineaVentaEntityComplemento:
+INSERT INTO LineaVentaEntityComplemento (id, venta_id, complemento_id, cantidad, precio, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?,?);
+updateLineaVentaEntityComplemento:
+UPDATE LineaVentaEntityComplemento SET venta_id = ?, complemento_id = ?, cantidad = ?, precio = ?, updated_at = ?, is_deleted = ? WHERE id = ?;
+
+deleteLineaVentaEntityComplemento:
+DELETE FROM LineaVentaEntityComplemento WHERE id = ?;
+
+selectAllLineasById:
+SELECT *
+FROM LineaVentaEntityButaca
+WHERE venta_id = ?
+UNION ALL
+SELECT *
+FROM LineaVentaEntityComplemento
+WHERE venta_id = ?;
 

@@ -9,56 +9,36 @@ import org.lighthousegames.logging.logging
 import kotlin.random.Random
 
 private val logger = logging()
-class UserRepositoryImpl(
-    private val databaseClient: SqlDelightManager
-): UserRepository {
-    private val db = databaseClient.databaseQueries
+class UserRepositoryImpl: UserRepository {
+    private val db = SqlDelightManager.databaseQueries
     override fun save(user: Usuario): Usuario {
         logger.debug { "save: $user" }
-        return create(user)
-    }
-
-    override fun cambioContraseña(email: String, contraseña: String): Usuario? {
-        logger.debug { "cambiando contraseña en email: $email" }
-        findByEmail(email).let {
-            it?.contraseña = contraseña
-        }
-        return findByEmail(email)
-    }
-
-    private fun newID(): String{
-        logger.debug { "Generando nuevo id para cliente" }
-        var id: String
-        do {
-            var letras = ""
-            letras = List(3){('A'..'Z').random()}.joinToString { "" }
-            val numeros = List(3){ Random.nextInt(0,10)}.joinToString { "" }
-            id = letras + numeros
-        }while (findById(id) != null)
-        return id
-
-    }
-
-    private fun create(user: Usuario): Usuario{
-        logger.debug { "create: $user" }
         db.transaction {
-            db.insert(
-                id = newID(),
+            db.insertUser(
                 email = user.email,
                 nombre = user.nombre,
                 apellidos = user.apellidos,
                 tipo = "cliente",
-                contrasena = user.contraseña.encodeToBase64()
+                contrasena = user.contraseña.encodeToBase64(),
             )
         }
-        return db.selectLastInserted().executeAsOne().toUsuario()
+        return user
     }
+
+    override fun cambioContraseña(email: String, contraseña: String): Usuario? {
+        logger.debug { "cambiando contraseña en email: $email" }
+        findByEmail(email)?.let {
+            it.contraseña = contraseña
+        }
+        return findByEmail(email)
+    }
+
     override fun findByEmail(email: String): Usuario? {
         logger.debug { "Buscando usuario por email $email" }
         return db.selectByEmail(email).executeAsOneOrNull()?.toUsuario()
     }
 
-    override fun findById(id: String): Usuario? {
+    override fun findById(id: Long): Usuario? {
         logger.debug { "Buscando usuario por id: $id" }
         return db.selectById(id).executeAsOneOrNull()?.toUsuario()
     }

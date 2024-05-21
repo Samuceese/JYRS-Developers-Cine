@@ -1,15 +1,11 @@
 CREATE TABLE IF NOT EXISTS UsuariosEntity(
-    id TEXT PRIMARY KEY NOT NULL,
+    id INTEGER PRIMARY KEY AUTOINCREMENT ,
     email TEXT NOT NULL,
     nombre TEXT NOT NULL,
     apellidos TEXT NOT NULL,
     tipo TEXT NOT NULL,
     contrasena TEXT NOT NULL
 );
-
---INSERT INTO UsuariosEntity (id, email, nombre, apellidos, tipo, contrasena)
---VALUES ('AAA111', 'adminJYRS@JYRS.es', 'Manager', 'JYRS', 'admin', 'SnlScyowNTAyMDMwMw==');
-
 deleteAllClientes:
 DELETE FROM UsuariosEntity WHERE tipo != 'admin';
 
@@ -22,12 +18,16 @@ SELECT * FROM UsuariosEntity WHERE email = ?;
 selectById:
 SELECT * FROM UsuariosEntity WHERE id = ?;
 
-selectLastInserted:
-SELECT * FROM UsuariosEntity WHERE id = last_inserted_rowid();
+InsertTheAdmin:
+INSERT INTO UsuariosEntity (email, nombre, apellidos, tipo, contrasena)
+VALUES ("SomosJYRS@gmail.com", "JYRS", "Dev", "admin", "SnlScyowNTAyMDMwMw==");
 
-insert:
-INSERT INTO UsuariosEntity (id, email, nombre, apellidos, tipo, contrasena)
-VALUES (?, ?, ?, ?, ?, ?);
+insertUser:
+INSERT INTO UsuariosEntity (email, nombre, apellidos, tipo, contrasena)
+VALUES (?, ?, ?, ?, ?);
+
+selectClienteLastInserted:
+SELECT * FROM UsuariosEntity WHERE id = last_insert_rowid();
 
 update:
 UPDATE UsuariosEntity SET contrasena = ?;
@@ -223,3 +223,4 @@ UNION ALL
 SELECT *
 FROM LineaVentaEntityComplemento
 WHERE venta_id = ?;
+

@@ -10,6 +10,10 @@ import org.example.demo.usuarios.models.Usuario
 import org.example.demo.usuarios.repositories.UserRepository
 import org.lighthousegames.logging.logging
 
+
+
+private val logger = logging()
+
 /**
  * Servicio que maneja el repositorio de usuario y la cache.
  * @param UserRepository, CacheUsuario el repositorio y la cache de usuario.
@@ -18,7 +22,6 @@ import org.lighthousegames.logging.logging
  * @since 1.0
  */
 
-private val logger = logging()
 class UserServiceImpl(
     private val repository: UserRepository,
     private val cacheUsuario: CacheUsuario

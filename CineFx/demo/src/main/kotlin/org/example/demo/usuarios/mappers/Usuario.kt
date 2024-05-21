@@ -8,7 +8,7 @@ import org.example.demo.usuarios.models.Usuario
 
 /**
  * Mapea un UsuarioEntity en un estudiante.
- * @return tipo.
+ * @return admin, cliente
  * @author Yahya El Hadri, Raúl Fernández, Javier Hernández, Samuel Cortés
  * @since 1.0
  */

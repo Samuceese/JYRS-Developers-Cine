@@ -72,7 +72,7 @@ class UserServiceImpl(
      * @since 1.0
      */
 
-    override fun findById(id: String): Result<Usuario, UserError> {
+    override fun findById(id: Long): Result<Usuario, UserError> {
         logger.debug { "Buscando Usuario por id: $id" }
         return cacheUsuario.get(id).mapBoth(
             success = {

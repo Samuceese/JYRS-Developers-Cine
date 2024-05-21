@@ -26,6 +26,7 @@ fun ButacaEntity.toButaca():Butaca{
     when(this.estado){
         "ACTIVA" -> _estado = Estado.ACTIVA
         "MANTENIMIENTO"-> _estado=Estado.MANTENIMIENTO
+        "OCUPADA" -> _estado = Estado.OCUPADA
     }
     return Butaca(_id,_estado!!,_tipo!!, LocalDate.parse(this.createAt))
 }
@@ -47,6 +48,7 @@ fun ButacaDto.toButaca():Butaca{
     when(this.estado) {
         "ACTIVA" -> _estado = Estado.ACTIVA
         "MANTENIMIENTO" -> _estado = Estado.MANTENIMIENTO
+        "OCUPADA" -> _estado = Estado.OCUPADA
     }
     return Butaca(this.id,_estado!!,_tipo!!)
 }
@@ -69,13 +71,15 @@ fun Butaca.toButacaDto(): ButacaDto {
     when(this.estado){
         Estado.ACTIVA -> _estado = "ACTIVA"
         Estado.MANTENIMIENTO -> _estado = "MANTENIMIENTO"
+        Estado.OCUPADA-> _estado = "OCUPADA"
     }
     var _ocupacion:String?=null
     when(this.ocupacion){
         Ocupacion.LIBRE-> _ocupacion = "LIBRE"
         Ocupacion.INACTIVA-> _ocupacion = "INACTIVA"
         Ocupacion.SELECCIONADA-> _ocupacion = "RESERVA"
-        Ocupacion.OCUPADA-> _ocupacion = "OCUPADA"
+        Ocupacion.OCUPADA -> _ocupacion = "OCUPADA"
+
     }
     return ButacaDto(this.id,_estado,_tipo,this.precio.toString(),_ocupacion,this.create.toString())
 }

@@ -8,19 +8,7 @@ import org.example.demo.usuarios.models.Usuario
 import org.lighthousegames.logging.logging
 import kotlin.random.Random
 
-
-/**
- * Repositorio que se comunica con la base de datos de usuario.db
- * @author Raúl Fernández, Javier Hernández, Yahya El Hadri, Samuel Cortés
- * @property databaseClient de la base de datos usuario.db
- */
-
 private val logger = logging()
-class UserRepositoryImpl(
-
-): UserRepository {
-
-    private val db = SqlDelightManager.databaseQueries
 
     /**
      * Se encarga de guardar todos los datos que guardemos del usuario en la base de datos.
@@ -28,6 +16,8 @@ class UserRepositoryImpl(
      * @since 1.0
      */
 
+class UserRepositoryImpl: UserRepository {
+    private val db = SqlDelightManager.databaseQueries
     override fun save(user: Usuario): Usuario {
         logger.debug { "save: $user" }
         db.transaction {
@@ -41,7 +31,7 @@ class UserRepositoryImpl(
         }
         return user
     }
-
+    
     /**
      * El cambio de contraseña del usuario.
      * @param email
@@ -49,11 +39,11 @@ class UserRepositoryImpl(
      * @author Yahya El Hadri, Raúl Fernández, Javier Hernández, Samuel Cortés
      * @since 1.0
      */
-
+     
     override fun cambioContraseña(email: String, contraseña: String): Usuario? {
         logger.debug { "cambiando contraseña en email: $email" }
-        findByEmail(email).let {
-            it?.contraseña = contraseña
+        findByEmail(email)?.let {
+            it.contraseña = contraseña
         }
         return findByEmail(email)
     }
@@ -77,7 +67,7 @@ class UserRepositoryImpl(
      * @since 1.0
      */
 
-    override fun findById(id: String): Usuario? {
+    override fun findById(id: Long): Usuario? {
         logger.debug { "Buscando usuario por id: $id" }
         return db.selectById(id).executeAsOneOrNull()?.toUsuario()
     }

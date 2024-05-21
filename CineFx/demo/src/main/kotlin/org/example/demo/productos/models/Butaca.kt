@@ -25,10 +25,12 @@ class Butaca(
             Tipo.VIP-> precio=8.0
             Tipo.NORMAL->precio=5.0
         }
-        if (estado == Estado.MANTENIMIENTO){
+        if (estado == Estado.MANTENIMIENTO ){
             ocupacion = Ocupacion.INACTIVA
+        }else if(estado == Estado.OCUPADA){
+            ocupacion=Ocupacion.OCUPADA
         }else{
-            ocupacion=Ocupacion.LIBRE
+            ocupacion= Ocupacion.LIBRE
         }
     }
 
@@ -45,8 +47,8 @@ enum class Estado {
 enum class Ocupacion{
     LIBRE,
     SELECCIONADA,
-    OCUPADA,
-    INACTIVA
+    INACTIVA,
+    OCUPADA
 }
 enum class Tipo{
     NORMAL,

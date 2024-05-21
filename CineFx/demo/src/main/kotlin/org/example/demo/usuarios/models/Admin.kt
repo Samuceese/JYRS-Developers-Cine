@@ -17,5 +17,4 @@ class Admin(
     apellidos: String,
     contraseña: String,
     email: String
-) : Usuario(id, nombre, apellidos, email, contraseña)  {
-}
+) : Usuario(id, nombre, apellidos, email, contraseña)

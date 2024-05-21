@@ -7,8 +7,10 @@ import org.example.demo.productos.butaca.repositories.ButacaRepository
 import org.example.demo.productos.butaca.storage.ButacaStorage
 import org.example.demo.productos.butaca.validator.ButacaValidator
 import org.example.demo.productos.models.Butaca
+import org.example.demo.productos.models.Ocupacion
 import org.lighthousegames.logging.logging
 import java.io.File
+import java.io.InputStream
 
 private val logger=logging()
 
@@ -121,10 +123,10 @@ class ButacaServiceImpl(
      * @since 1.0
      */
 
-    override fun update(id: String, butaca: Butaca): Result<Butaca, ButacaError> {
+    override fun update(id: String, butaca: Butaca, ocupacion: Ocupacion, precio:Double): Result<Butaca, ButacaError> {
         logger.debug { "Actualizando butaca con id: $id" }
         return validador.validarButaca(butaca).andThen {  b ->
-            repository.update(b.id, b)
+            repository.update(b.id, b,ocupacion,precio)
                 ?.let { Ok(it) }
                 ?: Err(ButacaError.ButacaNoActualizadas("No se ha podido actualizar la butaca: $id"))
         }.andThen {
@@ -137,7 +139,7 @@ class ButacaServiceImpl(
      * @author Yahya El Hadri, Raúl Fernández, Javier Hernández, Samuel Cortés
      * @since 1.0
      */
-
+     
     override fun deleteAll() {
         repository.deleteAll()
     }
@@ -150,7 +152,7 @@ class ButacaServiceImpl(
      * @since 1.0
      */
 
-    override fun import(csvFile: File): Result<List<Butaca>, ButacaError> {
+    override fun import(csvFile: InputStream): Result<List<Butaca>, ButacaError> {
         logger.debug { "Cargando butacas desde CSV" }
         return storage.load(csvFile).andThen { butacas->
             butacas.forEach{ p->

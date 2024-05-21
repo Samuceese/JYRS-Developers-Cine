@@ -1,0 +1,104 @@
+CREATE TABLE IF NOT EXISTS UsuariosEntity(
+    id INTEGER PRIMARY KEY AUTOINCREMENT ,
+    email TEXT NOT NULL,
+    nombre TEXT NOT NULL,
+    apellidos TEXT NOT NULL,
+    tipo TEXT NOT NULL,
+    contrasena TEXT NOT NULL
+);
+
+deleteAllClientes:
+DELETE FROM UsuariosEntity WHERE tipo != 'admin';
+
+selectAll:
+SELECT * FROM UsuariosEntity ORDER BY nombre ASC;
+
+selectByEmail:
+SELECT * FROM UsuariosEntity WHERE email = ?;
+
+selectById:
+SELECT * FROM UsuariosEntity WHERE id = ?;
+
+InsertTheAdmin:
+INSERT INTO UsuariosEntity (email, nombre, apellidos, tipo, contrasena)
+VALUES ("SomosJYRS@gmail.com", "JYRS", "Dev", "admin", "SnlScyowNTAyMDMwMw==");
+
+insertUser:
+INSERT INTO UsuariosEntity (email, nombre, apellidos, tipo, contrasena)
+VALUES (?, ?, ?, ?, ?);
+
+selectClienteLastInserted:
+SELECT * FROM UsuariosEntity WHERE id = last_insert_rowid();
+
+update:
+UPDATE UsuariosEntity SET contrasena = ?;
+
+--ButacaEntity
+CREATE TABLE IF NOT EXISTS ButacaEntity(
+    id TEXT PRIMARY KEY NOT NULL,
+    estado TEXT NOT NULL,
+    tipo TEXT NOT NULL,
+    ocupacion TEXT NOT NULL ,
+    precio INTEGER NOT NULL,
+    createAt TEXT NOT NULL
+);
+-- Crud ButacaEntity
+getAllButacaEntity:
+SELECT * FROM ButacaEntity;
+
+getByIdButacaEntity:
+SELECT * FROM ButacaEntity WHERE id = ?;
+
+getButacaByEstado:
+SELECT * FROM ButacaEntity WHERE estado = ?;
+
+getButacaByOcupacion:
+SELECT * FROM ButacaEntity WHERE ocupacion = ?;
+
+getbutacaByTipo:
+SELECT * FROM ButacaEntity WHERE tipo = ?;
+
+insertarbutaca:
+INSERT INTO ButacaEntity (id,estado,tipo,ocupacion,precio,createAt) VALUES (?,?,?,?,?,?);
+
+updateButacaEntity:
+UPDATE ButacaEntity SET id=?, estado=?, tipo=?, ocupacion=?, precio=? ;
+
+deleteAllButacaEntity:
+DELETE FROM ButacaEntity;
+
+--ComplementoEntity
+CREATE TABLE IF NOT EXISTS ComplementoEntity(
+    tipo TEXT NOT NULL ,
+    id TEXT PRIMARY KEY NOT NULL,
+    nombre TEXT NOT NULL,
+    precio INTEGER NOT NULL
+);
+-- Crud ComplemetoEntity
+getAllComplemetoEntity:
+SELECT * FROM ComplementoEntity;
+
+getByIdComplemetoEntity:
+SELECT * FROM ComplementoEntity WHERE id = ?;
+
+getComplementoByTipo:
+SELECT * FROM ComplementoEntity WHERE tipo=?;
+
+updateComplementoEntity:
+UPDATE ComplementoEntity SET id=?, nombre=?, precio=?, tipo=?;
+
+deleteAllComplemetoEntity:
+DELETE FROM ComplementoEntity;
+
+insertComplemento:
+INSERT INTO ComplementoEntity(tipo,id,nombre,precio) VALUES(?,?,?,?);
+
+deleteComplementoByID:
+DELETE FROM ComplementoEntity WHERE id=?;
+
+--PeliculaEntity
+CREATE TABLE IF NOT EXISTS PeliculaEntity(
+    id INTEGER PRIMARY KEY NOT NULL,
+    nombre TEXT NOT NULL
+);
+

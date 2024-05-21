@@ -34,19 +34,7 @@ fun Usuario.validate(): Result<Usuario, UserError>{
     return Ok(this)
 }
 
-/**
- * Se encarga de verificar el nombre de usuario no esté vacío ni compuesto por espacios en blanco.
- * @return Devuelve un error si el nombre esta vacio y el nombre validado si es válido.
- * @author Raúl Fernández, Yahya El Hadri, Samuel Cortés, Javier Hernández
- * @since 1.0
- */
 
-fun validateNombre(nombre: String): Boolean{
-    if (nombre.isEmpty() || nombre.isBlank()){
-        return false
-    }
-    return true
-}
 /**
  * Valida los apellidos de un usuario.
  * @return Devuelve un error si el apellido esta vacio y el apellido validado si es válido.
@@ -54,10 +42,9 @@ fun validateNombre(nombre: String): Boolean{
  * @since 1.0
  */
 
-fun validateApellidos(apellidos: String): Boolean{
+ fun validateApellidos(apellidos: String): Boolean{
     if (apellidos.isEmpty() || apellidos.isBlank()){
         return false
-
     }
     return true
 }

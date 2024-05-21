@@ -343,9 +343,4 @@ class SeleccionarAsientoViewController :KoinComponent{
         RoutesManager.changeScene(view = RoutesManager.View.SELECPELICULAS, title = "Seleccionar pelicula")
     }
 
-    private fun reasignarButacas() {
-        lista.forEach {
-            viewButacas.actualizarButaca(it.id,Estado.ACTIVA, it.tipo, it.create, Ocupacion.LIBRE, it.precio)
-        }
-    }
 }

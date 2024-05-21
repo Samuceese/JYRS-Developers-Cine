@@ -3,6 +3,7 @@ package org.example.demo.productos.butaca.validator
 import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
+import org.example.demo.productos.butaca.dto.ButacaDto
 import org.example.demo.productos.butaca.errors.ButacaError
 import org.example.demo.productos.models.Butaca
 
@@ -18,11 +19,49 @@ class ButacaValidator {
         return true
     }
     fun validarButaca(butaca:Butaca): Result<Butaca, ButacaError> {
-        when {
-            !validarId(butaca.id) -> Err(ButacaError.IdNoValido("El ID: ${butaca.id} no es valido"))
+        return when {
+            !validarId(butaca.id) -> Err(ButacaError.IdNoValido("El ID: ${butaca.id} no es valido, debe ser Letra Número: Ej A2"))
             else -> Ok(butaca)
         }
-        return Ok(butaca)
+    }
+
+    fun validarButacaDto(butaca: ButacaDto): Result<ButacaDto, ButacaError>{
+        return when{
+            !validarId(butaca.id) -> Err(ButacaError.IdNoValido("El ID: ${butaca.id} no es valido, debe ser Letra Número: Ej A2"))
+            !validarEstado(butaca) -> Err(ButacaError.EstadoNoValido("El estado de la butaca no es válido debe ser ACTIVA o MANTENIMIENTO"))
+            !validarOcupación(butaca) -> Err(ButacaError.OcupacionNoValiado("La ocupación de la butaca no es válida debe ser LIBRE, SELECCIONADA, OCUPADA O INACTIVA"))
+            !validarTipo(butaca) -> Err(ButacaError.TipoInvalido("El tipo de la butaca no es válido, debe ser NORMAL o VIP"))
+            !esDouble(butaca.precio) -> Err(ButacaError.PrecioNoValido("El precio de la butaca no es válido, debe ser un double"))
+            else -> Ok(butaca)
+        }
+    }
+    fun esDouble(cadena: String): Boolean {
+        return try {
+            cadena.toDouble()
+            true
+        } catch (e: NumberFormatException) {
+            false
+        }
+    }
+    private fun validarOcupación(butaca: ButacaDto): Boolean{
+        return if(butaca.ocupacion != "LIBRE" && butaca.ocupacion != "SELECCIONADA" && butaca.ocupacion != "OCUPADA" && butaca.ocupacion != "INACTIVA"){
+            false
+        }else{
+            true
+        }
+    }
+    private fun validarEstado(butaca: ButacaDto): Boolean{
+        if (butaca.estado != "ACTIVA" || butaca.estado != "MANTENIMIENTO"){
+            return false
+        }
+        return true
+    }
+
+    private fun validarTipo(butaca: ButacaDto): Boolean{
+        if(butaca.tipo != "NORMAL" || butaca.tipo != "VIP"){
+            return false
+        }
+        return true
     }
 
     private fun validarId(id: String) :Boolean{

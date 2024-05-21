@@ -37,16 +37,6 @@ fun Usuario.validate(): Result<Usuario, UserError>{
     return Ok(this)
 }
 
-fun isValidLocalDate(dateString: String): Boolean {
-    return try {
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-        LocalDate.parse(dateString, formatter)
-        true
-    } catch (e: DateTimeParseException) {
-        false
-    }
-}
-
 fun validateNombre(nombre: String): Boolean{
     if(nombre.isEmpty() || nombre.isBlank()){
         return false
@@ -75,9 +65,9 @@ fun validateNombre(nombre: String): Boolean{
  * @since 1.0
  */
 
-fun validateEmail(usuario: Usuario): Boolean{
+fun validateEmail(email: String): Boolean{
     val regex = Regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
-    if(!usuario.email.matches(regex)){
+    if(!email.matches(regex)){
         return false
     }
     return true
@@ -90,9 +80,9 @@ fun validateEmail(usuario: Usuario): Boolean{
  * @since 1.0
  */
 
-fun validateContraseña(usuario: Usuario): Boolean{
+fun validateContraseña(contraseña: String): Boolean{
     val regex = Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*?&]{12,}$")
-    if(!usuario.contraseña.matches(regex)){
+    if(!contraseña.matches(regex)){
         return false
     }
     return true

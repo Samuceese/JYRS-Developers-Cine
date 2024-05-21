@@ -2,7 +2,7 @@ package org.example.demo.usuarios.services
 
 import com.github.michaelbull.result.Result
 import org.example.demo.usuarios.errors.UserError
-import org.example.demo.usuarios.models.Usuario
+import org.example.demo.usuarios.models7.Usuario
 
 interface UserService {
     fun save(user: Usuario): Result<Usuario, UserError>

@@ -1,7 +1,6 @@
 package org.example.demo.venta.models
 
-import org.example.demo.usuarios.models.Cliente
-import org.example.demo.usuarios.models.Usuario
+import org.example.demo.usuarios.models7.Usuario
 import java.time.LocalDateTime
 import java.util.*
 

@@ -338,7 +338,7 @@ class SeleccionarAsientoViewController :KoinComponent{
     }
 
     private fun botonVolveronAction() {
-        reasignarButacas()
+        viewButacas.reasignarButacas()
         viewButacas.state.value.butacasSeleccionadas.clear()
         RoutesManager.changeScene(view = RoutesManager.View.SELECPELICULAS, title = "Seleccionar pelicula")
     }

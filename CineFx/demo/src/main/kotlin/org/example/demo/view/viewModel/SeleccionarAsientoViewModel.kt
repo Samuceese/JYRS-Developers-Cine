@@ -24,11 +24,9 @@ class SeleccionarAsientoViewModel(
         }
     }
 
-    fun importarCsv(){
-        service.deleteAll()
-        state.value.butacas.clear()
-        service.import(RoutesManager.getResourceAsStream("data/butacas.csv")).onSuccess {
-            initState(it)
+    fun reasignarButacas() {
+        state.value.butacasSeleccionadas.forEach {
+            actualizarButaca(it.id,Estado.ACTIVA, it.tipo, it.create, Ocupacion.LIBRE, it.precio)
         }
     }
 

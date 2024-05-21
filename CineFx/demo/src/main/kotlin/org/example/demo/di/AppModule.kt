@@ -16,10 +16,7 @@ import org.example.demo.usuarios.repositories.UserRepositoryImpl
 import org.example.demo.usuarios.services.UserService
 import org.example.demo.usuarios.services.UserServiceImpl
 import org.example.demo.view.controllers.*
-import org.example.demo.view.viewModel.LoginViewModel
-import org.example.demo.view.viewModel.OlvidarContraViewModel
-import org.example.demo.view.viewModel.RegistroViewModel
-import org.example.demo.view.viewModel.SeleccionarAsientoViewModel
+import org.example.demo.view.viewModel.*
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
@@ -33,15 +30,18 @@ val appModule = module {
     single <ButacasCacheImpl>{ ButacasCacheImpl(5) }
     single <ButacaStorage>{ ButacaStorageImpl(get()) }
     single <ButacaService>{ ButacaServiceImpl(get(),get(),get(),get()) }
-    singleOf(:: LoginViewController)
+
+    //singleOf(:: LoginViewController)
     singleOf(:: LoginViewModel)
-    singleOf(:: RegistroViewController)
+    //singleOf(:: RegistroViewController)
     singleOf(:: RegistroViewModel)
-    singleOf(:: OlvidarContraViewController)
+    //singleOf(:: OlvidarContraViewController)
     singleOf(:: OlvidarContraViewModel)
     singleOf(:: SeleccionarAsientoViewModel)
-    singleOf(:: SeleccionarAsientoViewController)
+    //singleOf(:: SeleccionarAsientoViewController)
 
+    singleOf(:: SeleccionarPeliculaViewModel)
+   // singleOf(:: SeleccionarAsientoViewController)
 
 }
 

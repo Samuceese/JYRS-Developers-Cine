@@ -4,11 +4,16 @@ import javafx.fxml.FXML
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import org.example.demo.routes.RoutesManager
+import org.example.demo.view.viewModel.SeleccionarPeliculaViewModel
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 
 
 private val logger= logging()
-class SeleccionarPeliculaViewController {
+class SeleccionarPeliculaViewController :KoinComponent{
+
+    val view:SeleccionarPeliculaViewModel by inject()
 
     @FXML
     lateinit var simioImage: ImageView
@@ -27,15 +32,32 @@ class SeleccionarPeliculaViewController {
     }
 
     private fun initDefaultEvents() {
-        simioImage.setOnMouseClicked { imagenesOnAction() }
-        garfieldImage.setOnMouseClicked { imagenesOnAction() }
-        tarotImage.setOnMouseClicked { imagenesOnAction() }
-        especialistaImage.setOnMouseClicked { imagenesOnAction() }
+        simioImage.setOnMouseClicked { simioOnAction() }
+        garfieldImage.setOnMouseClicked { garfieldOnAction() }
+        tarotImage.setOnMouseClicked { tarotOnAction() }
+        especialistaImage.setOnMouseClicked { especialistaOnAction() }
     }
 
-    private fun imagenesOnAction() {
-        RoutesManager.changeScene(view = RoutesManager.View.SELECBUTACAS, title = "Seleccion Butaca", height = 650.00)
+    private fun simioOnAction() {
+        view.state.value = view.state.value.copy(pelicula = "El Reino del Planeta De Los Simios")
+        RoutesManager.changeScene(view = RoutesManager.View.SELECBUTACAS, title = "Seleccion Butaca Simio", height = 650.00)
     }
+
+    private fun garfieldOnAction() {
+        view.state.value = view.state.value.copy(pelicula = "Garfield La Pelicula")
+        RoutesManager.changeScene(view = RoutesManager.View.SELECBUTACAS, title = "Seleccion Butaca Garfield", height = 650.00)
+    }
+
+    private fun tarotOnAction() {
+        view.state.value = view.state.value.copy(pelicula = "Tarot")
+        RoutesManager.changeScene(view = RoutesManager.View.SELECBUTACAS, title = "Seleccion Butaca Tarot", height = 650.00)
+    }
+
+    private fun especialistaOnAction() {
+        view.state.value = view.state.value.copy(pelicula = "El Especialista")
+        RoutesManager.changeScene(view = RoutesManager.View.SELECBUTACAS, title = "Seleccion Butaca Especialista", height = 650.00)
+    }
+
 
     private fun initDefaultValues() {
         simioImage.image = Image(RoutesManager.getResourceAsStream("images/simios.jpeg"))

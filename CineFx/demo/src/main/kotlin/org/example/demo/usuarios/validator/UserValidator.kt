@@ -7,39 +7,56 @@ import org.example.demo.usuarios.errors.UserError
 import org.example.demo.usuarios.models.Usuario
 
 fun Usuario.validate(): Result<Usuario, UserError>{
-    validateNombre(this)
-    validateApellidos(this)
-    validateEmail(this)
-    validateContraseña(this)
-    return Ok(this)
+        if (this.nombre.isEmpty() || this.nombre.isBlank()){
+            return Err(UserError.ValidateProblem("El nombre no puede estar vacío"))
+        }
+        if (this.nombre.isEmpty() || this.nombre.isBlank()){
+            return Err(UserError.ValidateProblem("El nombre no puede estar vacío"))
+        }
+        if (this.apellidos.isEmpty() || this.apellidos.isBlank()){
+            return Err(UserError.ValidateProblem("Los apellidos no pueden estar vacios"))
+        }
+        val regexMail = Regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,3}$")
+        if(!this.email.matches(regexMail)){
+            return Err(UserError.ValidateProblem("El correo electrónico no es correcto"))
+        }
+        val regexContraseña = Regex("^(?=.[a-z])(?=.[A-Z])(?=.\\d)(?=.[@\$!%?&])[A-Za-z\\d@\$!%?&]{12,}$")
+        if(!this.contraseña.matches(regexContraseña) || this.contraseña.isEmpty() || this.contraseña.isBlank()){
+            return Err(UserError.ValidateProblem("La contraseña no es válida, debe tener 12 carácteres, contener al menos una mayúscula y una minúsucla, un número y un caracter especial"))
+        }
+        return Ok(this)
 }
 
-fun validateNombre(usuario: Usuario): Result<String, UserError>{
-    if (usuario.nombre.isEmpty() || usuario.nombre.isBlank()){
-        return Err(UserError.ValidateProblem("El nombre no puede estar vacío"))
+
+
+ fun validateNombre(nombre: String): Boolean{
+    if (nombre.isEmpty() || nombre.isBlank()){
+        return false
     }
-    return Ok(usuario.nombre)
+    return true
 }
 
-fun validateApellidos(usuario: Usuario): Result<String, UserError>{
-    if (usuario.apellidos.isEmpty() || usuario.apellidos.isBlank()){
-        return Err(UserError.ValidateProblem("Los apellidos no pueden estar vacios"))
+ fun validateApellidos(apellidos: String): Boolean{
+    if (apellidos.isEmpty() || apellidos.isBlank()){
+        return false
+
     }
-    return Ok(usuario.apellidos)
+    return true
 }
+
 
 fun validateEmail(usuario: Usuario): Result<String, UserError>{
     val regex = Regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
-    if(!usuario.email.matches(regex)){
-        return Err(UserError.ValidateProblem("El correo electrónico no es correcto"))
+    if(!email.matches(regex)){
+        return false
     }
-    return Ok(usuario.email)
+    return true
 }
 
 fun validateContraseña(usuario: Usuario): Result<String, UserError>{
     val regex = Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*?&]{12,}$")
-    if(!usuario.contraseña.matches(regex)){
-        return Err(UserError.ValidateProblem("La contraseña no es válida, debe tener 12 carácteres, contener al menos una mayúscula y una minúsucla, un número y un caracter especial"))
+    if(!contraseña.matches(regex)){
+        return false
     }
-    return Ok(usuario.contraseña)
+    return true
 }

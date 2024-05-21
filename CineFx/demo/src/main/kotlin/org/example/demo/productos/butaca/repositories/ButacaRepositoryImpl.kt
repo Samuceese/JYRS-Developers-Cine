@@ -3,6 +3,7 @@ package org.example.demo.productos.butaca.repositories
 import org.example.demo.database.SqlDelightManager
 import org.example.demo.productos.butaca.mappers.toButaca
 import org.example.demo.productos.models.Butaca
+import org.example.demo.productos.models.Ocupacion
 import org.lighthousegames.logging.logging
 
 private val logger=logging()
@@ -44,7 +45,7 @@ class ButacaRepositoryImpl:ButacaRepository {
             .map { it.toButaca() }
     }
 
-    override fun update(id: String, butaca: Butaca): Butaca? {
+    override fun update(id: String, butaca: Butaca,ocupacion: Ocupacion,precio:Double): Butaca? {
         logger.debug { "Actualizando butaca con id: $id" }
         val result = this.findById(id) ?: return null
 
@@ -52,8 +53,8 @@ class ButacaRepositoryImpl:ButacaRepository {
             id = id,
             estado = butaca.estado.toString(),
             tipo = butaca.tipo.toString(),
-            ocupacion = butaca.ocupacion.toString(),
-            precio = butaca.precio.toLong()
+            ocupacion = ocupacion.toString(),
+            precio = precio.toLong()
         )
         return result
     }
@@ -70,5 +71,9 @@ class ButacaRepositoryImpl:ButacaRepository {
         return db.getButacaByOcupacion(ocupacion)
             .executeAsList()
             .map { it.toButaca() }
+    }
+
+    override fun deleteAll() {
+        db.deleteAllButacaEntity()
     }
 }

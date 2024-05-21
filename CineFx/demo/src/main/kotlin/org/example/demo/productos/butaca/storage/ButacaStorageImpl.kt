@@ -13,6 +13,7 @@ import org.example.demo.productos.butaca.validator.ButacaValidator
 import org.example.demo.productos.models.Butaca
 import org.lighthousegames.logging.logging
 import java.io.File
+import java.io.InputStream
 import java.nio.file.Files
 import kotlin.io.path.Path
 
@@ -37,11 +38,11 @@ class ButacaStorageImpl(
         }
     }
 
-    override fun load(file: File): Result<List<Butaca>, ButacaError> {
+    override fun load(file: InputStream): Result<List<Butaca>, ButacaError> {
         logger.debug { "Carganado butacas desde fichero Csv" }
-        if (!file.exists()) println("fichero no existente")
+
         return try {
-            Ok(file.readLines().drop(1)
+            Ok(file.reader().readLines().drop(1)
                 .map {
                     val data = it.split(",")
                     ButacaDto(

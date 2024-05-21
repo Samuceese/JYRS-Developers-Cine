@@ -61,7 +61,7 @@ insertarbutaca:
 INSERT INTO ButacaEntity (id,estado,tipo,ocupacion,precio,createAt) VALUES (?,?,?,?,?,?);
 
 updateButacaEntity:
-UPDATE ButacaEntity SET id=?, estado=?, tipo=?, ocupacion=?, precio=? ;
+UPDATE ButacaEntity SET  estado=?, tipo=?, ocupacion=?, precio=? WHERE id =?;
 
 deleteAllButacaEntity:
 DELETE FROM ButacaEntity;

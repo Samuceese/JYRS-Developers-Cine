@@ -27,15 +27,28 @@ class SeleccionarPeliculaViewController {
     }
 
     private fun initDefaultEvents() {
-        simioImage.setOnMouseClicked { imagenesOnAction() }
-        garfieldImage.setOnMouseClicked { imagenesOnAction() }
-        tarotImage.setOnMouseClicked { imagenesOnAction() }
-        especialistaImage.setOnMouseClicked { imagenesOnAction() }
+        simioImage.setOnMouseClicked { simioOnAction() }
+        garfieldImage.setOnMouseClicked { garfieldOnAction() }
+        tarotImage.setOnMouseClicked { tarotOnAction() }
+        especialistaImage.setOnMouseClicked { especialistaOnAction() }
     }
 
-    private fun imagenesOnAction() {
-        RoutesManager.changeScene(view = RoutesManager.View.SELECBUTACAS, title = "Seleccion Butaca", height = 650.00)
+    private fun simioOnAction() {
+        RoutesManager.changeScene(view = RoutesManager.View.SELECBUTACAS, title = "Seleccion Butaca Simio", height = 650.00)
     }
+
+    private fun garfieldOnAction() {
+        RoutesManager.changeScene(view = RoutesManager.View.SELECBUTACAS, title = "Seleccion Butaca Garfield", height = 650.00)
+    }
+
+    private fun tarotOnAction() {
+        RoutesManager.changeScene(view = RoutesManager.View.SELECBUTACAS, title = "Seleccion Butaca Tarot", height = 650.00)
+    }
+
+    private fun especialistaOnAction() {
+        RoutesManager.changeScene(view = RoutesManager.View.SELECBUTACAS, title = "Seleccion Butaca Especialista", height = 650.00)
+    }
+
 
     private fun initDefaultValues() {
         simioImage.image = Image(RoutesManager.getResourceAsStream("images/simios.jpeg"))

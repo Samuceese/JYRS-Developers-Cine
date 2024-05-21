@@ -32,6 +32,12 @@ module org.example.demo {
     opens org.example.demo.usuarios.services to javafx.fxml;
     exports org.example.demo.usuarios.services;
 
+    opens org.example.demo.productos.models to javafx.fxml;
+    exports org.example.demo.productos.models;
+
+    opens org.example.demo.productos.butaca.services to javafx.fxml;
+    exports org.example.demo.productos.butaca.services;
+
 
 
 }

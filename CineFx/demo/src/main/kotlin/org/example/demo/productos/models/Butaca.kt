@@ -2,6 +2,16 @@ package org.example.demo.productos.models
 
 import java.time.LocalDate
 
+/**
+ * Representa una butaca.
+ * @property id
+ * @property estado
+ * @property tipo
+ * @property create
+ * @author Raúl Fernández, Javier Hernández, Samuel Cortés, Yahya El Hadri.
+ * @since 1.0
+ */
+
 class Butaca(
     val id:String,
     var estado: Estado,

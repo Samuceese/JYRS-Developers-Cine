@@ -2,6 +2,18 @@ package org.example.demo.productos.butaca.dto
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Clase Dto de butaca.
+ * @property id
+ * @property estado
+ * @property precio
+ * @property tipo
+ * @property ocupacion
+ * @property createAt
+ * @author Raúl Fernández, Yahya El Hadri, Samuel Cortés, Javier Hernández
+ * @since 1.0
+ */
+
 @Serializable
 class ButacaDto(
     val id:String,

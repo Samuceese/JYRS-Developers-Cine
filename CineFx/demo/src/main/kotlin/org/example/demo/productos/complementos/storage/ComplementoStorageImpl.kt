@@ -11,6 +11,14 @@ import org.lighthousegames.logging.logging
 import java.io.File
 
 private val logger=logging()
+
+/**
+ * Manejamos adecuadamente la carga de datos del archivo csv.
+ * @return Devuelve un objeto de tipo complemento si la operación esta bien, si no devuelve un error producido por un fallo al procesar el csv.
+ * @author Raúl Fernández, Javier Hernández, Yahya El Hadri, Samuel Cortés
+ * @since 1.0
+ */
+
 class ComplementoStorageImpl:ComplementoStorage {
     override fun load(file: File): Result<List<Complemento>, ComplementoError> {
         logger.debug { "Carganado complementos desde fichero Csv" }

@@ -20,6 +20,7 @@ class UserRepositoryImpl: UserRepository {
         logger.debug { "save: $user" }
         db.transaction {
             db.insertUser(
+                id = user.id,
                 email = user.email,
                 nombre = user.nombre,
                 apellidos = user.apellidos,

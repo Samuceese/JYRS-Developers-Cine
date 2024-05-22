@@ -6,8 +6,7 @@ import database.SelectAllLineasById
 import database.VentaEntity
 import org.example.demo.productos.models.Butaca
 import org.example.demo.productos.models.Complemento
-import org.example.demo.usuarios.models.Cliente
-import org.example.demo.usuarios.models.Usuario
+import org.example.demo.usuarios.models7.Usuario
 import org.example.demo.venta.models.LineaVenta
 import org.example.demo.venta.models.Venta
 import java.time.LocalDateTime

@@ -32,7 +32,7 @@ fun ComplementoEntity.toComplemento(): Complemento {
         }
 
     }
-    throw ComplementoException.TipoInvalido("Tipo no 2valido")
+    throw ComplementoException.TipoInvalido("Tipo no valido")
 }
 
 /**

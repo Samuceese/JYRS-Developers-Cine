@@ -2,9 +2,9 @@ package org.example.demo.locale
 
 import java.text.NumberFormat
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
+
 
 /**
  * Convertimos LocalDateTime en una cadena de texto con un formato especifíco.
@@ -13,8 +13,10 @@ import java.util.*
  * @author Raúl Fernández, Javier Hernández, Samuel Cortés, Yahya El Hadri
  */
 
-fun LocalDate.toDefaultDateTimeString():String{
-    return DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.getDefault()).format(this)
+
+fun LocalDate.toShortSpanishFormat(): String {
+    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    return this.format(formatter)
 }
 
 /**

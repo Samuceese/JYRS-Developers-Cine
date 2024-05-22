@@ -40,8 +40,9 @@ class VentaStorageHtml:VentasStorage {
                             </thead>
                             <tbody>
                                 ${
-                venta.lineas.forEach {
-                    "<tr>" +
+                            venta.lineas.forEach {
+                            "<tr>" +
+
                             "<td>${it.id}</td>" +
                             "<td>${it.precio.toDefaultMoneyString()}</td>" +
                             "<td>${it.cantidad}</td>" +

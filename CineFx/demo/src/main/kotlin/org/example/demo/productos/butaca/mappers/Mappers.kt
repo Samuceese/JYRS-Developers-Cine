@@ -1,6 +1,7 @@
 package org.example.demo.productos.butaca.mappers
 
 import database.ButacaEntity
+import org.example.demo.locale.returnDateTimeString
 import org.example.demo.productos.butaca.dto.ButacaDto
 import org.example.demo.productos.models.Butaca
 import org.example.demo.productos.models.Estado
@@ -28,7 +29,8 @@ fun ButacaEntity.toButaca():Butaca{
         "MANTENIMIENTO"-> _estado=Estado.MANTENIMIENTO
         "OCUPADA" -> _estado = Estado.OCUPADA
     }
-    return Butaca(_id,_estado!!,_tipo!!, LocalDate.parse(this.createAt))
+
+    return Butaca(_id,_estado!!,_tipo!!, this.createAt.returnDateTimeString())
 }
 
 /**

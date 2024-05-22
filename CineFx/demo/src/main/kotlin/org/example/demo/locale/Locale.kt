@@ -27,3 +27,7 @@ fun LocalDate.toDefaultDateTimeString():String{
 fun Double.toDefaultMoneyString():String{
     return NumberFormat.getCurrencyInstance(Locale.getDefault()).format(this)
 }
+fun String.returnDateTimeString():LocalDate{
+    val cadena=this.split("/")
+    return LocalDate.of(cadena[2].toInt(),cadena[1].toInt(),cadena[0].toInt())
+}

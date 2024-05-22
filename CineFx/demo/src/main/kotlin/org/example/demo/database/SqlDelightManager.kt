@@ -65,6 +65,14 @@ object SqlDelightManager {
             initilize()
         }
     }
+    fun clearData() {
+        logger.debug { "Borrando datos de la base de datos" }
+        databaseQueries.transaction {
+            databaseQueries.deleteAllClientes()
+            databaseQueries.deleteAllComplemetoEntity()
+            databaseQueries.deleteAllButacaEntity()
+        }
+    }
 
     /**
      * Inicia el gestor de base de datos.

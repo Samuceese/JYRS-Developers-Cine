@@ -47,6 +47,7 @@ fun isValidLocalDate(dateString: String): Boolean {
     }
 }
 
+
 fun validateNombre(nombre: String): Boolean{
     if(nombre.isEmpty() || nombre.isBlank()){
         return false
@@ -68,6 +69,7 @@ fun validateNombre(nombre: String): Boolean{
     return true
 }
 
+
 /**
  * Valida la dirección de correo electrónico de un usuario.
  * @return Devuelve un error si no sigue el formato esperado y la dirección de correo electrónico validada si es válida.
@@ -82,6 +84,7 @@ fun validateEmail(usuario: Usuario): Boolean{
     }
     return true
 }
+
 
 /**
  * Valida la contraseña de un usuario utilizando una expresión regular.

@@ -9,6 +9,7 @@ import org.example.demo.productos.complementos.mappers.toComplemento
 import org.example.demo.productos.models.Complemento
 import org.lighthousegames.logging.logging
 import java.io.File
+import java.io.InputStream
 
 private val logger=logging()
 
@@ -20,10 +21,10 @@ private val logger=logging()
  */
 
 class ComplementoStorageImpl:ComplementoStorage {
-    override fun load(file: File): Result<List<Complemento>, ComplementoError> {
+    override fun load(file: InputStream): Result<List<Complemento>, ComplementoError> {
         logger.debug { "Carganado complementos desde fichero Csv" }
         return try {
-            Ok(file.readLines().drop(1)
+            Ok(file.reader().readLines().drop(1)
                 .map {
                     val data = it.split(",")
                     ComplementoDto(

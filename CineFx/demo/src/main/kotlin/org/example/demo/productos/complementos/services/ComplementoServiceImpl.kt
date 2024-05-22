@@ -8,6 +8,7 @@ import org.example.demo.productos.complementos.storage.ComplementoStorage
 import org.example.demo.productos.models.Complemento
 import org.lighthousegames.logging.logging
 import java.io.File
+import java.io.InputStream
 
 private val logger= logging()
 
@@ -118,6 +119,7 @@ class ComplementoServiceImpl(
             ?: Err(ComplementoError.ComplementoNoEncontrado("El complemento no a sido eliminada $id"))
     }
 
+    override fun import(csvFile: InputStream): Result<List<Complemento>, ComplementoError> {
     /**
      * Cargamos complementos desde un csv utilizando el storage guardando cada complemento en el repositorio.
      * @return Devuelve un resultado que contiene la lista de complementos y si falla devuelve un error correspondiente.
@@ -125,7 +127,6 @@ class ComplementoServiceImpl(
      * @since 1.0
      */
 
-    override fun import(csvFile: File): Result<List<Complemento>, ComplementoError> {
         logger.debug { "Cargando complemento desde CSV" }
         return storage.load(csvFile).andThen { personajes->
             personajes.forEach{ p->

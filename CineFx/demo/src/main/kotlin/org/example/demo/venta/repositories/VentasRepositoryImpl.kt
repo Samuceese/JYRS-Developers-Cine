@@ -109,8 +109,9 @@ class VentasRepositoryImpl(
                     is_deleted = 0
                 )
             }
+            return venta
         }
-        return venta
+        return null
     }
 
     override fun delete(id: UUID): Venta? {
@@ -120,8 +121,9 @@ class VentasRepositoryImpl(
             db.transaction {
                 db.deleteVenta(id.toString())
             }
+            return delted
         }
-        return delted
+       return null
     }
 
 

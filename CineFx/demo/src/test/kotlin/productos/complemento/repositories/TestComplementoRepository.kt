@@ -1,6 +1,6 @@
 package productos.complemento.repositories
 
-import org.example.demo.database.SqlDelightManager
+import org.example.demo.database.SqlDelightManagerTest
 import org.example.demo.productos.complementos.repositories.ComplementoRepositoryImpl
 import org.example.demo.productos.models.Bebida
 import org.example.demo.productos.models.CategoriaBebida
@@ -14,12 +14,12 @@ import org.junit.jupiter.api.TestInstance
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class TestComplementoRepository {
-    private lateinit var dbManager : SqlDelightManager
+    private lateinit var dbManager : SqlDelightManagerTest
     private lateinit var complementoRepository : ComplementoRepositoryImpl
 
     @BeforeAll
     fun setUpAll() {
-        dbManager = SqlDelightManager
+        dbManager = SqlDelightManagerTest
         complementoRepository = ComplementoRepositoryImpl()
     }
 

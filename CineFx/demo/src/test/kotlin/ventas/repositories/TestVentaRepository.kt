@@ -1,6 +1,6 @@
 package ventas.repositories
 
-import org.example.demo.database.SqlDelightManager
+import org.example.demo.database.SqlDelightManagerTest
 import org.example.demo.locale.toShortSpanishFormat
 import org.example.demo.productos.butaca.repositories.ButacaRepository
 import org.example.demo.productos.butaca.repositories.ButacaRepositoryImpl
@@ -28,7 +28,7 @@ import java.util.*
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(MockitoExtension::class)
 class TestVentaRepository {
-    private lateinit var dbManager: SqlDelightManager
+    private lateinit var dbManager: SqlDelightManagerTest
 
     @InjectMocks
     private lateinit var ventaRepo: VentasRepository
@@ -52,7 +52,7 @@ class TestVentaRepository {
     @BeforeEach
     fun setUpAll(){
 
-        dbManager= SqlDelightManager
+        dbManager= SqlDelightManagerTest
         dbManager.initialize()
         butacaRepo= ButacaRepositoryImpl()
         complementoRepo= ComplementoRepositoryImpl()

@@ -23,8 +23,8 @@ selectById:
 SELECT * FROM UsuariosEntity WHERE id = ?;
 
 InsertTheAdmin:
-INSERT INTO UsuariosEntity (email, nombre, apellidos, tipo, contrasena)
-VALUES ("SomosJYRS@gmail.com", "JYRS", "Dev", "admin", "SnlScyowNTAyMDMwMw==");
+INSERT INTO UsuariosEntity (id,email, nombre, apellidos, tipo, contrasena)
+VALUES ("1", "SomosJYRS@gmail.com", "JYRS", "Dev", "admin", "SnlScyowNTAyMDMwMw==");
 
 insertUser:
 INSERT INTO UsuariosEntity (id,email, nombre, apellidos, tipo, contrasena)

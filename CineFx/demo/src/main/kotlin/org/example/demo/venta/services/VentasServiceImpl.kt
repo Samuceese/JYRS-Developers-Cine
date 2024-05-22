@@ -72,7 +72,7 @@ class VentasServiceImpl(
     }
 
     //TODO ¡¡¡ revisar
-    private fun validateCliente(cliente: Usuario): Result<Usuario, VentaError> {
+    fun validateCliente(cliente: Usuario): Result<Usuario, VentaError> {
         logger.debug { "Validando cliente: $cliente" }
        return validateCliente(cliente).mapBoth(
             failure = {

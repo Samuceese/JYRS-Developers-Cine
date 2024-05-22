@@ -1,6 +1,6 @@
 package usuarios.repositories
 
-import org.example.demo.database.SqlDelightManager
+import org.example.demo.database.SqlDelightManagerTest
 import org.example.demo.usuarios.models.Cliente
 import org.example.demo.usuarios.repositories.UserRepositoryImpl
 import org.junit.jupiter.api.AfterEach
@@ -14,12 +14,12 @@ import org.junit.jupiter.api.TestInstance
 class UserRepositoryTest {
 
     private lateinit var userRepository: UserRepositoryImpl
-    private lateinit var dbManager: SqlDelightManager
+    private lateinit var dbManager: SqlDelightManagerTest
 
     @BeforeEach
     fun setUpAll(){
         println("Iniciando test...")
-        dbManager = SqlDelightManager
+        dbManager = SqlDelightManagerTest
         dbManager.initialize()
         userRepository = UserRepositoryImpl()
     }

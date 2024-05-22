@@ -1,7 +1,7 @@
 package productos.butaca.repositories
 
 
-import org.example.demo.database.SqlDelightManager
+import org.example.demo.database.SqlDelightManagerTest
 import org.example.demo.productos.butaca.repositories.ButacaRepositoryImpl
 import org.example.demo.productos.models.Butaca
 import org.example.demo.productos.models.Estado
@@ -12,13 +12,13 @@ import org.junit.jupiter.api.Assertions.assertEquals
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class TestButacaRepository {
-    private lateinit var dbManager : SqlDelightManager
+    private lateinit var dbManager : SqlDelightManagerTest
     private lateinit var butacaRepository : ButacaRepositoryImpl
 
     @BeforeAll
     fun setUpAll() {
         println("Iniciando tests...")
-        dbManager = SqlDelightManager
+        dbManager = SqlDelightManagerTest
         dbManager.initialize()
         butacaRepository = ButacaRepositoryImpl()
     }

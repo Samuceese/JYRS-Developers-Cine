@@ -22,7 +22,7 @@ private val logger = logging()
  */
 // TODO repository debe ser del tipo de la interfaz no de la clase pero falla ahora mismo y ns por q por q en el otro ordenador sale perfecto
 class UserServiceImpl(
-    private val repository: UserRepositoryImpl,
+    private val repository: UserRepository,
     private val cacheUsuario: CacheUsuario
 ): UserService {
     override fun save(user: Usuario): Result<Usuario, UserError> {
@@ -30,7 +30,6 @@ class UserServiceImpl(
        return validateUser(user).mapBoth(
            success = {
                Ok(it).also { repository.save(user) }.also { cacheUsuario.put(user.id, user) }
-
            },
            failure = {
                Err(UserError.ValidateProblem("No se ha podido guardar debido a un error de valdiación"))

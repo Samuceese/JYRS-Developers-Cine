@@ -24,5 +24,9 @@ object Config {
         private set
     var cacheSize: Int = 5
         private set
+    var imagenesDirectory :String = "imagenes"
+        private set
+    var databaseUrlTst: String = "jdbc:sqlite:cineTest.db"
+        private set
 
 }

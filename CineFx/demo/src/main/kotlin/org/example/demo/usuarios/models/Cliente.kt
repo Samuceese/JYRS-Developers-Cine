@@ -1,7 +1,17 @@
 package org.example.demo.usuarios.models
 
-import org.example.demo.usuarios.repositories.UserRepositoryImpl
-import kotlin.random.Random
+import org.example.demo.usuarios.models7.Usuario
+
+/**
+ * Representa a un cliente.
+ * @property id
+ * @property nombre
+ * @property apellidos
+ * @property contraseña
+ * @property email
+ * @author Javier Hernández, Yahya El Hadri, Samuel Cortés, Raúl Fernández
+ * @since 1.0
+ */
 
 class Cliente(
     id: Long,
@@ -9,4 +19,4 @@ class Cliente(
     apellidos: String,
     contraseña: String,
     email: String
-) : Usuario(id, nombre, apellidos, email, contraseña) 
+) : Usuario(id, nombre, apellidos, email, contraseña)

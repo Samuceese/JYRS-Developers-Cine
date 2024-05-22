@@ -13,5 +13,5 @@ interface VentasService {
     fun create(venta: Venta): Result<Venta, VentaError>
     fun delete(id: UUID): Result<Venta, VentaError>
     fun getAll(): Result<List<Venta>, VentaError>
-    fun exportToHtml(venta: Venta, htmlFile: File,pelicula:String): Result<Unit, VentaError>
+    fun exportToHtml(venta: Venta, htmlFile: File, pelicula: String): Result<Unit, VentaError>
 }

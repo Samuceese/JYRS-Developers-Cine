@@ -5,6 +5,13 @@ import org.example.demo.productos.complementos.dto.ComplementoDto
 import org.example.demo.productos.complementos.exceptions.ComplementoException
 import org.example.demo.productos.models.*
 
+/**
+ * Mapea un ComplementoEntity en un complemento.
+ * @return comida, bebida
+ * @author Yahya El Hadri, Raúl Fernández, Javier Hernández, Samuel Cortés
+ * @since 1.0
+ */
+
 fun ComplementoEntity.toComplemento(): Complemento {
     val _nombre: String = this.nombre
     val _tipo: String = this.tipo
@@ -27,6 +34,13 @@ fun ComplementoEntity.toComplemento(): Complemento {
     }
     throw ComplementoException.TipoInvalido("Tipo no 2valido")
 }
+
+/**
+ * Mapea un ComplementoDto en un complemento.
+ * @return comida, bebida
+ * @author Yahya El Hadri, Raúl Fernández, Javier Hernández, Samuel Cortés
+ * @since 1.0
+ */
 
 fun ComplementoDto.toComplemento(): Complemento {
     when(this.nombre){

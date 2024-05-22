@@ -6,5 +6,5 @@ import org.example.demo.venta.models.Venta
 import java.io.File
 
 interface VentasStorage {
-    fun export(venta: Venta, file: File,pelicula:String): Result<Unit, VentaError>
+    fun export(venta: Venta, file: File, pelicula: String): Result<Unit, VentaError>
 }

@@ -4,11 +4,13 @@ import org.lighthousegames.logging.logging
 import kotlin.io.path.Path
 
 private val logger = logging()
+
 /**
- * clase config
- * @author Yahya el hadri el bakkali
+ * Clase config
+ * @author Yahya El Hadri, Raúl Fernández, Javier Hernández, Samuel Cortés
  * @since 1.0
  */
+
 object Config {
     var databaseUrl: String = "jdbc:sqlite:cine.db"
         private set

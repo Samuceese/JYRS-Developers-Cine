@@ -1,5 +1,6 @@
 package org.example.demo.productos.butaca.errors
 
+
 sealed class ButacaError(val mensage:String) {
     class IdNoValido(mensage: String):ButacaError(mensage)
     class EstadoNoValido(message: String): ButacaError(message)

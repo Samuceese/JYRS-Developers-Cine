@@ -9,6 +9,13 @@ import org.example.demo.productos.models.Ocupacion
 import org.example.demo.productos.models.Tipo
 import java.time.LocalDate
 
+/**
+ * Mapea una ButacaEntity en una Butaca.
+ * @return Butaca
+ * @author Yahya El Hadri, Raúl Fernández, Javier Hernández, Samuel Cortés
+ * @since 1.0
+ */
+
 fun ButacaEntity.toButaca():Butaca{
     var _id=this.id
     var _estado:Estado?=null
@@ -26,6 +33,13 @@ fun ButacaEntity.toButaca():Butaca{
     return Butaca(_id,_estado!!,_tipo!!, this.createAt.returnDateTimeString())
 }
 
+/**
+ * Mapea un ButacaDto en una Butaca.
+ * @return Butaca
+ * @author Yahya El Hadri, Raúl Fernández, Javier Hernández, Samuel Cortés
+ * @since 1.0
+ */
+
 fun ButacaDto.toButaca():Butaca{
     var _tipo:Tipo?=null
     when(this.tipo){
@@ -40,6 +54,14 @@ fun ButacaDto.toButaca():Butaca{
     }
     return Butaca(this.id,_estado!!,_tipo!!)
 }
+
+/**
+ * Mapea un Butaca en una ButacaDto.
+ * @return ButacaDto
+ * @author Yahya El Hadri, Raúl Fernández, Javier Hernández, Samuel Cortés
+ * @since 1.0
+ */
+
 
 fun Butaca.toButacaDto(): ButacaDto {
     var _tipo:String?=null

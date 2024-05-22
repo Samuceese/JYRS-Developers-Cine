@@ -42,6 +42,7 @@ class VentaStorageHtml:VentasStorage {
                                 ${
                             venta.lineas.forEach {
                             "<tr>" +
+
                             "<td>${it.id}</td>" +
                             "<td>${it.precio.toDefaultMoneyString()}</td>" +
                             "<td>${it.cantidad}</td>" +

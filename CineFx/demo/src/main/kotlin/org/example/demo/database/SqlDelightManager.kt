@@ -71,6 +71,7 @@ object SqlDelightManager {
             databaseQueries.deleteAllClientes()
             databaseQueries.deleteAllComplemetoEntity()
             databaseQueries.deleteAllButacaEntity()
+            databaseQueries.eliminarTodo()
         }
     }
 

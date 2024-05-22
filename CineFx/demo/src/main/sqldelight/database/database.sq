@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS UsuariosEntity(
-    id INTEGER PRIMARY KEY AUTOINCREMENT ,
+    id INTEGER PRIMARY KEY ,
     email TEXT NOT NULL,
     nombre TEXT NOT NULL,
     apellidos TEXT NOT NULL,
@@ -27,8 +27,8 @@ INSERT INTO UsuariosEntity (email, nombre, apellidos, tipo, contrasena)
 VALUES ("SomosJYRS@gmail.com", "JYRS", "Dev", "admin", "SnlScyowNTAyMDMwMw==");
 
 insertUser:
-INSERT INTO UsuariosEntity (email, nombre, apellidos, tipo, contrasena)
-VALUES (?, ?, ?, ?, ?);
+INSERT INTO UsuariosEntity (id,email, nombre, apellidos, tipo, contrasena)
+VALUES (?, ?, ?, ?, ?,?);
 
 selectClienteLastInserted:
 SELECT * FROM UsuariosEntity WHERE id = last_insert_rowid();
@@ -227,4 +227,12 @@ UNION ALL
 SELECT *
 FROM LineaVentaEntityComplemento
 WHERE venta_id = ?;
+
+eliminarTodo:
+DELETE FROM VentaEntity;
+DELETE FROM UsuariosEntity;
+DELETE FROM ButacaEntity;
+DELETE FROM ComplementoEntity;
+DELETE FROM LineaVentaEntityComplemento;
+DELETE FROM LineaVentaEntityButaca;
 

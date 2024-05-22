@@ -19,7 +19,6 @@ import java.util.*
 private val logger = logging()
 class VentasServiceImpl(
     private val ventasRepository: VentasRepository,
-    private val clienteRepositoryImpl: UserRepository,
     private val complementoRepository: ComplementoRepository,
     private val butacasRepository: ButacaRepository,
     private val ventasSotrageHtml: VentasStorage
@@ -33,12 +32,25 @@ class VentasServiceImpl(
 
     override fun create(venta: Venta): Result<Venta, VentaError> {
         logger.debug { "Creando venta: $venta" }
-        return validateCliente(venta.cliente)
-            .andThen { validateLineas(venta.lineas) }
-            .andThen { Ok(ventasRepository.save(venta)) }
+        return validateCliente(venta.cliente).mapBoth(
+            success = {
+                validateLineas(venta.lineas).mapBoth(
+                    success = {
+                        Ok(ventasRepository.save(venta))
+                    },
+                    failure = {
+                        Err(VentaError.VentaNoAlmacenada("no se a podido almacenar la venta: ${venta.id}"))
+                    }
+                )
+            },
+            failure = {
+                Err(VentaError.VentaNoAlmacenada("no se a podido almacenar la venta: ${venta.id}"))
+            }
+        )
+
     }
 
-    private fun validateLineas(lineas: List<LineaVenta>): Result<List<LineaVenta>, VentaError> {
+   fun validateLineas(lineas: List<LineaVenta>): Result<List<LineaVenta>, VentaError> {
         logger.debug { "Validando lineas - Existen Productos: $lineas" }
         lineas.forEach {
             logger.debug { "Validando linea: $it" }

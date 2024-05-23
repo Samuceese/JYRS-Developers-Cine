@@ -1,34 +1,31 @@
 package usuarios.repositories
 
-import org.example.demo.database.SqlDelightManagerTest
+import org.example.demo.database.SqlDelightManager
+import org.example.demo.locale.encodeToBase64
 import org.example.demo.usuarios.models.Cliente
 import org.example.demo.usuarios.repositories.UserRepositoryImpl
-import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
+import org.lighthousegames.logging.logging
+import kotlin.io.path.Path
 
-
+private val logger = logging()
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class UserRepositoryTest {
 
     private lateinit var userRepository: UserRepositoryImpl
-    private lateinit var dbManager: SqlDelightManagerTest
+    private lateinit var dbManager: SqlDelightManager
 
     @BeforeEach
     fun setUpAll(){
         println("Iniciando test...")
-        dbManager = SqlDelightManagerTest
-        dbManager.initialize()
+        SqlDelightManager.initializeDb()
+        logger.debug { "inicializado" }
         userRepository = UserRepositoryImpl()
     }
-
-    @AfterEach
-    fun tearDown(){
-        dbManager.clearData()
-    }
-
 
     @Test
     fun findById(){
@@ -72,7 +69,7 @@ class UserRepositoryTest {
             Cliente(
                 id = 4,
                 nombre = "NombreTest4",
-                apellidos = "ApellidoTest2",
+                apellidos = "ApellidoTest4",
                 contraseña = "P@ssw0rd!2021",
                 email = "ejemplo.usuario4@example.com"
             )
@@ -84,19 +81,18 @@ class UserRepositoryTest {
 
     @Test
     fun cambioContraseña(){
-        val cliente = userRepository.save(
-            Cliente(
-                id = 4,
-                nombre = "NombreTest4",
-                apellidos = "ApellidoTest2",
+        val cliente = Cliente(
+                id = 5,
+                nombre = "NombreTest5",
+                apellidos = "ApellidoTest5",
                 contraseña = "P@ssw0rd!2021",
-                email = "ejemplo.usuario4@example.com"
-            )
+                email = "ejemplo.usuario5@example.com"
         )
+        userRepository.save(cliente)
         val nuevaContra = "P@ssw0rd!2021NUEVA"
-        cliente.contraseña = nuevaContra
+        val result = userRepository.cambioContraseña(cliente.email, nuevaContra)
 
-        assertEquals("P@ssw0rd!2021NUEVA", cliente.contraseña)
+        assertEquals(result?.contraseña, cliente.contraseña.encodeToBase64())
     }
 
 }

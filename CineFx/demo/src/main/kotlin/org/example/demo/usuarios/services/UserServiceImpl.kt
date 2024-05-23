@@ -20,7 +20,7 @@ private val logger = logging()
  * @author Yahya El Hadri, Raúl Fernández, Javier Hernández, Samuel Cortés
  * @since 1.0
  */
-// TODO repository debe ser del tipo de la interfaz no de la clase pero falla ahora mismo y ns por q por q en el otro ordenador sale perfecto
+
 class UserServiceImpl(
     private val repository: UserRepository,
     private val cacheUsuario: CacheUsuario
@@ -47,10 +47,10 @@ class UserServiceImpl(
      */
 
     override fun cambioContraseña(email: String, contraseña: String): Result<Usuario, UserError> {
-        logger.debug { "Cambiando contraseña en email: $email" }
+        logger.debug { "Cambiando contraseña en email: ${email}" }
         return repository.cambioContraseña(email, contraseña)?.let {
             Ok(it)
-        } ?: Err(UserError.UserNotFound("No se ha encontrado usuario con email: $email"))
+        } ?: Err(UserError.UserNotFound("No se ha encontrado usuario con email: ${email}"))
     }
 
     /**

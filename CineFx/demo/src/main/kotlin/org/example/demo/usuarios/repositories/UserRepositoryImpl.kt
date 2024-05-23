@@ -20,7 +20,6 @@ class UserRepositoryImpl: UserRepository {
         logger.debug { "save: $user" }
         db.transaction {
             db.insertUser(
-                id = user.id,
                 email = user.email,
                 nombre = user.nombre,
                 apellidos = user.apellidos,
@@ -40,9 +39,11 @@ class UserRepositoryImpl: UserRepository {
      */
      
     override fun cambioContraseña(email: String, contraseña: String): Usuario? {
-        logger.debug { "cambiando contraseña en email: $email" }
+        logger.debug { "cambiando contraseña en email: ${email}" }
         findByEmail(email)?.let {
-            it.contraseña = contraseña
+            db.transaction {
+                db.updateContrasena(email, contraseña)
+            }
         }
         return findByEmail(email)
     }

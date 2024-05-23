@@ -19,15 +19,9 @@ private val logger = logging()
 object SqlDelightManager {
     val databaseQueries: DatabaseQueries by lazy { initQueries() }
 
-    /**
-     * Inicia el gestor de base de datos.
-     * @author Yahya El Hadri, Samuel Cortés, Raúl Fernández, Javier Hernández
-     * @since 1.0
-     */
-
     init {
         logger.debug { "Inicializando el gestor de Base de Datos con SqlDelight" }
-        initialize()
+        initializeDb()
     }
 
     /**
@@ -38,7 +32,6 @@ object SqlDelightManager {
      */
 
     private fun initQueries(): DatabaseQueries {
-
         return if (Config.databaseInMemory) {
             logger.debug { "SqlDeLightClient - InMemory" }
             JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY)
@@ -54,13 +47,12 @@ object SqlDelightManager {
     }
 
     /**
-     * Inicializa.
+     * Inicializa la base de datos.
      * @author Yahya El Hadri, Samuel Cortés, Raúl Fernández, Javier Hernández
      * @since 1.0
      */
 
-
-    fun initialize() {
+    fun initializeDb() {
         if (Config.databaseInitData) {
             initilize()
         }
@@ -68,10 +60,12 @@ object SqlDelightManager {
     fun clearData() {
         logger.debug { "Borrando datos de la base de datos" }
         databaseQueries.transaction {
-            databaseQueries.deleteAllClientes()
-            databaseQueries.deleteAllComplemetoEntity()
+            databaseQueries.deleteAllUsers()
             databaseQueries.deleteAllButacaEntity()
-            databaseQueries.eliminarTodo()
+            databaseQueries.deleteAllComplemetoEntity()
+            databaseQueries.removeAllVentas()
+            databaseQueries.removeAllLineaVentaEntityButaca()
+            databaseQueries.removeAllLineaVentaEntityComplemento()
         }
     }
 
@@ -85,9 +79,7 @@ object SqlDelightManager {
     private fun initilize() {
         logger.debug { "SqlDeLightClient.removeAllData()" }
         databaseQueries.transaction {
-            databaseQueries.deleteAllButacaEntity()
-            databaseQueries.deleteAllComplemetoEntity()
-            databaseQueries.deleteAllClientes()
+            clearData()
             databaseQueries.InsertTheAdmin()
         }
     }

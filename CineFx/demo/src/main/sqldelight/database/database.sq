@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS UsuariosEntity(
-    id INTEGER PRIMARY KEY ,
+    id INTEGER PRIMARY KEY,
     email TEXT NOT NULL,
     nombre TEXT NOT NULL,
     apellidos TEXT NOT NULL,
@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS UsuariosEntity(
     contrasena TEXT NOT NULL
 );
 
-deleteAll:
+deleteAllUsers:
 DELETE FROM UsuariosEntity;
 
 deleteAllClientes:
@@ -23,18 +23,18 @@ selectById:
 SELECT * FROM UsuariosEntity WHERE id = ?;
 
 InsertTheAdmin:
-INSERT INTO UsuariosEntity (id,email, nombre, apellidos, tipo, contrasena)
-VALUES ("1", "SomosJYRS@gmail.com", "JYRS", "Dev", "admin", "SnlScyowNTAyMDMwMw==");
+INSERT INTO UsuariosEntity (id, email, nombre, apellidos, tipo, contrasena)
+VALUES ( 1, "SomosJYRS@gmail.com", "JYRS", "Dev", "admin", "SnlScyowNTAyMDMwMw==");
 
 insertUser:
-INSERT INTO UsuariosEntity (id,email, nombre, apellidos, tipo, contrasena)
-VALUES (?, ?, ?, ?, ?,?);
+INSERT INTO UsuariosEntity (email, nombre, apellidos, tipo, contrasena)
+VALUES (?, ?, ?, ?,?);
 
 selectClienteLastInserted:
 SELECT * FROM UsuariosEntity WHERE id = last_insert_rowid();
 
-update:
-UPDATE UsuariosEntity SET contrasena = ?;
+updateContrasena:
+UPDATE UsuariosEntity SET contrasena = ? WHERE email = ?;
 
 --ButacaEntity
 CREATE TABLE IF NOT EXISTS ButacaEntity(
@@ -227,12 +227,4 @@ UNION ALL
 SELECT *
 FROM LineaVentaEntityComplemento
 WHERE venta_id = ?;
-
-eliminarTodo:
-DELETE FROM VentaEntity;
-DELETE FROM UsuariosEntity;
-DELETE FROM ButacaEntity;
-DELETE FROM ComplementoEntity;
-DELETE FROM LineaVentaEntityComplemento;
-DELETE FROM LineaVentaEntityButaca;
 

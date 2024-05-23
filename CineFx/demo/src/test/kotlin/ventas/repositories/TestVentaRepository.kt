@@ -1,6 +1,6 @@
 package ventas.repositories
 
-import org.example.demo.database.SqlDelightManagerTest
+import org.example.demo.database.SqlDelightManager
 import org.example.demo.locale.toShortSpanishFormat
 import org.example.demo.productos.butaca.repositories.ButacaRepository
 import org.example.demo.productos.butaca.repositories.ButacaRepositoryImpl
@@ -28,7 +28,7 @@ import java.util.*
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(MockitoExtension::class)
 class TestVentaRepository {
-    private lateinit var dbManager: SqlDelightManagerTest
+    private lateinit var dbManager: SqlDelightManager
 
     @InjectMocks
     private lateinit var ventaRepo: VentasRepository
@@ -52,8 +52,8 @@ class TestVentaRepository {
     @BeforeEach
     fun setUpAll(){
 
-        dbManager= SqlDelightManagerTest
-        dbManager.initialize()
+        dbManager= SqlDelightManager
+        dbManager.initializeDb()
         butacaRepo= ButacaRepositoryImpl()
         complementoRepo= ComplementoRepositoryImpl()
         clienteRepo= UserRepositoryImpl()
@@ -66,7 +66,7 @@ class TestVentaRepository {
             email = "user@gmail.com",
             contraseña = "!6635GxH#&aV"
         )
-        dbManager.databaseQueries.insertUser(cliente.id,cliente.email,cliente.nombre,cliente.apellidos,"cliente",cliente.contraseña)
+        dbManager.databaseQueries.insertUser(cliente.email,cliente.nombre,cliente.apellidos,"cliente",cliente.contraseña)
         complemento = Bebida(
             id="AGUA",
             nombre = CategoriaBebida.AGUA,

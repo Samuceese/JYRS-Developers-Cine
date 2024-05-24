@@ -10,7 +10,7 @@ import javafx.scene.control.TableView
 import javafx.scene.control.TextField
 import javafx.scene.control.cell.PropertyValueFactory
 import javafx.scene.image.ImageView
-import org.example.demo.productos.models.Complemento
+import org.example.demo.productos.models.*
 import org.example.demo.routes.RoutesManager
 import org.example.demo.view.viewModel.SeleccionarAsientoViewModel
 import org.example.demo.view.viewModel.SeleccionarComplViewModel
@@ -22,7 +22,6 @@ import org.lighthousegames.logging.logging
 private val logger = logging()
 class SeleccionarComplViewController :KoinComponent{
 
-    val viewButacas:SeleccionarAsientoViewModel by inject()
     val viewCompl:SeleccionarComplViewModel by inject()
 
     @FXML
@@ -44,17 +43,15 @@ class SeleccionarComplViewController :KoinComponent{
     @FXML
     lateinit var filtroNombre:TextField
     @FXML
-    lateinit var filtroTipo:ComboBox<String>
-    @FXML
     lateinit var tablaComplementos:TableView<Complemento>
     @FXML
     lateinit var nombreColumna: TableColumn<Complemento,String>
     @FXML
-    lateinit var tipoColumna: TableColumn<Complemento,String>
-    @FXML
     lateinit var precioColumna: TableColumn<Complemento,String>
     @FXML
     lateinit var filtroPrecio:ComboBox<String>
+
+    private var complemmentosSeleccionas:MutableList<Complemento> = mutableListOf()
 
     @FXML
     fun initialize(){
@@ -65,12 +62,12 @@ class SeleccionarComplViewController :KoinComponent{
     }
 
     private fun initDefaultValues() {
-        cantidadSpinner.setMaxSize(0.0,3.0)
         tablaComplementos.items=
             FXCollections.observableList(viewCompl.state.value.complementos)
         nombreColumna.cellValueFactory = PropertyValueFactory("id")
-        tipoColumna.cellValueFactory = PropertyValueFactory("tipo")
         precioColumna.cellValueFactory = PropertyValueFactory("precio")
+
+        filtroPrecio.items = FXCollections.observableList(viewCompl.state.value.precios)
     }
 
     private fun initReactiveProperties() {
@@ -78,6 +75,8 @@ class SeleccionarComplViewController :KoinComponent{
             tipoTextfield.text=newValue.tipo
             nombreTextfield.text=newValue.nombre
             precioTextfield.text=newValue.precio
+            imagenComplemento.image = newValue.imagen
+            complemmentosSeleccionas=newValue.complementosSeleccionados
         }
     }
 
@@ -87,6 +86,52 @@ class SeleccionarComplViewController :KoinComponent{
         tablaComplementos.selectionModel.selectedItemProperty().addListener { _,_,newValue->
             newValue?.let { onTableSelected(it) }
         }
+        filtroPrecio.selectionModel.selectedItemProperty().addListener { _,_,newValue->
+            newValue?.let { onComboSelected() }
+        }
+        filtroNombre.setOnKeyReleased {
+            it?.let { onTextAction() }
+        }
+        añadirComplementoButton.setOnAction { añadirOnAction() }
+        
+    }
+
+    private fun añadirOnAction() {
+        var complememnto:Complemento=Bebida("NOVALIDO",CategoriaBebida.AGUA)
+            when(nombreTextfield.text){
+                "AGUA"->complememnto=Bebida(nombreTextfield.text,CategoriaBebida.AGUA)
+                "REFRESCO"->complememnto=Bebida(nombreTextfield.text,CategoriaBebida.REFRESCOS)
+                "FRUTOS SECOS"->complememnto=Comida(nombreTextfield.text,CategoriaComida.FRUTOSSECOS)
+                "PATATAS"->complememnto=Comida(nombreTextfield.text,CategoriaComida.PATATAS)
+                "PALOMITAS"->complememnto=Comida(nombreTextfield.text,CategoriaComida.PALOMITAS)
+            }
+
+        añadirComplemmento(complememnto)
+    }
+
+    private fun añadirComplemmento(complemento:Complemento) {
+        if (complemento.id != "NOVALIDO" && complemmentosSeleccionas.size < 3){
+            complemmentosSeleccionas.add(complemento)
+            println(complemmentosSeleccionas.size)
+            viewCompl.actualizarSeleccionados(complemmentosSeleccionas)
+        }else{
+            RoutesManager.alerta("Maximo 3 Complmenetos","El maximo de complemmentos que puedes seleccionar son 3")
+        }
+
+    }
+
+    private fun onTextAction() {
+        filtrarTabla()
+    }
+
+    private fun filtrarTabla() {
+        tablaComplementos.items= FXCollections.observableList(
+            viewCompl.filtrarComplementos(filtroPrecio.value,filtroNombre.text.uppercase())
+        )
+    }
+
+    private fun onComboSelected() {
+        filtrarTabla()
     }
 
     private fun onTableSelected(complemento: Complemento) {
@@ -99,8 +144,6 @@ class SeleccionarComplViewController :KoinComponent{
 
     private fun volverOnAction(){
         viewCompl.borrarSeleccionado()
-        viewButacas.reasignarButacas()
-        viewButacas.state.value.butacasSeleccionadas.clear()
         RoutesManager.changeScene(view = RoutesManager.View.SELECBUTACAS, title = "Seleccionar Butaca", height = 650.00)
     }
 

@@ -16,25 +16,21 @@ import java.time.format.DateTimeParseException
  * @since 1.0
  */
 
-fun Usuario.validate(): Result<Usuario, UserError>{
-    if (this.nombre.isEmpty() || this.nombre.isBlank()){
+fun validateUser(user: Usuario): Result<Usuario, UserError>{
+    if(!validateNombre(user.nombre)){
         return Err(UserError.ValidateProblem("El nombre no puede estar vacío"))
     }
-    if (this.nombre.isEmpty() || this.nombre.isBlank()){
-        return Err(UserError.ValidateProblem("El nombre no puede estar vacío"))
-    }
-    if (this.apellidos.isEmpty() || this.apellidos.isBlank()){
+    if (!validateApellidos(user.apellidos)){
         return Err(UserError.ValidateProblem("Los apellidos no pueden estar vacios"))
     }
-    val regexMail = Regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,3}$")
-    if(!this.email.matches(regexMail)){
+    if (!validateEmail(user.email)){
         return Err(UserError.ValidateProblem("El correo electrónico no es correcto"))
     }
-    val regexContraseña = Regex("^(?=.[a-z])(?=.[A-Z])(?=.\\d)(?=.[@\$!%?&])[A-Za-z\\d@\$!%?&]{12,}$")
-    if(!this.contraseña.matches(regexContraseña) || this.contraseña.isEmpty() || this.contraseña.isBlank()){
+    if(!validateContraseña(user.contraseña)){
+        println(user.contraseña)
         return Err(UserError.ValidateProblem("La contraseña no es válida, debe tener 12 carácteres, contener al menos una mayúscula y una minúsucla, un número y un caracter especial"))
     }
-    return Ok(this)
+    return Ok(user)
 }
 
 fun isValidLocalDate(dateString: String): Boolean {
@@ -62,7 +58,7 @@ fun validateNombre(nombre: String): Boolean{
  * @since 1.0
  */
 
- fun validateApellidos(apellidos: String): Boolean{
+fun validateApellidos(apellidos: String): Boolean{
     if (apellidos.isEmpty() || apellidos.isBlank()){
         return false
     }
@@ -78,7 +74,7 @@ fun validateNombre(nombre: String): Boolean{
  */
 
 fun validateEmail(email: String): Boolean{
-    val regex = Regex("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
+    val regex = Regex("^[^\\s@]+@[^\\s@]+\\.[a-zA-Z]{2,3}\$")
     if(!email.matches(regex)){
         return false
     }
@@ -94,9 +90,11 @@ fun validateEmail(email: String): Boolean{
  */
 
 fun validateContraseña(contraseña: String): Boolean{
-    val regex = Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*?&]{12,}$")
+    val regex = Regex("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@\$!%?&])[A-Za-z\\d@\$!%?&]{13,}\$")
     if(!contraseña.matches(regex)){
+        println("No se valida la contraseña")
         return false
+    }else{
+        return true
     }
-    return true
 }

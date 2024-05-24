@@ -104,6 +104,7 @@ class ButacaRepositoryImpl:ButacaRepository {
             ocupacion = ocupacion.toString(),
             precio = precio.toLong()
         )
+        logger.debug { "ActualizaDA butaca con id: $id" }
         return result
     }
 

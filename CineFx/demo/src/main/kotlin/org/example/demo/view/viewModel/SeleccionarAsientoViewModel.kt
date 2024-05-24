@@ -19,8 +19,10 @@ class SeleccionarAsientoViewModel(
     val state: SimpleObjectProperty<ButacasState> = SimpleObjectProperty(ButacasState())
 
     init {
-        service.import(RoutesManager.getResourceAsStream("data/butacas.csv")).onSuccess {
-            initState(it)
+        if (state.value.butacas.size == 0){
+            service.import(RoutesManager.getResourceAsStream("data/butacas.csv")).onSuccess {
+                initState(it)
+            }
         }
     }
 
@@ -57,6 +59,7 @@ class SeleccionarAsientoViewModel(
             butacasSeleccionadas = lista
         )
     }
+
 
 
     data class ButacasState(

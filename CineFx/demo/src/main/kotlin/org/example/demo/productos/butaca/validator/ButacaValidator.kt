@@ -25,7 +25,9 @@ class ButacaValidator {
     fun validarButaca(butaca:Butaca): Result<Butaca, ButacaError> {
         return when {
             !validarId(butaca.id) -> Err(ButacaError.IdNoValido("El ID: ${butaca.id} no es valido, debe ser Letra Número: Ej A2"))
-            else -> Ok(butaca)
+            else -> {
+                Ok(butaca)
+            }
         }
     }
 
@@ -94,7 +96,7 @@ class ButacaValidator {
     private fun validarId(id: String) :Boolean{
         if (id.length != 2) return false
         val letra=id.slice(0..0)
-        val letras= arrayOf("A","B","C","D","E")
+        val letras= arrayOf("A","B","C","D","E","F","G")
         if (letra.uppercase() !in letras) return false
         val numero= id.slice(1..1).toIntOrNull()?: -1
         if (numero == -1)return false

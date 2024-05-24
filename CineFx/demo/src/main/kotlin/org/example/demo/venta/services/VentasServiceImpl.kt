@@ -6,14 +6,15 @@ import org.example.demo.productos.complementos.repositories.ComplementoRepositor
 import org.example.demo.productos.models.Butaca
 import org.example.demo.productos.models.Complemento
 import org.example.demo.usuarios.models7.Usuario
-import org.example.demo.usuarios.repositories.UserRepository
-import org.example.demo.usuarios.validator.validate
+
+import org.example.demo.usuarios.validator.validateUser
 import org.example.demo.venta.errors.VentaError
 import org.example.demo.venta.models.LineaVenta
 import org.example.demo.venta.models.Venta
 import org.example.demo.venta.repositories.VentasRepository
 import org.example.demo.venta.storage.VentasStorage
 import org.lighthousegames.logging.logging
+
 import java.io.File
 import java.util.*
 
@@ -33,9 +34,7 @@ class VentasServiceImpl(
 
     override fun create(venta: Venta): Result<Venta, VentaError> {
         logger.debug { "Creando venta: $venta" }
-        return validateCliente(venta.cliente).mapBoth(
-            success = {
-                validateLineas(venta.lineas).mapBoth(
+        return validateLineas(venta.lineas).mapBoth(
                     success = {
                         Ok(ventasRepository.save(venta))
                     },
@@ -43,11 +42,7 @@ class VentasServiceImpl(
                         Err(VentaError.VentaNoAlmacenada("no se a podido almacenar la venta: ${venta.id}"))
                     }
                 )
-            },
-            failure = {
-                Err(VentaError.VentaNoAlmacenada("no se a podido almacenar la venta: ${venta.id}"))
-            }
-        )
+
 
     }
 
@@ -73,8 +68,9 @@ class VentasServiceImpl(
     }
     fun validateCliente(cliente: Usuario): Result<Usuario, VentaError> {
         logger.debug { "Validando cliente: $cliente" }
-       return cliente.validate().mapBoth(
+       return validateUser(cliente).mapBoth(
             failure = {
+                println(it.message)
                 Err(VentaError.VentaNoValida("El cliente no se ha podido validar"))
             },
             success = {

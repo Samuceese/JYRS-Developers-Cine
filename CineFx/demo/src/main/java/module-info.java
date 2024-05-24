@@ -32,6 +32,9 @@ module org.example.demo {
     opens org.example.demo.usuarios.services to javafx.fxml;
     exports org.example.demo.usuarios.services;
 
+    opens org.example.demo.usuarios.repositories to javafx.fxml;
+    exports org.example.demo.usuarios.repositories;
+
     opens org.example.demo.productos.models to javafx.fxml;
     exports org.example.demo.productos.models;
 
@@ -40,5 +43,13 @@ module org.example.demo {
 
     opens org.example.demo.productos.complementos.services to javafx.fxml;
     exports org.example.demo.productos.complementos.services;
+
+    opens org.example.demo.venta.models to javafx.fxml;
+    exports org.example.demo.venta.models;
+
+    opens org.example.demo.venta.services to javafx.fxml;
+    exports org.example.demo.venta.services;
+
+
 
 }

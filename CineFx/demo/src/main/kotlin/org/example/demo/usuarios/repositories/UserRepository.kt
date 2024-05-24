@@ -1,6 +1,5 @@
 package org.example.demo.usuarios.repositories
 
-
 import org.example.demo.usuarios.models7.Usuario
 
 interface UserRepository {

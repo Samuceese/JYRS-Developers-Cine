@@ -2,7 +2,6 @@ package org.example.demo.venta.mappers
 
 import database.LineaVentaEntityButaca
 import database.LineaVentaEntityComplemento
-import database.SelectAllLineasById
 import database.VentaEntity
 import org.example.demo.productos.models.Butaca
 import org.example.demo.productos.models.Complemento

@@ -4,26 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Venta</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            color: #4a90e2;
+        }
+        p {
+            line-height: 1.6;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f9;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .total {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #e94e77;
+        }
+    </style>
 </head>
-<body style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
-    <div>
+<body>
+    <div class="container">
         <h1>Venta</h1>
-        <p>Fecha: 2024-05-24T02:07:36.802465</p>
+        <p>Fecha: 2024-05-24T18:03:41.116079400</p>
         <p>Cliente: a</p>
-        <p>Película: Tarot</p>
+        <p>Película: El Especialista</p>
         <p>Productos:</p>
-        <table border="2px">
+        <table>
             <thead>
                 <tr>
-                    <th>Nombre</th>                            
+                    <th>Nombre</th>
                     <th>Precio Unitario</th>
                 </tr>
             </thead>
             <tbody>
-                <tr><td>Comida: PALOMITAS</td><td>3,00 €</td></tr><tr><td>Comida: PATATAS</td><td>2,50 €</td></tr><tr><td>Butaca: C3</td><td>8,00 €</td></tr><tr><td>Butaca: D3</td><td>8,00 €</td></tr><tr><td>Butaca: E3</td><td>8,00 €</td></tr><tr><td>Butaca: F3</td><td>8,00 €</td></tr>
+                <tr><td>Bebida: REFRESCO</td><td>3,00 €</td></tr><tr><td>Butaca: B3</td><td>8,00 €</td></tr><tr><td>Butaca: C3</td><td>8,00 €</td></tr><tr><td>Butaca: D3</td><td>8,00 €</td></tr><tr><td>Butaca: E3</td><td>8,00 €</td></tr><tr><td>Butaca: F3</td><td>8,00 €</td></tr>
             </tbody>
         </table>
-        <p>Total: <span style="font-weight: bold;">37,50 €</span></p>
+        <p>Total: <span class="total">43,00 €</span></p>
     </div>
 </body>
 </html>

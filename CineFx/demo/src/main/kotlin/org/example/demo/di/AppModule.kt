@@ -22,6 +22,12 @@ import org.example.demo.usuarios.repositories.UserRepository
 import org.example.demo.usuarios.repositories.UserRepositoryImpl
 import org.example.demo.usuarios.services.UserService
 import org.example.demo.usuarios.services.UserServiceImpl
+import org.example.demo.venta.repositories.VentasRepository
+import org.example.demo.venta.repositories.VentasRepositoryImpl
+import org.example.demo.venta.services.VentasService
+import org.example.demo.venta.services.VentasServiceImpl
+import org.example.demo.venta.storage.VentaStorageHtml
+import org.example.demo.venta.storage.VentasStorage
 import org.example.demo.view.controllers.*
 import org.example.demo.view.viewModel.*
 import org.koin.core.module.dsl.singleOf
@@ -30,9 +36,12 @@ import org.koin.dsl.module
 
 
 val appModule = module {
+
     single <CacheUsuario>{ CacheUsuario(5) }
+    single <UserRepositoryImpl>{ UserRepositoryImpl() }
     single <UserRepository>{ UserRepositoryImpl() }
     single <UserService>{ UserServiceImpl(get(),get()) }
+
     single <ButacaRepository>{ ButacaRepositoryImpl() }
     single <ButacaValidator>{ ButacaValidator()  }
     single <ButacasCacheImpl>{ ButacasCacheImpl(5) }
@@ -43,19 +52,32 @@ val appModule = module {
     single <ComplementoCacheImpl>{ ComplementoCacheImpl(5) }
     single <ComplementoStorage>{ ComplementoStorageImpl() }
     single <ComplementoService>{ ComplementoServiceImpl(get(),get(),get()) }
-    //singleOf(:: LoginViewController)
+
+    single <VentasStorage>{ VentaStorageHtml() }
+    single <VentasRepository>{ VentasRepositoryImpl(get(),get(),get()) }
+    single <VentasService>{ VentasServiceImpl(get(),get(),get(),get()) }
+
     singleOf(:: LoginViewModel)
-    //singleOf(:: RegistroViewController)
+
     singleOf(:: RegistroViewModel)
-    //singleOf(:: OlvidarContraViewController)
+
     singleOf(:: OlvidarContraViewModel)
+
     singleOf(:: SeleccionarAsientoViewModel)
-    //singleOf(:: SeleccionarAsientoViewController)
 
     singleOf(:: SeleccionarPeliculaViewModel)
-   // singleOf(:: SeleccionarAsientoViewController)
 
     singleOf(:: SeleccionarComplViewModel)
+
+    singleOf(:: CarritoViewModel)
+
+    singleOf(:: PagoViewModel)
+
+    singleOf(:: DetallesCompraViewModel)
+
+
+
+
 
 }
 

@@ -1,14 +1,12 @@
 package org.example.demo.usuarios.services
 
-import com.github.michaelbull.result.Err
-import com.github.michaelbull.result.Ok
-import com.github.michaelbull.result.Result
-import com.github.michaelbull.result.mapBoth
+import com.github.michaelbull.result.*
 import org.example.demo.usuarios.cache.CacheUsuario
 import org.example.demo.usuarios.errors.UserError
 import org.example.demo.usuarios.models7.Usuario
 import org.example.demo.usuarios.repositories.UserRepository
 import org.example.demo.usuarios.repositories.UserRepositoryImpl
+import org.example.demo.usuarios.validator.validateUser
 import org.lighthousegames.logging.logging
 
 
@@ -30,10 +28,15 @@ class UserServiceImpl(
 
     override fun save(user: Usuario): Result<Usuario, UserError> {
         logger.debug { "Guardando Usuario: $user" }
-        repository.save(user).also {
-            cacheUsuario.put(user.id, user)
-            return Ok(it)
-        }
+       return validateUser(user).mapBoth(
+           success = {
+               Ok(it).also { repository.save(user) }.also { cacheUsuario.put(user.id, user) }
+
+           },
+           failure = {
+               Err(UserError.ValidateProblem("No se ha podido guardar debido a un error de valdiación"))
+           }
+       )
     }
 
 

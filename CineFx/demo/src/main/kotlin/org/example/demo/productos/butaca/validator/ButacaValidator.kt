@@ -42,7 +42,7 @@ class ButacaValidator {
             return Err(ButacaError.PrecioNoValido("El precio de la butaca no es válido"))
         }
         if(validarEstado(butaca).isErr){
-            return Err(ButacaError.EstadoNoValido("El estado de la butaca es incorrecto, debe ser ACTIVA o MANTENIMIENTO"))
+            return Err(ButacaError.EstadoNoValido("El estado de la butaca no es válido debe ser ACTIVA o MANTENIMIENTO"))
         }
         if(validarTipo(butaca).isErr){
             return Err(ButacaError.TipoNoValido("El tipo de la butaca debe ser NORMAL o VIP"))
@@ -78,8 +78,8 @@ class ButacaValidator {
         }
     }
     private fun validarEstado(butaca: ButacaDto): Result<ButacaDto, ButacaError.EstadoNoValido> {
-        return if(butaca.estado !in listOf("ACTIVA", "MANTENIMIENTO")){
-            Err(ButacaError.EstadoNoValido("El estado de la butaca es incorrecto, debe ser ACTIVA o MANTENIMIENTO"))
+        return if(butaca.estado !in listOf("ACTIVA", "MANTENIMIENTO", "OCUPADA")){
+            Err(ButacaError.EstadoNoValido("El estado de la butaca es incorrecto, debe ser ACTIVA, OCUPADA o MANTENIMIENTO"))
         }else{
             Ok(butaca)
         }

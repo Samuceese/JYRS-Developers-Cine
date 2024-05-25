@@ -32,22 +32,14 @@ class VentasServiceImpl(
 
     override fun create(venta: Venta): Result<Venta, VentaError> {
         logger.debug { "Creando venta: $venta" }
-        return validateCliente(venta.cliente).mapBoth(
-            success = {
-                validateLineas(venta.lineas).mapBoth(
+        return validateLineas(venta.lineas).mapBoth(
                     success = {
                         Ok(ventasRepository.save(venta))
                     },
                     failure = {
                         Err(VentaError.VentaNoAlmacenada("no se a podido almacenar la venta: ${venta.id}"))
                     }
-                )
-            },
-            failure = {
-                Err(VentaError.VentaNoAlmacenada("no se a podido almacenar la venta: ${venta.id}"))
-            }
         )
-
     }
 
    fun validateLineas(lineas: List<LineaVenta>): Result<List<LineaVenta>, VentaError> {
@@ -71,7 +63,7 @@ class VentasServiceImpl(
         return Ok(lineas)
     }
 
-    //TODO ¡¡¡ revisar
+    //TODO borrar
     private fun validateCliente(cliente: Usuario): Result<Usuario, VentaError> {
         logger.debug { "Validando cliente: $cliente" }
        return validateCliente(cliente).mapBoth(

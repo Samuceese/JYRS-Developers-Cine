@@ -29,7 +29,6 @@ fun ButacaEntity.toButaca():Butaca{
         "MANTENIMIENTO"-> _estado=Estado.MANTENIMIENTO
         "OCUPADA" -> _estado = Estado.OCUPADA
     }
-
     return Butaca(_id,_estado!!,_tipo!!, this.createAt.returnDateTimeString())
 }
 

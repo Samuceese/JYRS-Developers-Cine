@@ -13,13 +13,13 @@ import org.example.demo.productos.models.*
  */
 
 fun ComplementoEntity.toComplemento(): Complemento {
-    val _nombre: String = this.nombre
+    val _nombre: String = this.id
     val _tipo: String = this.tipo
     when (_tipo) {
         "COMIDA" -> {
             when (_nombre) {
                 "PALOMITAS" -> return Comida("PALOMITAS",CategoriaComida.PALOMITAS)
-                "FRUTOSSECOS" -> return Comida("FRUTOS SECOS",CategoriaComida.FRUTOSSECOS)
+                "FRUTOS SECOS" -> return Comida("FRUTOS SECOS",CategoriaComida.FRUTOSSECOS)
                 "PATATAS" -> return Comida("PATATAS", CategoriaComida.PATATAS)
             }
         }

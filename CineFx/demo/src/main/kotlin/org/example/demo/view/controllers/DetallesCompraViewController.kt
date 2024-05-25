@@ -3,13 +3,29 @@ package org.example.demo.view.controllers
 import javafx.fxml.FXML
 import javafx.scene.control.Button
 import javafx.scene.control.Label
+import javafx.scene.control.TextArea
 import javafx.scene.image.ImageView
+import org.example.demo.locale.toDefaultMoneyString
+import org.example.demo.productos.models.Bebida
+import org.example.demo.productos.models.Butaca
+import org.example.demo.productos.models.Comida
+import org.example.demo.productos.models.Complemento
 import org.example.demo.routes.RoutesManager
+import org.example.demo.view.viewModel.CarritoViewModel
+import org.example.demo.view.viewModel.DetallesCompraViewModel
+import org.example.demo.view.viewModel.LoginViewModel
+import org.example.demo.view.viewModel.PagoViewModel
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 
 
 private val logger= logging()
-class DetallesCompraViewController {
+class DetallesCompraViewController: KoinComponent {
+
+
+    val viewPago: PagoViewModel by inject()
+    val view: DetallesCompraViewModel by inject()
 
     @FXML
     lateinit var imagenMenu: ImageView
@@ -20,9 +36,9 @@ class DetallesCompraViewController {
     @FXML
     lateinit var tituloLabel: Label
     @FXML
-    lateinit var complementosLabel: Label
+    lateinit var complementosLista: TextArea
     @FXML
-    lateinit var fxButacaLabel: Label
+    lateinit var butacasLista: TextArea
     @FXML
     lateinit var fxTotalLabel: Label
     @FXML
@@ -32,16 +48,51 @@ class DetallesCompraViewController {
     @FXML
     lateinit var fxBotonImprimirPdf:Button
 
+
     @FXML
     fun initialize(){
         logger.debug { "inicializando controller Detalles de compra" }
         initDefaultEvents()
+        initDefaultValues()
+    }
+
+    private fun initDefaultValues() {
+
+        nombreLabel.text = viewPago.state.value.venta.cliente.nombre
+        correoLabel.text = viewPago.state.value.venta.cliente.email
+
+        tituloLabel.text = viewPago.state.value.pelicula
+
+        val complementos= mutableListOf<String>()
+        val butacas= mutableListOf<String>()
+        viewPago.state.value.venta.lineas.forEach {
+            when(it.producto){
+                is Butaca->butacas.add("Butaca ${it.producto.id}-${it.producto.precio.toDefaultMoneyString()}")
+                is Complemento->{
+                    when(it.producto){
+                        is Comida->complementos.add("Comida ${it.producto.nombre}-${it.producto.precio.toDefaultMoneyString()}")
+                        is Bebida ->complementos.add("Bebida ${it.producto.nombre}-${it.producto.precio.toDefaultMoneyString()}")
+                    }
+                }
+            }
+        }
+
+        butacasLista.text = butacas.joinToString(separator = "\n")
+        complementosLista.text = complementos.joinToString(separator = "\n")
+
+        fxTotalLabel.text = viewPago.state.value.venta.total.toDefaultMoneyString()
+
     }
 
     private fun initDefaultEvents() {
         imagenMenu.setOnMouseClicked { menuOnAction() }
         fxBotonSeleccionarPelicula.setOnAction { menuOnAction() }
         fxBotonCerrarSesion.setOnAction { cerrarSesionOnAction() }
+        fxBotonImprimirPdf.setOnAction { pdfOnAction() }
+    }
+
+    private fun pdfOnAction() {
+        view.guardarPdf(viewPago.state.value.venta,viewPago.state.value.pelicula)
     }
 
     private fun cerrarSesionOnAction() {

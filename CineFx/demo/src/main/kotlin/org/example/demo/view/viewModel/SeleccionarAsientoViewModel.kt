@@ -19,8 +19,10 @@ class SeleccionarAsientoViewModel(
     val state: SimpleObjectProperty<ButacasState> = SimpleObjectProperty(ButacasState())
 
     init {
-        service.import(RoutesManager.getResourceAsStream("data/butacas.csv")).onSuccess {
-            initState(it)
+        if (state.value.butacas.size == 0){
+            service.import(RoutesManager.getResourceAsStream("data/butacas.csv")).onSuccess {
+                initState(it)
+            }
         }
     }
 
@@ -48,15 +50,38 @@ class SeleccionarAsientoViewModel(
         createAt: LocalDate,
         ocupada: Ocupacion,
         precio: Double
-    ){
+    ):Butaca{
         val butaca = Butaca(id,estado, tipo, createAt)
-        service.update(id,butaca,ocupada,precio)
+        return service.update(id,butaca,ocupada,precio).value
     }
     fun actualizarButacasSeleccionadas(lista:MutableList<Butaca>){
         state.value = state.value.copy(
             butacasSeleccionadas = lista
         )
     }
+
+    fun actualizarButacas(){
+        val lista= mutableListOf<Butaca>()
+        state.value.butacas.forEach {
+            if (verificarButaca(it.id)){
+                lista.add(actualizarButaca(it.id,Estado.OCUPADA,it.tipo,it.create,Ocupacion.OCUPADA,it.precio))
+            }else{
+                lista.add(it)
+            }
+        }
+        state.value = state.value.copy(
+            butacasSeleccionadas = mutableListOf(),
+            butacas = lista
+        )
+    }
+
+    private fun verificarButaca(id:String):Boolean{
+        state.value.butacasSeleccionadas.forEach {
+            if (it.id == id) return true
+        }
+        return false
+    }
+
 
 
     data class ButacasState(

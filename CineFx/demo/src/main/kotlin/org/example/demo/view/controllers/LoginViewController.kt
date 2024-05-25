@@ -59,7 +59,7 @@ class LoginViewController:KoinComponent {
     }
 
     private fun botonLoginOnAction() {
-       /*if (view.validarAdmin(nombreLogin.text, contraseñaLogin.text)){
+       if (view.validarAdmin(nombreLogin.text, contraseñaLogin.text)){
         RoutesManager.changeScene(view = RoutesManager.View.MENUADMIN, title = "Menu admin")
        }else{
            if (!view.validarUsuario(nombreLogin.text)){
@@ -69,13 +69,10 @@ class LoginViewController:KoinComponent {
                RoutesManager.alerta("Contraseña","La contraseña no coincide")
            }
            if (view.validarContraseña(nombreLogin.text, contraseñaLogin.text)){
-               view.state.value.usuario= nombreLogin.text
-
-
-        */
+               view.establecerUsuario(nombreLogin.text)
                RoutesManager.changeScene(view = RoutesManager.View.SELECPELICULAS, title = "Seleccionar Pelicula")
-         //  }
-       //}
+          }
+       }
     }
 
 

@@ -137,6 +137,7 @@ class SeleccionarAsientoViewController :KoinComponent{
         viewButacas.state.addListener { _,_,newValue->
             lista = newValue.butacasSeleccionadas
             //lista.size = newValue.butacasSeleccionadas.size
+
         }
     }
 
@@ -199,37 +200,43 @@ class SeleccionarAsientoViewController :KoinComponent{
         asignarImagen("G7",butacaImage7g)
     }
 
-    private fun seleccionarButaca(id:String,image: ImageView){
+    private fun seleccionarButaca(id: String, image: ImageView) {
         image.setOnMouseClicked {
-            val butaca=viewButacas.buscarButacaId(id)!!
+            val butaca = viewButacas.buscarButacaId(id)!!
 
             if (butaca.ocupacion != Ocupacion.SELECCIONADA
                 && butaca.estado != Estado.MANTENIMIENTO
-               && butaca.estado != Estado.OCUPADA
-                ){
-                if (lista.size < 5){
-                    image.image =  Image(RoutesManager.getResourceAsStream("images/seleccionada.png"))
-                    viewButacas.actualizarButaca(id,Estado.OCUPADA,butaca.tipo, butaca.create,Ocupacion.SELECCIONADA,butaca.precio)
-                    añadirButaca(id)
+                && butaca.estado != Estado.OCUPADA
+                && !lista.contains(viewButacas.buscarButacaId(butaca.id))
+            ) {
+                if (lista.size < 5) {
+                    image.image = Image(RoutesManager.getResourceAsStream("images/seleccionada.png"))
+                    viewButacas.actualizarButaca(
+                        butaca.id,
+                        butaca.estado,
+                        butaca.tipo,
+                        butaca.create,
+                        Ocupacion.SELECCIONADA,
+                        butaca.precio
+                    )
+                    val butaca2 = viewButacas.buscarButacaId(id)!!
+                    añadirButaca(butaca2.id)
                     viewButacas.actualizarButacasSeleccionadas(lista)
-                    //viewButacas.añadirButacaSeleccionada(id)
-                }else{
-                    RoutesManager.alerta("5 butacas","Maximo 5 butacas por cliente")
+                } else {
+                    RoutesManager.alerta("5 butacas", "Máximo 5 butacas por cliente")
                 }
-            }
-            else if ( lista.contains(butaca)) {
+            } else if (lista.contains(viewButacas.buscarButacaId(id))) {
                 viewButacas.actualizarButaca(
                     id,
-                    Estado.ACTIVA,
+                    butaca.estado,
                     butaca.tipo,
                     butaca.create,
                     Ocupacion.LIBRE,
                     butaca.precio
                 )
-                eliminarButaca(id)
-
-                //viewButacas.eliminarButacaSeleccionada(id)
-                asignarImagen(id,image)
+                val butaca2 = viewButacas.buscarButacaId(id)!!
+                eliminarButaca(butaca2.id)
+                asignarImagen(butaca2.id, image)
             }
         }
     }
@@ -244,7 +251,6 @@ class SeleccionarAsientoViewController :KoinComponent{
                 lista2.add(it)
             }
         }
-        println("eliminada")
         viewButacas.actualizarButacasSeleccionadas(lista2)
     }
 
@@ -256,8 +262,9 @@ class SeleccionarAsientoViewController :KoinComponent{
             image.image = Image(RoutesManager.getResourceAsStream("images/ocupada.png"))
         }else if (butaca.ocupacion == Ocupacion.OCUPADA){
             image.image = Image(RoutesManager.getResourceAsStream("images/ocupada.png"))
-        }
-        else if (butaca.tipo == Tipo.NORMAL){
+        }else if (butaca.ocupacion == Ocupacion.SELECCIONADA){
+            image.image = Image(RoutesManager.getResourceAsStream("images/seleccionada.png"))
+        }else if (butaca.tipo == Tipo.NORMAL){
             image.image = Image(RoutesManager.getResourceAsStream("images/libre.png"))
         }else if (butaca.tipo == Tipo.VIP){
             image.image = Image(RoutesManager.getResourceAsStream("images/vip.png"))
@@ -334,7 +341,6 @@ class SeleccionarAsientoViewController :KoinComponent{
         if (viewButacas.state.value.butacasSeleccionadas.size > 0){
             RoutesManager.changeScene(view = RoutesManager.View.SELECCOMPL, title = "Seleccionar Complemento")
         }
-
     }
 
     private fun botonVolveronAction() {

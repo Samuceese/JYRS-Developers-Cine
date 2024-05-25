@@ -25,6 +25,7 @@ class UserServiceImpl(
     private val repository: UserRepositoryImpl,
     private val cacheUsuario: CacheUsuario
 ): UserService {
+
     override fun save(user: Usuario): Result<Usuario, UserError> {
         logger.debug { "Guardando Usuario: $user" }
        return validateUser(user).mapBoth(
@@ -65,6 +66,7 @@ class UserServiceImpl(
     override fun findByEmail(email: String): Result<Usuario, UserError> {
         logger.debug { "Buscando Usuario por email: $email" }
         return repository.findByEmail(email)?.let {
+            println("Encontrado email $email")
             Ok(it)
         } ?: Err(UserError.UserNotFound("No se ha encontrado usuario con email $email"))
     }

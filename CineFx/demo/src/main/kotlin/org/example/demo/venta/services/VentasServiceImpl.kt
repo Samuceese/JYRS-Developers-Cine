@@ -6,6 +6,7 @@ import org.example.demo.productos.complementos.repositories.ComplementoRepositor
 import org.example.demo.productos.models.Butaca
 import org.example.demo.productos.models.Complemento
 import org.example.demo.usuarios.models7.Usuario
+import org.example.demo.usuarios.validator.validateUser
 import org.example.demo.usuarios.repositories.UserRepository
 import org.example.demo.venta.errors.VentaError
 import org.example.demo.venta.models.LineaVenta
@@ -13,6 +14,7 @@ import org.example.demo.venta.models.Venta
 import org.example.demo.venta.repositories.VentasRepository
 import org.example.demo.venta.storage.VentasStorage
 import org.lighthousegames.logging.logging
+
 import java.io.File
 import java.util.*
 
@@ -66,8 +68,9 @@ class VentasServiceImpl(
     //TODO borrar
     private fun validateCliente(cliente: Usuario): Result<Usuario, VentaError> {
         logger.debug { "Validando cliente: $cliente" }
-       return validateCliente(cliente).mapBoth(
+       return validateUser(cliente).mapBoth(
             failure = {
+                println(it.message)
                 Err(VentaError.VentaNoValida("El cliente no se ha podido validar"))
             },
             success = {

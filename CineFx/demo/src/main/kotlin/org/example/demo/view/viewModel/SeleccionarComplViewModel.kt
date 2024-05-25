@@ -37,7 +37,7 @@ class SeleccionarComplViewModel(
             },
             imagen = when(complemento.id){
                 "PALOMITAS"-> Image(RoutesManager.getResourceAsStream("images/palomitas.png"))
-                "FRUTOSSECOS"->Image(RoutesManager.getResourceAsStream("images/frutossecos.png"))
+                "FRUTOS SECOS"->Image(RoutesManager.getResourceAsStream("images/frutossecos.png"))
                 "PATATAS"->Image(RoutesManager.getResourceAsStream("images/patatas.png"))
                 "AGUA"->Image(RoutesManager.getResourceAsStream("images/agua.png"))
                 "REFRESCO"->Image(RoutesManager.getResourceAsStream("images/refresco.png"))
@@ -47,21 +47,27 @@ class SeleccionarComplViewModel(
         )
     }
 
-    fun filtratComplementos(precio: String,nombre: String,tipo: String):List<Complemento>{
+    fun filtrarComplementos(precio: String,nombre: String):List<Complemento>{
 
         return state.value.complementos
             .asSequence()
             .filter {
-                it.id == nombre
+                when(it){
+                    is Bebida->it.nombre.toString().contains(nombre)
+                    is Comida->it.nombre.toString().contains(nombre)
+                    else -> it.id.contains(nombre)
+                }
             }.filter {
-                (it is Comida && tipo=="Comida")
-            }.filter {
-                (it is Bebida && tipo=="Bebida")
-            }.filter {
-                (it as Bebida).precio.toDefaultMoneyString() == precio
-            }.filter {
-                (it as Comida).precio.toDefaultMoneyString() == precio
+                if (precio=="All") true else{
+                    when(it){
+                        is Bebida->it.precio.toDefaultMoneyString() == precio
+                        is Comida->it.precio.toDefaultMoneyString()== precio
+                        else -> it.id.contains(nombre)
+                    }
+                }
+
             }
+
             .toList()
     }
 
@@ -75,14 +81,7 @@ class SeleccionarComplViewModel(
 
     private fun initState(lista: List<Complemento>) {
         val listaTipos= mutableListOf<String>("All")
-        lista.forEach {
-            if (it is Bebida) {
-                listaTipos.add("Bebida")
-            }
-            else if ( it is Comida) {
-                listaTipos.add("Comida")
-            }
-        }
+
         val listaPrecio = mutableListOf("All")
         lista.forEach {
             when(it){
@@ -95,6 +94,12 @@ class SeleccionarComplViewModel(
             complementos = lista,
             tipos = listaTipos.distinct().sorted(),
             precios = listaPrecio.distinct().sorted()
+        )
+    }
+
+    fun actualizarSeleccionados(complemmentosSeleccionas: MutableList<Complemento>) {
+        state.value = state.value.copy(
+            complementosSeleccionados = complemmentosSeleccionas
         )
     }
 

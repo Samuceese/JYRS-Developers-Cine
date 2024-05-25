@@ -76,19 +76,19 @@
                     <children>
                         <AnchorPane prefHeight="41.0" prefWidth="700.0">
                             <children>
-                                <ImageView fx:id="fxPaypalImage" fitHeight="47.0" fitWidth="45.0" layoutX="224.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="224.0">
+                                <ImageView fx:id="fxPaypalImage" fitHeight="40.0" fitWidth="40.0" layoutX="224.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="224.0">
                                     <image>
-                                        <Image url="@../images/logo.png" />
+                                        <Image url="@../../../../../../../../../../OneDrive/Escritorio/simbolos%20png/logo.png" />
                                     </image>
                                 </ImageView>
-                                <ImageView fx:id="fxCreditCardImage" fitHeight="45.0" fitWidth="61.0" layoutX="327.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="327.0" AnchorPane.rightAnchor="328.0">
+                                <ImageView fx:id="fxCreditCardImage" fitHeight="40.0" fitWidth="40.0" layoutX="327.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="327.0" AnchorPane.rightAnchor="328.0">
                                     <image>
-                                        <Image url="@../images/logo.png" />
+                                        <Image url="@../../../../../../../../../../OneDrive/Escritorio/simbolos%20png/tarjetas-de-credito.png" />
                                     </image>
                                 </ImageView>
-                                <ImageView fx:id="fxMasterCardImage" fitHeight="32.0" fitWidth="39.0" layoutX="430.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="430.0">
+                                <ImageView fx:id="fxMasterCardImage" fitHeight="40.0" fitWidth="40.0" layoutX="430.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="430.0">
                                     <image>
-                                        <Image url="@../images/logo.png" />
+                                        <Image url="@../../../../../../../../../../OneDrive/Escritorio/simbolos%20png/paypal.png" />
                                     </image>
                                 </ImageView>
                             </children>

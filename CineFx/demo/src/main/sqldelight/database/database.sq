@@ -13,8 +13,8 @@ DELETE FROM UsuariosEntity;
 deleteAllClientes:
 DELETE FROM UsuariosEntity WHERE tipo != 'admin';
 
-selectAll:
-SELECT * FROM UsuariosEntity ORDER BY nombre ASC;
+selectAllClientes:
+SELECT * FROM UsuariosEntity WHERE tipo != 'admin' ORDER BY nombre ASC;
 
 selectByEmail:
 SELECT * FROM UsuariosEntity WHERE email = ?;

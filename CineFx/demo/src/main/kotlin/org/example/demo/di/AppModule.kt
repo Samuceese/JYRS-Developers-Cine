@@ -31,15 +31,15 @@ import org.koin.dsl.module
 
 val appModule = module {
     single <CacheUsuario>{ CacheUsuario(5) }
-    single <UserRepository>{ UserRepositoryImpl() }
+    single <UserRepository>{ UserRepositoryImpl(get()) }
     single <UserService>{ UserServiceImpl(get(),get()) }
-    single <ButacaRepository>{ ButacaRepositoryImpl() }
+    single <ButacaRepository>{ ButacaRepositoryImpl(get()) }
     single <ButacaValidator>{ ButacaValidator()  }
     single <ButacasCacheImpl>{ ButacasCacheImpl(5) }
     single <ButacaStorage>{ ButacaStorageImpl(get()) }
     single <ButacaService>{ ButacaServiceImpl(get(),get(),get(),get()) }
 
-    single <ComplementoRepository>{ ComplementoRepositoryImpl() }
+    single <ComplementoRepository>{ ComplementoRepositoryImpl(get()) }
     single <ComplementoCacheImpl>{ ComplementoCacheImpl(5) }
     single <ComplementoStorage>{ ComplementoStorageImpl() }
     single <ComplementoService>{ ComplementoServiceImpl(get(),get(),get()) }

@@ -11,8 +11,10 @@ import org.lighthousegames.logging.logging
 
 private val logger=logging()
 
-class ComplementoRepositoryImpl:ComplementoRepository {
-    private val db  = SqlDelightManager.databaseQueries
+class ComplementoRepositoryImpl(
+    private val dbManager: SqlDelightManager
+):ComplementoRepository {
+    private val db  = dbManager.databaseQueries
 
     /**
      * Consultamos la base de datos para obtener todas las entidades y convertirlas en objetos.

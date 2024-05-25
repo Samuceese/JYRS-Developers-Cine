@@ -1,5 +1,6 @@
 package ventas.repositories
 
+import org.example.demo.config.Config
 import org.example.demo.database.SqlDelightManager
 import org.example.demo.locale.toShortSpanishFormat
 import org.example.demo.productos.butaca.repositories.ButacaRepository
@@ -52,12 +53,11 @@ class TestVentaRepository {
     @BeforeEach
     fun setUpAll(){
 
-        dbManager= SqlDelightManager
-        dbManager.initializeDb()
-        butacaRepo= ButacaRepositoryImpl()
-        complementoRepo= ComplementoRepositoryImpl()
-        clienteRepo= UserRepositoryImpl()
-        ventaRepo = VentasRepositoryImpl(clienteRepo, butacaRepo, complementoRepo)
+        dbManager= SqlDelightManager(Config)
+        butacaRepo= ButacaRepositoryImpl(dbManager)
+        complementoRepo= ComplementoRepositoryImpl(dbManager)
+        clienteRepo= UserRepositoryImpl(dbManager)
+        ventaRepo = VentasRepositoryImpl(dbManager, clienteRepo, butacaRepo, complementoRepo)
 
         cliente = Cliente(
             id = 55,

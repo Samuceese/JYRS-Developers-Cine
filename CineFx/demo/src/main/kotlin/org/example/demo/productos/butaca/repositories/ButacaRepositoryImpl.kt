@@ -16,8 +16,10 @@ private val logger=logging()
  * @author Javier Hernández, Yahya El Hadri, Samuel Cortés, Raúl Fernández
  */
 
-class ButacaRepositoryImpl:ButacaRepository {
-    private val db  = SqlDelightManager.databaseQueries
+class ButacaRepositoryImpl(
+    private val dbManager: SqlDelightManager
+):ButacaRepository {
+    private val db  = dbManager.databaseQueries
 
     /**
      * Obtenemos todas las butacas almacenadas en la base de datos.

@@ -17,11 +17,12 @@ import java.util.*
 
 private val logger = logging()
 class VentasRepositoryImpl(
+    private val dbManager: SqlDelightManager,
     private val clienteRepository: UserRepository,
     private val butacasRepository: ButacaRepository,
     private val complementosRepository: ComplementoRepository
 ): VentasRepository {
-    private val db = SqlDelightManager.databaseQueries
+    private val db = dbManager.databaseQueries
 
     override fun getById(id: UUID): Venta? {
         logger.debug { "Obteniendo venta por id: $id" }

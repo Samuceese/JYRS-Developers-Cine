@@ -4,11 +4,15 @@ import app.cash.sqldelight.driver.jdbc.sqlite.JdbcSqliteDriver
 import database.DatabaseQueries
 import org.example.database.AppDatabase
 import org.example.demo.config.Config
-import org.example.demo.database.SqlDelightManager.databaseQueries
+
 import org.lighthousegames.logging.logging
+import java.io.File
+import java.nio.file.Files
+import kotlin.math.log
 
 
 private val logger = logging()
+
 /**
  * Para manejar la base de datos.
  * @property databaseQueries
@@ -16,12 +20,15 @@ private val logger = logging()
  * @since 1.0
  */
 
-object SqlDelightManager {
+class SqlDelightManager(
+    private val config: Config
+) {
     val databaseQueries: DatabaseQueries by lazy { initQueries() }
 
     init {
-        logger.debug { "Inicializando el gestor de Base de Datos con SqlDelight" }
-        initializeDb()
+        logger.debug { "Inicializando la base de datos con SqlDelight" }
+        clearData()
+        initilize()
     }
 
     /**
@@ -32,6 +39,7 @@ object SqlDelightManager {
      */
 
     private fun initQueries(): DatabaseQueries {
+
         return if (Config.databaseInMemory) {
             logger.debug { "SqlDeLightClient - InMemory" }
             JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY)
@@ -46,17 +54,7 @@ object SqlDelightManager {
         }.databaseQueries
     }
 
-    /**
-     * Inicializa la base de datos.
-     * @author Yahya El Hadri, Samuel Cortés, Raúl Fernández, Javier Hernández
-     * @since 1.0
-     */
 
-    fun initializeDb() {
-        if (Config.databaseInitData) {
-            initilize()
-        }
-    }
     fun clearData() {
         logger.debug { "Borrando datos de la base de datos" }
         databaseQueries.transaction {
@@ -79,7 +77,6 @@ object SqlDelightManager {
     private fun initilize() {
         logger.debug { "SqlDeLightClient.removeAllData()" }
         databaseQueries.transaction {
-            clearData()
             databaseQueries.InsertTheAdmin()
         }
     }

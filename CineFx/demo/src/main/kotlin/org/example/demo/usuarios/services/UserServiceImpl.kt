@@ -3,6 +3,7 @@ package org.example.demo.usuarios.services
 import com.github.michaelbull.result.*
 import org.example.demo.usuarios.cache.CacheUsuario
 import org.example.demo.usuarios.errors.UserError
+import org.example.demo.usuarios.models.Cliente
 import org.example.demo.usuarios.models7.Usuario
 import org.example.demo.usuarios.repositories.UserRepository
 import org.example.demo.usuarios.repositories.UserRepositoryImpl
@@ -93,4 +94,12 @@ class UserServiceImpl(
             }
         )
     }
+
+    override fun findAll(): Result<List<Usuario>, UserError> {
+        logger.debug { "Obteniendo todos los clientes registrados" }
+        val clientes = mutableListOf<Usuario>()
+        repository.getAllClientes().forEach { clientes.add(it) }
+        return Ok(clientes)
+    }
+
 }

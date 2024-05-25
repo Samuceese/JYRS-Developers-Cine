@@ -1,32 +1,31 @@
 package productos.butaca.repositories
 
 
+import org.example.demo.config.Config
 import org.example.demo.database.SqlDelightManager
 import org.example.demo.productos.butaca.repositories.ButacaRepositoryImpl
 import org.example.demo.productos.models.Butaca
 import org.example.demo.productos.models.Estado
 import org.example.demo.productos.models.Ocupacion
 import org.example.demo.productos.models.Tipo
+import org.example.demo.usuarios.repositories.UserRepositoryImpl
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
-
+import org.lighthousegames.logging.logging
+private val logger = logging()
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class TestButacaRepository {
     private lateinit var dbManager : SqlDelightManager
     private lateinit var butacaRepository : ButacaRepositoryImpl
 
-    @BeforeAll
-    fun setUpAll() {
-        println("Iniciando tests...")
-        dbManager = SqlDelightManager
-        dbManager.initializeDb()
-        butacaRepository = ButacaRepositoryImpl()
+    @BeforeEach
+    fun setUpAll(){
+        println("Iniciando test...")
+        dbManager = SqlDelightManager(Config)
+        logger.debug { "inicializado" }
+        butacaRepository = ButacaRepositoryImpl(dbManager)
     }
 
-    @AfterAll
-    fun tearDown() {
-        dbManager.initializeDb()
-    }
     @Test
     fun findAll() {
         val butaca = butacaRepository.findAll()

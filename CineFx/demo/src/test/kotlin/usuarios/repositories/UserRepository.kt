@@ -1,5 +1,7 @@
 package usuarios.repositories
 
+import database.DatabaseQueries
+import org.example.demo.config.Config
 import org.example.demo.database.SqlDelightManager
 import org.example.demo.locale.encodeToBase64
 import org.example.demo.usuarios.models.Cliente
@@ -9,22 +11,42 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
+import org.junit.jupiter.api.extension.ExtendWith
 import org.lighthousegames.logging.logging
+import org.mockito.Mock
+import org.mockito.junit.jupiter.MockitoExtension
+import org.mockito.junit.jupiter.MockitoSettings
+import org.mockito.kotlin.whenever
+import org.mockito.quality.Strictness
 import kotlin.io.path.Path
 
 private val logger = logging()
+@ExtendWith(MockitoExtension::class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class UserRepositoryTest {
-
+    @Mock
+    lateinit var config: Config
     private lateinit var userRepository: UserRepositoryImpl
+    private lateinit var databaseQueries: DatabaseQueries
     private lateinit var dbManager: SqlDelightManager
 
     @BeforeEach
     fun setUpAll(){
+        whenever(config.databaseInit).thenReturn(true)
+        whenever(config.databaseRemoveData).thenReturn(true)
         println("Iniciando test...")
-        SqlDelightManager.initializeDb()
-        logger.debug { "inicializado" }
-        userRepository = UserRepositoryImpl()
+        dbManager = SqlDelightManager(Config)
+        databaseQueries = dbManager.databaseQueries
+        userRepository = UserRepositoryImpl(dbManager)
+    }
+
+    @Test
+    fun findAll(){
+        val cliente = Cliente(1, "NombreTest1", "ApellidoTest1", "P@ssw0rd!2021", "ejemplo1@gmail.com")
+        userRepository.save(cliente)
+        val result = userRepository.getAllClientes()
+        assertEquals(1, result.size)
     }
 
     @Test

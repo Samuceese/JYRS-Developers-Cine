@@ -89,7 +89,7 @@ fun validateEmail(email: String): Boolean{
  */
 
 fun validateContraseña(contraseña: String): Boolean{
-    val regex = Regex("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*?&]{12,}\$")
+    val regex = Regex("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[\$#@])\\S{12}\$")
     if(!contraseña.matches(regex)){
         return false
     }

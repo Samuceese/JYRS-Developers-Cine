@@ -48,7 +48,7 @@ class ButacaRepositoryImpl(
             db.insertarbutaca(
                 id = producto.id,
                 estado = producto.estado.toString(),
-                precio = producto.precio.toLong(),
+                precio = producto.precio,
                 tipo = producto.tipo.toString(),
                 ocupacion = producto.ocupacion.toString(),
                 createAt = producto.create.toShortSpanishFormat()
@@ -97,15 +97,16 @@ class ButacaRepositoryImpl(
 
     override fun update(id: String, butaca: Butaca,ocupacion: Ocupacion,precio:Double): Butaca? {
         logger.debug { "Actualizando butaca con id: $id" }
-        val result = this.findById(id) ?: return null
+        var result = this.findById(id) ?: return null
 
         db.updateButacaEntity(
             id = id,
             estado = butaca.estado.toString(),
             tipo = butaca.tipo.toString(),
             ocupacion = ocupacion.toString(),
-            precio = precio.toLong()
+            precio = precio
         )
+        result = this.findById(id)!!
         return result
     }
 

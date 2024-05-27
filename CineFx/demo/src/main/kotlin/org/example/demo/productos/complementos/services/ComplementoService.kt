@@ -13,5 +13,5 @@ interface ComplementoService {
     fun create(complemento: Complemento): Result<Complemento, ComplementoError>
     fun update(id: String, complemento: Complemento): Result<Complemento, ComplementoError>
     fun delete(id: String): Result<Complemento, ComplementoError>
-    fun import(csvFile: InputStream): Result<List<Complemento>, ComplementoError>
+    fun import(csvFile: File): Result<List<Complemento>, ComplementoError>
 }

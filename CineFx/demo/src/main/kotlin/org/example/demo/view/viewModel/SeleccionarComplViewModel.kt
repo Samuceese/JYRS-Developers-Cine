@@ -9,6 +9,7 @@ import org.example.demo.productos.models.Bebida
 import org.example.demo.productos.models.Comida
 import org.example.demo.productos.models.Complemento
 import org.example.demo.routes.RoutesManager
+import java.io.File
 import java.lang.Exception
 
 class SeleccionarComplViewModel(
@@ -18,7 +19,7 @@ class SeleccionarComplViewModel(
     val state: SimpleObjectProperty<ComplementoState> = SimpleObjectProperty(ComplementoState())
 
     init {
-        servicio.import(RoutesManager.getResourceAsStream("data/complemento.csv")).onSuccess {
+        servicio.import(File("data", "complemento.csv")).onSuccess {
             initState(it)
         }
     }

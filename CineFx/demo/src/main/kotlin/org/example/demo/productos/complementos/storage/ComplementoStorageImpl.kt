@@ -21,7 +21,7 @@ private val logger=logging()
  */
 
 class ComplementoStorageImpl:ComplementoStorage {
-    override fun load(file: InputStream): Result<List<Complemento>, ComplementoError> {
+    override fun load(file: File): Result<List<Complemento>, ComplementoError> {
         logger.debug { "Carganado complementos desde fichero Csv" }
         return try {
             Ok(file.reader().readLines().drop(1)

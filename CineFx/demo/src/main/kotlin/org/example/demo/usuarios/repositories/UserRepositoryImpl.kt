@@ -43,12 +43,16 @@ class UserRepositoryImpl(
      
     override fun cambioContraseña(email: String, contraseña: String): Usuario? {
         logger.debug { "cambiando contraseña en email: ${email}" }
-        findByEmail(email)?.let {
+        val user = findByEmail(email)?: return null
+         user.let {
             db.transaction {
-                db.updateContrasena(email, contraseña)
+                db.updateContrasena(
+                    email = email,
+                    contrasena = contraseña.encodeToBase64()
+                )
             }
         }
-        return findByEmail(email)
+        return findByEmail(user.email)
     }
 
     /**

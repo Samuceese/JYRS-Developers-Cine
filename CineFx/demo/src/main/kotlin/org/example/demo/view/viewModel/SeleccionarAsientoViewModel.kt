@@ -8,6 +8,7 @@ import org.example.demo.productos.models.Estado
 import org.example.demo.productos.models.Ocupacion
 import org.example.demo.productos.models.Tipo
 import org.example.demo.routes.RoutesManager
+import java.io.File
 
 import java.time.LocalDate
 
@@ -19,7 +20,7 @@ class SeleccionarAsientoViewModel(
     val state: SimpleObjectProperty<ButacasState> = SimpleObjectProperty(ButacasState())
 
     init {
-        service.import(RoutesManager.getResourceAsStream("data/butacas.csv")).onSuccess {
+        service.import(File("data", "butacas.csv")).onSuccess {
             initState(it)
         }
     }

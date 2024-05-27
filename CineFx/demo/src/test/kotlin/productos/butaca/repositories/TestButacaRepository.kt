@@ -8,7 +8,6 @@ import org.example.demo.productos.models.Butaca
 import org.example.demo.productos.models.Estado
 import org.example.demo.productos.models.Ocupacion
 import org.example.demo.productos.models.Tipo
-import org.example.demo.usuarios.repositories.UserRepositoryImpl
 import org.junit.jupiter.api.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.lighthousegames.logging.logging
@@ -74,18 +73,24 @@ class TestButacaRepository {
 
     @Test
     fun update() {
-        val butaca = butacaRepository.update(
+        val butaca = Butaca(
+            id = "A1",
+            tipo = Tipo.NORMAL,
+            estado = Estado.ACTIVA,
+        )
+        butacaRepository.save(butaca)
+        val butacaActualizada = Butaca(id = "A1",
+            tipo = Tipo.VIP,
+            estado = Estado.ACTIVA)
+
+        val result = butacaRepository.update(
             "A1",
-            Butaca(
-                id = "A1",
-                tipo = Tipo.NORMAL,
-                estado = Estado.ACTIVA,
-            ),Ocupacion.SELECCIONADA,7.0
+            butacaActualizada
+            ,Ocupacion.SELECCIONADA,5.0
         )
 
-        assertEquals("A1", butaca?.id)
-        assertEquals(Tipo.NORMAL, butaca?.tipo)
-        assertEquals(Estado.ACTIVA, butaca?.estado)
+        assertEquals("A1", result?.id)
+        assertEquals(Tipo.VIP, result?.tipo)
     }
 
     @Test

@@ -31,17 +31,16 @@ private val logger=logging()
 class ButacaStorageImpl(
     private val validator : ButacaValidator
 ):ButacaStorage {
-    override fun save(fecha: String, list: List<Butaca>): Result<Unit, ButacaError> {
-        if (!validator.validarFecha(fecha)) Err(ButacaError.FechaInvalido("La fecha introducida no es valida. Formato AAAA/MM/DD"))
+    override fun save(file: File, list: List<Butaca>): Result<Long, ButacaError> {
         logger.debug { "Guardando butacas en fichero json" }
-        Files.createDirectories(Path("data"))
-        val file = Path("data", "butacas-$fecha.json").toFile()
         return try {
             val json = Json {
                 prettyPrint = true
                 ignoreUnknownKeys = true
             }
-            Ok(file.writeText(json.encodeToString<List<ButacaDto>>(list.map { it.toButacaDto() })))
+            val jsonString = json.encodeToString<List<ButacaDto>>(list.map { it.toButacaDto() })
+            file.writeText(jsonString)
+            Ok(list.size.toLong())
         }catch (e: Exception){
             logger.error { "Error al guardar el fichero json de butacas" }
             Err(ButacaError.FicheroNoValido("Error al guardar el fichero json"))
@@ -55,9 +54,8 @@ class ButacaStorageImpl(
      * @since 1.0
      */
 
-    override fun load(file: InputStream): Result<List<Butaca>, ButacaError> {
+    override fun load(file: File): Result<List<Butaca>, ButacaError> {
         logger.debug { "Carganado butacas desde fichero Csv" }
-
         return try {
             Ok(file.reader().readLines().drop(1)
                 .map {

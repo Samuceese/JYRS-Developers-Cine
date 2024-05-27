@@ -68,6 +68,19 @@ class UserRepositoryTest {
         assertEquals("ApellidoTest2", cliente?.apellidos)
     }
 
+    @Test
+    fun findByIdNotFound(){
+        val cliente = Cliente( id = 39,
+            nombre = "PElelepeleple",
+            apellidos = "adnajdbasjbdasjhbd",
+            contraseña = "P@ssw0rd!2021",
+            email = "ejemplo.usuario2@example.com"
+        )
+        val result = userRepository.findById(33)
+        assertEquals(null, result)
+
+    }
+
 
     @Test
     fun save(){
@@ -96,9 +109,21 @@ class UserRepositoryTest {
                 email = "ejemplo.usuario4@example.com"
             )
         )
-
         val cliente = userRepository.findByEmail("ejemplo.usuario4@example.com")
         assertEquals("ejemplo.usuario4@example.com", cliente?.email)
+    }
+
+    @Test
+    fun findByEmailNotFound(){
+        val cliente = Cliente( id = 39,
+            nombre = "PElelepeleple",
+            apellidos = "adnajdbasjbdasjhbd",
+            contraseña = "P@ssw0rd!2021",
+            email = "lolololoManolololo@gmail.com"
+        )
+        val result = userRepository.findByEmail(cliente.email)
+        assertEquals(null, result)
+
     }
 
     @Test
@@ -107,14 +132,26 @@ class UserRepositoryTest {
                 id = 5,
                 nombre = "NombreTest5",
                 apellidos = "ApellidoTest5",
-                contraseña = "P@ssw0rd!2021",
+                contraseña = "0rd!2021po09",
                 email = "ejemplo.usuario5@example.com"
         )
         userRepository.save(cliente)
-        val nuevaContra = "P@ssw0rd!2021NUEVA"
-        val result = userRepository.cambioContraseña(cliente.email, nuevaContra)
+        val nuevaContra = "0rd!202NUEVA"
+        val operation = userRepository.cambioContraseña(cliente.email, nuevaContra)
+        val result = userRepository.findByEmail(cliente.email)
+        assertEquals(nuevaContra.encodeToBase64(), result?.contraseña)
+    }
 
-        assertEquals(result?.contraseña, cliente.contraseña.encodeToBase64())
+    @Test
+    fun cambioContraseñaFail(){
+        val cliente = Cliente( id = 39,
+            nombre = "PElelepeleple",
+            apellidos = "adnajdbasjbdasjhbd",
+            contraseña = "P@ssw0rd!2021",
+            email = "lolololoManolololo@gmail.com"
+        )
+        val result = userRepository.cambioContraseña(cliente.email, "P@ssw0rd!2022")
+        assertEquals(null, result)
     }
 
 }

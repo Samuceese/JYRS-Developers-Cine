@@ -7,5 +7,5 @@ import java.io.File
 import java.io.InputStream
 
 interface ComplementoStorage {
-    fun load(file: InputStream): Result<List<Complemento>, ComplementoError>
+    fun load(file: File): Result<List<Complemento>, ComplementoError>
 }

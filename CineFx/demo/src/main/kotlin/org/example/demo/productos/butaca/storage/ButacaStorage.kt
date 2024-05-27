@@ -7,6 +7,6 @@ import java.io.File
 import java.io.InputStream
 
 interface ButacaStorage {
-    fun save(fecha:String,list: List<Butaca>): Result<Unit, ButacaError>
-    fun load(file: InputStream): Result<List<Butaca>, ButacaError>
+    fun save(file: File,list: List<Butaca>): Result<Long, ButacaError>
+    fun load(file: File): Result<List<Butaca>, ButacaError>
 }

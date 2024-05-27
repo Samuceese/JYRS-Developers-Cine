@@ -77,7 +77,7 @@ class TestVentaRepository {
             estado = Estado.ACTIVA,
             tipo = Tipo.NORMAL,
         )
-        dbManager.databaseQueries.insertarbutaca(butaca.id,butaca.estado.toString(),butaca.tipo.toString(),butaca.ocupacion.toString(),butaca.precio.toLong(),butaca.create.toShortSpanishFormat())
+        dbManager.databaseQueries.insertarbutaca(butaca.id,butaca.estado.toString(),butaca.tipo.toString(),butaca.ocupacion.toString(),butaca.precio,butaca.create.toShortSpanishFormat())
         lineaVenta1 = LineaVenta(
             producto = butaca,
             cantidad = 1,

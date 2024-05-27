@@ -16,6 +16,6 @@ interface ButacaService {
     fun create(butaca: Butaca): Result<Butaca, ButacaError>
     fun update(id: String, butaca: Butaca, ocupacion: Ocupacion, precio:Double): Result<Butaca, ButacaError>
     fun deleteAll()
-    fun import(csvFile: InputStream): Result<List<Butaca>, ButacaError>
-    fun export(fecha:String,list: List<Butaca>): Result<Unit, ButacaError>
+    fun import(csvFile: File): Result<List<Butaca>, ButacaError>
+    fun export(fecha:String,list: List<Butaca>): Result<Long, ButacaError>
 }

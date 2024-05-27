@@ -11,6 +11,7 @@ import org.example.demo.productos.models.Ocupacion
 import org.lighthousegames.logging.logging
 import java.io.File
 import java.io.InputStream
+import kotlin.io.path.Path
 
 private val logger=logging()
 
@@ -152,7 +153,7 @@ class ButacaServiceImpl(
      * @since 1.0
      */
 
-    override fun import(csvFile: InputStream): Result<List<Butaca>, ButacaError> {
+    override fun import(csvFile: File): Result<List<Butaca>, ButacaError> {
         logger.debug { "Cargando butacas desde CSV" }
         return storage.load(csvFile).andThen { butacas->
             butacas.forEach{ p->
@@ -170,9 +171,9 @@ class ButacaServiceImpl(
      * @since 1.0
      */
 
-    override fun export(fecha:String,list: List<Butaca>): Result<Unit, ButacaError> {
+    override fun export(fecha:String,list: List<Butaca>): Result<Long, ButacaError> {
         logger.debug { "Guardando personajes en JSON" }
-        return storage.save(fecha,list)
+        return storage.save(Path("alalal").toFile(),list)
     }
 
 }

@@ -34,7 +34,9 @@ selectClienteLastInserted:
 SELECT * FROM UsuariosEntity WHERE id = last_insert_rowid();
 
 updateContrasena:
-UPDATE UsuariosEntity SET contrasena = ? WHERE email = ?;
+UPDATE UsuariosEntity
+SET contrasena = ?
+WHERE email = ?;
 
 --ButacaEntity
 CREATE TABLE IF NOT EXISTS ButacaEntity(
@@ -42,7 +44,7 @@ CREATE TABLE IF NOT EXISTS ButacaEntity(
     estado TEXT NOT NULL,
     tipo TEXT NOT NULL,
     ocupacion TEXT NOT NULL ,
-    precio INTEGER NOT NULL,
+    precio REAL NOT NULL,
     createAt TEXT NOT NULL
 );
 -- Crud ButacaEntity

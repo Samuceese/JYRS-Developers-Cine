@@ -52,6 +52,7 @@ class SeleccionarComplViewController :KoinComponent{
     lateinit var filtroPrecio:ComboBox<String>
 
     private var complemmentosSeleccionas:MutableList<Complemento> = mutableListOf()
+    private var complemennto:Complemento?=null
 
     @FXML
     fun initialize(){
@@ -68,6 +69,7 @@ class SeleccionarComplViewController :KoinComponent{
         precioColumna.cellValueFactory = PropertyValueFactory("precio")
 
         filtroPrecio.items = FXCollections.observableList(viewCompl.state.value.precios)
+        filtroPrecio.value ="All"
     }
 
     private fun initReactiveProperties() {
@@ -77,6 +79,7 @@ class SeleccionarComplViewController :KoinComponent{
             precioTextfield.text=newValue.precio
             imagenComplemento.image = newValue.imagen
             complemmentosSeleccionas=newValue.complementosSeleccionados
+            complemennto=newValue.complemento
         }
     }
 
@@ -92,20 +95,11 @@ class SeleccionarComplViewController :KoinComponent{
         filtroNombre.setOnKeyReleased {
             it?.let { onTextAction() }
         }
-        añadirComplementoButton.setOnAction { añadirOnAction() }
+        añadirComplementoButton.setOnAction { añadirOnAction(complemennto!!) }
         
     }
 
-    private fun añadirOnAction() {
-        var complememnto:Complemento=Bebida("NOVALIDO",CategoriaBebida.AGUA)
-            when(nombreTextfield.text){
-                "AGUA"->complememnto=Bebida(nombreTextfield.text,CategoriaBebida.AGUA)
-                "REFRESCO"->complememnto=Bebida(nombreTextfield.text,CategoriaBebida.REFRESCOS)
-                "FRUTOS SECOS"->complememnto=Comida(nombreTextfield.text,CategoriaComida.FRUTOSSECOS)
-                "PATATAS"->complememnto=Comida(nombreTextfield.text,CategoriaComida.PATATAS)
-                "PALOMITAS"->complememnto=Comida(nombreTextfield.text,CategoriaComida.PALOMITAS)
-            }
-
+    private fun añadirOnAction(complememnto:Complemento) {
         añadirComplemmento(complememnto)
     }
 

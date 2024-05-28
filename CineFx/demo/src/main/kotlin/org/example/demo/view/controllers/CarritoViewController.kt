@@ -76,6 +76,7 @@ class CarritoViewController:KoinComponent {
     }
 
     private fun initDefaultValues() {
+        logger.debug { "inicializando valores por defecto" }
         butacas= viewBut.state.value.butacasSeleccionadas
         complemetos = viewComp.state.value.complementosSeleccionados
         view.asignarProductos(butacas,complemetos)
@@ -217,6 +218,7 @@ class CarritoViewController:KoinComponent {
     }
 
     private fun totalDinero(listaTotal: MutableList<Producto>): Double {
+        logger.debug { "calculando total del Carrito" }
         return listaTotal.map {
             when(it){
                 is Butaca->it.precio
@@ -237,15 +239,18 @@ class CarritoViewController:KoinComponent {
     }
 
     private fun initDefaultEvents() {
+        logger.debug { "inicializando eventos por defecto carrito" }
         botonVolver.setOnAction { volverOnAction() }
         botonContinuar.setOnAction { continuarOnAction() }
     }
 
     private fun continuarOnAction() {
+        logger.debug { "boton continuar Pulsado carrito" }
         RoutesManager.changeScene(view = RoutesManager.View.PAGO, title = "Pagar")
     }
 
     private fun volverOnAction() {
+        logger.debug { "boton volver Pulsado carrito" }
         RoutesManager.changeScene(view = RoutesManager.View.SELECCOMPL, title = "Seleccionar Complemento")
     }
 

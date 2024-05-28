@@ -118,14 +118,14 @@ class ComplementoServiceImpl(
             }
             ?: Err(ComplementoError.ComplementoNoEncontrado("El complemento no a sido eliminada $id"))
     }
-
-    override fun import(csvFile: InputStream): Result<List<Complemento>, ComplementoError> {
     /**
      * Cargamos complementos desde un csv utilizando el storage guardando cada complemento en el repositorio.
      * @return Devuelve un resultado que contiene la lista de complementos y si falla devuelve un error correspondiente.
      * @author Yahya El Hadri, Raúl Fernández, Javier Hernández, Samuel Cortés
      * @since 1.0
      */
+    override fun import(csvFile: File): Result<List<Complemento>, ComplementoError> {
+
 
         logger.debug { "Cargando complemento desde CSV" }
         return storage.load(csvFile).andThen { personajes->

@@ -18,12 +18,12 @@
                     <children>
                         <AnchorPane prefHeight="72.0" prefWidth="701.0">
                             <children>
-                                <Label layoutX="238.0" layoutY="3.0" text="DETALLES DE TU COMPRA" textFill="WHITE">
+                                <Label layoutX="230.0" layoutY="3.0" text="DETALLES DE TU COMPRA" textFill="WHITE">
                                     <font>
                                         <Font name="Arial Rounded MT Bold" size="18.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="279.0" layoutY="21.0" text="---------------------------------" textFill="WHITE" />
+                                <Label layoutX="271.0" layoutY="21.0" text="---------------------------------" textFill="WHITE" />
                                 <ImageView fx:id="imagenMenu" fitHeight="40.0" fitWidth="40.0" layoutX="18.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@../images/menu.png" />
@@ -44,14 +44,14 @@
                                                 <Font name="Arial Rounded MT Bold" size="18.0" />
                                             </font>
                                         </Label>
-                                        <Label layoutX="26.0" layoutY="29.0" text="Nombre:" textFill="WHITE" AnchorPane.leftAnchor="35.0">
+                                        <Label layoutX="35.0" layoutY="31.0" text="Nombre:" textFill="WHITE" AnchorPane.leftAnchor="35.0">
                                             <font>
-                                                <Font name="Cambria Math" size="12.0" />
+                                                <Font name="Cambria Math" size="14.0" />
                                             </font>
                                         </Label>
-                                        <Label layoutX="31.0" layoutY="49.0" text="Correo electrónico:" textFill="WHITE" AnchorPane.leftAnchor="35.0">
+                                        <Label layoutX="35.0" layoutY="55.0" text="Correo electrónico:" textFill="WHITE" AnchorPane.leftAnchor="35.0">
                                             <font>
-                                                <Font name="Cambria Math" size="12.0" />
+                                                <Font name="Cambria Math" size="14.0" />
                                             </font>
                                         </Label>
                                         <Label fx:id="nombreLabel" layoutX="112.0" layoutY="28.0" />
@@ -75,7 +75,7 @@
                                         </Label>
                                         <Label layoutX="22.0" layoutY="35.0" text="Titulo:" textFill="WHITE" AnchorPane.leftAnchor="35.0">
                                             <font>
-                                                <Font name="Cambria Math" size="12.0" />
+                                                <Font name="Cambria Math" size="14.0" />
                                             </font>
                                         </Label>
                                         <Label fx:id="tituloLabel" layoutX="88.0" layoutY="34.0" />

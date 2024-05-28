@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.view.controllers.GestionComplViewController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.view.controllers.GestionComplViewController">
     <children>
         <AnchorPane prefHeight="500.0" prefWidth="700.0">
             <children>
@@ -89,12 +98,10 @@
                                 </VBox>
                                 <VBox layoutX="36.0" layoutY="118.0" prefHeight="330.0" prefWidth="310.0" style="-fx-background-color: cfcfcf;" AnchorPane.bottomAnchor="51.200000000000045" AnchorPane.leftAnchor="36.0" AnchorPane.topAnchor="118.0" />
                                 <TextField fx:id="filtroNombre" layoutX="43.0" layoutY="124.0" prefHeight="26.0" prefWidth="100.0" promptText="Nombre" />
-                                <ComboBox fx:id="filtroTipo" layoutX="143.0" layoutY="124.0" prefHeight="26.0" prefWidth="100.0" promptText="Tipo" />
                                 <TableView fx:id="tablaComplementos" layoutX="41.0" layoutY="166.0" prefHeight="276.0" prefWidth="298.0">
                                     <columns>
-                                        <TableColumn fx:id="nombreColumna" minWidth="100.0" prefWidth="75.0" text="Nombre" />
-                                        <TableColumn fx:id="tipoColumna" minWidth="100.0" prefWidth="75.0" text="Tipo" />
-                                        <TableColumn fx:id="precioColumna" minWidth="100.0" prefWidth="75.0" text="Precio" />
+                                        <TableColumn fx:id="nombreColumna" minWidth="100.0" prefWidth="141.60003662109375" text="Nombre" />
+                                        <TableColumn fx:id="precioColumna" minWidth="100.0" prefWidth="156.79998779296875" text="Precio" />
                                     </columns>
                                 </TableView>
                                 <ComboBox fx:id="filtroPrecio" layoutX="258.0" layoutY="124.0" prefHeight="26.0" prefWidth="80.0" promptText="Precio" />

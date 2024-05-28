@@ -16,8 +16,10 @@ private val logger=logging()
  * @author Javier Hernández, Yahya El Hadri, Samuel Cortés, Raúl Fernández
  */
 
-class ButacaRepositoryImpl:ButacaRepository {
-    private val db  = SqlDelightManager.databaseQueries
+class ButacaRepositoryImpl(
+    private val dbManager: SqlDelightManager
+):ButacaRepository{
+    private val db  = dbManager.databaseQueries
 
     /**
      * Obtenemos todas las butacas almacenadas en la base de datos.
@@ -46,7 +48,7 @@ class ButacaRepositoryImpl:ButacaRepository {
             db.insertarbutaca(
                 id = producto.id,
                 estado = producto.estado.toString(),
-                precio = producto.precio.toLong(),
+                precio = producto.precio,
                 tipo = producto.tipo.toString(),
                 ocupacion = producto.ocupacion.toString(),
                 createAt = producto.create.toShortSpanishFormat()
@@ -95,16 +97,19 @@ class ButacaRepositoryImpl:ButacaRepository {
 
     override fun update(id: String, butaca: Butaca,ocupacion: Ocupacion,precio:Double): Butaca? {
         logger.debug { "Actualizando butaca con id: $id" }
-        val result = this.findById(id) ?: return null
+        var result = this.findById(id) ?: return null
 
         db.updateButacaEntity(
             id = id,
             estado = butaca.estado.toString(),
             tipo = butaca.tipo.toString(),
             ocupacion = ocupacion.toString(),
-            precio = precio.toLong()
+            precio = precio
         )
-        logger.debug { "ActualizaDA butaca con id: $id" }
+
+        logger.debug { "Actualizada butaca con id: $id" }
+        println("ActualizaDA butaca con id: $id")
+        result = this.findById(id)!!
         return result
     }
 
@@ -145,6 +150,7 @@ class ButacaRepositoryImpl:ButacaRepository {
      */
      
     override fun deleteAll() {
+        logger.debug { "Borrando todas las butacas" }
         db.deleteAllButacaEntity()
     }
 }

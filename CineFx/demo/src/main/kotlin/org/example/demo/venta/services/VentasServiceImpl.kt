@@ -7,7 +7,6 @@ import org.example.demo.productos.models.Butaca
 import org.example.demo.productos.models.Complemento
 import org.example.demo.usuarios.models7.Usuario
 import org.example.demo.usuarios.validator.validateUser
-import org.example.demo.usuarios.repositories.UserRepository
 import org.example.demo.venta.errors.VentaError
 import org.example.demo.venta.models.LineaVenta
 import org.example.demo.venta.models.Venta
@@ -65,16 +64,14 @@ class VentasServiceImpl(
         return Ok(lineas)
     }
 
-    //TODO borrar
-    private fun validateCliente(cliente: Usuario): Result<Usuario, VentaError> {
+    fun validateCliente(cliente: Usuario): Result<Usuario, VentaError> {
         logger.debug { "Validando cliente: $cliente" }
-       return validateUser(cliente).mapBoth(
-            failure = {
-                println(it.message)
-                Err(VentaError.VentaNoValida("El cliente no se ha podido validar"))
-            },
+        return validateUser(cliente).mapBoth(
             success = {
                 Ok(it)
+            },
+            failure ={
+                Err(VentaError.VentaNoValida("No se ha podido validar la "))
             }
         )
     }

@@ -1,6 +1,7 @@
 package org.example.demo.productos.butaca.dto
 
 import kotlinx.serialization.Serializable
+import org.example.demo.productos.dto.ProductoDto
 
 /**
  * Clase Dto de butaca.
@@ -22,4 +23,4 @@ class ButacaDto(
     val precio:String,
     var ocupacion: String,
     var createAt: String,
-)
+):ProductoDto()

@@ -9,4 +9,5 @@ interface UserService {
     fun cambioContraseña(email: String, contraseña: String): Result<Usuario, UserError>
     fun findByEmail(email: String): Result<Usuario, UserError>
     fun findById(id: Long): Result<Usuario, UserError>
+    fun findAll(): Result<List<Usuario>, UserError>
 }

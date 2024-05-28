@@ -50,8 +50,9 @@ class RegistroViewController:KoinComponent {
                 nombre = nombreRegister1.text,
                 apellidos = apellidos.text,
                 email = emailRegister.text,
-                contraseña = contraseñaRegister.text
-            )
+                contraseña = contraseñaRegister.text)
+            &&
+            contraseñaConfirmarRegister.text == contraseñaRegister.text
         ){
             println("dando alta")
             view.darAltaCliente(

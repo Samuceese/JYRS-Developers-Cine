@@ -12,4 +12,5 @@ sealed class ButacaError(val mensage:String) {
     class ButacaNoEncontrada(mensage: String):ButacaError(mensage)
     class ButacaNoBorradas(mensage: String):ButacaError(mensage)
     class ButacaNoActualizadas(mensage: String):ButacaError(mensage)
+    class StorageError(mensage: String):ButacaError(mensage)
 }

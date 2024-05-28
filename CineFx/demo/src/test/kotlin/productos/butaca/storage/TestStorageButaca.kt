@@ -1,6 +1,6 @@
 package productos.butaca.storage
 
-import org.example.demo.productos.butaca.storage.ButacaStorageImpl
+import org.example.demo.productos.butaca.storage.ButacaStorageJsonImpl
 import org.example.demo.productos.butaca.validator.ButacaValidator
 import org.example.demo.productos.models.Butaca
 import org.example.demo.productos.models.Estado
@@ -22,7 +22,7 @@ class TestStorageButaca {
     private lateinit var mockButacaValidator: ButacaValidator
 
     @InjectMocks
-    private lateinit var storage: ButacaStorageImpl
+    private lateinit var storage: ButacaStorageJsonImpl
 
     private var myFile: InputStream = Files.newInputStream(Path.of("C:\\Users\\anasm\\proyecto final\\JYRS-Developers-Cine\\CineFx\\demo\\src\\test\\resources\\data\\csv-test.csv"))
 
@@ -31,7 +31,7 @@ class TestStorageButaca {
 
         val butacas= listOf(Butaca("A1", Estado.ACTIVA, Tipo.NORMAL))
 
-        val result = storage.load(myFile)
+        val result = storage.loadCsv(myFile)
 
         assertTrue(result.isOk)
         assertEquals(butacas.toList().size,result.value.size)

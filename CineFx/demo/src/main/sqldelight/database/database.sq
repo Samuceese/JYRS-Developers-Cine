@@ -88,7 +88,7 @@ getComplementoByTipo:
 SELECT * FROM ComplementoEntity WHERE tipo=?;
 
 updateComplementoEntity:
-UPDATE ComplementoEntity SET id=?, nombre=?, precio=?, tipo=?;
+UPDATE ComplementoEntity SET  nombre=?, precio=?, tipo=? WHERE id=?;
 
 deleteAllComplemetoEntity:
 DELETE FROM ComplementoEntity;

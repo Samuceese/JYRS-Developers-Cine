@@ -23,7 +23,7 @@ import org.lighthousegames.logging.logging
 private val logger= logging()
 class DetallesCompraViewController: KoinComponent {
 
-
+    val viewLogin:LoginViewModel by inject()
     val viewPago: PagoViewModel by inject()
     val view: DetallesCompraViewModel by inject()
 
@@ -57,6 +57,7 @@ class DetallesCompraViewController: KoinComponent {
     }
 
     private fun initDefaultValues() {
+        logger.debug { "inicializando valores por defecto Detalles de compra" }
 
         nombreLabel.text = viewPago.state.value.venta.cliente.nombre
         correoLabel.text = viewPago.state.value.venta.cliente.email
@@ -69,10 +70,7 @@ class DetallesCompraViewController: KoinComponent {
             when(it.producto){
                 is Butaca->butacas.add("Butaca ${it.producto.id}-${it.producto.precio.toDefaultMoneyString()}")
                 is Complemento->{
-                    when(it.producto){
-                        is Comida->complementos.add("Comida ${it.producto.nombre}-${it.producto.precio.toDefaultMoneyString()}")
-                        is Bebida ->complementos.add("Bebida ${it.producto.nombre}-${it.producto.precio.toDefaultMoneyString()}")
-                    }
+                    complementos.add("Complemento ${it.producto.id}-${it.producto.precio.toDefaultMoneyString()}")
                 }
             }
         }
@@ -85,6 +83,7 @@ class DetallesCompraViewController: KoinComponent {
     }
 
     private fun initDefaultEvents() {
+        logger.debug { "inicializando eventos por defecto Detalles de compra" }
         imagenMenu.setOnMouseClicked { menuOnAction() }
         fxBotonSeleccionarPelicula.setOnAction { menuOnAction() }
         fxBotonCerrarSesion.setOnAction { cerrarSesionOnAction() }
@@ -92,14 +91,18 @@ class DetallesCompraViewController: KoinComponent {
     }
 
     private fun pdfOnAction() {
+        logger.debug { "creando pdf Detalles de compra" }
         view.guardarPdf(viewPago.state.value.venta,viewPago.state.value.pelicula)
     }
 
     private fun cerrarSesionOnAction() {
+        logger.debug { "cerrando sesion Detalles de compra" }
+        viewLogin.state.value = viewLogin.state.value.copy( usuario = null )
         RoutesManager.changeScene(view = RoutesManager.View.INICIO_SESION, title = "Inicio De Sesion")
     }
 
     private fun menuOnAction() {
+        logger.debug { "cambiando a seleccionar pelicula desde Detalles de compra" }
         RoutesManager.changeScene(view = RoutesManager.View.SELECPELICULAS, title = "Seleccionar Pelicula")
     }
 

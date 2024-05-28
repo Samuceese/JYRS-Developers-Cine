@@ -8,5 +8,7 @@ package org.example.demo.productos.models
  */
 
 abstract class Complemento(
-    val id:String
+    val id:String,
+    val tipo: String,
+    val precio:Double
 ):Producto()

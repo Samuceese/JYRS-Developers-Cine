@@ -10,7 +10,6 @@ import org.example.demo.productos.models.Butaca
 import org.example.demo.productos.models.Ocupacion
 import org.lighthousegames.logging.logging
 import java.io.File
-import java.io.InputStream
 
 private val logger=logging()
 
@@ -126,7 +125,7 @@ class ButacaServiceImpl(
     override fun update(id: String, butaca: Butaca, ocupacion: Ocupacion, precio:Double): Result<Butaca, ButacaError> {
         logger.debug { "Actualizando butaca con id: $id" }
         return validador.validarButaca(butaca).andThen {  b ->
-            repository.update(b.id, b,ocupacion,precio)
+            repository.update(id, b,ocupacion,precio)
                 ?.let { Ok(it) }
                 ?: Err(ButacaError.ButacaNoActualizadas("No se ha podido actualizar la butaca: $id"))
         }.andThen {
@@ -141,6 +140,7 @@ class ButacaServiceImpl(
      */
      
     override fun deleteAll() {
+        logger.debug { "Borrando todas las butacas" }
         repository.deleteAll()
     }
 
@@ -152,14 +152,26 @@ class ButacaServiceImpl(
      * @since 1.0
      */
 
-    override fun import(csvFile: InputStream): Result<List<Butaca>, ButacaError> {
+    override fun importCsv(csvFile: File): Result<List<Butaca>, ButacaError> {
         logger.debug { "Cargando butacas desde CSV" }
-        return storage.load(csvFile).andThen { butacas->
+        return storage.loadCsv(csvFile).andThen { butacas->
             butacas.forEach{ p->
                 repository.save(p)
             }
             Ok(butacas)
         }
+    }
+    /**
+     * Exportamos una lista de butacas a un archivo utilizando CSV.
+     * @param fecha
+     * @return Devuelve el resultado encapsulado en un objeto (result).
+     * @author Yahya El Hadri, Raúl Fernández, Javier Hernández, Samuel Cortés
+     * @since 1.0
+     */
+
+    override fun exportCsv(fecha:String, list: List<Butaca>): Result<Unit, ButacaError> {
+        logger.debug { "Guardando personajes en JSON" }
+        return storage.saveCsv(fecha,list)
     }
 
     /**
@@ -170,9 +182,30 @@ class ButacaServiceImpl(
      * @since 1.0
      */
 
-    override fun export(fecha:String,list: List<Butaca>): Result<Unit, ButacaError> {
+    override fun exportJson(fecha:String, list: List<Butaca>): Result<Unit, ButacaError> {
         logger.debug { "Guardando personajes en JSON" }
-        return storage.save(fecha,list)
+        return storage.saveJson(fecha,list)
     }
+
+    /**
+     * Importamos datos de un archivo JSON para crear butacas en el sistema.
+     * @param jsonFile
+     * @return Devuelve el resultado encapsulado en un objeto (result).
+     * @author Yahya El Hadri, Raúl Fernández, Javier Hernández, Samuel Cortés
+     * @since 1.0
+     */
+
+    override fun importJson(jsonFile: File): Result<List<Butaca>, ButacaError> {
+        logger.debug { "Cargando butacas desde JSON" }
+        return storage.loadJson(jsonFile).andThen { butacas->
+            butacas.forEach{ p->
+                repository.save(p)
+            }
+            Ok(butacas)
+        }
+    }
+
+
+
 
 }

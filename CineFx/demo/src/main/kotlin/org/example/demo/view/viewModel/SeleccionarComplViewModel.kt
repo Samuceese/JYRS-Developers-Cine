@@ -9,6 +9,7 @@ import org.example.demo.productos.models.Bebida
 import org.example.demo.productos.models.Comida
 import org.example.demo.productos.models.Complemento
 import org.example.demo.routes.RoutesManager
+import java.io.File
 import java.lang.Exception
 
 class SeleccionarComplViewModel(
@@ -18,8 +19,12 @@ class SeleccionarComplViewModel(
     val state: SimpleObjectProperty<ComplementoState> = SimpleObjectProperty(ComplementoState())
 
     init {
-        servicio.import(RoutesManager.getResourceAsStream("data/complemento.csv")).onSuccess {
-            initState(it)
+        if (servicio.getAll().value.isEmpty()){
+            servicio.import(File("data","complemento.csv")).onSuccess {
+                initState(it)
+            }
+        }else{
+            initState(servicio.getAll().value)
         }
     }
     fun updateState(complemento: Complemento){
@@ -42,7 +47,8 @@ class SeleccionarComplViewModel(
                 "AGUA"->Image(RoutesManager.getResourceAsStream("images/agua.png"))
                 "REFRESCO"->Image(RoutesManager.getResourceAsStream("images/refresco.png"))
                 else -> Image(RoutesManager.getResourceAsStream("images/interrogacion.png"))
-            }
+            },
+            complemento = complemento
 
         )
     }
@@ -52,11 +58,7 @@ class SeleccionarComplViewModel(
         return state.value.complementos
             .asSequence()
             .filter {
-                when(it){
-                    is Bebida->it.nombre.toString().contains(nombre)
-                    is Comida->it.nombre.toString().contains(nombre)
-                    else -> it.id.contains(nombre)
-                }
+               it.id.contains(nombre)
             }.filter {
                 if (precio=="All") true else{
                     when(it){
@@ -65,10 +67,8 @@ class SeleccionarComplViewModel(
                         else -> it.id.contains(nombre)
                     }
                 }
+            }.toList()
 
-            }
-
-            .toList()
     }
 
 
@@ -112,6 +112,7 @@ class SeleccionarComplViewModel(
         val complementos:List<Complemento> = listOf(),
         val tipos:List<String> = listOf(),
         val precios:List<String> = listOf(),
-        val complementosSeleccionados : MutableList<Complemento> = mutableListOf()
+        val complementosSeleccionados : MutableList<Complemento> = mutableListOf(),
+        val complemento:Complemento?=null
     )
 }

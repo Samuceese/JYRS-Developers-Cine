@@ -30,7 +30,7 @@ class UserServiceImpl(
         logger.debug { "Guardando Usuario: $user" }
        return validateUser(user).mapBoth(
            success = {
-               Ok(it).also { repository.save(user) }.also { cacheUsuario.put(user.id, user) }
+               Ok(repository.save(it).also { cacheUsuario.put(user.id, user) })
            },
            failure = {
                Err(UserError.ValidateProblem("No se ha podido guardar debido a un error de valdiación"))

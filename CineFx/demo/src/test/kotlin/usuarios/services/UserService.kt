@@ -60,7 +60,7 @@ class UserService {
 
     @Test
     fun saveOk(){
-        val cliente = Cliente(id = -1L, "Manolo", "Lama", "u3QY%Xj46k*O", "manololama@gmail.com")
+        val cliente = Cliente(id = -1L, "Manolo", "Lama", "123456789Aa@", "manololama@gmail.com")
         whenever(repository.save(cliente)).thenReturn(cliente)
         val result = serviceImpl.save(cliente)
         assertAll(

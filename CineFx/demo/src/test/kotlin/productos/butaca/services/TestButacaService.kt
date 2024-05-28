@@ -21,6 +21,8 @@ import org.mockito.Mockito
 import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
 import org.mockito.junit.jupiter.MockitoExtension
+import org.mockito.kotlin.whenever
+import java.io.File
 import java.io.InputStream
 import java.nio.file.Files
 import java.nio.file.Path
@@ -141,9 +143,9 @@ class TestButacaService {
     @Test
     fun export(){
         val lista = listOf(Butaca("A1", Estado.ACTIVA, Tipo.NORMAL))
-        var myFile: InputStream = Files.newInputStream(Path.of("C:\\Users\\anasm\\proyecto final\\JYRS-Developers-Cine\\CineFx\\demo\\src\\test\\resources\\data\\csv-test.csv"))
+        val myFile = File("data", "butacas.csv")
 
-        Mockito.`when`(storage.loadCsv(myFile)).thenReturn(Ok(lista))
+        whenever(storage.load(myFile)).thenReturn(Ok(lista))
 
         val result = storage.loadCsv(myFile)
 

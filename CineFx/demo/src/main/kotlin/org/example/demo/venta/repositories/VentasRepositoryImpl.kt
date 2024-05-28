@@ -17,6 +17,7 @@ import java.util.*
 
 private val logger = logging()
 class VentasRepositoryImpl(
+    private val dbManager: SqlDelightManager,
     private val clienteRepository: UserRepository,
     private val butacasRepository: ButacaRepository,
     private val complementosRepository: ComplementoRepository,

@@ -29,7 +29,6 @@ object Config {
     val databaseRemoveData: Boolean by lazy {
         readProperty("database.removedata")?.toBoolean() ?: false
     }
-
     val databaseInMemory: Boolean by lazy {
         readProperty("database.inmemory")?.toBoolean() ?: false
     }

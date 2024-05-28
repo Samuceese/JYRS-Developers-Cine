@@ -3,6 +3,7 @@ package org.example.demo.usuarios.repositories
 import org.example.demo.database.SqlDelightManager
 import org.example.demo.locale.encodeToBase64
 import org.example.demo.usuarios.mappers.toUsuario
+import org.example.demo.usuarios.models.Cliente
 import org.example.demo.usuarios.models7.Usuario
 import org.lighthousegames.logging.logging
 
@@ -23,7 +24,6 @@ class UserRepositoryImpl(
         logger.debug { "save: $user" }
         db.transaction {
             db.insertUser(
-                id = user.id,
                 email = user.email,
                 nombre = user.nombre,
                 apellidos = user.apellidos,
@@ -43,11 +43,17 @@ class UserRepositoryImpl(
      */
      
     override fun cambioContraseña(email: String, contraseña: String): Usuario? {
-        logger.debug { "cambiando contraseña en email: $email" }
-        findByEmail(email)?.let {
-            it.contraseña = contraseña
+        logger.debug { "cambiando contraseña en email: ${email}" }
+        val user = findByEmail(email)?: return null
+         user.let {
+            db.transaction {
+                db.updateContrasena(
+                    email = email,
+                    contrasena = contraseña.encodeToBase64()
+                )
+            }
         }
-        return findByEmail(email)
+        return findByEmail(user.email)
     }
 
     /**
@@ -72,5 +78,10 @@ class UserRepositoryImpl(
     override fun findById(id: Long): Usuario? {
         logger.debug { "Buscando usuario por id: $id" }
         return db.selectById(id).executeAsOneOrNull()?.toUsuario()
+    }
+
+    override fun getAllClientes(): List<Usuario>{
+        logger.debug { "Buscando todos los clientes" }
+        return db.selectAllClientes().executeAsList().map { it.toUsuario() }
     }
 }

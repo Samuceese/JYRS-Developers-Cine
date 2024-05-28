@@ -1,5 +1,6 @@
 package ventas.repositories
 
+import org.example.demo.config.Config
 import org.example.demo.database.SqlDelightManager
 import org.example.demo.locale.toShortSpanishFormat
 import org.example.demo.productos.butaca.repositories.ButacaRepository
@@ -52,12 +53,11 @@ class TestVentaRepository {
     @BeforeEach
     fun setUpAll(){
 
-        dbManager= SqlDelightManager
-        dbManager.initialize()
-        butacaRepo= ButacaRepositoryImpl()
-        complementoRepo= ComplementoRepositoryImpl()
-        clienteRepo= UserRepositoryImpl()
-        ventaRepo = VentasRepositoryImpl(clienteRepo, butacaRepo, complementoRepo)
+        dbManager= SqlDelightManager(Config)
+        butacaRepo= ButacaRepositoryImpl(dbManager)
+        complementoRepo= ComplementoRepositoryImpl(dbManager)
+        clienteRepo= UserRepositoryImpl(dbManager)
+        ventaRepo = VentasRepositoryImpl(dbManager, clienteRepo, butacaRepo, complementoRepo)
 
         cliente = Cliente(
             id = 55,
@@ -66,7 +66,7 @@ class TestVentaRepository {
             email = "user@gmail.com",
             contraseña = "!6635GxH#&aV"
         )
-        dbManager.databaseQueries.insertUser(cliente.id,cliente.email,cliente.nombre,cliente.apellidos,"cliente",cliente.contraseña)
+        dbManager.databaseQueries.insertUser(cliente.email,cliente.nombre,cliente.apellidos,"cliente",cliente.contraseña)
         complemento = Bebida(
             id="AGUA",
             nombre = CategoriaBebida.AGUA,
@@ -77,7 +77,7 @@ class TestVentaRepository {
             estado = Estado.ACTIVA,
             tipo = Tipo.NORMAL,
         )
-        dbManager.databaseQueries.insertarbutaca(butaca.id,butaca.estado.toString(),butaca.tipo.toString(),butaca.ocupacion.toString(),butaca.precio.toLong(),butaca.create.toShortSpanishFormat())
+        dbManager.databaseQueries.insertarbutaca(butaca.id,butaca.estado.toString(),butaca.tipo.toString(),butaca.ocupacion.toString(),butaca.precio,butaca.create.toShortSpanishFormat())
         lineaVenta1 = LineaVenta(
             producto = butaca,
             cantidad = 1,

@@ -27,6 +27,7 @@ fun validateUser(user: Usuario): Result<Usuario, UserError>{
         return Err(UserError.ValidateProblem("El correo electrónico no es correcto"))
     }
     if(!validateContraseña(user.contraseña)){
+        println(user.contraseña)
         return Err(UserError.ValidateProblem("La contraseña no es válida, debe tener 12 carácteres, contener al menos una mayúscula y una minúsucla, un número y un caracter especial"))
     }
     return Ok(user)
@@ -57,7 +58,7 @@ fun validateNombre(nombre: String): Boolean{
  * @since 1.0
  */
 
- fun validateApellidos(apellidos: String): Boolean{
+fun validateApellidos(apellidos: String): Boolean{
     if (apellidos.isEmpty() || apellidos.isBlank()){
         return false
     }
@@ -89,9 +90,12 @@ fun validateEmail(email: String): Boolean{
  */
 
 fun validateContraseña(contraseña: String): Boolean{
-    val regex = Regex("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*?&]{12,}\$")
+    val regex = Regex("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[\$#@])\\S{12}\$")
     if(!contraseña.matches(regex)){
+        println("No se valida la contraseña")
         return false
+    }else{
+        return true
     }
-    return true
 }
+

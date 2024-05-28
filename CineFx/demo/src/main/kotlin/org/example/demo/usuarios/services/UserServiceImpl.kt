@@ -3,6 +3,7 @@ package org.example.demo.usuarios.services
 import com.github.michaelbull.result.*
 import org.example.demo.usuarios.cache.CacheUsuario
 import org.example.demo.usuarios.errors.UserError
+import org.example.demo.usuarios.models.Cliente
 import org.example.demo.usuarios.models7.Usuario
 import org.example.demo.usuarios.repositories.UserRepository
 import org.example.demo.usuarios.repositories.UserRepositoryImpl
@@ -20,17 +21,17 @@ private val logger = logging()
  * @author Yahya El Hadri, Raúl Fernández, Javier Hernández, Samuel Cortés
  * @since 1.0
  */
-// TODO repository debe ser del tipo de la interfaz no de la clase pero falla ahora mismo y ns por q por q en el otro ordenador sale perfecto
+
 class UserServiceImpl(
-    private val repository: UserRepositoryImpl,
+    private val repository: UserRepository,
     private val cacheUsuario: CacheUsuario
 ): UserService {
+
     override fun save(user: Usuario): Result<Usuario, UserError> {
         logger.debug { "Guardando Usuario: $user" }
        return validateUser(user).mapBoth(
            success = {
-               Ok(it).also { repository.save(user) }.also { cacheUsuario.put(user.id, user) }
-
+               Ok(repository.save(it).also { cacheUsuario.put(user.id, user) })
            },
            failure = {
                Err(UserError.ValidateProblem("No se ha podido guardar debido a un error de valdiación"))
@@ -48,10 +49,10 @@ class UserServiceImpl(
      */
 
     override fun cambioContraseña(email: String, contraseña: String): Result<Usuario, UserError> {
-        logger.debug { "Cambiando contraseña en email: $email" }
-        return repository.cambioContraseña(email, contraseña)?.let {
+        logger.debug { "Cambiando contraseña en email: ${email}" }
+        return repository.cambioContraseña(email = email, contraseña = contraseña)?.let {
             Ok(it)
-        } ?: Err(UserError.UserNotFound("No se ha encontrado usuario con email: $email"))
+        } ?: Err(UserError.UserNotFound("No se ha encontrado usuario con email: ${email}"))
     }
 
     /**
@@ -65,6 +66,7 @@ class UserServiceImpl(
     override fun findByEmail(email: String): Result<Usuario, UserError> {
         logger.debug { "Buscando Usuario por email: $email" }
         return repository.findByEmail(email)?.let {
+            println("Encontrado email $email")
             Ok(it)
         } ?: Err(UserError.UserNotFound("No se ha encontrado usuario con email $email"))
     }
@@ -94,4 +96,12 @@ class UserServiceImpl(
             }
         )
     }
+
+    override fun findAll(): Result<List<Usuario>, UserError> {
+        logger.debug { "Obteniendo todos los clientes registrados" }
+        val clientes = mutableListOf<Usuario>()
+        repository.getAllClientes().forEach { clientes.add(it) }
+        return Ok(clientes)
+    }
+
 }

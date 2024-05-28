@@ -4,6 +4,7 @@ import database.ComplementoEntity
 import org.example.demo.productos.complementos.dto.ComplementoDto
 import org.example.demo.productos.complementos.exceptions.ComplementoException
 import org.example.demo.productos.models.*
+import org.lighthousegames.logging.logging
 
 /**
  * Mapea un ComplementoEntity en un complemento.
@@ -11,24 +12,17 @@ import org.example.demo.productos.models.*
  * @author Yahya El Hadri, Raúl Fernández, Javier Hernández, Samuel Cortés
  * @since 1.0
  */
-
+val logger=logging()
 fun ComplementoEntity.toComplemento(): Complemento {
-    val _nombre: String = this.nombre
+    logger.debug { "Pasando ComplementoEntity ${this.id} a Complemento" }
+    val _nombre: String = this.id
     val _tipo: String = this.tipo
     when (_tipo) {
         "COMIDA" -> {
-            when (_nombre) {
-                "PALOMITAS" -> return Comida("PALOMITAS",CategoriaComida.PALOMITAS)
-                "FRUTOSSECOS" -> return Comida("FRUTOS SECOS",CategoriaComida.FRUTOSSECOS)
-                "PATATAS" -> return Comida("PATATAS", CategoriaComida.PATATAS)
-            }
+               return Comida(_nombre,_tipo,this.precio.toDouble())
         }
-
         "BEBIDA" -> {
-            when (_nombre) {
-                "AGUA" -> return Bebida("AGUA", CategoriaBebida.AGUA)
-                "REFRESCO" -> return Bebida("REFRESCO",CategoriaBebida.REFRESCOS)
-            }
+                return Bebida(_nombre, _tipo,this.precio.toDouble())
         }
 
     }
@@ -43,12 +37,18 @@ fun ComplementoEntity.toComplemento(): Complemento {
  */
 
 fun ComplementoDto.toComplemento(): Complemento {
-    when(this.nombre){
-        "PALOMITAS" -> return Comida("PALOMITAS",CategoriaComida.PALOMITAS)
-        "FRUTOS SECOS" -> return Comida("FRUTOS SECOS",CategoriaComida.FRUTOSSECOS)
-        "PATATAS" -> return Comida("PATATAS",CategoriaComida.PATATAS)
-        "AGUA" -> return Bebida("AGUA",CategoriaBebida.AGUA)
-        "REFRESCO" -> return Bebida("REFRESCO",CategoriaBebida.REFRESCOS)
+    logger.debug { "Pasando ComplementoDto ${this.nombre} a Complemento" }
+    when(this.tipoComplemento){
+        "COMIDA" -> return Comida(this.nombre,this.tipoComplemento,this.precio.toDouble())
+        "BEBIDA" -> return Bebida(this.nombre,this.tipoComplemento,this.precio.toDouble())
     }
     throw ComplementoException.TipoInvalido("Tipo no valido")
+}
+
+fun Complemento.toComplementoDto():ComplementoDto{
+    return ComplementoDto(
+        tipoComplemento = this.tipo,
+        nombre = this.id,
+        precio = this.precio.toString()
+    )
 }

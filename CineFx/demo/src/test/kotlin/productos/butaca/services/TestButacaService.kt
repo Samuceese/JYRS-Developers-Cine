@@ -7,9 +7,8 @@ import org.example.demo.productos.butaca.cache.ButacasCacheImpl
 import org.example.demo.productos.butaca.errors.ButacaError
 import org.example.demo.productos.butaca.repositories.ButacaRepository
 import org.example.demo.productos.butaca.services.ButacaServiceImpl
-import org.example.demo.productos.butaca.storage.ButacaStorageImpl
+import org.example.demo.productos.butaca.storage.ButacaStorageJsonImpl
 import org.example.demo.productos.butaca.validator.ButacaValidator
-import org.example.demo.productos.complementos.repositories.ComplementoRepository
 import org.example.demo.productos.models.Butaca
 import org.example.demo.productos.models.Estado
 import org.example.demo.productos.models.Tipo
@@ -22,6 +21,8 @@ import org.mockito.Mockito
 import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
 import org.mockito.junit.jupiter.MockitoExtension
+import org.mockito.kotlin.whenever
+import java.io.File
 import java.io.InputStream
 import java.nio.file.Files
 import java.nio.file.Path
@@ -35,7 +36,7 @@ class TestButacaService {
     private lateinit var mockButacaCache: ButacasCacheImpl
 
     @Mock
-    private lateinit var storage: ButacaStorageImpl
+    private lateinit var storage: ButacaStorageJsonImpl
 
     @Mock
     private lateinit var mockButacaValidator: ButacaValidator
@@ -142,15 +143,15 @@ class TestButacaService {
     @Test
     fun export(){
         val lista = listOf(Butaca("A1", Estado.ACTIVA, Tipo.NORMAL))
-        var myFile: InputStream = Files.newInputStream(Path.of("C:\\Users\\anasm\\proyecto final\\JYRS-Developers-Cine\\CineFx\\demo\\src\\test\\resources\\data\\csv-test.csv"))
+        val myFile = File("data", "butacas.csv")
 
-        Mockito.`when`(storage.load(myFile)).thenReturn(Ok(lista))
+        whenever(storage.load(myFile)).thenReturn(Ok(lista))
 
-        val result = storage.load(myFile)
+        val result = storage.loadCsv(myFile)
 
         assertTrue(result.isOk)
         assertEquals(result.value.size,lista.size)
 
-        verify(storage, times(1)).load(myFile)
+        verify(storage, times(1)).loadCsv(myFile)
     }
 }

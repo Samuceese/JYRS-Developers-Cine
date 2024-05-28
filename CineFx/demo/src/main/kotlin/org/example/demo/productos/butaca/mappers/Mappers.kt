@@ -7,6 +7,7 @@ import org.example.demo.productos.models.Butaca
 import org.example.demo.productos.models.Estado
 import org.example.demo.productos.models.Ocupacion
 import org.example.demo.productos.models.Tipo
+import org.lighthousegames.logging.logging
 import java.time.LocalDate
 
 /**
@@ -15,11 +16,13 @@ import java.time.LocalDate
  * @author Yahya El Hadri, Raúl Fernández, Javier Hernández, Samuel Cortés
  * @since 1.0
  */
-
+val logger= logging()
 fun ButacaEntity.toButaca():Butaca{
+    logger.debug { "Pasando ButacaEntity ${this.id} a Butaca" }
     var _id=this.id
     var _estado:Estado?=null
     var _tipo:Tipo?=null
+    var _ocupacion:Ocupacion?=null
     when(this.tipo){
         "NORMAL" -> _tipo = Tipo.NORMAL
         "VIP"-> _tipo = Tipo.VIP
@@ -29,8 +32,15 @@ fun ButacaEntity.toButaca():Butaca{
         "MANTENIMIENTO"-> _estado=Estado.MANTENIMIENTO
         "OCUPADA" -> _estado = Estado.OCUPADA
     }
+    when(this.ocupacion){
+        "LIBRE"->_ocupacion=Ocupacion.LIBRE
+        "SELECCIONADA"->_ocupacion=Ocupacion.SELECCIONADA
+        "INACTIVA"->_ocupacion=Ocupacion.INACTIVA
+        "OCUPADA"->_ocupacion=Ocupacion.OCUPADA
+        //else->_ocupacion=Ocupacion.SELECCIONADA
 
-    return Butaca(_id,_estado!!,_tipo!!, this.createAt.returnDateTimeString())
+    }
+    return Butaca(id = _id, estado = _estado!!, tipo = _tipo!!, create = this.createAt.returnDateTimeString(), precio = this.precio.toDouble(), ocupacion = _ocupacion!!)
 }
 
 /**
@@ -41,7 +51,9 @@ fun ButacaEntity.toButaca():Butaca{
  */
 
 fun ButacaDto.toButaca():Butaca{
+    logger.debug { "Pasando ButacaDto ${this.id} a Butaca" }
     var _tipo:Tipo?=null
+    var _ocupacion:Ocupacion?=null
     when(this.tipo){
         "VIP"->_tipo = Tipo.VIP
         "NORMAL" -> _tipo = Tipo.NORMAL
@@ -52,7 +64,14 @@ fun ButacaDto.toButaca():Butaca{
         "MANTENIMIENTO" -> _estado = Estado.MANTENIMIENTO
         "OCUPADA" -> _estado = Estado.OCUPADA
     }
-    return Butaca(this.id,_estado!!,_tipo!!)
+    when(this.ocupacion){
+        "LIBRE"->_ocupacion= Ocupacion.LIBRE
+        "SELECCIONADA"->_ocupacion= Ocupacion.SELECCIONADA
+        "INACTIVA"->_ocupacion= Ocupacion.INACTIVA
+        "OCUPADA"->_ocupacion= Ocupacion.OCUPADA
+
+    }
+    return Butaca(id = this.id, estado = _estado!!, tipo = _tipo!!, precio = this.precio.toDouble(), ocupacion = _ocupacion!!)
 }
 
 /**
@@ -64,6 +83,7 @@ fun ButacaDto.toButaca():Butaca{
 
 
 fun Butaca.toButacaDto(): ButacaDto {
+    logger.debug { "Pasando Butaca ${this.id} a ButacaDto" }
     var _tipo:String?=null
     when(this.tipo){
         Tipo.VIP -> _tipo ="VIP"

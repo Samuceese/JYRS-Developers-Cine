@@ -9,6 +9,7 @@ import org.example.demo.productos.models.Bebida
 import org.example.demo.productos.models.Comida
 import org.example.demo.productos.models.Complemento
 import org.example.demo.routes.RoutesManager
+import java.io.File
 import java.lang.Exception
 
 class SeleccionarComplViewModel(
@@ -18,8 +19,12 @@ class SeleccionarComplViewModel(
     val state: SimpleObjectProperty<ComplementoState> = SimpleObjectProperty(ComplementoState())
 
     init {
-        servicio.import(RoutesManager.getResourceAsStream("data/complemento.csv")).onSuccess {
-            initState(it)
+        if (servicio.getAll().value.isEmpty()){
+            servicio.import(File("data","complemento.csv")).onSuccess {
+                initState(it)
+            }
+        }else{
+            initState(servicio.getAll().value)
         }
     }
     fun updateState(complemento: Complemento){
@@ -37,32 +42,33 @@ class SeleccionarComplViewModel(
             },
             imagen = when(complemento.id){
                 "PALOMITAS"-> Image(RoutesManager.getResourceAsStream("images/palomitas.png"))
-                "FRUTOSSECOS"->Image(RoutesManager.getResourceAsStream("images/frutossecos.png"))
+                "FRUTOS SECOS"->Image(RoutesManager.getResourceAsStream("images/frutossecos.png"))
                 "PATATAS"->Image(RoutesManager.getResourceAsStream("images/patatas.png"))
                 "AGUA"->Image(RoutesManager.getResourceAsStream("images/agua.png"))
                 "REFRESCO"->Image(RoutesManager.getResourceAsStream("images/refresco.png"))
                 else -> Image(RoutesManager.getResourceAsStream("images/interrogacion.png"))
-            }
+            },
+            complemento = complemento
 
         )
     }
 
-    fun filtratComplementos(precio: String,nombre: String,tipo: String):List<Complemento>{
+    fun filtrarComplementos(precio: String,nombre: String):List<Complemento>{
 
         return state.value.complementos
             .asSequence()
             .filter {
-                it.id == nombre
+               it.id.contains(nombre)
             }.filter {
-                (it is Comida && tipo=="Comida")
-            }.filter {
-                (it is Bebida && tipo=="Bebida")
-            }.filter {
-                (it as Bebida).precio.toDefaultMoneyString() == precio
-            }.filter {
-                (it as Comida).precio.toDefaultMoneyString() == precio
-            }
-            .toList()
+                if (precio=="All") true else{
+                    when(it){
+                        is Bebida->it.precio.toDefaultMoneyString() == precio
+                        is Comida->it.precio.toDefaultMoneyString()== precio
+                        else -> it.id.contains(nombre)
+                    }
+                }
+            }.toList()
+
     }
 
 
@@ -75,14 +81,7 @@ class SeleccionarComplViewModel(
 
     private fun initState(lista: List<Complemento>) {
         val listaTipos= mutableListOf<String>("All")
-        lista.forEach {
-            if (it is Bebida) {
-                listaTipos.add("Bebida")
-            }
-            else if ( it is Comida) {
-                listaTipos.add("Comida")
-            }
-        }
+
         val listaPrecio = mutableListOf("All")
         lista.forEach {
             when(it){
@@ -98,6 +97,12 @@ class SeleccionarComplViewModel(
         )
     }
 
+    fun actualizarSeleccionados(complemmentosSeleccionas: MutableList<Complemento>) {
+        state.value = state.value.copy(
+            complementosSeleccionados = complemmentosSeleccionas
+        )
+    }
+
     data class ComplementoState(
         val tipo:String="" ,
         val nombre:String="",
@@ -107,6 +112,7 @@ class SeleccionarComplViewModel(
         val complementos:List<Complemento> = listOf(),
         val tipos:List<String> = listOf(),
         val precios:List<String> = listOf(),
-        val complementosSeleccionados : MutableList<Complemento> = mutableListOf()
+        val complementosSeleccionados : MutableList<Complemento> = mutableListOf(),
+        val complemento:Complemento?=null
     )
 }

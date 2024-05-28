@@ -74,7 +74,7 @@ object RoutesManager {
         width: Double = 700.0,
         height: Double = 500.0,
     ) {
-        logger.debug { "Inicializando $title" }
+        logger.debug { "Cambiando escena a $title" }
         var parentRoot: Parent
         if (view==View.SELECPELICULAS) parentRoot = FXMLLoader.load<ScrollPane>(this.getResource(view.fxml))
         else parentRoot = FXMLLoader.load<Pane>(this.getResource(view.fxml))
@@ -88,7 +88,7 @@ object RoutesManager {
         view: View,
         title: String
     ) {
-        logger.debug { "Inicializando Detalle" }
+        logger.debug { "Inicializando Detalle $title" }
 
         val fxmlLoader = FXMLLoader(getResource(view.fxml))
         val parentRoot = fxmlLoader.load<Pane>()
@@ -103,10 +103,9 @@ object RoutesManager {
         stage.show()
     }
 
-    fun cerrarVentana(){
-    }
 
     fun initAcercaDeStage(){
+        logger.debug { "Iniciando AcercaDe" }
         val fxmlLoader=FXMLLoader(getResource(View.ACERCA_DE.fxml))
         val parentRoot=fxmlLoader.load<Pane>()
         val mainScene=Scene(parentRoot,400.0,200.0)
@@ -128,6 +127,7 @@ object RoutesManager {
         contentText:String="Si sale, perdera la informacion no guardada",
         event: WindowEvent?=null
     ) {
+        logger.debug { "Cerrando App" }
         Alert(Alert.AlertType.CONFIRMATION).apply {
             this.title=title
             this.contentText=contentText
@@ -139,20 +139,38 @@ object RoutesManager {
 
     }
     fun alerta(mensaje:String,contenido:String){
+        logger.debug { "Alerta $mensaje" }
         Alert(Alert.AlertType.ERROR).apply {
-            this.title="Error Inicio Sesion"
-            this.headerText="$mensaje Incorrecto/Invalido"
+            this.title="Error ${mainStage.title}"
+            this.headerText="$mensaje "
             this.contentText=contenido
         }.showAndWait()
     }
+    fun alertaEliminar(nombre:String):Boolean{
+
+        var eliminar:Boolean=false
+        Alert(Alert.AlertType.ERROR).apply {
+            this.title="Elimar Complemento"
+            this.headerText="Eliminar $nombre"
+            this.contentText="Si elimina $nombre perdera toda su informacion"
+        }.showAndWait().ifPresent {opcion->
+            if (opcion == ButtonType.OK) {
+                logger.debug { "Elimnar Complemento $nombre" }
+                eliminar=true
+            }
+        }
+        return eliminar
+    }
 
     fun getResourceAsStream(icon: String): InputStream {
+        logger.debug { "Obteniendo $icon" }
         return app::class.java.getResourceAsStream(icon)
             ?:throw RuntimeException("No se a podido cargar $icon")
 
     }
 
     fun getResource(fxml: String): URL{
+        logger.debug { "Obteniendo $fxml" }
         return app::class.java.getResource(fxml)
             ?:throw RuntimeException("No se a podido cargar $fxml")
     }

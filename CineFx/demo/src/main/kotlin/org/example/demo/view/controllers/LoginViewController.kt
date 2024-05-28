@@ -8,6 +8,7 @@ import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
 import javafx.scene.image.ImageView
 import org.example.demo.routes.RoutesManager
+import org.example.demo.usuarios.models.Admin
 import org.example.demo.view.viewModel.LoginViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -45,37 +46,43 @@ class LoginViewController:KoinComponent {
     }
 
     private fun initDefaultEvents() {
+        logger.debug { "inicializando eventos por defecto controller login" }
         botonLogin.setOnAction { botonLoginOnAction() }
         botonRegister.setOnAction { botonRegisterOnAction() }
         olvidaContraseñaLink.setOnAction { linkOlvidarContraseñaOnAction() }
     }
 
     private fun linkOlvidarContraseñaOnAction() {
+        logger.debug { "olvidar contraseña desde login" }
         RoutesManager.changeScene(view = RoutesManager.View.OLVIDARCONTRA, title = "Recuperar Contraseña")
     }
 
     private fun botonRegisterOnAction() {
+        logger.debug { "registrar desde login" }
         RoutesManager.changeScene(view = RoutesManager.View.REGISTRO, title = "Registro")
     }
 
     private fun botonLoginOnAction() {
-       /*if (view.validarAdmin(nombreLogin.text, contraseñaLogin.text)){
+       if (view.validarAdmin(nombreLogin.text, contraseñaLogin.text)){
+           logger.debug { "admin logeado" }
+
+           view.establecerUsuario(nombreLogin.text)
         RoutesManager.changeScene(view = RoutesManager.View.MENUADMIN, title = "Menu admin")
        }else{
            if (!view.validarUsuario(nombreLogin.text)){
-              RoutesManager.alerta("Usuario","El usuario Introducido no es valido, Recuerda que debe estar Registrado")
+               logger.error { "usuario no valido" }
+               RoutesManager.alerta("Usuario","El usuario Introducido no es valido, Recuerda que debe estar Registrado")
            }
            if (!view.validarContraseña(nombreLogin.text,contraseñaLogin.text)){
+               logger.error { "contraseña no valida" }
                RoutesManager.alerta("Contraseña","La contraseña no coincide")
            }
            if (view.validarContraseña(nombreLogin.text, contraseñaLogin.text)){
-               view.state.value.usuario= nombreLogin.text
-
-
-        */
+               logger.debug { "usuario ${nombreLogin.text} logeado" }
+               view.establecerUsuario(nombreLogin.text)
                RoutesManager.changeScene(view = RoutesManager.View.SELECPELICULAS, title = "Seleccionar Pelicula")
-         //  }
-       //}
+          }
+       }
     }
 
 

@@ -40,19 +40,30 @@ class RegistroViewController:KoinComponent {
         if (!view.comprobarUsuario(emailRegister.text)) RoutesManager.alerta("Email", "El Email introducido ya esta registrado")
         if (!view.comprobarNombre(nombreRegister1.text)) RoutesManager.alerta("Nombre", "El nombre no puede estar vacio")
         if (!view.comprobarApellido(apellidos.text)) RoutesManager.alerta("Apellido", "El apellido no puede estar vacio")
-        if (view.comprobarContraseña(contraseñaRegister.text)) RoutesManager.alerta("Contraseña", "La Contraseña no puede estar vacia")
-        if (contraseñaConfirmarRegister.text.isBlank()) RoutesManager.alerta("Contraseña Confrimacion", "La Contraseña de confirmacion no puede estar vacia")
+        if (!view.comprobarContraseña(contraseñaRegister.text)) RoutesManager.alerta("Contraseña", "La Contraseña no es valida")
+        if (contraseñaConfirmarRegister.text.isBlank()) RoutesManager.alerta("Contraseña Confrimacion", "La Contraseña debe coincidir")
         if (!view.comprobarEmail(emailRegister.text)) RoutesManager.alerta("Email", "Introduce un email Valido")
-        if (contraseñaConfirmarRegister.text != contraseñaRegister.text)RoutesManager.alerta("Contraseña", "Las contraseñas deben coincidir")
+        println(contraseñaRegister.text)
+        if (contraseñaConfirmarRegister.text != contraseñaRegister.text) RoutesManager.alerta("Contraseña", "Las contraseñas deben coincidir")
         if (
-            view.comprobarUsuario(emailRegister.text)&&
-            view.comprobarNombre(nombreRegister1.text) &&
-            view.comprobarApellido(apellidos.text)&&
-            view.comprobarEmail(emailRegister.text)&&
-            view.comprobarContraseña(contraseñaRegister.text)&&
+            view.validarUsuario(
+                nombre = nombreRegister1.text,
+                apellidos = apellidos.text,
+                email = emailRegister.text,
+                contraseña = contraseñaRegister.text)
+            &&
             contraseñaConfirmarRegister.text == contraseñaRegister.text
         ){
+            println("dando alta")
+            view.darAltaCliente(
+                nombre = nombreRegister1.text,
+                apellidos = apellidos.text,
+                email = emailRegister.text,
+                contraseña = contraseñaRegister.text
+            )
             RoutesManager.changeScene(view = RoutesManager.View.INICIO_SESION, title = "Inicio Sesion")
+        }else{
+            RoutesManager.alerta("Usuario", "Introduce datos correctos")
         }
 
     }

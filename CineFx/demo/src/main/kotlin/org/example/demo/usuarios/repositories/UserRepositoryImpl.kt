@@ -14,9 +14,12 @@ private val logger = logging()
      * @since 1.0
      */
 
-class UserRepositoryImpl: UserRepository {
-    private val db = SqlDelightManager.databaseQueries
+class UserRepositoryImpl(
+        private val dbManager: SqlDelightManager
+): UserRepository {
+    private val db = dbManager.databaseQueries
     override fun save(user: Usuario): Usuario {
+        logger.debug { "Guardando Usuario: $user" }
         logger.debug { "save: $user" }
         db.transaction {
             db.insertUser(

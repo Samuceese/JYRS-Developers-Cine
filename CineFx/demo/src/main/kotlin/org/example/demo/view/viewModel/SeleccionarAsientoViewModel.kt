@@ -2,27 +2,31 @@ package org.example.demo.view.viewModel
 
 import com.github.michaelbull.result.onSuccess
 import javafx.beans.property.SimpleObjectProperty
-import org.example.demo.productos.butaca.services.ButacaService
+import org.example.demo.productos.butaca.services.ButacaServiceImpl
 import org.example.demo.productos.models.Butaca
 import org.example.demo.productos.models.Estado
 import org.example.demo.productos.models.Ocupacion
 import org.example.demo.productos.models.Tipo
-import org.example.demo.routes.RoutesManager
+import java.io.File
 
 import java.time.LocalDate
 
 
 
 class SeleccionarAsientoViewModel(
-    private val service: ButacaService
+    private val service: ButacaServiceImpl
 ) {
     val state: SimpleObjectProperty<ButacasState> = SimpleObjectProperty(ButacasState())
 
     init {
-        if (state.value.butacas.size == 0){
-            service.import(RoutesManager.getResourceAsStream("data/butacas.csv")).onSuccess {
-                initState(it)
+        if (service.getAll().value.isEmpty()){
+           println("sacando butacas de csv")
+           service.importCsv(File("data","butacas.csv")).onSuccess {
+               initState(it)
             }
+        }else{
+            println("sacando butacas de bdd")
+            initState(service.getAll().value)
         }
     }
 
@@ -51,7 +55,7 @@ class SeleccionarAsientoViewModel(
         ocupada: Ocupacion,
         precio: Double
     ):Butaca{
-        val butaca = Butaca(id,estado, tipo, createAt)
+        val butaca = Butaca(id,estado, tipo, createAt, precio = precio, ocupacion = ocupada)
         return service.update(id,butaca,ocupada,precio).value
     }
     fun actualizarButacasSeleccionadas(lista:MutableList<Butaca>){

@@ -1,5 +1,7 @@
 package org.example.demo.productos.complementos.dto
 
+import org.example.demo.productos.dto.ProductoDto
+
 /**
  * Clase Dto de complemento
  * @property tipoComplemento
@@ -13,4 +15,4 @@ class ComplementoDto(
     val tipoComplemento: String,
     val nombre:String,
     val precio:String
-)
+): ProductoDto()

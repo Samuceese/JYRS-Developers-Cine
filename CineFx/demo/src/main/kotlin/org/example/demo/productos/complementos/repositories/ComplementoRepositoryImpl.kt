@@ -11,8 +11,10 @@ import org.lighthousegames.logging.logging
 
 private val logger=logging()
 
-class ComplementoRepositoryImpl:ComplementoRepository {
-    private val db  = SqlDelightManager.databaseQueries
+class ComplementoRepositoryImpl(
+    private val dbManager: SqlDelightManager
+):ComplementoRepository {
+    private val db  = dbManager.databaseQueries
 
     /**
      * Consultamos la base de datos para obtener todas las entidades y convertirlas en objetos.
@@ -65,30 +67,15 @@ class ComplementoRepositoryImpl:ComplementoRepository {
     override fun save(producto: Complemento): Complemento {
         logger.debug { "Guardando complemento: $producto" }
 
-        when(producto) {
-            is Bebida -> {
                 db.transaction {
                     db.insertComplemento(
-                        tipo = "BEBIDA",
+                        tipo = producto.tipo,
                         id = producto.id,
-                        nombre = producto.nombre.toString(),
+                        nombre = producto.id.toString(),
                         precio = producto.precio.toLong()
                     )
-                    println("llega aqui")
                 }
-            }
 
-            is Comida -> {
-                db.transaction {
-                    db.insertComplemento(
-                        tipo = "COMIDA",
-                        id = producto.id,
-                        nombre = producto.nombre.toString(),
-                        precio = producto.precio.toLong()
-                    )
-                }
-            }
-        }
         return producto
     }
 
@@ -103,17 +90,17 @@ class ComplementoRepositoryImpl:ComplementoRepository {
 
     override fun update(id: String, complemento: Complemento): Complemento? {
         logger.debug { "Actualizando complemento con id: $id" }
-        val result = this.findById(id) ?: return null
+        var result = this.findById(id) ?: return null
 
-        when(complemento){
-            is Bebida ->{
-                db.updateComplementoEntity(id,complemento.nombre.toString(),complemento.precio.toLong(),"BEBIDA")
-            }
-            is Comida ->{
-                db.updateComplementoEntity(id,complemento.nombre.toString(),complemento.precio.toLong(),"COMIDA")
-            }
-        }
+        db.updateComplementoEntity(
+            id= id,
+            nombre = complemento.id,
+            precio = complemento.precio.toLong(),
+            tipo = complemento.tipo)
 
+
+        logger.debug { "Actualizado complemento con id: $id" }
+        result = this.findById(id)!!
         return result
     }
 

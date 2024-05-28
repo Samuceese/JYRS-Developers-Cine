@@ -1,20 +1,18 @@
 package org.example.demo.view.viewModel
 
 import com.github.michaelbull.result.mapBoth
-import com.github.michaelbull.result.onSuccess
 import javafx.beans.property.SimpleObjectProperty
 import org.example.demo.database.SqlDelightManager
 import org.example.demo.locale.encodeToBase64
-import org.example.demo.usuarios.models.Cliente
 import org.example.demo.usuarios.models7.Usuario
 import org.example.demo.usuarios.services.UserService
 
 class LoginViewModel(
-    private val service: UserService
+    private val service: UserService,
+    private val dbManager: SqlDelightManager
 ) {
     init {
-        SqlDelightManager.databaseQueries.InsertTheAdmin()
-        SqlDelightManager.databaseQueries.insertUser(
+        dbManager.databaseQueries.insertUser(
             email = "a@gmail.com",
             nombre = "a",
             apellidos = "a",
@@ -53,6 +51,6 @@ class LoginViewModel(
     }
 
     data class LoginState(
-        var usuario:Usuario=Cliente(-1,"","","","")
+        var usuario:Usuario?=null
     )
 }

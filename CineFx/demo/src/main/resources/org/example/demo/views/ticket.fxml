@@ -94,7 +94,7 @@
                                         <Font name="Arial Rounded MT Bold" size="18.0" />
                                     </font>
                                 </Label>
-                        <TextArea fx:id="complementosLista" layoutX="26.0" layoutY="24.0" prefHeight="58.0" prefWidth="333.0" />
+                        <TextArea fx:id="complementosLista" editable="false" layoutX="26.0" layoutY="24.0" prefHeight="58.0" prefWidth="333.0" />
                             </children>
                         </AnchorPane>
                     </children>
@@ -108,7 +108,7 @@
                                         <Font name="Arial Rounded MT Bold" size="18.0" />
                                     </font>
                                 </Label>
-                        <TextArea fx:id="butacasLista" layoutX="28.0" layoutY="37.0" prefHeight="57.0" prefWidth="334.0" />
+                        <TextArea fx:id="butacasLista" editable="false" layoutX="28.0" layoutY="37.0" prefHeight="57.0" prefWidth="334.0" />
                             </children>
                         </AnchorPane>
                     </children></HBox>
@@ -130,9 +130,30 @@
                     <children>
                         <AnchorPane prefHeight="50.0" prefWidth="714.0">
                             <children>
-                                <Button fx:id="fxBotonCerrarSesion" layoutX="72.0" layoutY="12.0" mnemonicParsing="false" text="CERRAR SESIÓN" />
-                                <Button fx:id="fxBotonSeleccionarPelicula" layoutX="277.0" layoutY="12.0" mnemonicParsing="false" text="SELECCIONAR PELICULA" />
-                                <Button fx:id="fxBotonImprimirPdf" layoutX="535.0" layoutY="12.0" mnemonicParsing="false" text="IMPRIMIR PDF" AnchorPane.leftAnchor="535.0" />
+                                <Button fx:id="fxBotonCerrarSesion" layoutX="72.0" layoutY="12.0" mnemonicParsing="false" text="CERRAR SESIÓN">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../../../../../OneDrive/Escritorio/PROYECTO%20PROGRAMACIÓN/iconos/exit.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                                <Button fx:id="fxBotonSeleccionarPelicula" layoutX="277.0" layoutY="12.0" mnemonicParsing="false" text="SELECCIONAR PELICULA">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../../../../../OneDrive/Escritorio/PROYECTO%20PROGRAMACIÓN/iconos/new.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                                <Button fx:id="fxBotonImprimirPdf" layoutX="535.0" layoutY="12.0" mnemonicParsing="false" text="IMPRIMIR PDF" AnchorPane.leftAnchor="535.0">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../../../../../OneDrive/Escritorio/PROYECTO%20PROGRAMACIÓN/iconos/file-import.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
                             </children>
                         </AnchorPane>
                     </children>

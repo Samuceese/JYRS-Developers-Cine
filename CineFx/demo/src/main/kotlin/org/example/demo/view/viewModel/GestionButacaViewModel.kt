@@ -1,15 +1,18 @@
 package org.example.demo.view.viewModel
 
+import com.github.michaelbull.result.mapBoth
 import com.github.michaelbull.result.onSuccess
 import javafx.beans.property.SimpleObjectProperty
 import org.example.demo.locale.toDefaultMoneyString
 import org.example.demo.productos.butaca.services.ButacaService
+import org.example.demo.productos.butaca.storage.ButacaStorage
 import org.example.demo.productos.models.Butaca
 import java.io.File
 
 
 class GestionButacaViewModel(
-    val service: ButacaService
+    private val service: ButacaService,
+    private val storage:ButacaStorage
 ) {
     val state: SimpleObjectProperty<GestButacasState> = SimpleObjectProperty(GestButacasState())
     init {
@@ -20,6 +23,57 @@ class GestionButacaViewModel(
         }else{
             initState(service.getAll().value)
         }
+    }
+
+    fun importarButacas(file:File):Boolean{
+        var lista= listOf<Butaca>()
+        if (file.toPath().toString().contains(".json")){
+            storage.loadJson(file).mapBoth(
+                success = {
+                    lista=it
+                },
+                failure = {
+                    return false
+                }
+            )
+        }else if (file.toPath().toString().contains(".csv")){
+            storage.loadCsv(file).mapBoth(
+                success = {
+                    lista=it
+                },
+                failure = {
+                    return false
+                }
+            )
+        }
+        lista.forEach {
+            service.update(it.id,it,it.ocupacion,it.precio)
+        }
+        initState(lista)
+        return true
+    }
+
+    fun exportar(file: File):Boolean{
+        if (file.toPath().toString().contains(".json")){
+            storage.saveJson(file,state.value.butacas).mapBoth(
+                success = {
+                    return true
+                },
+                failure = {
+                    return false
+                }
+            )
+        }else if (file.toPath().toString().contains(".csv")){
+            storage.saveCsv(file,state.value.butacas).mapBoth(
+                success = {
+                    return true
+                },
+                failure = {
+                    return false
+                }
+            )
+        }
+        return true
     }
 
 

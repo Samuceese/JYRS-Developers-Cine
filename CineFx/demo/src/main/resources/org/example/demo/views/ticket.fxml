@@ -134,7 +134,7 @@
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../OneDrive/Escritorio/PROYECTO%20PROGRAMACIÓN/iconos/exit.png" />
+                                    <Image url="@../icons/exit.png" />
                                  </image>
                               </ImageView>
                            </graphic></Button>
@@ -142,7 +142,7 @@
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../OneDrive/Escritorio/PROYECTO%20PROGRAMACIÓN/iconos/new.png" />
+                                    <Image url="@../icons/new.png" />
                                  </image>
                               </ImageView>
                            </graphic></Button>
@@ -150,7 +150,7 @@
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../OneDrive/Escritorio/PROYECTO%20PROGRAMACIÓN/iconos/file-import.png" />
+                                    <Image url="@../icons/file-export.png" />
                                  </image>
                               </ImageView>
                            </graphic></Button>

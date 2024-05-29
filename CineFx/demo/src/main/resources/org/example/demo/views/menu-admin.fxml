@@ -50,9 +50,30 @@
                                 <Separator layoutX="79.0" layoutY="134.0" prefHeight="3.0" prefWidth="14.0" />
                                 <Separator layoutX="79.0" layoutY="203.0" prefHeight="3.0" prefWidth="14.0" />
                                 <Separator layoutX="79.0" layoutY="273.0" prefHeight="3.0" prefWidth="14.0" />
-                        <Button fx:id="botonCerrarSesion" layoutX="121.0" layoutY="366.0" mnemonicParsing="false" text="Cerrar Sesion" />
-                        <Button fx:id="zipButton" layoutX="68.0" layoutY="318.0" mnemonicParsing="false" text="Zip" />
-                        <Button fx:id="botonUnzip" layoutX="232.0" layoutY="318.0" mnemonicParsing="false" text="Unzip" />
+                        <Button fx:id="botonCerrarSesion" layoutX="121.0" layoutY="366.0" mnemonicParsing="false" text="Cerrar Sesion">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../../../../../OneDrive/Escritorio/PROYECTO%20PROGRAMACIÓN/iconos/close.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                        <Button fx:id="zipButton" layoutX="68.0" layoutY="318.0" mnemonicParsing="false" text="Zip">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../../../../../OneDrive/Escritorio/PROYECTO%20PROGRAMACIÓN/iconos/file-export.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                        <Button fx:id="botonUnzip" layoutX="232.0" layoutY="318.0" mnemonicParsing="false" text="Unzip">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../../../../../OneDrive/Escritorio/PROYECTO%20PROGRAMACIÓN/iconos/file-import.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
                             </children>
                         </AnchorPane>
                     </children>

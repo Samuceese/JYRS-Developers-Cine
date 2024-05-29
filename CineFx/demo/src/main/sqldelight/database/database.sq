@@ -71,7 +71,7 @@ getbutacaByTipo:
 SELECT * FROM ButacaEntity WHERE tipo = ?;
 
 insertarbutaca:
-INSERT INTO ButacaEntity (id,estado,tipo,ocupacion,precio,createAt) VALUES (?,?,?,?,?,?);
+INSERT INTO ButacaEntity (id,estado,tipo, ocupacion,precio,createAt) VALUES (?,?,?, ?, ?,?);
 
 updateButacaEntity:
 UPDATE ButacaEntity SET  estado=?, tipo=?, ocupacion=?, precio=? WHERE id =?;
@@ -82,6 +82,7 @@ DELETE FROM ButacaEntity;
 CREATE TABLE IF NOT EXISTS ComplementoEntity(
     tipo TEXT NOT NULL ,
     id TEXT PRIMARY KEY NOT NULL,
+    imagen TEXT NOT NULL ,
     nombre TEXT NOT NULL,
     precio INTEGER NOT NULL
 );
@@ -96,13 +97,13 @@ getComplementoByTipo:
 SELECT * FROM ComplementoEntity WHERE tipo=?;
 
 updateComplementoEntity:
-UPDATE ComplementoEntity SET  nombre=?, precio=?, tipo=? WHERE id=?;
+UPDATE ComplementoEntity SET  nombre=?, precio=?, imagen =?, tipo=? WHERE id=?;
 
 deleteAllComplemetoEntity:
 DELETE FROM ComplementoEntity;
 
 insertComplemento:
-INSERT INTO ComplementoEntity(tipo,id,nombre,precio) VALUES(?,?,?,?);
+INSERT INTO ComplementoEntity(tipo,id, imagen, nombre,precio) VALUES(?,?, ?, ?,?);
 
 deleteComplementoByID:
 DELETE FROM ComplementoEntity WHERE id=?;

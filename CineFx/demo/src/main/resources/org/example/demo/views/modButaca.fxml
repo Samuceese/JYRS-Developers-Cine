@@ -25,7 +25,7 @@
                             <children>
                                 <ImageView fx:id="butacaImage" fitHeight="59.0" fitWidth="75.0" layoutX="85.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../images/butaca2.png" />
+                                        <Image url="@../icons/butaca2.png" />
                                     </image>
                                     <effect>
                                         <DropShadow>

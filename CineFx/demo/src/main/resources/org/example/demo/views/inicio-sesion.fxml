@@ -19,12 +19,12 @@
             <PasswordField fx:id="contraseñaLogin" layoutX="122.0" layoutY="265.0" promptText="Contraseña" style="-fx-background-color: transparent; -fx-border-color: #061326; -fx-border-width: 0px 0px 2px 0px;" AnchorPane.leftAnchor="121.0" />
             <ImageView fx:id="imagenUser" fitHeight="31.0" fitWidth="33.0" layoutX="74.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/user.png" />
+                  <Image url="@../icons/user.png" />
                </image>
             </ImageView>
             <ImageView fx:id="imagenKey" fitHeight="31.0" fitWidth="33.0" layoutX="74.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/key.png" />
+                  <Image url="@../icons/key.png" />
                </image>
             </ImageView>
             <Button fx:id="botonLogin" layoutX="91.0" layoutY="342.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="75.0" style="-fx-background-color: #061326;" text="Login" textFill="WHITE" AnchorPane.bottomAnchor="118.0" />
@@ -32,7 +32,7 @@
             <Hyperlink fx:id="olvidaContraseñaLink" layoutX="118.0" layoutY="437.0" text="Forgot your password?" />
             <ImageView fx:id="imagenUsers" fitHeight="63.0" fitWidth="69.0" layoutX="143.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/users.png" />
+                  <Image url="@../icons/users.png" />
                </image>
             </ImageView>
             <Text layoutX="112.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iniciar sesión">
@@ -48,7 +48,7 @@
          <children>
             <ImageView fx:id="imagenLogo"  fitHeight="218.0" fitWidth="301.0" layoutX="26.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/logo.png" />
+                  <Image url="@../icons/logo.png" />
                </image>
             </ImageView>
          </children>

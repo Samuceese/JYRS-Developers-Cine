@@ -13,8 +13,9 @@ import kotlinx.serialization.Serializable
 class Comida(
     id:String,
     tipo:String,
-    precio:Double
-):Complemento(id,tipo,precio) {
+    precio:Double,
+    imagen: String
+):Complemento(id,tipo,precio, imagen) {
 
 
 }

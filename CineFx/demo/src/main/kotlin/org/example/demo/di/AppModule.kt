@@ -19,6 +19,7 @@ import org.example.demo.productos.complementos.services.ComplementoService
 import org.example.demo.productos.complementos.services.ComplementoServiceImpl
 import org.example.demo.productos.complementos.storage.ComplementoStorage
 import org.example.demo.productos.complementos.storage.ComplementoStorageImpl
+import org.example.demo.productos.complementos.storage.images.StorageImageImpl
 import org.example.demo.storage.CineStorage
 import org.example.demo.storage.CineStorageImpl
 import org.example.demo.usuarios.cache.CacheUsuario
@@ -57,7 +58,7 @@ val appModule = module {
     single<ButacaStorage> { ButacaStorageImpl() }
     single<ButacaServiceImpl> { ButacaServiceImpl(get(), get(), get(), get()) }
     single<ButacaService> { ButacaServiceImpl(get(), get(), get(), get()) }
-
+    single<StorageImageImpl> { StorageImageImpl(get ()) }
     single<ComplementoRepository> { ComplementoRepositoryImpl(get()) }
     single<ComplementoCacheImpl> { ComplementoCacheImpl(5) }
     single<ComplementoStorage> { ComplementoStorageImpl() }

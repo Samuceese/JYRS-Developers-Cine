@@ -62,6 +62,7 @@ class GestionComplViewController:KoinComponent {
         nombreColumna.cellValueFactory = PropertyValueFactory("id")
         precioColumna.cellValueFactory = PropertyValueFactory("precio")
 
+
         filtroPrecio.items = FXCollections.observableList(view.state.value.precios)
         filtroPrecio.value = "All"
     }

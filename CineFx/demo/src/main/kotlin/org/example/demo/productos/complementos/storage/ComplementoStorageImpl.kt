@@ -34,6 +34,7 @@ class ComplementoStorageImpl:ComplementoStorage {
                         tipoComplemento = data[0],
                         nombre = data[1],
                         precio = data[2],
+                        imagen = data[3]
                     ).toComplemento()
                 }
             )
@@ -73,10 +74,10 @@ class ComplementoStorageImpl:ComplementoStorage {
 
     override fun saveCsv(file: File, list: List<Complemento>): Result<Unit, ComplementoError> {
         return try {
-                file.writeText("tipo_complemento,nombre,precio\n")
+                file.writeText("tipo_complemento,nombre,precio,imagen\n")
                 list.map { it.toComplementoDto() }
                     .forEach { complemento ->
-                    file.appendText("${complemento.tipoComplemento},${complemento.nombre},${complemento.precio}\n")
+                    file.appendText("${complemento.tipoComplemento},${complemento.nombre},${complemento.precio},${complemento.imagen}\n")
                 }
             Ok(Unit)
         } catch (e: Exception) {

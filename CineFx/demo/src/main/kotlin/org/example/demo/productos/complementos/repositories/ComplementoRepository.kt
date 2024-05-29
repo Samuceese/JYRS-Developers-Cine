@@ -7,6 +7,6 @@ interface ComplementoRepository {
     fun findById(id: String): Complemento?
     fun findByTipo(tipo: String): List<Complemento>
     fun save(producto: Complemento): Complemento
-    fun update(id: String, complemento:Complemento): Complemento?
+    fun update(id: String, complemento:Complemento,imagen:String): Complemento?
     fun delete(id: String): Complemento?
 }

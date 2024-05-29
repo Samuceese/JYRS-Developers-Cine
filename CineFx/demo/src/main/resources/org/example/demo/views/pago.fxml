@@ -25,7 +25,7 @@
                                 </Label>
                                 <ImageView fx:id="menuImagen" fitHeight="40.0" fitWidth="40.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0">
                                     <image>
-                                        <Image url="@../icons/menu.png" />
+                                        <Image url="@../images/menu.png" />
                                     </image>
                                 </ImageView>
                             </children>

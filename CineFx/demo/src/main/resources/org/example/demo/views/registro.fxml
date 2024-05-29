@@ -18,7 +18,7 @@
                 <Button fx:id="botonRegister" layoutX="126.0" layoutY="387.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="95.0" style="-fx-background-color: #061326;" text="Register" textFill="WHITE" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="385.0" />
                 <ImageView fitHeight="63.0" fitWidth="69.0" layoutX="143.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="143.0" AnchorPane.rightAnchor="143.40000000000003">
                     <image>
-                        <Image url="@../icons/user.png" />
+                        <Image url="@../images/user.png" />
                     </image>
                 </ImageView>
                 <Text layoutX="105.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nuevo Usuario" textAlignment="CENTER">
@@ -29,7 +29,7 @@
                 <PasswordField fx:id="contraseñaRegister" layoutX="99.0" layoutY="291.0" promptText="Contraseña" style="-fx-background-color: transparent; -fx-border-color: #061326; -fx-border-width: 0px 0px 2px 0px;" AnchorPane.bottomAnchor="179.39999999999998" AnchorPane.leftAnchor="99.0" AnchorPane.rightAnchor="101.0" AnchorPane.topAnchor="291.0" />
                 <ImageView fitHeight="26.0" fitWidth="33.0" layoutX="186.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../icons/plus.png" />
+                        <Image url="@../images/plus.png" />
                     </image>
                 </ImageView>
                 <TextField fx:id="emailRegister" layoutX="100.0" layoutY="250.0" promptText="E-mail" style="-fx-border-color: #061326; -fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent;" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="250.0" />
@@ -43,7 +43,7 @@
             <children>
                 <ImageView fitHeight="218.0" fitWidth="301.0" layoutX="26.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../icons/logo.png" />
+                        <Image url="@../images/logo.png" />
                     </image>
                 </ImageView>
             </children>

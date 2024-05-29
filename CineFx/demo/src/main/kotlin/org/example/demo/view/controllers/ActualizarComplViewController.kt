@@ -5,6 +5,7 @@ import javafx.fxml.FXML
 import javafx.scene.control.Button
 import javafx.scene.control.ComboBox
 import javafx.scene.control.TextField
+import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.stage.FileChooser
 import org.example.demo.routes.RoutesManager
@@ -13,6 +14,7 @@ import org.example.demo.view.viewModel.GestionComplementoViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
+import java.io.File
 import kotlin.math.log
 
 private val logger= logging()
@@ -36,6 +38,7 @@ class ActualizarComplViewController:KoinComponent {
     @FXML
     lateinit var imagenComplemento:ImageView
 
+    private var imagen=viewGest.state.value.complementoSeleccionado!!.imagen
     @FXML
     fun initialize(){
         logger.debug { "inicializando controller Actualizar complemento" }
@@ -47,11 +50,15 @@ class ActualizarComplViewController:KoinComponent {
         fxTextFieldNombre.text=viewGest.state.value.complementoSeleccionado!!.id
         fxtextFieldBebida.text=viewGest.state.value.complementoSeleccionado!!.tipo
         fxTextFieldPrecio.text=viewGest.state.value.complementoSeleccionado!!.precio.toString()
+        val imagen= File("imagenes",viewGest.state.value.complementoSeleccionado!!.imagen)
+        imagenComplemento.image = Image(imagen.absoluteFile.toURI().toString())
+        println(viewGest.state.value.complementoSeleccionado!!.imagen)
     }
 
     private fun initDefaultEvents() {
         fxBotonGuardar.setOnAction { guardarOnAction() }
         fxBotonLimpiar.setOnAction { limpiarOnAction() }
+        imagenComplemento.setOnMouseClicked { onImageAction() }
     }
 
     private fun limpiarOnAction() {
@@ -65,7 +72,7 @@ class ActualizarComplViewController:KoinComponent {
             extensionFilters.addAll(FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg"))
             showOpenDialog(RoutesManager.activeStage)
         }?.let {
-            view.actualizar()
+            imagen=it.name
         }
     }
 
@@ -76,7 +83,7 @@ class ActualizarComplViewController:KoinComponent {
         if (fxTextFieldPrecio.text.isNotBlank() &&
             fxTextFieldNombre.text.isNotBlank() &&
             fxTextFieldPrecio.text.toDoubleOrNull()!= null){
-            view.actualizar(id = fxTextFieldNombre.text, precio = fxTextFieldPrecio.text, tipo = fxtextFieldBebida.text, imagen = )
+            view.actualizar(id = fxTextFieldNombre.text, precio = fxTextFieldPrecio.text, tipo = fxtextFieldBebida.text, imagen =imagen )
             viewGest.initState(view.allComplementos())
         }
     }

@@ -15,5 +15,6 @@ import org.example.demo.productos.dto.ProductoDto
 class ComplementoDto(
     val tipoComplemento: String,
     val nombre:String,
-    val precio:String
+    val precio:String,
+    val imagen:String
 ): ProductoDto()

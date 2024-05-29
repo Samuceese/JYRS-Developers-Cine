@@ -170,6 +170,8 @@ object RoutesManager {
 
     }
 
+
+
     fun getResource(fxml: String): URL{
         logger.debug { "Obteniendo $fxml" }
         return app::class.java.getResource(fxml)

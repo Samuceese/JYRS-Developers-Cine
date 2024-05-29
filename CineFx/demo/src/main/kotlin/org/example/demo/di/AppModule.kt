@@ -64,7 +64,7 @@ val appModule = module {
     single<ComplementoService> { ComplementoServiceImpl(get(), get(), get()) }
 
     single<VentasStorage> { VentaStorageHtml() }
-    single<VentasRepository> { VentasRepositoryImpl(get(), get(), get(), get(),get()) }
+    single<VentasRepository> { VentasRepositoryImpl(get(), get(), get(), get()) }
     single<VentasService> { VentasServiceImpl(get(), get(), get(), get()) }
 
     single<CineStorage> { CineStorageImpl(get(),get(),get(),get())  }

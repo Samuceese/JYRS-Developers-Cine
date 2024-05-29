@@ -35,7 +35,7 @@
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/libre.png" />
+                              <Image url="@../icons/libre.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -47,7 +47,7 @@
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/seleccionada.png" />
+                              <Image url="@../icons/seleccionada.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -62,7 +62,7 @@
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/mentenimiento.png" />
+                              <Image url="@../icons/mentenimiento.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -74,7 +74,7 @@
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/vip.png" />
+                              <Image url="@../icons/vip.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -89,7 +89,7 @@
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/ocupada.png" />
+                              <Image url="@../icons/ocupada.png" />
                            </image>
                         </ImageView>
                      </graphic>

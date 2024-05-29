@@ -34,7 +34,7 @@
                                                 <Separator layoutX="-2.0" layoutY="81.0" prefHeight="0.0" prefWidth="700.0" />
                                                 <ImageView fx:id="menuAdmin" fitHeight="40.0" fitWidth="40.0" layoutX="14.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="10.0">
                                                     <image>
-                                                        <Image url="@../images/menu.png" />
+                                                        <Image url="@../icons/menu.png" />
                                                     </image>
                                                 </ImageView>
                                             </children>
@@ -52,7 +52,7 @@
                                                 </Label>
                                                 <ImageView fx:id="imagenComplemento" fitHeight="45.0" fitWidth="60.0" layoutX="117.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
                                                     <image>
-                                                        <Image url="@../images/interrogacion.png" />
+                                                        <Image url="@../icons/interrogacion.png" />
                                                     </image>
                                                 </ImageView>
                                                 <Label layoutX="69.39999999999999" layoutY="123.0" text="Tipo" AnchorPane.leftAnchor="35.0">

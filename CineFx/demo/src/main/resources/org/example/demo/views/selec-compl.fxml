@@ -48,7 +48,7 @@
                                                 </Label>
                                                 <ImageView fx:id="imagenComplemento" fitHeight="45.0" fitWidth="60.0" layoutX="117.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
                                                     <image>
-                                                        <Image url="@../images/interrogacion.png" />
+                                                        <Image url="@../icons/interrogacion.png" />
                                                     </image>
                                                 </ImageView>
                                                 <Label layoutX="69.39999999999999" layoutY="123.0" text="Tipo" AnchorPane.leftAnchor="35.0">

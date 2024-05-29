@@ -97,19 +97,17 @@ class ButacaRepositoryImpl(
 
     override fun update(id: String, butaca: Butaca,ocupacion: Ocupacion,precio:Double): Butaca? {
         logger.debug { "Actualizando butaca con id: $id" }
-        var result = this.findById(id) ?: return null
-
         db.updateButacaEntity(
             id = id,
             estado = butaca.estado.toString(),
             tipo = butaca.tipo.toString(),
             ocupacion = ocupacion.toString(),
-            precio = precio
+            precio = precio,
         )
 
         logger.debug { "Actualizada butaca con id: $id" }
         println("ActualizaDA butaca con id: $id")
-        result = this.findById(id)!!
+         val result = this.findById(id)!!
         return result
     }
 

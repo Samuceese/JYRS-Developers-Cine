@@ -27,7 +27,7 @@
                         <Label layoutX="248.8" layoutY="55.8" prefHeight="18.0" prefWidth="202.0" text="------------------------------------------" textFill="WHITE" AnchorPane.leftAnchor="248.8" AnchorPane.rightAnchor="249.60000000000002" AnchorPane.topAnchor="55.8" />
                         <ImageView fx:id="menuAdmin" fitHeight="40.0" fitWidth="40.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="10.0">
                             <image>
-                                <Image url="@../images/menu.png" />
+                                <Image url="@../icons/menu.png" />
                             </image>
                         </ImageView>
                     </children>
@@ -47,7 +47,7 @@
                             <graphic>
                                 <ImageView fitHeight="32.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../images/libre.png" />
+                                        <Image url="@../icons/libre.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
@@ -59,7 +59,7 @@
                             <graphic>
                                 <ImageView fitHeight="32.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../images/seleccionada.png" />
+                                        <Image url="@../icons/seleccionada.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
@@ -74,7 +74,7 @@
                             <graphic>
                                 <ImageView fitHeight="32.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../images/mentenimiento.png" />
+                                        <Image url="@../icons/mentenimiento.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
@@ -86,7 +86,7 @@
                             <graphic>
                                 <ImageView fitHeight="32.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../images/vip.png" />
+                                        <Image url="@../icons/vip.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
@@ -101,7 +101,7 @@
                             <graphic>
                                 <ImageView fitHeight="32.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../images/ocupada.png" />
+                                        <Image url="@../icons/ocupada.png" />
                                     </image>
                                 </ImageView>
                             </graphic>

@@ -26,7 +26,7 @@
                                 <Label layoutX="271.0" layoutY="21.0" text="---------------------------------" textFill="WHITE" />
                                 <ImageView fx:id="imagenMenu" fitHeight="40.0" fitWidth="40.0" layoutX="18.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../images/menu.png" />
+                                        <Image url="@../icons/menu.png" />
                                     </image>
                                 </ImageView>
                             </children>

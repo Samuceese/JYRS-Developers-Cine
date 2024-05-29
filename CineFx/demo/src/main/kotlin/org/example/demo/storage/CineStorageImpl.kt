@@ -8,23 +8,18 @@ import org.example.demo.usuarios.models7.Usuario
 import org.example.demo.venta.models.Venta
 import java.io.File
 import com.github.michaelbull.result.Result
-import org.example.demo.config.Config
 import org.example.demo.errors.ErrorStorage
 import org.example.demo.productos.butaca.storage.ButacaStorage
 import org.example.demo.productos.complementos.storage.ComplementoStorage
-import org.example.demo.productos.complementos.storage.ComplementoStorageImpl
 import org.example.demo.usuarios.storage.UsuarioStorage
-import org.example.demo.usuarios.storage.UsuarioStorageImpl
 import org.example.demo.venta.storage.VentasStorage
 import org.lighthousegames.logging.logging
 import java.nio.file.Files
-import java.nio.file.Path
 import java.nio.file.Paths
 import java.nio.file.StandardCopyOption
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 import java.util.zip.ZipOutputStream
-import kotlin.io.path.Path
 
 private val logger= logging()
 
@@ -62,7 +57,7 @@ class CineStorageImpl  (
             }
 
 
-            storageComplementos.save(File("$tempDir","complementos.json"), complementos)
+            storageComplementos.saveJson(File("$tempDir","complementos.json"), complementos)
             Files.walk(tempDir).forEach { logger.debug { it } }
             val allComplementos = Files.walk(tempDir)
                 .filter { Files.isRegularFile(it) }

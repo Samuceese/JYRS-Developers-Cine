@@ -8,7 +8,6 @@ import org.example.demo.productos.complementos.storage.ComplementoStorage
 import org.example.demo.productos.models.Complemento
 import org.lighthousegames.logging.logging
 import java.io.File
-import java.io.InputStream
 
 private val logger= logging()
 
@@ -128,7 +127,7 @@ class ComplementoServiceImpl(
 
 
         logger.debug { "Cargando complemento desde CSV" }
-        return storage.load(csvFile).andThen { personajes->
+        return storage.loadCsv(csvFile).andThen { personajes->
             personajes.forEach{ p->
                 repository.save(p)
                 println("guardado $p")

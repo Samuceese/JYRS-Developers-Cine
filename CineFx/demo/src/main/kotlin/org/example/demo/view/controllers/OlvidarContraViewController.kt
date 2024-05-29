@@ -1,6 +1,7 @@
 package org.example.demo.view.controllers
 
 import javafx.fxml.FXML
+import javafx.scene.control.Alert
 import javafx.scene.control.Button
 import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
@@ -47,6 +48,7 @@ class OlvidarContraViewController :KoinComponent{
             newPassword.text == confirmPassword.text&&
             view.cambiarContraseña(textEmail.text,confirmPassword.text)
         ){
+            RoutesManager.alerta("Contraseña cambiada","La contraseña a sido cambiadsa con exito",Alert.AlertType.CONFIRMATION)
             RoutesManager.changeScene(view = RoutesManager.View.INICIO_SESION, title = "Inicio Sesion")
         }
 

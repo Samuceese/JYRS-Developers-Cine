@@ -26,7 +26,7 @@
                                     <children>
                                         <AnchorPane prefHeight="87.0" prefWidth="624.0">
                                             <children>
-                                                <Label layoutX="205.0" layoutY="30.0" text="ELEGIR COMPLEMENTO" textFill="WHITE">
+                                                <Label layoutX="205.0" layoutY="30.0" text="GESTIONAR COMPLEMENTOS" textFill="WHITE">
                                                     <font>
                                                         <Font name="Arial Rounded MT Bold" size="24.0" />
                                                     </font>
@@ -41,9 +41,9 @@
                                         </AnchorPane>
                                     </children>
                                 </HBox>
-                                <VBox layoutX="388.0" layoutY="114.0" prefHeight="321.0" prefWidth="280.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="51.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="118.39999999999998">
+                                <VBox layoutX="388.0" layoutY="118.4" prefHeight="268.0" prefWidth="276.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="114.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="118.0">
                                     <children>
-                                        <AnchorPane prefHeight="330.0" prefWidth="280.0" style="-fx-background-color: cfcfcf; -fx-border-color: white;">
+                                        <AnchorPane prefHeight="265.0" prefWidth="289.0" style="-fx-background-color: cfcfcf; -fx-border-color: white;">
                                             <children>
                                                 <Label layoutX="56.0" layoutY="27.0" text="COMPLEMENTO">
                                                     <font>
@@ -70,24 +70,19 @@
                                                         <Font name="Cambria" size="12.0" />
                                                     </font>
                                                 </Label>
-                                                <Label layoutX="69.39999999999999" layoutY="235.0" text="Cantidad" AnchorPane.leftAnchor="35.0">
-                                                    <font>
-                                                        <Font name="Cambria" size="12.0" />
-                                                    </font>
-                                                </Label>
                                                 <TextField fx:id="tipoTextfield" layoutX="88.0" layoutY="119.0" AnchorPane.rightAnchor="40.0" />
                                                 <TextField fx:id="nombreTextfield" layoutX="88.0" layoutY="156.0" AnchorPane.rightAnchor="40.0" />
                                                 <TextField fx:id="precioTextfield" layoutX="88.0" layoutY="194.0" AnchorPane.rightAnchor="40.0" />
-                                                <Button fx:id="añadirButton" layoutX="32.0" layoutY="283.0" mnemonicParsing="false" text="Añadir" AnchorPane.leftAnchor="32.0">
+                                                <Button fx:id="añadirButton" layoutX="32.0" layoutY="232.0" mnemonicParsing="false" text="Añadir" AnchorPane.leftAnchor="32.0">
                                                     <font>
                                                         <Font name="Bookman Old Style" size="12.0" />
                                                     </font></Button>
-                                                <Button fx:id="modificarButton" layoutX="104.0" layoutY="283.0" mnemonicParsing="false" text="Modificar">
+                                                <Button fx:id="modificarButton" layoutX="103.0" layoutY="232.0" mnemonicParsing="false" text="Modificar">
                                                     <font>
                                                         <Font name="Bookman Old Style" size="12.0" />
                                                     </font>
                                                 </Button>
-                                                <Button fx:id="eliminarButton" layoutX="191.0" layoutY="283.0" mnemonicParsing="false" text="Eliminar" AnchorPane.rightAnchor="21.80000000000001">
+                                                <Button fx:id="eliminarButton" layoutX="184.0" layoutY="232.0" mnemonicParsing="false" text="Eliminar" AnchorPane.rightAnchor="28.80000000000001">
                                                     <font>
                                                         <Font name="Bookman Old Style" size="12.0" />
                                                     </font>
@@ -106,6 +101,8 @@
                                 </TableView>
                                 <ComboBox fx:id="filtroPrecio" layoutX="258.0" layoutY="124.0" prefHeight="26.0" prefWidth="80.0" promptText="Precio" />
                                 <Separator layoutX="14.0" layoutY="118.0" orientation="VERTICAL" prefHeight="330.0" prefWidth="0.0" AnchorPane.leftAnchor="16.0" />
+                        <Button fx:id="importarBoton" layoutX="402.0" layoutY="405.0" mnemonicParsing="false" text="IMPORTAR" />
+                        <Button fx:id="exportarBoton" layoutX="548.0" layoutY="405.0" mnemonicParsing="false" text="EXPORTAR" />
                             </children>
                         </AnchorPane>
                     </children>

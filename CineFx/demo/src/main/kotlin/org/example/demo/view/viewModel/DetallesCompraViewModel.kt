@@ -12,9 +12,10 @@ class DetallesCompraViewModel(
     val service:VentasService
 ) {
 
-    fun guardarPdf(venta: Venta, pelicula:String){
+    fun guardarPdf(venta: Venta, pelicula:String):String{
         Files.createDirectories(Path("data"))
         val file= Path("data","Ticket${LocalDate.now()}-${venta.cliente.nombre}.html").toFile()
         service.exportToHtml(venta = venta, htmlFile = file, pelicula = pelicula)
+        return file.toPath().toString()
     }
 }

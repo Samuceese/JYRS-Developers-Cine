@@ -2,6 +2,7 @@ package org.example.demo.locale
 
 import java.text.NumberFormat
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
@@ -32,4 +33,9 @@ fun Double.toDefaultMoneyString():String{
 fun String.returnDateTimeString():LocalDate{
     val cadena=this.split("/")
     return LocalDate.of(cadena[2].toInt(),cadena[1].toInt(),cadena[0].toInt())
+}
+
+fun LocalDateTime.toShortSpanishFormat(): String {
+    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    return this.format(formatter)
 }

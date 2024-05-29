@@ -1,5 +1,6 @@
 package org.example.demo.view.controllers
 
+import com.vaadin.open.Open
 import javafx.fxml.FXML
 import javafx.scene.control.Button
 import javafx.scene.control.Label
@@ -18,6 +19,7 @@ import org.example.demo.view.viewModel.PagoViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
+
 
 
 private val logger= logging()
@@ -91,8 +93,9 @@ class DetallesCompraViewController: KoinComponent {
     }
 
     private fun pdfOnAction() {
-        logger.debug { "creando pdf Detalles de compra" }
-        view.guardarPdf(viewPago.state.value.venta,viewPago.state.value.pelicula)
+        logger.debug { "creando html Detalles de compra" }
+        Open.open(view.guardarPdf(viewPago.state.value.venta, viewPago.state.value.pelicula))
+
     }
 
     private fun cerrarSesionOnAction() {

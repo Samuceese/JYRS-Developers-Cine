@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.scene.control.Alert
+import javafx.scene.control.Alert.AlertType
 import javafx.scene.control.ButtonType
 import javafx.scene.control.ScrollPane
 import javafx.scene.image.Image
@@ -138,10 +139,10 @@ object RoutesManager {
         }
 
     }
-    fun alerta(mensaje:String,contenido:String){
+    fun alerta(mensaje:String,contenido:String,alertType: AlertType=AlertType.ERROR){
         logger.debug { "Alerta $mensaje" }
-        Alert(Alert.AlertType.ERROR).apply {
-            this.title="Error ${mainStage.title}"
+        Alert(alertType).apply {
+            this.title= mainStage.title
             this.headerText="$mensaje "
             this.contentText=contenido
         }.showAndWait()

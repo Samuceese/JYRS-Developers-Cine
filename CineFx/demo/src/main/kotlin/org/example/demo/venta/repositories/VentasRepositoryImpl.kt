@@ -21,7 +21,6 @@ class VentasRepositoryImpl(
     private val clienteRepository: UserRepository,
     private val butacasRepository: ButacaRepository,
     private val complementosRepository: ComplementoRepository,
-    private val dbManager: SqlDelightManager
 ): VentasRepository {
     private val db = dbManager.databaseQueries
 

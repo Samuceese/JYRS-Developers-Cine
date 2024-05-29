@@ -7,6 +7,9 @@ CREATE TABLE IF NOT EXISTS UsuariosEntity(
     contrasena TEXT NOT NULL
 );
 
+deleteAdmin:
+DELETE FROM UsuariosEntity WHERE tipo == 'admin';
+
 deleteAllUsers:
 DELETE FROM UsuariosEntity;
 
@@ -23,8 +26,8 @@ selectById:
 SELECT * FROM UsuariosEntity WHERE id = ?;
 
 InsertTheAdmin:
-INSERT INTO UsuariosEntity (id, email, nombre, apellidos, tipo, contrasena)
-VALUES ( 1, "SomosJYRS@gmail.com", "JYRS", "Dev", "admin", "SnlScyowNTAyMDMwMw==");
+INSERT INTO UsuariosEntity ( email, nombre, apellidos, tipo, contrasena)
+VALUES (  "SomosJYRS@gmail.com", "JYRS", "Dev", "admin", "SnlScyowNTAyMDMwMw==");
 
 insertUser:
 INSERT INTO UsuariosEntity (email, nombre, apellidos, tipo, contrasena)

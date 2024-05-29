@@ -5,21 +5,14 @@ import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import org.example.demo.productos.butaca.dto.ButacaDto
-import org.example.demo.productos.butaca.errors.ButacaError
-import org.example.demo.productos.butaca.mappers.toButaca
-import org.example.demo.productos.butaca.mappers.toButacaDto
 import org.example.demo.productos.complementos.dto.ComplementoDto
 import org.example.demo.productos.complementos.errors.ComplementoError
 import org.example.demo.productos.complementos.mappers.toComplemento
 import org.example.demo.productos.complementos.mappers.toComplementoDto
-import org.example.demo.productos.models.Butaca
 import org.example.demo.productos.models.Complemento
 import org.lighthousegames.logging.logging
 import java.io.File
-import java.io.InputStream
-import java.nio.file.Files
-import kotlin.io.path.Path
+
 
 private val logger=logging()
 

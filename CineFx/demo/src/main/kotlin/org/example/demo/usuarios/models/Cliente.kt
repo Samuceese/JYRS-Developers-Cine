@@ -1,5 +1,6 @@
 package org.example.demo.usuarios.models
 
+import kotlinx.serialization.Serializable
 import org.example.demo.usuarios.models7.Usuario
 
 /**

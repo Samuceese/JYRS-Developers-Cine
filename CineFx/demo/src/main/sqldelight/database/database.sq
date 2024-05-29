@@ -26,12 +26,16 @@ selectById:
 SELECT * FROM UsuariosEntity WHERE id = ?;
 
 InsertTheAdmin:
-INSERT INTO UsuariosEntity ( email, nombre, apellidos, tipo, contrasena)
-VALUES (  "SomosJYRS@gmail.com", "JYRS", "Dev", "admin", "SnlScyowNTAyMDMwMw==");
+INSERT INTO UsuariosEntity ( id,email, nombre, apellidos, tipo, contrasena)
+VALUES ( 1, "SomosJYRS@gmail.com", "JYRS", "Dev", "admin", "SnlScyowNTAyMDMwMw==");
 
 insertUser:
 INSERT INTO UsuariosEntity (email, nombre, apellidos, tipo, contrasena)
 VALUES (?, ?, ?, ?,?);
+
+insertUserFromJson:
+INSERT INTO UsuariosEntity (id,email, nombre, apellidos, tipo, contrasena)
+VALUES (?,?, ?, ?, ?,?);
 
 selectClienteLastInserted:
 SELECT * FROM UsuariosEntity WHERE id = last_insert_rowid();
@@ -74,7 +78,6 @@ UPDATE ButacaEntity SET  estado=?, tipo=?, ocupacion=?, precio=? WHERE id =?;
 
 deleteAllButacaEntity:
 DELETE FROM ButacaEntity;
-
 --ComplementoEntity
 CREATE TABLE IF NOT EXISTS ComplementoEntity(
     tipo TEXT NOT NULL ,
@@ -104,12 +107,6 @@ INSERT INTO ComplementoEntity(tipo,id,nombre,precio) VALUES(?,?,?,?);
 deleteComplementoByID:
 DELETE FROM ComplementoEntity WHERE id=?;
 
---PeliculaEntity
-CREATE TABLE IF NOT EXISTS PeliculaEntity(
-    id INTEGER PRIMARY KEY NOT NULL,
-    nombre TEXT NOT NULL
-);
---Tabla ventas
 CREATE TABLE IF NOT EXISTS VentaEntity (
     id TEXT PRIMARY KEY,
     cliente_id TEXT NOT NULL REFERENCES UsuariosEntity(id),

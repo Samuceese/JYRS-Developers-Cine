@@ -2,13 +2,10 @@ package org.example.demo.view.controllers
 
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
-import javafx.scene.control.Button
-import javafx.scene.control.ComboBox
-import javafx.scene.control.TableColumn
-import javafx.scene.control.TableView
-import javafx.scene.control.TextField
+import javafx.scene.control.*
 import javafx.scene.control.cell.PropertyValueFactory
 import javafx.scene.image.ImageView
+import javafx.stage.FileChooser
 import org.example.demo.productos.models.Complemento
 import org.example.demo.routes.RoutesManager
 import org.example.demo.view.viewModel.GestionComplementoViewModel
@@ -46,6 +43,10 @@ class GestionComplViewController:KoinComponent {
     lateinit var precioColumna:TableColumn<Complemento,String>
     @FXML
     lateinit var filtroPrecio:ComboBox<String>
+    @FXML
+    lateinit var exportarBoton:Button
+    @FXML
+    lateinit var importarBoton:Button
 
     @FXML
     fun initialize(){
@@ -86,6 +87,42 @@ class GestionComplViewController:KoinComponent {
         }
         filtroNombre.setOnKeyReleased {
             it?.let { filtrarTabla() }
+        }
+        exportarBoton.setOnAction { exportarOnAction() }
+        importarBoton.setOnAction { importarOnAction() }
+    }
+
+    private fun importarOnAction() {
+        logger.debug { "Importar complementos" }
+        FileChooser().run {
+            title = "Importar Complementos"
+            extensionFilters.add(FileChooser.ExtensionFilter("JSON", "*.json"))
+            extensionFilters.add(FileChooser.ExtensionFilter("CSV", "*.csv"))
+            showOpenDialog(RoutesManager.activeStage)
+        }?.let {
+            logger.debug { "Importar Complementos: $it" }
+            if (!view.importar(it)){
+                RoutesManager.alerta("Importar","Los Complementos no se han importado")
+            }else{
+                RoutesManager.alerta("Importar","Complementos importado con exito", Alert.AlertType.CONFIRMATION)
+            }
+        }
+    }
+
+    private fun exportarOnAction() {
+        logger.debug { "Exportar complementos" }
+        FileChooser().run {
+            title = "Exportar Complementos"
+            extensionFilters.add(FileChooser.ExtensionFilter("JSON", "*.json"))
+            extensionFilters.add(FileChooser.ExtensionFilter("CSV", "*.csv"))
+            showSaveDialog(RoutesManager.activeStage)
+        }?.let {
+            logger.debug { "Exportar Complementos: $it" }
+            if (!view.exportar(it)){
+                RoutesManager.alerta("Exportar","Los Complementos no se han exportado")
+            }else{
+                RoutesManager.alerta("Exportar","Complementos exportados con exito", Alert.AlertType.CONFIRMATION)
+            }
         }
     }
 

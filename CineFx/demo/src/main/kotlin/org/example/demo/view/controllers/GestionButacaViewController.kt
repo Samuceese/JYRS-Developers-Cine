@@ -122,7 +122,7 @@ class GestionButacaViewController:KoinComponent {
     private fun exportarOnAction() {
         logger.debug { "Exportar butacas" }
         FileChooser().run {
-            title = "Importar desde Zip"
+            title = "Importar Butacas"
             extensionFilters.add(FileChooser.ExtensionFilter("JSON", "*.json"))
             extensionFilters.add(FileChooser.ExtensionFilter("CSV", "*.csv"))
             showSaveDialog(RoutesManager.activeStage)

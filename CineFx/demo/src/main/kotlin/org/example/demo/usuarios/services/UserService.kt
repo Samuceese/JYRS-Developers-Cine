@@ -6,6 +6,7 @@ import org.example.demo.usuarios.models7.Usuario
 
 interface UserService {
     fun save(user: Usuario): Result<Usuario, UserError>
+    fun saveFromJson(user: Usuario):Result<Usuario, UserError>
     fun cambioContraseña(email: String, contraseña: String): Result<Usuario, UserError>
     fun findByEmail(email: String): Result<Usuario, UserError>
     fun findById(id: Long): Result<Usuario, UserError>

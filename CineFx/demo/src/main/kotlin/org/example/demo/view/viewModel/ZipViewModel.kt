@@ -44,7 +44,7 @@ class ZipViewModel(
                 it.forEach {
                     when(it){
                         is Venta->serviceVenta.create(it)
-                        is Cliente->serviceUsuario.save(it)
+                        is Cliente->serviceUsuario.saveFromJson(it)
                         is Complemento->serviceComplementos.create(it)
                         is Butaca->serviceButacas.create(it)
                     }

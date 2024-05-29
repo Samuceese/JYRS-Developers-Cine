@@ -58,12 +58,12 @@ class SqlDelightManager(
     fun clearData() {
         logger.debug { "Borrando datos de la base de datos" }
         databaseQueries.transaction {
-            databaseQueries.deleteAllUsers()
+            //databaseQueries.deleteAllUsers()
             databaseQueries.deleteAllButacaEntity()
             databaseQueries.deleteAllComplemetoEntity()
-            databaseQueries.removeAllVentas()
-            databaseQueries.removeAllLineaVentaEntityButaca()
-            databaseQueries.removeAllLineaVentaEntityComplemento()
+            //databaseQueries.removeAllVentas()
+            //databaseQueries.removeAllLineaVentaEntityButaca()
+            //databaseQueries.removeAllLineaVentaEntityComplemento()
         }
     }
 

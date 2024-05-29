@@ -29,14 +29,22 @@ class UserServiceImpl(
 
     override fun save(user: Usuario): Result<Usuario, UserError> {
         logger.debug { "Guardando Usuario: $user" }
-       return validateUser(user).mapBoth(
-           success = {
-               Ok(repository.save(it).also { cacheUsuario.put(user.id, user) })
-           },
-           failure = {
-               Err(UserError.ValidateProblem("No se ha podido guardar debido a un error de valdiación"))
-           }
-       )
+       return if (repository.save(user) != null) {
+           cacheUsuario.put(user.id, user)
+           Ok(user)
+       }else{
+           Err(UserError.ValidateProblem("No se ha podido guardar debido a un error de valdiación"))
+       }
+    }
+
+    override fun saveFromJson(user: Usuario): Result<Usuario, UserError> {
+        logger.debug { "Guardando Usuario desde JSON: $user" }
+        return if (repository.saveFromJson(user) != null) {
+            cacheUsuario.put(user.id, user)
+            Ok(user)
+        }else{
+            Err(UserError.ValidateProblem("No se ha podido guardar debido a un error de valdiación"))
+        }
     }
 
 

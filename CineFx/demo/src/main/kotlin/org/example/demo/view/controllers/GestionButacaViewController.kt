@@ -2,13 +2,10 @@ package org.example.demo.view.controllers
 
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
-import javafx.scene.control.Button
-import javafx.scene.control.ComboBox
-import javafx.scene.control.TableColumn
-import javafx.scene.control.TableView
-import javafx.scene.control.TextField
+import javafx.scene.control.*
 import javafx.scene.control.cell.PropertyValueFactory
 import javafx.scene.image.ImageView
+import javafx.stage.FileChooser
 import org.example.demo.productos.models.Butaca
 import org.example.demo.routes.RoutesManager
 import org.example.demo.view.viewModel.GestionButacaViewModel
@@ -80,6 +77,7 @@ class GestionButacaViewController:KoinComponent {
     }
 
     private fun initDefaultValues() {
+        exportarJsonButton.text="EXPORTAR BUTACAS"
         tablaButacas.items = FXCollections.observableList(view.state.value.butacas)
         columnaEstado.cellValueFactory= PropertyValueFactory("Estado")
         columnaId.cellValueFactory= PropertyValueFactory("Id")
@@ -101,6 +99,9 @@ class GestionButacaViewController:KoinComponent {
     private fun initDefaultEvents() {
         menuAdmin.setOnMouseClicked { menuOnAction() }
         modificarButton.setOnAction { modificarOnAction() }
+        importarButacasButton.setOnAction { importarOnAction() }
+        exportarJsonButton.setOnAction { exportarOnAction() }
+
         tablaButacas.selectionModel.selectedItemProperty().addListener { _,_,newValue->
             newValue?.let { onTableSelected(it) }
         }
@@ -115,6 +116,40 @@ class GestionButacaViewController:KoinComponent {
         }
         idButaca.setOnKeyReleased {
             it?.let { filtrarTabla() }
+        }
+    }
+
+    private fun exportarOnAction() {
+        logger.debug { "Exportar butacas" }
+        FileChooser().run {
+            title = "Importar desde Zip"
+            extensionFilters.add(FileChooser.ExtensionFilter("JSON", "*.json"))
+            extensionFilters.add(FileChooser.ExtensionFilter("CSV", "*.csv"))
+            showSaveDialog(RoutesManager.activeStage)
+        }?.let {
+            logger.debug { "Exportar Butacas: $it" }
+            if (!view.exportar(it)){
+                RoutesManager.alerta("Exportar","Las butacas no se han exportado")
+            }else{
+                RoutesManager.alerta("Exportar","Butacas exportadas con exito",Alert.AlertType.CONFIRMATION)
+            }
+        }
+    }
+
+    private fun importarOnAction() {
+        logger.debug { "Importar butacas" }
+        FileChooser().run {
+            title = "Importar Butacas"
+            extensionFilters.add(FileChooser.ExtensionFilter("CSV", "*.csv"))
+            extensionFilters.add(FileChooser.ExtensionFilter("JSON", "*.json"))
+            showOpenDialog(RoutesManager.activeStage)
+        }?.let {
+            logger.debug { "importarOnAction: $it" }
+            if (!view.importarButacas(it)){
+                RoutesManager.alerta("Importar","No se han importado las butacas")
+            }else{
+                RoutesManager.alerta("Importar","Butacas importadas con exito",Alert.AlertType.CONFIRMATION)
+            }
         }
     }
 

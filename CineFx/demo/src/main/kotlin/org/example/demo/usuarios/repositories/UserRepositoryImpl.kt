@@ -19,7 +19,7 @@ class UserRepositoryImpl(
         private val dbManager: SqlDelightManager
 ): UserRepository {
     private val db = dbManager.databaseQueries
-    override fun save(user: Usuario): Usuario {
+    override fun save(user: Usuario): Usuario? {
         logger.debug { "Guardando Usuario: $user" }
         logger.debug { "save: $user" }
         db.transaction {
@@ -33,8 +33,23 @@ class UserRepositoryImpl(
         }
         return user
     }
-    
-    /**
+
+        override fun saveFromJson(user: Usuario): Usuario? {
+            logger.debug { "Guardando Usuario desde JSON: $user" }
+            logger.debug { "save: $user" }
+            db.transaction {
+                db.insertUser(
+                    email = user.email,
+                    nombre = user.nombre,
+                    apellidos = user.apellidos,
+                    tipo = "cliente",
+                    contrasena = user.contraseña,
+                )
+            }
+            return user
+        }
+
+        /**
      * El cambio de contraseña del usuario.
      * @param email
      * @param contraseña

@@ -9,7 +9,6 @@ import kotlinx.serialization.Serializable
  * @since 1.0
  */
 
-@Serializable
 abstract class Complemento(
     val id:String,
     val tipo: String,

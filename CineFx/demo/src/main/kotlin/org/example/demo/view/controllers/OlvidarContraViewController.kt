@@ -17,6 +17,8 @@ class OlvidarContraViewController :KoinComponent{
     @FXML
     lateinit var textEmail: TextField
     @FXML
+    lateinit var botonVolver: Button
+    @FXML
     lateinit var newPassword: PasswordField
     @FXML
     lateinit var botonRestablecer: Button
@@ -31,6 +33,11 @@ class OlvidarContraViewController :KoinComponent{
 
     private fun initDefaultEvents() {
         botonRestablecer.setOnAction { restablecerOnAction() }
+        botonVolver.setOnAction { volverOnAction() }
+    }
+
+    private fun volverOnAction() {
+        RoutesManager.changeScene(title = "Iniciar Sesion", view = RoutesManager.View.INICIO_SESION)
     }
 
     private fun restablecerOnAction() {

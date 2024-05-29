@@ -2,6 +2,7 @@ package org.example.demo.view.controllers
 
 import javafx.fxml.FXML
 import javafx.scene.control.Button
+import javafx.scene.control.Label
 import javafx.scene.control.TextField
 import javafx.scene.image.ImageView
 import org.example.demo.routes.RoutesManager
@@ -31,6 +32,8 @@ class PagoViewController:KoinComponent {
     lateinit var fxCvcTextField: TextField
     @FXML
     lateinit var fxPagarButton: Button
+    @FXML
+    lateinit var totalPagar: Label
 
     @FXML
     fun initialize(){
@@ -41,7 +44,7 @@ class PagoViewController:KoinComponent {
 
     private fun initDefaultValues() {
         logger.debug { "inicializando valores por defecto de pago" }
-        fxPagarButton.text = "Pagar ${viewCarrito.state.value.total}"
+        totalPagar.text = "Pagar ${viewCarrito.state.value.total}"
     }
 
     private fun initDefaultEvents() {

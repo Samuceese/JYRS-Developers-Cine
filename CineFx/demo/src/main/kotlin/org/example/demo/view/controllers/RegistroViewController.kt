@@ -13,6 +13,8 @@ import org.lighthousegames.logging.logging
 private val logger= logging()
 class RegistroViewController:KoinComponent {
     val view:RegistroViewModel by inject()
+    //@FXML
+    //lateinit var botonVolver:Button
     @FXML
     lateinit var nombreRegister1: TextField
     @FXML
@@ -34,6 +36,11 @@ class RegistroViewController:KoinComponent {
 
     private fun initDefaultEvents() {
         botonRegister.setOnAction { botonRegisterOnAction() }
+        //botonVolver.setOnAction { volverOnAction() }
+    }
+
+    private fun volverOnAction() {
+        RoutesManager.changeScene(title = "Iniciar Sesion", view = RoutesManager.View.INICIO_SESION)
     }
 
     private fun botonRegisterOnAction(){

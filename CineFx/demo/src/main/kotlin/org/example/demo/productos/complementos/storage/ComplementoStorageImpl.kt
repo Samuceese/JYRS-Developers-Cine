@@ -24,7 +24,7 @@ private val logger=logging()
  */
 
 class ComplementoStorageImpl:ComplementoStorage {
-    override fun load(file: File): Result<List<Complemento>, ComplementoError> {
+    override fun loadCsv(file: File): Result<List<Complemento>, ComplementoError> {
         logger.debug { "Carganado complementos desde fichero Csv" }
         return try {
             Ok(file.reader().readLines().drop(1)
@@ -43,7 +43,8 @@ class ComplementoStorageImpl:ComplementoStorage {
         }
     }
 
-    override fun save(file: File, list: List<Complemento>): Result<Unit, ComplementoError> {
+
+    override fun saveJson(file: File, list: List<Complemento>): Result<Unit, ComplementoError> {
         logger.debug { "Guardando complementos en fichero json" }
         return try {
             val json = Json {
@@ -67,6 +68,19 @@ class ComplementoStorageImpl:ComplementoStorage {
             Ok(json.decodeFromString<List<ComplementoDto>>(file.readText()).map { it.toComplemento() })
         }catch (e: Exception) {
             Err(ComplementoError.FicheroNoValido("Error al leer el JSON: ${e.message}"))
+        }
+    }
+
+    override fun saveCsv(file: File, list: List<Complemento>): Result<Unit, ComplementoError> {
+        return try {
+                file.writeText("tipo_complemento,nombre,precio\n")
+                list.map { it.toComplementoDto() }
+                    .forEach { complemento ->
+                    file.appendText("${complemento.tipoComplemento},${complemento.nombre},${complemento.precio}\n")
+                }
+            Ok(Unit)
+        } catch (e: Exception) {
+            Err(ComplementoError.FicheroNoValido("Error al escribir el fichero csv"))
         }
     }
 

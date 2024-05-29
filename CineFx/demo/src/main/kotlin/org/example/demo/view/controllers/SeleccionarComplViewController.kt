@@ -2,12 +2,7 @@ package org.example.demo.view.controllers
 
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
-import javafx.scene.control.Button
-import javafx.scene.control.ComboBox
-import javafx.scene.control.Spinner
-import javafx.scene.control.TableColumn
-import javafx.scene.control.TableView
-import javafx.scene.control.TextField
+import javafx.scene.control.*
 import javafx.scene.control.cell.PropertyValueFactory
 import javafx.scene.image.ImageView
 import org.example.demo.productos.models.*
@@ -34,6 +29,8 @@ class SeleccionarComplViewController :KoinComponent{
     lateinit var cantidadSpinner: Spinner<Int>
     @FXML
     lateinit var añadirComplementoButton:Button
+    //@FXML
+    //lateinit var eliminarComplementoBoton:Button
     @FXML
     lateinit var imagenComplemento: ImageView
     @FXML
@@ -95,22 +92,43 @@ class SeleccionarComplViewController :KoinComponent{
         filtroNombre.setOnKeyReleased {
             it?.let { onTextAction() }
         }
-        añadirComplementoButton.setOnAction { añadirOnAction(complemennto!!) }
+        añadirComplementoButton.setOnAction { añadirOnAction(complemennto) }
+        //eliminarComplementoBoton.setOnAction { eliminarOnAction(complemennto!!) }
         
     }
 
-    private fun añadirOnAction(complememnto:Complemento) {
+    private fun eliminarOnAction(complemento: Complemento) {
+        if (this.complemennto != null){
+            if (complemento.id != "NOVALIDO" && viewCompl.state.value.complementosSeleccionados.contains(complemento)){
+                complemmentosSeleccionas.remove(complemento)
+                println(complemmentosSeleccionas.size)
+                viewCompl.actualizarSeleccionados(complemmentosSeleccionas)
+                RoutesManager.alerta("Complemento Eliminado","El Complemento a sido eliminado con exito",Alert.AlertType.CONFIRMATION)
+            }else{
+                RoutesManager.alerta("Eliminar Complemento","El complemento seleccionado no esta en tu carrito")
+            }
+        }else{
+            RoutesManager.alerta("Complemento Seleccionado","No has seleccionado ningun complemento")
+        }
+    }
+
+    private fun añadirOnAction(complememnto:Complemento?) {
         añadirComplemmento(complememnto)
     }
 
-    private fun añadirComplemmento(complemento:Complemento) {
-        if (complemento.id != "NOVALIDO" && complemmentosSeleccionas.size < 3){
-            complemmentosSeleccionas.add(complemento)
-            println(complemmentosSeleccionas.size)
-            viewCompl.actualizarSeleccionados(complemmentosSeleccionas)
+    private fun añadirComplemmento(complemento:Complemento?) {
+        if (complemento != null){
+            if (complemento.id != "NOVALIDO" && complemmentosSeleccionas.size < 3){
+                complemmentosSeleccionas.add(complemento)
+                println(complemmentosSeleccionas.size)
+                viewCompl.actualizarSeleccionados(complemmentosSeleccionas)
+            }else{
+                RoutesManager.alerta("Maximo 3 Complmenetos","El maximo de complemmentos que puedes seleccionar son 3")
+            }
         }else{
-            RoutesManager.alerta("Maximo 3 Complmenetos","El maximo de complemmentos que puedes seleccionar son 3")
+            RoutesManager.alerta("Complemento Seleccionado","No has seleccionado ningun complemento")
         }
+
 
     }
 

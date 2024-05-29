@@ -5,12 +5,15 @@ import javafx.fxml.FXML
 import javafx.scene.control.Button
 import javafx.scene.control.ComboBox
 import javafx.scene.control.TextField
+import javafx.scene.image.ImageView
+import javafx.stage.FileChooser
 import org.example.demo.routes.RoutesManager
 import org.example.demo.view.viewModel.ActualizarComplViewModel
 import org.example.demo.view.viewModel.GestionComplementoViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
+import kotlin.math.log
 
 private val logger= logging()
 class ActualizarComplViewController:KoinComponent {
@@ -30,6 +33,8 @@ class ActualizarComplViewController:KoinComponent {
     lateinit var fxBotonLimpiar:Button
     @FXML
     lateinit var fxBotonCancelar:Button
+    @FXML
+    lateinit var imagenComplemento:ImageView
 
     @FXML
     fun initialize(){
@@ -53,6 +58,17 @@ class ActualizarComplViewController:KoinComponent {
         fxTextFieldPrecio.text=""
     }
 
+    private fun onImageAction(){
+        logger.debug { "onImageAction" }
+        FileChooser().run {
+            title = "Selecciona una imagen"
+            extensionFilters.addAll(FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg"))
+            showOpenDialog(RoutesManager.activeStage)
+        }?.let {
+            view.actualizar()
+        }
+    }
+
     private fun guardarOnAction() {
         if (fxTextFieldNombre.text.isBlank())RoutesManager.alerta("Nombre","Recuerda que el nombre no puede estar vacio")
         if (fxTextFieldPrecio.text.isBlank())RoutesManager.alerta("Precio","Recuerda que el precio no puede estar vacio")
@@ -60,7 +76,7 @@ class ActualizarComplViewController:KoinComponent {
         if (fxTextFieldPrecio.text.isNotBlank() &&
             fxTextFieldNombre.text.isNotBlank() &&
             fxTextFieldPrecio.text.toDoubleOrNull()!= null){
-            view.actualizar(id = fxTextFieldNombre.text, precio = fxTextFieldPrecio.text, tipo = fxtextFieldBebida.text)
+            view.actualizar(id = fxTextFieldNombre.text, precio = fxTextFieldPrecio.text, tipo = fxtextFieldBebida.text, imagen = )
             viewGest.initState(view.allComplementos())
         }
     }

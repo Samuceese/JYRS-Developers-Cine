@@ -12,6 +12,7 @@ module org.example.demo {
     requires java.sql;
     requires kotlinx.serialization.json;
     requires koin.core.jvm;
+    requires open;
 
 
     opens org.example.demo to javafx.fxml;

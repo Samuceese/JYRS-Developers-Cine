@@ -8,9 +8,9 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.modules.subclass
-import org.example.demo.LocalDateTimeSerializer
-import org.example.demo.UUIDSerializer
+
 import org.example.demo.locale.toDefaultMoneyString
+import org.example.demo.locale.toShortSpanishFormat
 import org.example.demo.productos.butaca.dto.ButacaDto
 import org.example.demo.productos.complementos.dto.ComplementoDto
 import org.example.demo.productos.complementos.errors.ComplementoError
@@ -104,7 +104,7 @@ class VentaStorageHtml:VentasStorage {
                     <body>
                         <div class="container">
                             <h1>Venta</h1>
-                            <p>Fecha: ${venta.createdAt}</p>
+                            <p>Fecha: ${venta.createdAt.toShortSpanishFormat()}</p>
                             <p>Cliente: ${venta.cliente.nombre}</p>
                             <p>Película: $pelicula</p>
                             <p>Productos:</p>
@@ -143,12 +143,10 @@ class VentaStorageHtml:VentasStorage {
                         subclass(ComplementoDto::class)
                         subclass(ButacaDto::class)
                     }
-               }
+                }
             }
 
-                val jsonString = json.encodeToString(list.map { it.toVentaDto() })
-            file.writeText(jsonString)
-            Ok(Unit)
+            Ok(file.writeText(json.encodeToString<List<VentaDto>>(list.map { it.toVentaDto() })))
         } catch (e: Exception) {
             logger.error { "Error al guardar el fichero json de ventas: ${e.message}" }
             Err(VentaError.VentaStorageError("Error al guardar el JSON: ${e.message}"))

@@ -22,17 +22,10 @@ class ActualizarComplViewModel(
                 "COMIDA"->Comida(id,tipo,precio.toDouble(), imagen )
                 "BEBIDA"->Bebida(id,tipo,precio.toDouble(), imagen)
                 else->Comida(id,tipo,precio.toDouble(), imagen)
-            }
+            },
+            imagen= imagen
         )
     }
-
-    fun updateImageComplemento(fileImage: File){
-        logger.debug { "Actualizando imagen: $fileImage" }
-        state.value = state.value.copy(
-
-        )
-    }
-
 
     fun allComplementos():List<Complemento>{
         return service.getAll().value

@@ -5,6 +5,9 @@ import javafx.fxml.FXML
 import javafx.scene.control.Button
 import javafx.scene.control.ComboBox
 import javafx.scene.control.TextField
+import javafx.scene.image.Image
+import javafx.scene.image.ImageView
+import javafx.stage.FileChooser
 import javafx.stage.Stage
 import org.example.demo.routes.RoutesManager
 import org.example.demo.view.viewModel.GestionComplementoViewModel
@@ -31,7 +34,11 @@ class NewComplementoViewController: KoinComponent {
     lateinit var fxBotonLimpiar:Button
     @FXML
     lateinit var fxBotonCancelar:Button
+    @FXML
+    lateinit var imagenComplemento:ImageView
 
+    private var seleccionada=false
+    private var imagen:String=""
     @FXML
     fun initialize(){
         logger.debug { "inicializando controller Nuevo Complementos" }
@@ -49,6 +56,19 @@ class NewComplementoViewController: KoinComponent {
     private fun initDefaultEvents() {
         fxBotonCrear.setOnAction { crearOnAction() }
         fxBotonLimpiar.setOnAction { limpiarOnAction() }
+        imagenComplemento.setOnMouseClicked { imagenOnAction() }
+    }
+
+    private fun imagenOnAction() {
+        logger.debug { "onImageAction" }
+        FileChooser().run {
+            title = "Selecciona una imagen"
+            extensionFilters.addAll(FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg"))
+            showOpenDialog(RoutesManager.activeStage)
+        }?.let {
+            imagen=it.name
+            seleccionada=true
+        }
     }
 
     private fun limpiarOnAction() {
@@ -60,11 +80,12 @@ class NewComplementoViewController: KoinComponent {
         if (fxTextFieldPrecio.text.isBlank())RoutesManager.alerta("Precio","Recuerda que el precio no puede estar vacio")
         if (fxTextFieldPrecio.text.toDoubleOrNull() == null)RoutesManager.alerta("Precio","Recuerda que el precio debe ser un double 0.0")
         if (view.comprobarExistencia(fxTextFieldNombre.text))RoutesManager.alerta("Nombre","Ya existe ese complemento")
-        if (fxTextFieldPrecio.text.isNotBlank() &&
+        if (!seleccionada)RoutesManager.alerta("Imagen","Debes elegir una imagen")
+        if (seleccionada && fxTextFieldPrecio.text.isNotBlank() &&
             fxTextFieldNombre.text.isNotBlank() &&
             fxTextFieldPrecio.text.toDoubleOrNull()!= null&&
             !view.comprobarExistencia(fxTextFieldNombre.text)){
-            view.createComplemento(nombre = fxTextFieldNombre.text, precio = fxTextFieldPrecio.text, tipo = fxtextFieldBebida.value)
+            view.createComplemento(nombre = fxTextFieldNombre.text, precio = fxTextFieldPrecio.text, tipo = fxtextFieldBebida.value, imagen = imagen)
             viewGest.initState(view.allComplementos())
         }
     }

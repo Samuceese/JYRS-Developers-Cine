@@ -14,10 +14,10 @@ class NewComplementoViewModel(
 ) {
     val state: SimpleObjectProperty<NuevoComplementoState> = SimpleObjectProperty(NuevoComplementoState())
 
-    fun createComplemento(tipo:String,nombre: String,precio: String){
+    fun createComplemento(tipo:String,nombre: String,precio: String,imagen:String){
         when(tipo){
-            "COMIDA"->service.create(Comida(nombre,"COMIDA",precio.toDouble()))
-            "BEBIDA"->service.create(Bebida(nombre,"BEBIDA",precio.toDouble()))
+            "COMIDA"->service.create(Comida(nombre,"COMIDA",precio.toDouble(),imagen))
+            "BEBIDA"->service.create(Bebida(nombre,"BEBIDA",precio.toDouble(),imagen))
         }
     }
     fun allComplementos():List<Complemento>{

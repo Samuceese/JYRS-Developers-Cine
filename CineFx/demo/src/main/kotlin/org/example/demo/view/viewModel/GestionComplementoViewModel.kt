@@ -7,6 +7,7 @@ import javafx.scene.image.Image
 import org.example.demo.locale.toDefaultMoneyString
 import org.example.demo.productos.complementos.services.ComplementoService
 import org.example.demo.productos.complementos.storage.ComplementoStorage
+import org.example.demo.productos.complementos.storage.images.StorageImageImpl
 import org.example.demo.productos.models.Bebida
 import org.example.demo.productos.models.Butaca
 import org.example.demo.productos.models.Comida
@@ -16,24 +17,26 @@ import java.io.File
 
 class GestionComplementoViewModel(
     val servicio:ComplementoService,
-    val storage:ComplementoStorage
+    val storage:ComplementoStorage,
+    val storageImagen:StorageImageImpl
 ) {
 
     val state: SimpleObjectProperty<ComplementoState> = SimpleObjectProperty(ComplementoState())
 
     init {
-        if (servicio.getAll().value.isEmpty()){
-            servicio.import(File("data","complemento.csv")).onSuccess {
+        if (servicio.getAll().value.isEmpty()) {
+            servicio.import(File("data", "complemento.csv")).onSuccess {
                 initState(it)
             }
-        }else{
+        } else {
             initState(servicio.getAll().value)
         }
 
     }
-    fun exportar(file: File):Boolean{
-        if (file.toPath().toString().contains(".json")){
-            storage.saveJson(file,state.value.complementos).mapBoth(
+
+    fun exportar(file: File): Boolean {
+        if (file.toPath().toString().contains(".json")) {
+            storage.saveJson(file, state.value.complementos).mapBoth(
                 success = {
                     return true
                 },
@@ -41,8 +44,8 @@ class GestionComplementoViewModel(
                     return false
                 }
             )
-        }else if (file.toPath().toString().contains(".csv")){
-            storage.saveCsv(file,state.value.complementos).mapBoth(
+        } else if (file.toPath().toString().contains(".csv")) {
+            storage.saveCsv(file, state.value.complementos).mapBoth(
                 success = {
                     return true
                 },
@@ -54,21 +57,21 @@ class GestionComplementoViewModel(
         return true
     }
 
-    fun importar(file: File):Boolean{
-        var lista= listOf<Complemento>()
-        if (file.toPath().toString().contains(".json")){
+    fun importar(file: File): Boolean {
+        var lista = listOf<Complemento>()
+        if (file.toPath().toString().contains(".json")) {
             storage.loadJson(file).mapBoth(
                 success = {
-                    lista=it
+                    lista = it
                 },
                 failure = {
                     return false
                 }
             )
-        }else if (file.toPath().toString().contains(".csv")){
+        } else if (file.toPath().toString().contains(".csv")) {
             storage.loadCsv(file).mapBoth(
                 success = {
-                    lista=it
+                    lista = it
                 },
                 failure = {
                     return false
@@ -76,53 +79,51 @@ class GestionComplementoViewModel(
             )
         }
         lista.forEach {
-            servicio.update(it.id,it)
+            servicio.update(it.id, it, it.imagen)
         }
         initState(lista)
         return true
     }
-    fun updateState(complemento: Complemento){
+
+    fun updateState(complemento: Complemento) {
+        var imagen = Image(RoutesManager.getResourceAsStream("images/interrogacion.png"))
+        storageImagen.loadImage(complemento.imagen).onSuccess {
+            imagen = Image(it.absoluteFile.toURI().toString())
+        }
         state.value = state.value.copy(
             tipo = complemento.tipo,
             nombre = complemento.id,
-            precio =complemento.precio.toDefaultMoneyString(),
-            imagen = when(complemento.id){
-                "PALOMITAS"-> Image(RoutesManager.getResourceAsStream("images/palomitas.png"))
-                "FRUTOS SECOS"-> Image(RoutesManager.getResourceAsStream("images/frutossecos.png"))
-                "PATATAS"-> Image(RoutesManager.getResourceAsStream("images/patatas.png"))
-                "AGUA"-> Image(RoutesManager.getResourceAsStream("images/agua.png"))
-                "REFRESCO"-> Image(RoutesManager.getResourceAsStream("images/refresco.png"))
-                else -> Image(RoutesManager.getResourceAsStream("images/interrogacion.png"))
-            },
+            precio = complemento.precio.toDefaultMoneyString(),
+            imagen = imagen,
             complementoSeleccionado = complemento
-
         )
     }
-    fun eliminarComplemento(id:String){
+
+    fun eliminarComplemento(id: String) {
         servicio.delete(id)
     }
 
-    fun actualizarComplementos(){
+    fun actualizarComplementos() {
         state.value = state.value.copy(
             complementoSeleccionado = null,
             complementos = servicio.getAll().value,
-            tipo="",
-            nombre="",
-            precio="",
-            imagen=Image(RoutesManager.getResourceAsStream("images/interrogacion.png"))
+            tipo = "",
+            nombre = "",
+            precio = "",
+            imagen = Image(RoutesManager.getResourceAsStream("images/interrogacion.png"))
         )
     }
 
-    fun filtrarComplementos(precio: String,nombre: String):List<Complemento>{
+    fun filtrarComplementos(precio: String, nombre: String): List<Complemento> {
         return state.value.complementos
             .asSequence()
             .filter {
-              it.id.contains(nombre)
+                it.id.contains(nombre)
             }.filter {
-                if (precio=="All") true else{
-                    when(it){
-                        is Bebida ->it.precio.toDefaultMoneyString() == precio
-                        is Comida ->it.precio.toDefaultMoneyString()== precio
+                if (precio == "All") true else {
+                    when (it) {
+                        is Bebida -> it.precio.toDefaultMoneyString() == precio
+                        is Comida -> it.precio.toDefaultMoneyString() == precio
                         else -> it.id.contains(nombre)
                     }
                 }
@@ -132,7 +133,7 @@ class GestionComplementoViewModel(
     fun initState(lista: List<Complemento>) {
         val listaPrecio = mutableListOf("All")
         lista.forEach {
-            when(it){
+            when (it) {
                 is Bebida -> listaPrecio.add(it.precio.toDefaultMoneyString())
                 is Comida -> listaPrecio.add(it.precio.toDefaultMoneyString())
             }
@@ -144,13 +145,14 @@ class GestionComplementoViewModel(
         )
     }
 
+
     data class ComplementoState(
-        val complementoSeleccionado:Complemento?=null,
-        val tipo:String="",
-        val nombre:String="",
-        val precio:String="",
+        val complementoSeleccionado: Complemento? = null,
+        val tipo: String = "",
+        val nombre: String = "",
+        val precio: String = "",
         val imagen: Image = Image(RoutesManager.getResourceAsStream("images/interrogacion.png")),
-        val complementos:List<Complemento> = listOf(),
-        val precios:List<String> = listOf(),
+        val complementos: List<Complemento> = listOf(),
+        val precios: List<String> = listOf(),
     )
 }

@@ -1,6 +1,7 @@
 package org.example.demo.view.viewModel
 
 import com.github.michaelbull.result.mapBoth
+import com.github.michaelbull.result.onSuccess
 import javafx.beans.property.SimpleObjectProperty
 import org.example.demo.database.SqlDelightManager
 import org.example.demo.locale.encodeToBase64
@@ -12,14 +13,15 @@ class LoginViewModel(
     private val dbManager: SqlDelightManager
 ) {
     init {
+        /**
         dbManager.databaseQueries.insertUser(
             email = "a@gmail.com",
             nombre = "a",
             apellidos = "a",
             contrasena = "Hola123456789@".encodeToBase64(),
-            tipo = "cliente",
-            id = 12
+            tipo = "cliente"
         )
+        */
     }
     val state: SimpleObjectProperty<LoginState> = SimpleObjectProperty(LoginState())
 
@@ -46,7 +48,14 @@ class LoginViewModel(
 
     fun establecerUsuario(email: String) {
         state.value = state.value.copy(
-            usuario = service.findByEmail(email).value
+            usuario = service.findByEmail(email).mapBoth(
+                success = {
+                    it
+                },
+                failure = {
+                    null
+                }
+            )
         )
     }
 

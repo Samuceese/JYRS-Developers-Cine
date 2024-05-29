@@ -1,5 +1,6 @@
 package org.example.demo.productos.complementos.dto
 
+import kotlinx.serialization.Serializable
 import org.example.demo.productos.dto.ProductoDto
 
 /**
@@ -10,7 +11,7 @@ import org.example.demo.productos.dto.ProductoDto
  * @author Raúl Fernández, Yahya El Hadri, Samuel Cortés, Javier Hernández
  * @since 1.0
  */
-
+@Serializable
 class ComplementoDto(
     val tipoComplemento: String,
     val nombre:String,

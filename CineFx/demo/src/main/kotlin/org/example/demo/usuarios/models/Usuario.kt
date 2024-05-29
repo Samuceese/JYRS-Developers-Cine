@@ -13,7 +13,7 @@ import kotlinx.serialization.Serializable
  * @since 1.0
  */
 
-@Serializable
+
 abstract class Usuario(
     val id: Long = -1,
     val nombre: String,

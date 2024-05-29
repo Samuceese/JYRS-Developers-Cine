@@ -50,6 +50,8 @@ module org.example.demo {
     opens org.example.demo.venta.services to javafx.fxml;
     exports org.example.demo.venta.services;
 
+    opens org.example.demo.storage to javafx.fxml;
+    exports org.example.demo.storage;
 
 
 }

@@ -3,6 +3,7 @@ package org.example.demo.venta.mappers
 import database.LineaVentaEntityButaca
 import database.LineaVentaEntityComplemento
 import database.VentaEntity
+import kotlinx.serialization.Serializable
 import org.example.demo.productos.butaca.dto.ButacaDto
 import org.example.demo.productos.butaca.mappers.toButaca
 import org.example.demo.productos.butaca.mappers.toButacaDto
@@ -99,6 +100,7 @@ fun VentaDto.toVenta():Venta{
         updatedAt = LocalDateTime.parse(this.updatedAt)
     )
 }
+
 
 fun Venta.toVentaDto():VentaDto{
     logger.debug { "Mapeando Venta ${this.id} a VentaDto" }

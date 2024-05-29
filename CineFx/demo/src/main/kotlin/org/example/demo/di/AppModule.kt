@@ -10,7 +10,7 @@ import org.example.demo.productos.butaca.repositories.ButacaRepositoryImpl
 import org.example.demo.productos.butaca.services.ButacaService
 import org.example.demo.productos.butaca.services.ButacaServiceImpl
 import org.example.demo.productos.butaca.storage.ButacaStorage
-import org.example.demo.productos.butaca.storage.ButacaStorageJsonImpl
+import org.example.demo.productos.butaca.storage.ButacaStorageImpl
 import org.example.demo.productos.butaca.validator.ButacaValidator
 import org.example.demo.productos.complementos.cache.ComplementoCacheImpl
 import org.example.demo.productos.complementos.repositories.ComplementoRepository
@@ -19,11 +19,15 @@ import org.example.demo.productos.complementos.services.ComplementoService
 import org.example.demo.productos.complementos.services.ComplementoServiceImpl
 import org.example.demo.productos.complementos.storage.ComplementoStorage
 import org.example.demo.productos.complementos.storage.ComplementoStorageImpl
+import org.example.demo.storage.CineStorage
+import org.example.demo.storage.CineStorageImpl
 import org.example.demo.usuarios.cache.CacheUsuario
 import org.example.demo.usuarios.repositories.UserRepository
 import org.example.demo.usuarios.repositories.UserRepositoryImpl
 import org.example.demo.usuarios.services.UserService
 import org.example.demo.usuarios.services.UserServiceImpl
+import org.example.demo.usuarios.storage.UsuarioStorage
+import org.example.demo.usuarios.storage.UsuarioStorageImpl
 import org.example.demo.venta.repositories.VentasRepository
 import org.example.demo.venta.repositories.VentasRepositoryImpl
 import org.example.demo.venta.services.VentasService
@@ -38,6 +42,7 @@ import org.koin.dsl.module
 val appModule = module {
 
     single<CacheUsuario> { CacheUsuario(5) }
+    single<UsuarioStorage> { UsuarioStorageImpl() }
     single<UserRepositoryImpl> { UserRepositoryImpl(get()) }
     single<UserRepository> { UserRepositoryImpl(get()) }
     single<UserService> { UserServiceImpl(get(), get()) }
@@ -49,7 +54,7 @@ val appModule = module {
     single<ButacaRepository> { ButacaRepositoryImpl(get()) }
     single<ButacaValidator> { ButacaValidator() }
     single<ButacasCacheImpl> { ButacasCacheImpl(5) }
-    single<ButacaStorage> { ButacaStorageJsonImpl(get()) }
+    single<ButacaStorage> { ButacaStorageImpl() }
     single<ButacaServiceImpl> { ButacaServiceImpl(get(), get(), get(), get()) }
     single<ButacaService> { ButacaServiceImpl(get(), get(), get(), get()) }
 
@@ -61,6 +66,8 @@ val appModule = module {
     single<VentasStorage> { VentaStorageHtml() }
     single<VentasRepository> { VentasRepositoryImpl(get(), get(), get(), get()) }
     single<VentasService> { VentasServiceImpl(get(), get(), get(), get()) }
+
+    single<CineStorage> { CineStorageImpl(get(),get(),get(),get())  }
 
     singleOf(::LoginViewModel)
 
@@ -91,5 +98,8 @@ val appModule = module {
     singleOf(::ActualizarComplViewModel)
 
     singleOf(::EstadoCineViewModel)
+
+    singleOf(::ZipViewModel)
+
 }
 

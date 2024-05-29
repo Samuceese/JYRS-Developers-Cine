@@ -9,6 +9,6 @@ import java.io.File
 
 interface VentasStorage {
     fun export(venta: Venta, file: File, pelicula: String): Result<Unit, VentaError>
-    fun save(file: File, list: List<Complemento>): Result<Unit, ComplementoError>
-    fun load(file: File): Result<List<Complemento>, ComplementoError>
+    fun save(file: File, list: List<Venta>): Result<Unit, VentaError>
+    fun load(file: File): Result<List<Venta>, VentaError>
 }

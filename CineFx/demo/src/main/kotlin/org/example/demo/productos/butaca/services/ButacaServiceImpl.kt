@@ -169,9 +169,9 @@ class ButacaServiceImpl(
      * @since 1.0
      */
 
-    override fun exportCsv(fecha:String, list: List<Butaca>): Result<Unit, ButacaError> {
+    override fun exportCsv(file:File, list: List<Butaca>): Result<Unit, ButacaError> {
         logger.debug { "Guardando personajes en JSON" }
-        return storage.saveCsv(fecha,list)
+        return storage.saveCsv(file,list)
     }
 
     /**
@@ -182,9 +182,9 @@ class ButacaServiceImpl(
      * @since 1.0
      */
 
-    override fun exportJson(fecha:String, list: List<Butaca>): Result<Unit, ButacaError> {
+    override fun exportJson(file: File, list: List<Butaca>): Result<Unit, ButacaError> {
         logger.debug { "Guardando personajes en JSON" }
-        return storage.saveJson(fecha,list)
+        return storage.saveJson(file,list)
     }
 
     /**

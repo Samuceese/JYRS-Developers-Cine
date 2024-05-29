@@ -1,5 +1,7 @@
 package org.example.demo.productos.models
 
+import kotlinx.serialization.Serializable
+
 /**
  * Representa un complemento.
  * @property id
@@ -7,6 +9,7 @@ package org.example.demo.productos.models
  * @since 1.0
  */
 
+@Serializable
 abstract class Complemento(
     val id:String,
     val tipo: String,

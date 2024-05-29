@@ -9,41 +9,55 @@ import org.example.demo.productos.butaca.dto.ButacaDto
 import org.example.demo.productos.butaca.errors.ButacaError
 import org.example.demo.productos.butaca.mappers.toButaca
 import org.example.demo.productos.butaca.mappers.toButacaDto
-import org.example.demo.productos.butaca.validator.ButacaValidator
 import org.example.demo.productos.models.Butaca
 import org.lighthousegames.logging.logging
 import java.io.File
-import java.io.InputStream
-import java.nio.file.Files
-import kotlin.io.path.Path
 
 private val logger=logging()
 
-/**
- * Guarda una lista de butacas de un archivo JSON para una fecha especifíca.
- * @param fecha
- * @param list
- * @return Devuelve la lista de butacas si ha sido exitosa la operación, en cambio si ha surgido algun contratiempo devuelve un error.
- * @author Raúl Fernández, Javier Hernández, Yahya El Hadri, Samuel Cortés
- * @since 1.0
- */
 
-class ButacaStorageImpl(
-    private val validator : ButacaValidator
-):ButacaStorage {
-    override fun save(file: File, list: List<Butaca>): Result<Long, ButacaError> {
+class ButacaStorageImpl:ButacaStorage {
+    /**
+     * Guarda una lista de butacas de un archivo JSON para una fecha especifíca.
+     * @param fecha
+     * @param list
+     * @return Devuelve la lista de butacas si ha sido exitosa la operación, en cambio si ha surgido algun contratiempo devuelve un error.
+     * @author Raúl Fernández, Javier Hernández, Yahya El Hadri, Samuel Cortés
+     * @since 1.0
+     */
+    override fun saveJson(file: File, list: List<Butaca>): Result<Unit, ButacaError> {
         logger.debug { "Guardando butacas en fichero json" }
+
         return try {
             val json = Json {
                 prettyPrint = true
                 ignoreUnknownKeys = true
             }
-            val jsonString = json.encodeToString<List<ButacaDto>>(list.map { it.toButacaDto() })
-            file.writeText(jsonString)
-            Ok(list.size.toLong())
+            Ok(file.writeText(json.encodeToString<List<ButacaDto>>(list.map { it.toButacaDto() })))
         }catch (e: Exception){
             logger.error { "Error al guardar el fichero json de butacas" }
             Err(ButacaError.FicheroNoValido("Error al guardar el fichero json"))
+        }
+    }
+
+    /**
+     * Cargamos datos de un archivo json para generar una lista de objetos 'butaca'.
+     * @return Devuelve un resultado encapsulado en un objeto, diciendo si la operación fue exitosa o no.
+     * @author Raúl Fernández, Javier Hernández, Yahya El Hadri, Samuel Cortés
+     * @since 1.0
+     */
+
+    override fun loadJson(file: File): Result<List<Butaca> , ButacaError> {
+        logger.debug { "Leyendo Butacas desde fichero json $file" }
+
+        return try {
+            val json = Json{
+                prettyPrint = true
+                ignoreUnknownKeys = true
+            }
+            Ok(json.decodeFromString<List<ButacaDto>>(file.readText()).map { it.toButaca() })
+        }catch (e: Exception) {
+            Err(ButacaError.StorageError("Error al leer el JSON: ${e.message}"))
         }
     }
 
@@ -54,8 +68,9 @@ class ButacaStorageImpl(
      * @since 1.0
      */
 
-    override fun load(file: File): Result<List<Butaca>, ButacaError> {
+    override fun loadCsv(file: File): Result<List<Butaca>, ButacaError> {
         logger.debug { "Carganado butacas desde fichero Csv" }
+
         return try {
             Ok(file.reader().readLines().drop(1)
                 .map {
@@ -68,6 +83,7 @@ class ButacaStorageImpl(
                         ocupacion = data[4],
                         createAt = data[5]
                     ).toButaca()
+
                 }
             )
         }catch (e: Exception){
@@ -75,4 +91,29 @@ class ButacaStorageImpl(
             Err((ButacaError.FicheroNoValido("Error al leer el fichero csv")))
         }
     }
+
+    /**
+     * Guarda una lista de butacas de un archivo CSV para una fecha especifíca.
+     * @param fecha
+     * @param list
+     * @return Devuelve la lista de butacas si ha sido exitosa la operación, en cambio si ha surgido algun contratiempo devuelve un error.
+     * @author Raúl Fernández, Javier Hernández, Yahya El Hadri, Samuel Cortés
+     * @since 1.0
+     */
+    override fun saveCsv(file: File, list: List<Butaca>): Result<Unit, ButacaError> {
+        logger.debug { "Guardando butacas en fichero csv" }
+        return try {
+            file.writeText("ID,Estado,Tipo,Precio,Ocupacion,CreatedAt\n")
+                list.map { it. toButacaDto() }
+                    .forEach {
+                        file.appendText("${it.id},${it.estado},${it.tipo},${it.precio},${it.ocupacion},${it.createAt}\n")
+                    }
+            Ok(Unit)
+
+        } catch (e: Exception) {
+            logger.error { "Error al guardar el fichero csv de butacas: ${e.message}" }
+            Err(ButacaError.FicheroNoValido("Error al guardar el fichero csv de butacas: ${e.message}"))
+        }
+    }
+
 }

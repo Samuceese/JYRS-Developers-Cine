@@ -10,6 +10,7 @@ import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.modules.subclass
 
 import org.example.demo.locale.toDefaultMoneyString
+import org.example.demo.locale.toShortSpanishFormat
 import org.example.demo.productos.butaca.dto.ButacaDto
 import org.example.demo.productos.complementos.dto.ComplementoDto
 import org.example.demo.productos.complementos.errors.ComplementoError
@@ -103,7 +104,7 @@ class VentaStorageHtml:VentasStorage {
                     <body>
                         <div class="container">
                             <h1>Venta</h1>
-                            <p>Fecha: ${venta.createdAt}</p>
+                            <p>Fecha: ${venta.createdAt.toShortSpanishFormat()}</p>
                             <p>Cliente: ${venta.cliente.nombre}</p>
                             <p>Película: $pelicula</p>
                             <p>Productos:</p>

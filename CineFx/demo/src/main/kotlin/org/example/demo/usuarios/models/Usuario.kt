@@ -1,5 +1,7 @@
 package org.example.demo.usuarios.models7
 
+import kotlinx.serialization.Serializable
+
 /**
  * Representa a un admin
  * @property id
@@ -11,6 +13,7 @@ package org.example.demo.usuarios.models7
  * @since 1.0
  */
 
+@Serializable
 abstract class Usuario(
     val id: Long = -1,
     val nombre: String,

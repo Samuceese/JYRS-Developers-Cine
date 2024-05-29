@@ -1,5 +1,7 @@
 package org.example.demo.productos.models
 
+import kotlinx.serialization.Serializable
+import org.example.demo.LocalDateTimeSerializer
 import java.time.LocalDate
 
 /**
@@ -11,12 +13,12 @@ import java.time.LocalDate
  * @author Raúl Fernández, Javier Hernández, Samuel Cortés, Yahya El Hadri.
  * @since 1.0
  */
-
+@Serializable
 class Butaca(
     val id:String,
     var estado: Estado,
     var tipo:Tipo,
-    val create: LocalDate = LocalDate.now(),
+    @Serializable(with = LocalDateTimeSerializer::class) val create: LocalDate = LocalDate.now(),
     var precio:Double,
     var ocupacion: Ocupacion
 ):Producto() {

@@ -1,5 +1,7 @@
 package org.example.demo.productos.models
 
+import kotlinx.serialization.Serializable
+
 /**
  * Representa a un admin.
  * @property id

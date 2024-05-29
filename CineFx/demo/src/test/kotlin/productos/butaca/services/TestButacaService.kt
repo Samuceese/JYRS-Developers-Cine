@@ -7,7 +7,7 @@ import org.example.demo.productos.butaca.cache.ButacasCacheImpl
 import org.example.demo.productos.butaca.errors.ButacaError
 import org.example.demo.productos.butaca.repositories.ButacaRepository
 import org.example.demo.productos.butaca.services.ButacaServiceImpl
-import org.example.demo.productos.butaca.storage.ButacaStorageJsonImpl
+import org.example.demo.productos.butaca.storage.ButacaStorageImpl
 import org.example.demo.productos.butaca.validator.ButacaValidator
 import org.example.demo.productos.models.Butaca
 import org.example.demo.productos.models.Estado
@@ -23,9 +23,6 @@ import org.mockito.Mockito.verify
 import org.mockito.junit.jupiter.MockitoExtension
 import org.mockito.kotlin.whenever
 import java.io.File
-import java.io.InputStream
-import java.nio.file.Files
-import java.nio.file.Path
 
 @ExtendWith(MockitoExtension::class)
 class TestButacaService {
@@ -36,7 +33,7 @@ class TestButacaService {
     private lateinit var mockButacaCache: ButacasCacheImpl
 
     @Mock
-    private lateinit var storage: ButacaStorageJsonImpl
+    private lateinit var storage: ButacaStorageImpl
 
     @Mock
     private lateinit var mockButacaValidator: ButacaValidator

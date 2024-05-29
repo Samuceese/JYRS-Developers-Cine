@@ -38,7 +38,7 @@ class SqlDelightManager(
      * @since 1.0
      */
 
-    private fun initQueries(): DatabaseQueries {
+     fun initQueries(): DatabaseQueries {
         val driver = if (Config.databaseInMemory) {
             logger.debug { "SqlDeLightClient - InMemory" }
             JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY)

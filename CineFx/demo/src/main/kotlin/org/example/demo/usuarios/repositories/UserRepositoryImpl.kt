@@ -38,7 +38,8 @@ class UserRepositoryImpl(
             logger.debug { "Guardando Usuario desde JSON: $user" }
             logger.debug { "save: $user" }
             db.transaction {
-                db.insertUser(
+                db.insertUserFromJson(
+                    id = user.id,
                     email = user.email,
                     nombre = user.nombre,
                     apellidos = user.apellidos,

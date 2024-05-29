@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -16,33 +15,24 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.effect.DropShadow?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="230.0" style="-fx-background-color: #061326;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.view.controllers.NewComplementoViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="230.0" style="-fx-background-color: #061326;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.view.controllers.NewComplementoViewController">
     <children>
-        <VBox prefHeight="340.0" prefWidth="230.0"></VBox>
-
+        <VBox prefHeight="340.0" prefWidth="230.0">
+            <children>
                 <HBox prefHeight="75.0" prefWidth="230.0">
                     <children>
                         <AnchorPane prefHeight="96.0" prefWidth="229.0">
                             <children>
-                                <Label layoutX="19.0" layoutY="26.0" text="NEW COMPLEMENTO" textFill="WHITE"></Label>
-                                <ImageView fx:id="fxMasImage" fitHeight="22.0" fitWidth="21.0" layoutX="4.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../images/mas.png" />
-                                    </image>
-                                    <effect>
-                                        <DropShadow>
-                                            <color>
-                                                <Color green="0.0833333358168602" blue="1.0" />
-                                            </color>
-                                        </DropShadow>
-                                    </effect>
-                                </ImageView>
-                                <Label layoutX="35.0" layoutY="23.0" text="NEW COMPLEMENTO" textFill="WHIT">
+                                <Label layoutX="19.0" layoutY="14.0" text="NEW COMPLEMENTO" textFill="WHITE">
                                     <font>
                                         <Font name="Arial Rounded MT Bold" size="18.0" />
                                     </font>
                                 </Label>
+                        <ImageView fx:id="imagenComplemento" fitHeight="52.0" fitWidth="59.0" layoutX="85.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/complemento.png" />
+                           </image>
+                        </ImageView>
                             </children>
                         </AnchorPane>
                     </children>
@@ -51,24 +41,25 @@
                     <children>
                         <AnchorPane prefHeight="211.0" prefWidth="230.0">
                             <children>
-                                <Label layoutX="14.0" layoutY="133.0" text="PRECIO" textFill="WHITE" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="133.0">
+                                <Label layoutX="30.0" layoutY="133.0" text="PRECIO" textFill="WHITE" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="133.0">
                                     <font>
                                         <Font name="Arial Black" size="14.0" />
                                     </font>
                                 </Label>
-                                <Label layoutX="9.0" layoutY="76.0" text="NOMBRE" textFill="WHITE" AnchorPane.leftAnchor="15.0">
+                                <Label layoutX="33.0" layoutY="86.0" text="NOMBRE" textFill="WHITE" AnchorPane.leftAnchor="30.0">
                                     <font>
                                         <Font name="Arial Black" size="14.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="fxTextFieldPrecio" layoutX="115.0" layoutY="131.0" prefHeight="26.0" prefWidth="87.0" AnchorPane.leftAnchor="115.0" />
-                                <ComboBox fx:id="fxtextFieldBebida" layoutX="115.0" layoutY="14.0" prefHeight="26.0" prefWidth="87.0" AnchorPane.leftAnchor="115.0" />
-                                <Label layoutX="15.0" layoutY="16.0" text="TIPO" textFill="WHITE" AnchorPane.leftAnchor="15.0">
+                                <TextField fx:id="fxTextFieldPrecio" layoutX="128.0" layoutY="131.0" prefHeight="26.0" prefWidth="87.0" />
+                                <Label layoutX="30.0" layoutY="39.0" text="BEBIDA" textFill="WHITE" AnchorPane.leftAnchor="30.0">
                                     <font>
                                         <Font name="Arial Black" size="14.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="fxTextFieldNombre" layoutX="115.0" layoutY="74.0" prefHeight="26.0" prefWidth="87.0" AnchorPane.leftAnchor="115.0" />
+                                <ComboBox fx:id="combo" layoutX="128.0" layoutY="38.0" prefHeight="26.0" prefWidth="87.0" />
+
+                                <TextField fx:id="fxTextFieldNombre" layoutX="128.0" layoutY="85.0" prefHeight="26.0" prefWidth="87.0" />
                             </children>
                         </AnchorPane>
                     </children>
@@ -77,12 +68,7 @@
                     <children>
                         <AnchorPane prefHeight="54.0" prefWidth="230.0">
                             <children>
-                                <Button fx:id="fxBotonCrear" alignment="TOP_CENTER" layoutX="14.0" layoutY="-15.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="87.0" style="-fx-border-color: white;" text="Crear">
-                                    <effect>
-                              <Blend />
-                                    </effect>
-                                </Button>
-                                <Button fx:id="fxBotonLimpiar" layoutX="71.0" layoutY="34.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="87.0" style="-fx-border-color: white;" text="Limpiar">
+                                <Button fx:id="fxBotonCrear" alignment="TOP_CENTER" layoutX="14.0" layoutY="-15.0" mnemonicParsing="false" style="-fx-border-color: white;" text="Crear">
                                     <textFill>
                                         <LinearGradient endX="1.0" endY="1.0">
                                             <stops>
@@ -100,42 +86,45 @@
                                         </LinearGradient>
                                     </textFill>
                                     <effect>
-                              <Blend />
+                                        <Blend />
                                     </effect>
-                           <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-
-                                 </image>
-                              </ImageView>
-                           </graphic>
+                                    <graphic>
+                                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../images/jyrs-cinema.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
                                 </Button>
-                                <Button fx:id="fxBotonCancelar" alignment="TOP_CENTER" layoutX="134.0" layoutY="-15.0" mnemonicParsing="false" style="-fx-border-color: white;" text="Cancelar">
+                                <Button fx:id="fxBotonLimpiar" layoutX="71.0" layoutY="34.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="87.0" style="-fx-border-color: white;" text="Limpiar">
                                     <effect>
-                              <Blend />
+                                        <Blend />
                                     </effect>
-                           <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-
-                                 </image>
-                                 <cursor>
-                                    <Cursor fx:constant="DEFAULT" />
-                                 </cursor>
-                                 <effect>
-                                    <Blend />
-                                 </effect>
-                              </ImageView>
-                           </graphic></Button>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="19.0" layoutY="-12.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-
-                           </image>
-                        </ImageView>
+                                    <graphic>
+                                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../images/jyrs-cinema.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
+                                <Button fx:id="fxBotonCancelar" alignment="TOP_CENTER" layoutX="128.0" layoutY="-15.0" mnemonicParsing="false" style="-fx-border-color: white;" text="Cancelar">
+                                    <effect>
+                                        <Blend />
+                                    </effect>
+                                    <graphic>
+                                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../images/jyrs-cinema.png" />
+                                            </image>
+                                        </ImageView>
+                                    </graphic>
+                                </Button>
                             </children>
                         </AnchorPane>
                     </children>
                 </HBox>
+            </children>
+        </VBox>
     </children>
 </AnchorPane>
-

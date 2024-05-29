@@ -72,7 +72,8 @@ class ComplementoRepositoryImpl(
                         tipo = producto.tipo,
                         id = producto.id,
                         nombre = producto.id.toString(),
-                        precio = producto.precio.toLong()
+                        precio = producto.precio.toLong(),
+                        imagen = producto.imagen
                     )
                 }
 
@@ -88,7 +89,7 @@ class ComplementoRepositoryImpl(
      * @since 1.0
      */
 
-    override fun update(id: String, complemento: Complemento): Complemento? {
+    override fun update(id: String, complemento: Complemento,imagen:String): Complemento? {
         logger.debug { "Actualizando complemento con id: $id" }
         var result = this.findById(id) ?: return null
 
@@ -96,7 +97,9 @@ class ComplementoRepositoryImpl(
             id= id,
             nombre = complemento.id,
             precio = complemento.precio.toLong(),
-            tipo = complemento.tipo)
+            tipo = complemento.tipo,
+            imagen = imagen
+        )
 
 
         logger.debug { "Actualizado complemento con id: $id" }

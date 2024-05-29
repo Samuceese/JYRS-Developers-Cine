@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleObjectProperty
 import javafx.scene.image.Image
 import org.example.demo.locale.toDefaultMoneyString
 import org.example.demo.productos.complementos.services.ComplementoService
+import org.example.demo.productos.complementos.storage.images.StorageImageImpl
 import org.example.demo.productos.models.Bebida
 import org.example.demo.productos.models.Comida
 import org.example.demo.productos.models.Complemento
@@ -13,7 +14,8 @@ import java.io.File
 import java.lang.Exception
 
 class SeleccionarComplViewModel(
-    private val servicio : ComplementoService
+    private val servicio : ComplementoService,
+    private val storageImage: StorageImageImpl
 ) {
 
     val state: SimpleObjectProperty<ComplementoState> = SimpleObjectProperty(ComplementoState())
@@ -28,6 +30,10 @@ class SeleccionarComplViewModel(
         }
     }
     fun updateState(complemento: Complemento){
+        var imagen = Image(RoutesManager.getResourceAsStream("images/interrogacion.png"))
+        storageImage.loadImage(complemento.imagen).onSuccess {
+            imagen = Image(it.absoluteFile.toURI().toString())
+        }
         state.value = state.value.copy(
             tipo = when(complemento){
                 is Bebida-> "Bebida"
@@ -40,14 +46,7 @@ class SeleccionarComplViewModel(
                 is Comida -> complemento.precio.toDefaultMoneyString()
                 else -> "No detectado"
             },
-            imagen = when(complemento.id){
-                "PALOMITAS"-> Image(RoutesManager.getResourceAsStream("images/palomitas.png"))
-                "FRUTOS SECOS"->Image(RoutesManager.getResourceAsStream("images/frutossecos.png"))
-                "PATATAS"->Image(RoutesManager.getResourceAsStream("images/patatas.png"))
-                "AGUA"->Image(RoutesManager.getResourceAsStream("images/agua.png"))
-                "REFRESCO"->Image(RoutesManager.getResourceAsStream("images/refresco.png"))
-                else -> Image(RoutesManager.getResourceAsStream("images/interrogacion.png"))
-            },
+            imagen = imagen,
             complemento = complemento
 
         )

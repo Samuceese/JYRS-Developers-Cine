@@ -84,12 +84,12 @@
                             <children>
                                 <ImageView fitHeight="227.0" fitWidth="304.0" layoutX="24.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../icons/logo.png" />
+                                        <Image url="@../images/logo.png" />
                                     </image>
                                 </ImageView>
                                 <ImageView fitHeight="56.0" fitWidth="58.0" layoutX="148.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../icons/config.png" />
+                                        <Image url="@../images/config.png" />
                                     </image>
                                 </ImageView>
                             </children>

@@ -19,10 +19,10 @@ fun ComplementoEntity.toComplemento(): Complemento {
     val _tipo: String = this.tipo
     when (_tipo) {
         "COMIDA" -> {
-               return Comida(_nombre,_tipo,this.precio.toDouble())
+               return Comida(_nombre,_tipo,this.precio.toDouble(),this.imagen)
         }
         "BEBIDA" -> {
-                return Bebida(_nombre, _tipo,this.precio.toDouble())
+                return Bebida(_nombre, _tipo,this.precio.toDouble(),this.imagen)
         }
 
     }
@@ -39,8 +39,8 @@ fun ComplementoEntity.toComplemento(): Complemento {
 fun ComplementoDto.toComplemento(): Complemento {
     logger.debug { "Pasando ComplementoDto ${this.nombre} a Complemento" }
     when(this.tipoComplemento){
-        "COMIDA" -> return Comida(this.nombre,this.tipoComplemento,this.precio.toDouble())
-        "BEBIDA" -> return Bebida(this.nombre,this.tipoComplemento,this.precio.toDouble())
+        "COMIDA" -> return Comida(this.nombre,this.tipoComplemento,this.precio.toDouble(),this.imagen)
+        "BEBIDA" -> return Bebida(this.nombre,this.tipoComplemento,this.precio.toDouble(),this.imagen)
     }
     throw ComplementoException.TipoInvalido("Tipo no valido")
 }
@@ -49,6 +49,7 @@ fun Complemento.toComplementoDto():ComplementoDto{
     return ComplementoDto(
         tipoComplemento = this.tipo,
         nombre = this.id,
-        precio = this.precio.toString()
+        precio = this.precio.toString(),
+        imagen=this.imagen
     )
 }

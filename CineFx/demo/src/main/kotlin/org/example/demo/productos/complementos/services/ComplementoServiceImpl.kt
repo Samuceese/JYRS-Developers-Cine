@@ -91,9 +91,9 @@ class ComplementoServiceImpl(
      */
 
 
-    override fun update(id: String, complemento: Complemento): Result<Complemento, ComplementoError> {
+    override fun update(id: String, complemento: Complemento,imagen:String): Result<Complemento, ComplementoError> {
         logger.debug { "Actualizando complemento con id: $id" }
-        return  repository.update(complemento.id, complemento)
+        return  repository.update(complemento.id, complemento, imagen)
             .also { cache.put(id,complemento) }
             ?.let { Ok(it) }
             ?: Err(ComplementoError.ComplementoNoActualizado("No se ha podido actualizar el complemento: $id"))

@@ -38,8 +38,6 @@ class SqlDelightManager(
      * @since 1.0
      */
 
-
-
     private fun initQueries(): DatabaseQueries {
         val driver = if (Config.databaseInMemory) {
             logger.debug { "SqlDeLightClient - InMemory" }
@@ -60,8 +58,8 @@ class SqlDelightManager(
     fun clearData() {
         logger.debug { "Borrando datos de la base de datos" }
         databaseQueries.transaction {
-            //databaseQueries.deleteAllUsers()
-            //databaseQueries.deleteAllButacaEntity()
+            databaseQueries.deleteAllUsers()
+            databaseQueries.deleteAllButacaEntity()
             databaseQueries.deleteAllComplemetoEntity()
             databaseQueries.removeAllVentas()
             databaseQueries.removeAllLineaVentaEntityButaca()
@@ -80,6 +78,7 @@ class SqlDelightManager(
         logger.debug { "SqlDeLightClient.initialize()" }
         if (Config.databaseInit) {
             databaseQueries.transaction {
+                databaseQueries.deleteAdmin()
                 databaseQueries.InsertTheAdmin()
             }
         }

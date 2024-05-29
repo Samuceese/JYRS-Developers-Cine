@@ -5,19 +5,31 @@ import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.modules.SerializersModule
+import kotlinx.serialization.modules.polymorphic
+import kotlinx.serialization.modules.subclass
+import org.example.demo.LocalDateTimeSerializer
+import org.example.demo.UUIDSerializer
 import org.example.demo.locale.toDefaultMoneyString
+import org.example.demo.productos.butaca.dto.ButacaDto
 import org.example.demo.productos.complementos.dto.ComplementoDto
 import org.example.demo.productos.complementos.errors.ComplementoError
 import org.example.demo.productos.complementos.mappers.toComplemento
 import org.example.demo.productos.complementos.mappers.toComplementoDto
+import org.example.demo.productos.dto.ProductoDto
 import org.example.demo.productos.models.Bebida
 import org.example.demo.productos.models.Butaca
 import org.example.demo.productos.models.Comida
 import org.example.demo.productos.models.Complemento
+import org.example.demo.venta.dto.VentaDto
 import org.example.demo.venta.errors.VentaError
+import org.example.demo.venta.mappers.toVenta
+import org.example.demo.venta.mappers.toVentaDto
 import org.example.demo.venta.models.Venta
 import org.lighthousegames.logging.logging
 import java.io.File
+import java.time.LocalDateTime
+import java.util.*
 
 private val logger = logging()
 class VentaStorageHtml:VentasStorage {
@@ -120,30 +132,45 @@ class VentaStorageHtml:VentasStorage {
         }
     }
 
-    override fun save(file: File, list: List<Complemento>): Result<Unit, ComplementoError> {
+    override fun save(file: File, list: List<Venta>): Result<Unit, VentaError> {
         logger.debug { "Guardando ventas en fichero json" }
         return try {
             val json = Json {
                 prettyPrint = true
                 ignoreUnknownKeys = true
+                serializersModule = SerializersModule {
+                    polymorphic(ProductoDto::class){
+                        subclass(ComplementoDto::class)
+                        subclass(ButacaDto::class)
+                    }
+               }
             }
-            Ok(file.writeText(json.encodeToString<List<ComplementoDto>>(list.map { it.toComplementoDto() })))
-        }catch (e: Exception){
-            logger.error { "Error al guardar el fichero json de ventas" }
-            Err(ComplementoError.FicheroNoValido("Error al leer el JSON: ${e.message}"))
+
+                val jsonString = json.encodeToString(list.map { it.toVentaDto() })
+            file.writeText(jsonString)
+            Ok(Unit)
+        } catch (e: Exception) {
+            logger.error { "Error al guardar el fichero json de ventas: ${e.message}" }
+            Err(VentaError.VentaStorageError("Error al guardar el JSON: ${e.message}"))
         }
     }
 
-    override fun load(file: File): Result<List<Complemento>, ComplementoError> {
+    override fun load(file: File): Result<List<Venta>, VentaError> {
         logger.debug { "Cargando ventas desde $file" }
         return try {
             val json = Json{
                 prettyPrint = true
                 ignoreUnknownKeys = true
+                serializersModule = SerializersModule {
+                    polymorphic(ProductoDto::class){
+                        subclass(ComplementoDto::class)
+                        subclass(ButacaDto::class)
+                    }
+                }
             }
-            Ok(json.decodeFromString<List<ComplementoDto>>(file.readText()).map { it.toComplemento() })
+            Ok(json.decodeFromString<List<VentaDto>>(file.readText()).map { it.toVenta() })
         }catch (e: Exception) {
-            Err(ComplementoError.FicheroNoValido("Error al leer el JSON: ${e.message}"))
+            Err(VentaError.VentaStorageError("Error al leer el JSON: ${e.message}"))
         }
     }
 }

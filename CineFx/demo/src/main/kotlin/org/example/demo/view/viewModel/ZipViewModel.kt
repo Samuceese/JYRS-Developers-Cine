@@ -2,6 +2,7 @@ package org.example.demo.view.viewModel
 
 import com.github.michaelbull.result.map
 import com.github.michaelbull.result.mapBoth
+import org.example.demo.database.SqlDelightManager
 import org.example.demo.productos.butaca.services.ButacaService
 import org.example.demo.productos.complementos.services.ComplementoService
 import org.example.demo.productos.complementos.storage.ComplementoStorage
@@ -21,6 +22,7 @@ class ZipViewModel(
     private val serviceComplementos:ComplementoService,
     private val serviceVenta:VentasService,
     private val serviceUsuario:UserService,
+    private val db:SqlDelightManager
 ) {
     fun crearZip(file: File):Boolean{
         storage.exportToZip(
@@ -41,6 +43,8 @@ class ZipViewModel(
     fun unzip(file:File):Boolean{
         storage.loadFromZip(file).mapBoth(
             success = {
+                db.initQueries()
+                db.databaseQueries.InsertTheAdmin()
                 it.forEach {
                     when(it){
                         is Venta->serviceVenta.create(it)

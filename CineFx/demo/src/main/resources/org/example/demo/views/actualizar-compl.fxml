@@ -14,7 +14,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="230.0" style="-fx-background-color: #061326;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.view.controllers.ActualizarComplViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="230.0" style="-fx-background-color: #061326;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.demo.view.controllers.ActualizarComplViewController">
     <children>
         <VBox prefHeight="340.0" prefWidth="230.0">
             <children>
@@ -87,35 +87,19 @@
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../OneDrive/Escritorio/simbolos%20png/guardar.jpg" />
+                                    <Image url="@../../../../../../../../../../OneDrive/Escritorio/PROYECTO%20PROGRAMACIÓN/iconos/save.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                                 </Button>
                                 <Button fx:id="fxBotonLimpiar" layoutX="71.0" layoutY="34.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="87.0" style="-fx-border-color: white;" text="Limpiar">
-                                    <textFill>
-                                        <LinearGradient endX="1.0" endY="1.0">
-                                            <stops>
-                                                <Stop>
-                                                    <color>
-                                                        <Color />
-                                                    </color>
-                                                </Stop>
-                                                <Stop offset="1.0">
-                                                    <color>
-                                                        <Color />
-                                                    </color>
-                                                </Stop>
-                                            </stops>
-                                        </LinearGradient>
-                                    </textFill>
                                     <effect>
                               <Blend />
                                     </effect>
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../OneDrive/Escritorio/simbolos%20png/limpiar.jpg" />
+                                    <Image url="@../../../../../../../../../../OneDrive/Escritorio/PROYECTO%20PROGRAMACIÓN/iconos/clean.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -127,7 +111,7 @@
                            <graphic>
                               <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../../../../../../../OneDrive/Escritorio/simbolos%20png/x.jpg" />
+                                    <Image url="@../../../../../../../../../../OneDrive/Escritorio/PROYECTO%20PROGRAMACIÓN/iconos/close.png" />
                                  </image>
                               </ImageView>
                            </graphic></Button>

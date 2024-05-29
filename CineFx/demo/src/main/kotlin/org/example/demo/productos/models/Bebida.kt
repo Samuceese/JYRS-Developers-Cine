@@ -11,8 +11,9 @@ package org.example.demo.productos.models
 class Bebida(
     id:String,
     tipo:String,
-    precio:Double
-):Complemento(id,tipo,precio) {
+    precio:Double,
+    imagen: String
+):Complemento(id,tipo,precio, imagen) {
 }
 
 enum class CategoriaBebida{

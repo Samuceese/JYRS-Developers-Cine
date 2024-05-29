@@ -36,7 +36,7 @@ class ButacaStorageImpl:ButacaStorage {
             Ok(file.writeText(json.encodeToString<List<ButacaDto>>(list.map { it.toButacaDto() })))
         }catch (e: Exception){
             logger.error { "Error al guardar el fichero json de butacas" }
-            Err(ButacaError.FicheroNoValido("Error al guardar el fichero json"))
+             Err(ButacaError.FicheroNoValido("Error al guardar el fichero json"))
         }
     }
 

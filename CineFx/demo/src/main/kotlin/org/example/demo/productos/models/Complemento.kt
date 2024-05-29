@@ -13,5 +13,6 @@ import kotlinx.serialization.Serializable
 abstract class Complemento(
     val id:String,
     val tipo: String,
-    val precio:Double
+    val precio:Double,
+    val imagen: String
 ):Producto()

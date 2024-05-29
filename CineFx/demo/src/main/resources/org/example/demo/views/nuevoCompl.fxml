@@ -25,6 +25,19 @@
                         <AnchorPane prefHeight="96.0" prefWidth="229.0">
                             <children>
                                 <Label layoutX="19.0" layoutY="26.0" text="NEW COMPLEMENTO" textFill="WHITE">
+                                <ImageView fx:id="fxMasImage" fitHeight="22.0" fitWidth="21.0" layoutX="4.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../icons/mas.png" />
+                                    </image>
+                                    <effect>
+                                        <DropShadow>
+                                            <color>
+                                                <Color green="0.0833333358168602" blue="1.0" />
+                                            </color>
+                                        </DropShadow>
+                                    </effect>
+                                </ImageView>
+                                <Label layoutX="35.0" layoutY="23.0" text="NEW COMPLEMENTO" textFill="WHIT
                                     <font>
                                         <Font name="Arial Rounded MT Bold" size="18.0" />
                                     </font>

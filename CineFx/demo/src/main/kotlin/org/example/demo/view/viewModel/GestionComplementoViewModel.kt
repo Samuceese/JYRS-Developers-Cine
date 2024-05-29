@@ -1,18 +1,22 @@
 package org.example.demo.view.viewModel
 
+import com.github.michaelbull.result.mapBoth
 import com.github.michaelbull.result.onSuccess
 import javafx.beans.property.SimpleObjectProperty
 import javafx.scene.image.Image
 import org.example.demo.locale.toDefaultMoneyString
 import org.example.demo.productos.complementos.services.ComplementoService
+import org.example.demo.productos.complementos.storage.ComplementoStorage
 import org.example.demo.productos.models.Bebida
+import org.example.demo.productos.models.Butaca
 import org.example.demo.productos.models.Comida
 import org.example.demo.productos.models.Complemento
 import org.example.demo.routes.RoutesManager
 import java.io.File
 
 class GestionComplementoViewModel(
-    val servicio:ComplementoService
+    val servicio:ComplementoService,
+    val storage:ComplementoStorage
 ) {
 
     val state: SimpleObjectProperty<ComplementoState> = SimpleObjectProperty(ComplementoState())
@@ -24,9 +28,58 @@ class GestionComplementoViewModel(
             }
         }else{
             initState(servicio.getAll().value)
-
         }
 
+    }
+    fun exportar(file: File):Boolean{
+        if (file.toPath().toString().contains(".json")){
+            storage.saveJson(file,state.value.complementos).mapBoth(
+                success = {
+                    return true
+                },
+                failure = {
+                    return false
+                }
+            )
+        }else if (file.toPath().toString().contains(".csv")){
+            storage.saveCsv(file,state.value.complementos).mapBoth(
+                success = {
+                    return true
+                },
+                failure = {
+                    return false
+                }
+            )
+        }
+        return true
+    }
+
+    fun importar(file: File):Boolean{
+        var lista= listOf<Complemento>()
+        if (file.toPath().toString().contains(".json")){
+            storage.loadJson(file).mapBoth(
+                success = {
+                    lista=it
+                },
+                failure = {
+                    return false
+                }
+            )
+        }else if (file.toPath().toString().contains(".csv")){
+            storage.loadCsv(file).mapBoth(
+                success = {
+                    lista=it
+                },
+                failure = {
+                    return false
+                }
+            )
+        }
+        lista.forEach {
+            servicio.update(it.id,it)
+        }
+        initState(lista)
+        return true
     }
     fun updateState(complemento: Complemento){
         state.value = state.value.copy(

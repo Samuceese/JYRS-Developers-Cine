@@ -5,10 +5,8 @@ import javafx.fxml.FXML
 import javafx.scene.control.Button
 import javafx.scene.control.ComboBox
 import javafx.scene.control.TextField
-import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.stage.FileChooser
-import javafx.stage.Stage
 import org.example.demo.routes.RoutesManager
 import org.example.demo.view.viewModel.GestionComplementoViewModel
 import org.example.demo.view.viewModel.NewComplementoViewModel
@@ -25,7 +23,7 @@ class NewComplementoViewController: KoinComponent {
     @FXML
     lateinit var fxTextFieldPrecio:TextField
     @FXML
-    lateinit var fxtextFieldBebida:ComboBox<String>
+    lateinit var combo:ComboBox<String>
     @FXML
     lateinit var fxTextFieldNombre:TextField
     @FXML
@@ -47,8 +45,8 @@ class NewComplementoViewController: KoinComponent {
     }
 
     private fun initDefaultValues() {
-        fxtextFieldBebida.items = FXCollections.observableList(view.state.value.tipos)
-        fxtextFieldBebida.value="COMIDA"
+        combo.items = FXCollections.observableList(view.state.value.tipos)
+        combo.value="COMIDA"
         fxTextFieldNombre.text=""
         fxTextFieldPrecio.text=""
     }
@@ -85,7 +83,7 @@ class NewComplementoViewController: KoinComponent {
             fxTextFieldNombre.text.isNotBlank() &&
             fxTextFieldPrecio.text.toDoubleOrNull()!= null&&
             !view.comprobarExistencia(fxTextFieldNombre.text)){
-            view.createComplemento(nombre = fxTextFieldNombre.text, precio = fxTextFieldPrecio.text, tipo = fxtextFieldBebida.value, imagen = imagen)
+            view.createComplemento(nombre = fxTextFieldNombre.text, precio = fxTextFieldPrecio.text, tipo = combo.value, imagen = imagen)
             viewGest.initState(view.allComplementos())
         }
     }

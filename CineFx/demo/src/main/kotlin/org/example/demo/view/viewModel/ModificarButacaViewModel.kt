@@ -55,14 +55,7 @@ class ModificarButacaViewModel(
         )
         service.update(
             state.value.butacaModificar!!.id,
-            butaca = butaca,
-            ocupacion = when(ocupacion){
-                "LIBRE"->Ocupacion.LIBRE
-                "OCUPADA"->Ocupacion.OCUPADA
-                "INACTIVA"->Ocupacion.INACTIVA
-                else->Ocupacion.INACTIVA
-            },
-            precio = precio.toDouble()
+            butaca = butaca
         )
     }
 

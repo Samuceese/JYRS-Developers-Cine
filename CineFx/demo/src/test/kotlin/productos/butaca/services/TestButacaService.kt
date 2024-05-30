@@ -105,19 +105,19 @@ class TestButacaService {
 
     @Test
     fun updateButaca() {
-        val butaca = Butaca("A1", Estado.ACTIVA, Tipo.NORMAL, ocupacion =  Ocupacion.LIBRE, precio = 5.0)
+        val butaca = Butaca("A1", Estado.ACTIVA, Tipo.VIP, ocupacion =  Ocupacion.OCUPADA, precio = 20.0)
         whenever(mockButacaValidator.validarButaca(butaca)).thenReturn(Ok(butaca))
-        whenever(mockButacaRepository.update(butaca.id, butaca,  Ocupacion.OCUPADA,6.0)).thenReturn(butaca)
+        whenever(mockButacaRepository.update(butaca.id, butaca)).thenReturn(butaca)
         whenever(mockButacaCache.put(butaca.id, butaca)).thenReturn(Ok(butaca))
 
-        val result = service.update(butaca.id, butaca, Ocupacion.OCUPADA, 6.0)
+        val result = service.update(butaca.id, butaca)
 
         assertTrue(result.isOk)
         assertEquals( Ocupacion.OCUPADA, result.value.ocupacion)
-        assertEquals(6.0, result.value.precio)
+        assertEquals(20.0, result.value.precio)
 
         verify(mockButacaValidator, times(1)).validarButaca(butaca)
-        verify(mockButacaRepository, times(1)).update(butaca.id, butaca,  Ocupacion.OCUPADA, 6.0)
+        verify(mockButacaRepository, times(1)).update(butaca.id, butaca)
         verify(mockButacaCache, times(1)).put(butaca.id, butaca)
     }
 
@@ -125,16 +125,16 @@ class TestButacaService {
     fun updateButacaErr() {
         val butaca = Butaca("C6", Estado.ACTIVA, Tipo.NORMAL, ocupacion =  Ocupacion.LIBRE, precio = 5.0)
         Mockito.`when`(mockButacaValidator.validarButaca(butaca)).thenReturn(Ok(butaca))
-        Mockito.`when`(mockButacaRepository.update(butaca.id, butaca, butaca.ocupacion, butaca.precio)).thenReturn(null)
+        Mockito.`when`(mockButacaRepository.update(butaca.id, butaca)).thenReturn(null)
 
-        val result = service.update(butaca.id, butaca, butaca.ocupacion, butaca.precio)
+        val result = service.update(butaca.id, butaca)
 
         assertTrue(result.isErr)
         assertTrue(result.error is ButacaError.ButacaNoActualizadas)
         assertEquals(result.error.mensage, "No se ha podido actualizar la butaca: ${butaca.id}")
 
         verify(mockButacaValidator, times(1)).validarButaca(butaca)
-        verify(mockButacaRepository, times(1)).update(butaca.id, butaca, butaca.ocupacion, butaca.precio)
+        verify(mockButacaRepository, times(1)).update(butaca.id, butaca)
         verify(mockButacaCache, times(0)).put(butaca.id, butaca)
     }
 

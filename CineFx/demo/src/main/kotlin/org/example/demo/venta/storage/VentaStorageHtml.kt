@@ -119,7 +119,7 @@ class VentaStorageHtml:VentasStorage {
                                     $lineasHtml
                                 </tbody>
                             </table>
-                            <p>Total: <span class="total">${venta.total.toDefaultMoneyString()}</span></p>
+                            <p>Total: <span class="total">${venta.total.toDefaultMoneyString()} + 21%IVA = ${((venta.total * 0.21) + venta.total).toDefaultMoneyString()}</span></p>
                         </div>
                     </body>
                     </html>

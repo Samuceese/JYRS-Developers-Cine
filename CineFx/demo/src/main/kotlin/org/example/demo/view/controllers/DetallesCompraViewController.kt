@@ -80,7 +80,7 @@ class DetallesCompraViewController: KoinComponent {
         butacasLista.text = butacas.joinToString(separator = "\n")
         complementosLista.text = complementos.joinToString(separator = "\n")
 
-        fxTotalLabel.text = viewPago.state.value.venta.total.toDefaultMoneyString()
+        fxTotalLabel.text = ((viewPago.state.value.venta.total * 0.21) + viewPago.state.value.venta.total).toDefaultMoneyString()
 
     }
 

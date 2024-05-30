@@ -7,8 +7,8 @@ import javafx.scene.control.cell.PropertyValueFactory
 import javafx.scene.image.ImageView
 import org.example.demo.productos.models.*
 import org.example.demo.routes.RoutesManager
-import org.example.demo.view.viewModel.SeleccionarAsientoViewModel
-import org.example.demo.view.viewModel.SeleccionarComplViewModel
+import org.example.demo.usuarios.viewModel.SeleccionarAsientoViewModel
+import org.example.demo.usuarios.viewModel.SeleccionarComplViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
@@ -17,7 +17,7 @@ import org.lighthousegames.logging.logging
 private val logger = logging()
 class SeleccionarComplViewController :KoinComponent{
 
-    val viewCompl:SeleccionarComplViewModel by inject()
+    val viewCompl: SeleccionarComplViewModel by inject()
 
     @FXML
     lateinit var tipoTextfield: TextField
@@ -103,12 +103,12 @@ class SeleccionarComplViewController :KoinComponent{
                 complemmentosSeleccionas.remove(complemento)
                 println(complemmentosSeleccionas.size)
                 viewCompl.actualizarSeleccionados(complemmentosSeleccionas)
-                RoutesManager.alerta("Complemento Eliminado","El Complemento a sido eliminado con exito",Alert.AlertType.CONFIRMATION)
+                RoutesManager.alerta("Complemento Eliminado","El Complemento a sido eliminado con éxito",Alert.AlertType.CONFIRMATION)
             }else{
                 RoutesManager.alerta("Eliminar Complemento","El complemento seleccionado no esta en tu carrito")
             }
         }else{
-            RoutesManager.alerta("Complemento Seleccionado","No has seleccionado ningun complemento")
+            RoutesManager.alerta("Complemento Seleccionado","No has seleccionado ningún complemento")
         }
     }
 
@@ -123,10 +123,10 @@ class SeleccionarComplViewController :KoinComponent{
                 println(complemmentosSeleccionas.size)
                 viewCompl.actualizarSeleccionados(complemmentosSeleccionas)
             }else{
-                RoutesManager.alerta("Maximo 3 Complmenetos","El maximo de complemmentos que puedes seleccionar son 3")
+                RoutesManager.alerta("Máximo 3 Complementos","El máximo de complementos que puedes seleccionar son 3")
             }
         }else{
-            RoutesManager.alerta("Complemento Seleccionado","No has seleccionado ningun complemento")
+            RoutesManager.alerta("Complemento Seleccionado","No has seleccionado ningún complemento")
         }
 
 

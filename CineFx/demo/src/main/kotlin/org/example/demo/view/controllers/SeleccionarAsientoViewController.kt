@@ -9,7 +9,7 @@ import org.example.demo.productos.models.Estado
 import org.example.demo.productos.models.Ocupacion
 import org.example.demo.productos.models.Tipo
 import org.example.demo.routes.RoutesManager
-import org.example.demo.view.viewModel.SeleccionarAsientoViewModel
+import org.example.demo.usuarios.viewModel.SeleccionarAsientoViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
@@ -17,7 +17,7 @@ import org.lighthousegames.logging.logging
 
 private val logger= logging()
 class SeleccionarAsientoViewController :KoinComponent{
-    val viewButacas:SeleccionarAsientoViewModel by inject()
+    val viewButacas: SeleccionarAsientoViewModel by inject()
 
     @FXML
     lateinit var butacaImage1a:ImageView

@@ -107,7 +107,7 @@ class ButacaRepositoryImpl(
 
         logger.debug { "Actualizada butaca con id: $id" }
         println("ActualizaDA butaca con id: $id")
-         val result = this.findById(id)!!
+        val result = this.findById(id)
         return result
     }
 

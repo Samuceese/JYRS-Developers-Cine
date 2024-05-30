@@ -94,11 +94,12 @@ class TestButacaRepository {
         val result = butacaRepository.update(
             "A1",
             butacaActualizada
-            ,Ocupacion.SELECCIONADA,5.0
+            ,Ocupacion.SELECCIONADA,8.0
         )
 
         assertEquals("A1", result?.id)
         assertEquals(Tipo.VIP, result?.tipo)
+        assertEquals(8.0, result?.precio)
     }
 
     @Test

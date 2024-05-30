@@ -106,18 +106,18 @@ class TestButacaService {
     @Test
     fun updateButaca() {
         val butaca = Butaca("A1", Estado.ACTIVA, Tipo.NORMAL, ocupacion =  Ocupacion.LIBRE, precio = 5.0)
-        Mockito.`when`(mockButacaValidator.validarButaca(butaca)).thenReturn(Ok(butaca))
-        Mockito.`when`(mockButacaRepository.update(butaca.id, butaca, butaca.ocupacion,6.0))
-            .thenReturn(butaca)
-        Mockito.`when`(mockButacaCache.put(butaca.id, butaca)).thenReturn(Ok(butaca))
+        whenever(mockButacaValidator.validarButaca(butaca)).thenReturn(Ok(butaca))
+        whenever(mockButacaRepository.update(butaca.id, butaca,  Ocupacion.OCUPADA,6.0)).thenReturn(butaca)
+        whenever(mockButacaCache.put(butaca.id, butaca)).thenReturn(Ok(butaca))
 
-        val result = service.update(butaca.id, butaca, butaca.ocupacion, 6.0)
+        val result = service.update(butaca.id, butaca, Ocupacion.OCUPADA, 6.0)
 
         assertTrue(result.isOk)
+        assertEquals( Ocupacion.OCUPADA, result.value.ocupacion)
         assertEquals(6.0, result.value.precio)
 
         verify(mockButacaValidator, times(1)).validarButaca(butaca)
-        verify(mockButacaRepository, times(1)).update(butaca.id, butaca, butaca.ocupacion, 6.0)
+        verify(mockButacaRepository, times(1)).update(butaca.id, butaca,  Ocupacion.OCUPADA, 6.0)
         verify(mockButacaCache, times(1)).put(butaca.id, butaca)
     }
 

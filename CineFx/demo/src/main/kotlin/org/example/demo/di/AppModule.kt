@@ -29,13 +29,13 @@ import org.example.demo.usuarios.services.UserService
 import org.example.demo.usuarios.services.UserServiceImpl
 import org.example.demo.usuarios.storage.UsuarioStorage
 import org.example.demo.usuarios.storage.UsuarioStorageImpl
+import org.example.demo.usuarios.viewModel.*
 import org.example.demo.venta.repositories.VentasRepository
 import org.example.demo.venta.repositories.VentasRepositoryImpl
 import org.example.demo.venta.services.VentasService
 import org.example.demo.venta.services.VentasServiceImpl
 import org.example.demo.venta.storage.VentaStorageHtml
 import org.example.demo.venta.storage.VentasStorage
-import org.example.demo.view.viewModel.*
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 

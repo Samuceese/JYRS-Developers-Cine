@@ -8,14 +8,14 @@ import javafx.scene.image.ImageView
 import javafx.stage.FileChooser
 import org.example.demo.productos.models.Butaca
 import org.example.demo.routes.RoutesManager
-import org.example.demo.view.viewModel.GestionButacaViewModel
+import org.example.demo.usuarios.viewModel.GestionButacaViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 
 private val logger= logging()
 class GestionButacaViewController:KoinComponent {
-    val view:GestionButacaViewModel by inject()
+    val view: GestionButacaViewModel by inject()
     @FXML
     lateinit var menuAdmin:ImageView
     @FXML

@@ -8,14 +8,14 @@ import org.example.demo.productos.models.Estado
 import org.example.demo.productos.models.Ocupacion
 import org.example.demo.productos.models.Tipo
 import org.example.demo.routes.RoutesManager
-import org.example.demo.view.viewModel.EstadoCineViewModel
+import org.example.demo.usuarios.viewModel.EstadoCineViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
 
 private val logger= logging()
 class EstadoCineViewController: KoinComponent {
-    val view:EstadoCineViewModel by inject()
+    val view: EstadoCineViewModel by inject()
 
     @FXML
     lateinit var menuAdmin:ImageView

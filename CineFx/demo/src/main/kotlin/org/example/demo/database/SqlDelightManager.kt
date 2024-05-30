@@ -53,7 +53,11 @@ class SqlDelightManager(
         return database.databaseQueries
     }
 
-
+    /**
+     * Borramos los datos de la base de datos.
+     * @author Yahya El Hadri, Samuel Cortés, Raúl Fernández, Javier Hernández
+     * @since 1.0
+     */
 
     fun clearData() {
         logger.debug { "Borrando datos de la base de datos" }

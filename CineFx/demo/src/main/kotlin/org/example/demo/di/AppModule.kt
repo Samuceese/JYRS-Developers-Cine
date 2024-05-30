@@ -1,7 +1,5 @@
 package org.example.demo.di
 
-
-
 import org.example.demo.config.Config
 import org.example.demo.database.SqlDelightManager
 import org.example.demo.productos.butaca.cache.ButacasCacheImpl

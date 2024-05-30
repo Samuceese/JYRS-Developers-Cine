@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView
 import javafx.stage.FileChooser
 import org.example.demo.productos.models.Complemento
 import org.example.demo.routes.RoutesManager
-import org.example.demo.view.viewModel.GestionComplementoViewModel
+import org.example.demo.usuarios.viewModel.GestionComplementoViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
@@ -16,7 +16,7 @@ import org.lighthousegames.logging.logging
 
 private val logger= logging()
 class GestionComplViewController:KoinComponent {
-    val view:GestionComplementoViewModel by inject()
+    val view: GestionComplementoViewModel by inject()
     @FXML
     lateinit var menuAdmin: ImageView
     @FXML

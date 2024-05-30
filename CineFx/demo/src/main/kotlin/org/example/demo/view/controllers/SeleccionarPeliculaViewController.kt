@@ -4,7 +4,7 @@ import javafx.fxml.FXML
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import org.example.demo.routes.RoutesManager
-import org.example.demo.view.viewModel.SeleccionarPeliculaViewModel
+import org.example.demo.usuarios.viewModel.SeleccionarPeliculaViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
@@ -13,7 +13,7 @@ import org.lighthousegames.logging.logging
 private val logger= logging()
 class SeleccionarPeliculaViewController :KoinComponent{
 
-    val view:SeleccionarPeliculaViewModel by inject()
+    val view: SeleccionarPeliculaViewModel by inject()
 
     @FXML
     lateinit var simioImage: ImageView

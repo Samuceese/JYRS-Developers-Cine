@@ -2,6 +2,7 @@ package org.example.demo.usuarios.viewModel
 
 import com.github.michaelbull.result.map
 import com.github.michaelbull.result.mapBoth
+import org.example.demo.config.Config
 import org.example.demo.database.SqlDelightManager
 import org.example.demo.productos.butaca.services.ButacaService
 import org.example.demo.productos.complementos.services.ComplementoService
@@ -30,7 +31,8 @@ class ZipViewModel(
             butacas = serviceButacas.getAll().value,
             complementos = serviceComplementos.getAll().value,
             ventas = serviceVenta.getAll().value,
-            usuarios = serviceUsuario.findAll().value
+            usuarios = serviceUsuario.findAll().value,
+            config = Config
         ).mapBoth(
             success = {
                 return true
@@ -41,7 +43,7 @@ class ZipViewModel(
         )
     }
     fun unzip(file:File):Boolean{
-        storage.loadFromZip(file).mapBoth(
+        storage.loadFromZip(file,config = Config).mapBoth(
             success = {
                 db.initQueries()
                 db.databaseQueries.InsertTheAdmin()

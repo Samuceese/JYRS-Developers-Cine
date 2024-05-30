@@ -56,7 +56,7 @@ class SeleccionarAsientoViewModel(
         precio: Double
     ):Butaca{
         val butaca = Butaca(id,estado, tipo, createAt, precio = precio, ocupacion = ocupada)
-        return service.update(id,butaca,ocupada,precio).value
+        return service.update(id,butaca).value
     }
     fun actualizarButacasSeleccionadas(lista:MutableList<Butaca>){
         state.value = state.value.copy(

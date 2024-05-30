@@ -47,7 +47,7 @@ class GestionButacaViewModel(
             )
         }
         lista.forEach {
-            service.update(it.id,it,it.ocupacion,it.precio)
+            service.update(it.id,it)
         }
         initState(lista)
         return true

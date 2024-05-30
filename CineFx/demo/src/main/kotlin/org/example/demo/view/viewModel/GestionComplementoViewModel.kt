@@ -24,6 +24,11 @@ class GestionComplementoViewModel(
     val state: SimpleObjectProperty<ComplementoState> = SimpleObjectProperty(ComplementoState())
 
     init {
+        iniciar()
+
+    }
+
+    fun iniciar() {
         if (servicio.getAll().value.isEmpty()) {
             servicio.import(File("data", "complemento.csv")).onSuccess {
                 initState(it)
@@ -31,7 +36,6 @@ class GestionComplementoViewModel(
         } else {
             initState(servicio.getAll().value)
         }
-
     }
 
     fun exportar(file: File): Boolean {

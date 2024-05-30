@@ -118,5 +118,9 @@ class TestButacaRepository {
         assertEquals(null, butaca)
     }
 
-
+    @Test
+    fun deleteAll(){
+        val result = butacaRepository.deleteAll()
+        assertEquals(0, result.)
+    }
 }

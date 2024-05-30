@@ -131,7 +131,7 @@ class TestButacaService {
 
         assertTrue(result.isErr)
         assertTrue(result.error is ButacaError.ButacaNoActualizadas)
-        assertEquals(result.error.mensage, "No se ha podido actualizar la butaca: ${butaca.id}")
+        assertEquals("No se ha podido actualizar la butaca con id: ${butaca.id}", result.error.mensage)
 
         verify(mockButacaValidator, times(1)).validarButaca(butaca)
         verify(mockButacaRepository, times(1)).update(butaca.id, butaca)

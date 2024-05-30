@@ -23,13 +23,36 @@ import java.util.zip.ZipOutputStream
 
 private val logger= logging()
 
+
+/**
+ * @param storageClientes
+ * @param storageButacas
+ * @param storageComplementos
+ * @param storageVentas
+ * @author Raúl Fernández, Yahya El Hadri, Samuel Cortés, Javier Hernández.
+ * @since 1.0
+ */
+
 class CineStorageImpl  (
     private val storageButacas: ButacaStorage,
     private val storageComplementos:ComplementoStorage,
     private val storageClientes: UsuarioStorage,
     private val storageVentas: VentasStorage
 ): CineStorage {
+
     private val dirName = "JYRSCinemaZip"
+
+    /**
+     * Proporcionamos una manera de exportar datos de complementos, butacas, usuarios, ventas a un archivo ZIP.
+     * @return Devolvemos un result, que devuelve un ok en caso de que se haya hecho bien y un error en caso de que salga mal.
+     * @param file
+     * @param butacas
+     * @param complementos
+     * @param usuarios
+     * @param ventas
+     * @author Samuel Cortés, Yahya El Hadri, Raúl Fernández, Javier Hernández.
+     * @since 1.0
+     */
 
     override fun exportToZip(
         file: File,
@@ -107,6 +130,15 @@ class CineStorageImpl  (
             Err(ErrorStorage.FicheroError("Error al exportar a ZIP: ${e.message}"))
         }
     }
+
+    /**
+     * Nos encargamos de extraer los archivos ZIP especificado y los guarda en un directorio temporal.
+     * @return Devolverá un resultado exitoso conteniendo una lista de objetos y si ocurre algún error devolverá un error.
+     * @param file
+     * @since 1.0
+     * @author Samuel Cortés, Raúl Fernández, Yahya El Hadri,
+     */
+
     override fun loadFromZip(file: File): Result<List<Any>, ErrorStorage> {
         logger.debug { "Importando desde ZIP $file" }
         val tempDir = Files.createTempDirectory(dirName)
@@ -138,6 +170,4 @@ class CineStorageImpl  (
             Err(ErrorStorage.FicheroError("Error al importar desde ZIP: ${e.message}"))
         }
     }
-
-
 }

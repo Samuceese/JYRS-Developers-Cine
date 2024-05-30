@@ -39,6 +39,8 @@ class TestButacaRepository {
                 id = "A1",
                 tipo = Tipo.NORMAL,
                 estado = Estado.ACTIVA,
+                precio = 5.0,
+                ocupacion = Ocupacion.LIBRE
             )
         )
         val butaca = butacaRepository.findById("A1")
@@ -63,6 +65,8 @@ class TestButacaRepository {
                 id = "A1",
                 tipo = Tipo.NORMAL,
                 estado = Estado.ACTIVA,
+                precio = 5.0,
+                ocupacion = Ocupacion.LIBRE
             )
         )
 
@@ -77,11 +81,15 @@ class TestButacaRepository {
             id = "A1",
             tipo = Tipo.NORMAL,
             estado = Estado.ACTIVA,
+            precio = 5.0,
+            ocupacion = Ocupacion.LIBRE
         )
         butacaRepository.save(butaca)
         val butacaActualizada = Butaca(id = "A1",
             tipo = Tipo.VIP,
-            estado = Estado.ACTIVA)
+            estado = Estado.ACTIVA,
+            precio = 8.0,
+            ocupacion = Ocupacion.LIBRE)
 
         val result = butacaRepository.update(
             "A1",
@@ -101,7 +109,10 @@ class TestButacaRepository {
                 id = "A1",
                 estado = Estado.ACTIVA,
                 tipo = Tipo.VIP,
-            ),Ocupacion.LIBRE,5.0
+                ocupacion =  Ocupacion.LIBRE,
+                precio = 5.0
+            )
+            ,Ocupacion.LIBRE,5.0
         )
 
         assertEquals(null, butaca)

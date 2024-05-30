@@ -77,7 +77,6 @@ class GestionButacaViewController:KoinComponent {
     }
 
     private fun initDefaultValues() {
-        exportarJsonButton.text="EXPORTAR BUTACAS"
         tablaButacas.items = FXCollections.observableList(view.state.value.butacas)
         columnaEstado.cellValueFactory= PropertyValueFactory("Estado")
         columnaId.cellValueFactory= PropertyValueFactory("Id")

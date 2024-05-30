@@ -29,8 +29,8 @@ class SeleccionarComplViewController :KoinComponent{
     lateinit var cantidadSpinner: Spinner<Int>
     @FXML
     lateinit var añadirComplementoButton:Button
-    //@FXML
-    //lateinit var eliminarComplementoBoton:Button
+    @FXML
+    lateinit var eliminarComplementoBoton:Button
     @FXML
     lateinit var imagenComplemento: ImageView
     @FXML
@@ -93,7 +93,7 @@ class SeleccionarComplViewController :KoinComponent{
             it?.let { onTextAction() }
         }
         añadirComplementoButton.setOnAction { añadirOnAction(complemennto) }
-        //eliminarComplementoBoton.setOnAction { eliminarOnAction(complemennto!!) }
+        eliminarComplementoBoton.setOnAction { eliminarOnAction(complemennto!!) }
         
     }
 

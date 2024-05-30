@@ -62,18 +62,6 @@ class StorageImageImpl(
             Err(ComplementoError.ComplememntoImageError("Error al guardar la imagen: ${e.message}"))
         }
     }
-    fun saveImageTemp(dir:String,fileName: File): Result<File, ComplementoError> {
-        logger.debug { "Guardando imagen $fileName" }
-        return try {
-            val newFileImage = Paths.get(dir, fileName.name).toFile()
-            Files.copy(fileName.toPath(), newFileImage.toPath(), StandardCopyOption.REPLACE_EXISTING)
-            Ok(newFileImage)
-        }catch (e : Exception){
-            Err(ComplementoError.ComplememntoImageError("Error al guardar la imagen: ${e.message}"))
-        }
-    }
-
-
 
     /**
      * Nos encargamos de cargar una imagen sacada de la base de datos.

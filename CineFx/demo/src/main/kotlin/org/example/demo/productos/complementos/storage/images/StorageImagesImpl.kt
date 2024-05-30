@@ -10,6 +10,7 @@ import java.time.Instant
 import com.github.michaelbull.result.Result
 import org.example.demo.config.Config
 import java.nio.file.StandardCopyOption
+import kotlin.io.path.Path
 
 private val logger = logging()
 
@@ -51,21 +52,41 @@ class StorageImageImpl(
      */
 
     override fun saveImage(fileName: File): Result<File, ComplementoError> {
-        logger.debug { "Guardando imaáen $fileName" }
+        logger.debug { "Guardando imagen $fileName" }
         return try {
-            val newFileName = getImageName(fileName)
-            val newFileImage = Paths.get(config.imagenesDirectory, newFileName).toFile()
+            Files.createDirectories(Path( config.imagenesDirectory))
+            val newFileImage = Paths.get(config.imagenesDirectory, fileName.name).toFile()
             Files.copy(fileName.toPath(), newFileImage.toPath(), StandardCopyOption.REPLACE_EXISTING)
             Ok(newFileImage)
         }catch (e : Exception){
-            Err(ComplementoError.ComplememntoImageError("Error al guardar la imágen: ${e.message}"))
+            Err(ComplementoError.ComplememntoImageError("Error al guardar la imagen: ${e.message}"))
         }
     }
+
 
     /**
      * Nos encargamos de cargar una imagen sacada de la base de datos.
      * @param fileName
+     * @param dir
      * @return Devuelve un resultado exitoso si el archivo se encuentra en el directorio de imágenes y si el archivo no existe devuelve un error.
+     * @author Raúl Fernández, Javier Hernández, Yahya El Hadri, Samuel Cortés
+     * @since 1.0
+     */
+
+    fun saveImageTemp(dir:String,fileName: File): Result<File, ComplementoError> {
+        logger.debug { "Guardando imagen $fileName" }
+        return try {
+            val newFileImage = Paths.get(dir, fileName.name).toFile()
+            Files.copy(fileName.toPath(), newFileImage.toPath(), StandardCopyOption.REPLACE_EXISTING)
+            Ok(newFileImage)
+        }catch (e : Exception){
+            Err(ComplementoError.ComplememntoImageError("Error al guardar la imagen: ${e.message}"))
+        }
+    }
+
+    /**
+     * Cargamos todas las imágenes.
+     * @return Si la actualización no tiene éxito le salta un error y si tiene éxito no salta ningún error.
      * @author Raúl Fernández, Javier Hernández, Yahya El Hadri, Samuel Cortés
      * @since 1.0
      */
@@ -98,21 +119,21 @@ class StorageImageImpl(
     }
 
     /**
-     * Nos encargamos de eliminar todas las imágenes del directorio especifíco.
-     * @return Si la eliminación no tiene éxito le salta un error y si tiene éxito no salta ningún error.
+     * Eliminamos todas las imágenes.
+     * @return Si la actualización no tiene éxito le salta un error y si tiene éxito no salta ningún error.
      * @author Raúl Fernández, Javier Hernández, Yahya El Hadri, Samuel Cortés
      * @since 1.0
      */
 
     override fun deleteAllImages(): Result<Long, ComplementoError> {
-        logger.debug { "Borrando todas las imágenes" }
+        logger.debug { "Borrando todas las imagenes" }
         return try{
             Ok(Files.walk(Paths.get(config.imagenesDirectory))
                 .filter{Files.isRegularFile(it)}
                 .map { Files.deleteIfExists(it) }
                 .count())
         }catch(e: Exception){
-            Err(ComplementoError.ComplememntoImageError("Error al borrar todas las imágenes: ${e.message}"))
+            Err(ComplementoError.ComplememntoImageError("Error al borrar todas las imagenes: ${e.message}"))
         }
     }
 

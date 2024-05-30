@@ -121,6 +121,8 @@ class TestButacaRepository {
     @Test
     fun deleteAll(){
         val result = butacaRepository.deleteAll()
-        assertEquals(0, result.)
+        val operation = butacaRepository.findAll()
+        assertEquals(Unit, result)
+        assertEquals(0, operation.size)
     }
 }

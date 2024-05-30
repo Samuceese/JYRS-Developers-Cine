@@ -32,7 +32,7 @@ fun Double.toDefaultMoneyString():String{
 
 /**
  * En esta función tomamos una cadena de texto con una fecha en formato "dia/mes/año".
- *@return Devuelve un LocalDate que representa una fecha.
+ * @return Devuelve un LocalDate que representa una fecha.
  * @since 1.0
  * @author Raúl Fernández, Yahya El Hadri, Javier Hernández, Samuel Cortés.
  */
@@ -44,7 +44,7 @@ fun String.returnDateTimeString():LocalDate{
 
 /**
  * En esta función tomamos una cadena de texto con una fecha en formato "día/mes/año" usándolo en formato español.
- *@return Devuelve un LocalDate que representa una fecha en formato español.
+ * @return Devuelve un LocalDate que representa una fecha en formato español.
  * @since 1.0
  * @author Raúl Fernández, Yahya El Hadri, Javier Hernández, Samuel Cortés.
  */

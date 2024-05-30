@@ -8,62 +8,72 @@ import org.example.demo.usuarios.models7.Usuario
 import org.example.demo.venta.models.Venta
 import java.io.File
 import com.github.michaelbull.result.Result
+import com.github.michaelbull.result.mapBoth
+import org.example.demo.config.Config
 import org.example.demo.errors.ErrorStorage
 import org.example.demo.productos.butaca.storage.ButacaStorage
 import org.example.demo.productos.complementos.storage.ComplementoStorage
+import org.example.demo.productos.complementos.storage.images.StorageImageImpl
 import org.example.demo.usuarios.storage.UsuarioStorage
 import org.example.demo.venta.storage.VentasStorage
 import org.lighthousegames.logging.logging
+
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.nio.file.StandardCopyOption
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 import java.util.zip.ZipOutputStream
+import kotlin.io.path.name
+import kotlin.io.path.pathString
 
 private val logger= logging()
-
-
-/**
- * @param storageClientes
- * @param storageButacas
- * @param storageComplementos
- * @param storageVentas
- * @author Raúl Fernández, Yahya El Hadri, Samuel Cortés, Javier Hernández.
- * @since 1.0
- */
 
 class CineStorageImpl  (
     private val storageButacas: ButacaStorage,
     private val storageComplementos:ComplementoStorage,
     private val storageClientes: UsuarioStorage,
-    private val storageVentas: VentasStorage
+    private val storageVentas: VentasStorage,
+    private val storageImages: StorageImageImpl
 ): CineStorage {
-
     private val dirName = "JYRSCinemaZip"
 
     /**
-     * Proporcionamos una manera de exportar datos de complementos, butacas, usuarios, ventas a un archivo ZIP.
-     * @return Devolvemos un result, que devuelve un ok en caso de que se haya hecho bien y un error en caso de que salga mal.
+     * Exportamos datos de un archivo ZIP.
+     * @return Devuelve un storage de butacas, complementos, usuarios, ventas, file.
      * @param file
      * @param butacas
      * @param complementos
      * @param usuarios
      * @param ventas
-     * @author Samuel Cortés, Yahya El Hadri, Raúl Fernández, Javier Hernández.
      * @since 1.0
+     * @author Raúl Fernández, Samuel Cortés, Yahya El Hadri, Javier Hernández.
      */
 
     override fun exportToZip(
         file: File,
         butacas: List<Butaca>,
-        complementos:List<Complemento>,
+        complementos: List<Complemento>,
         usuarios: List<Usuario>,
         ventas: List<Venta>
     ): Result<File, ErrorStorage> { //dataVentas: List<Venta>
-        logger.debug { "Exportando a ZIP $file" }
+        logger.debug { "Exportando a ZIPp $file" }
         val tempDir = Files.createTempDirectory(dirName)
         return try {
+
+
+            complementos.forEach {
+                logger.debug { "Exportando imagenes a ZIP $file" }
+                val filee = storageImages.loadImage(it.imagen).value
+                if (filee.exists()) {
+                    logger.debug { "guardando imagenes a ZIP ${filee.name}" }
+                    storageImages.saveImageTemp(tempDir.pathString,filee)
+                }else{
+                    logger.error { "imagen no existente ${filee.name}" }
+                }
+
+            }
+            logger.debug { "guardando butacas " }
 
             storageButacas.saveJson(File("$tempDir","butacas.json"), butacas)
             Files.walk(tempDir).forEach { logger.debug { it } }
@@ -94,7 +104,6 @@ class CineStorageImpl  (
                 }
             }
 
-
             storageClientes.storeJson(File("$tempDir","clientes.json"), usuarios)
             Files.walk(tempDir)
                 .forEach { logger.debug { it } }
@@ -109,6 +118,7 @@ class CineStorageImpl  (
                     zip.closeEntry()
                 }
             }
+
             storageVentas.save(File("$tempDir","ventas.json"), ventas)
             Files.walk(tempDir).forEach { logger.debug { it } }
             val allVentas = Files.walk(tempDir)
@@ -132,11 +142,10 @@ class CineStorageImpl  (
     }
 
     /**
-     * Nos encargamos de extraer los archivos ZIP especificado y los guarda en un directorio temporal.
-     * @return Devolverá un resultado exitoso conteniendo una lista de objetos y si ocurre algún error devolverá un error.
+     * Cargamos datos desde un archivo zip.
      * @param file
      * @since 1.0
-     * @author Samuel Cortés, Raúl Fernández, Yahya El Hadri,
+     * @author Raúl Fernández, Samuel Cortés, Yahya El Hadri, Javier Hernández.
      */
 
     override fun loadFromZip(file: File): Result<List<Any>, ErrorStorage> {
@@ -152,6 +161,11 @@ class CineStorageImpl  (
                             StandardCopyOption.REPLACE_EXISTING
                         )
                     }
+                }
+            }
+            Files.walk(tempDir).forEach {
+                if (!it.toString().contains(".json") && Files.isRegularFile(it)) {
+                    storageImages.saveImage(it.toFile())
                 }
             }
             val listaButacas = storageButacas.loadJson(File("$tempDir","butacas.json"))

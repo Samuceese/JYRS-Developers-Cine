@@ -6,10 +6,10 @@ import javafx.scene.control.Label
 import org.example.demo.locale.toDefaultMoneyString
 import org.example.demo.productos.models.*
 import org.example.demo.routes.RoutesManager
-import org.example.demo.view.viewModel.CarritoViewModel
-import org.example.demo.view.viewModel.SeleccionarAsientoViewModel
-import org.example.demo.view.viewModel.SeleccionarComplViewModel
-import org.example.demo.view.viewModel.SeleccionarPeliculaViewModel
+import org.example.demo.usuarios.viewModel.CarritoViewModel
+import org.example.demo.usuarios.viewModel.SeleccionarAsientoViewModel
+import org.example.demo.usuarios.viewModel.SeleccionarComplViewModel
+import org.example.demo.usuarios.viewModel.SeleccionarPeliculaViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.Platform
@@ -22,7 +22,7 @@ class CarritoViewController:KoinComponent {
     val viewComp: SeleccionarComplViewModel by inject()
     val viewBut: SeleccionarAsientoViewModel by inject()
     val viewPeli: SeleccionarPeliculaViewModel by inject()
-    val view:CarritoViewModel by inject()
+    val view: CarritoViewModel by inject()
 
     @FXML
     lateinit var productoLabel1: Label

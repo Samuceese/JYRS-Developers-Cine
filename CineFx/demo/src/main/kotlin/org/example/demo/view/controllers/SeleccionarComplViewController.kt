@@ -26,8 +26,6 @@ class SeleccionarComplViewController :KoinComponent{
     @FXML
     lateinit var precioTextfield: TextField
     @FXML
-    lateinit var cantidadSpinner: Spinner<Int>
-    @FXML
     lateinit var añadirComplementoButton:Button
     @FXML
     lateinit var eliminarComplementoBoton:Button
@@ -93,12 +91,12 @@ class SeleccionarComplViewController :KoinComponent{
             it?.let { onTextAction() }
         }
         añadirComplementoButton.setOnAction { añadirOnAction(complemennto) }
-        eliminarComplementoBoton.setOnAction { eliminarOnAction(complemennto!!) }
+        eliminarComplementoBoton.setOnAction { eliminarOnAction(complemennto) }
         
     }
 
-    private fun eliminarOnAction(complemento: Complemento) {
-        if (this.complemennto != null){
+    private fun eliminarOnAction(complemento: Complemento?) {
+        if (complemento != null){
             if (complemento.id != "NOVALIDO" && viewCompl.state.value.complementosSeleccionados.contains(complemento)){
                 complemmentosSeleccionas.remove(complemento)
                 println(complemmentosSeleccionas.size)

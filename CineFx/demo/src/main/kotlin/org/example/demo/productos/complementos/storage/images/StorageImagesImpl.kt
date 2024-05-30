@@ -10,6 +10,7 @@ import java.time.Instant
 import com.github.michaelbull.result.Result
 import org.example.demo.config.Config
 import java.nio.file.StandardCopyOption
+import kotlin.io.path.Path
 
 private val logger = logging()
 
@@ -37,14 +38,25 @@ class StorageImageImpl(
     override fun saveImage(fileName: File): Result<File, ComplementoError> {
         logger.debug { "Guardando imagen $fileName" }
         return try {
-            val newFileName = getImageName(fileName)
-            val newFileImage = Paths.get(config.imagenesDirectory, newFileName).toFile()
+            Files.createDirectories(Path( config.imagenesDirectory))
+            val newFileImage = Paths.get(config.imagenesDirectory, fileName.name).toFile()
             Files.copy(fileName.toPath(), newFileImage.toPath(), StandardCopyOption.REPLACE_EXISTING)
             Ok(newFileImage)
         }catch (e : Exception){
             Err(ComplementoError.ComplememntoImageError("Error al guardar la imagen: ${e.message}"))
         }
     }
+     fun saveImageTemp(dir:String,fileName: File): Result<File, ComplementoError> {
+        logger.debug { "Guardando imagen $fileName" }
+        return try {
+            val newFileImage = Paths.get(dir, fileName.name).toFile()
+            Files.copy(fileName.toPath(), newFileImage.toPath(), StandardCopyOption.REPLACE_EXISTING)
+            Ok(newFileImage)
+        }catch (e : Exception){
+            Err(ComplementoError.ComplememntoImageError("Error al guardar la imagen: ${e.message}"))
+        }
+    }
+
 
     override fun loadImage(fileName: String): Result<File, ComplementoError> {
         logger.debug { "Cargando imagen $fileName" }

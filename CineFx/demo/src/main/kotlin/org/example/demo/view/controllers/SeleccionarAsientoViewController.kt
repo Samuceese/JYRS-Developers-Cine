@@ -340,6 +340,8 @@ class SeleccionarAsientoViewController :KoinComponent{
     private fun botonContinuarOnAction() {
         if (viewButacas.state.value.butacasSeleccionadas.size > 0){
             RoutesManager.changeScene(view = RoutesManager.View.SELECCOMPL, title = "Seleccionar Complemento")
+        }else{
+            RoutesManager.alerta("Butaca Nos eleccionada","No has seleccionado ninguna Butaca")
         }
     }
 

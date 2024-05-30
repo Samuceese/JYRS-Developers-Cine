@@ -68,7 +68,7 @@ val appModule = module {
     single<VentasRepository> { VentasRepositoryImpl(get(), get(), get(), get()) }
     single<VentasService> { VentasServiceImpl(get(), get(), get(), get()) }
 
-    single<CineStorage> { CineStorageImpl(get(),get(),get(),get())  }
+    single<CineStorage> { CineStorageImpl(get(),get(),get(),get(),get())  }
 
     singleOf(::LoginViewModel)
 

@@ -65,9 +65,9 @@ class SqlDelightManager(
             //databaseQueries.deleteAllUsers()
             databaseQueries.deleteAllButacaEntity()
             databaseQueries.deleteAllComplemetoEntity()
-            //databaseQueries.removeAllVentas()
-            //databaseQueries.removeAllLineaVentaEntityButaca()
-            //databaseQueries.removeAllLineaVentaEntityComplemento()
+            databaseQueries.removeAllVentas()
+            databaseQueries.removeAllLineaVentaEntityButaca()
+            databaseQueries.removeAllLineaVentaEntityComplemento()
         }
     }
 

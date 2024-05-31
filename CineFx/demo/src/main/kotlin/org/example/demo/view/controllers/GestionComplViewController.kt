@@ -57,6 +57,7 @@ class GestionComplViewController:KoinComponent {
     }
 
     private fun initDefaultValues() {
+        view.iniciar()
         tablaComplementos.items = FXCollections.observableList(view.state.value.complementos)
 
         nombreColumna.cellValueFactory = PropertyValueFactory("id")
@@ -67,6 +68,7 @@ class GestionComplViewController:KoinComponent {
         filtroPrecio.value = "All"
     }
     private fun initReactiveProperties() {
+        view.iniciar()
         view.state.addListener { _,_,newValue->
             tipoTextfield.text=newValue.tipo
             nombreTextfield.text=newValue.nombre

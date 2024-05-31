@@ -212,8 +212,10 @@ class CarritoViewController:KoinComponent {
                 }
             }
         }
-        fxLabelTotal.text= totalDinero(productos).toDefaultMoneyString()
-        view.asignarTotal(fxLabelTotal.text)
+        val totalSinIva=totalDinero(productos)
+        val totalIva=(totalSinIva * 0.21) + totalSinIva
+        fxLabelTotal.text= "${totalSinIva.toDefaultMoneyString()} + 21% IVA = ${totalIva.toDefaultMoneyString()}"
+        view.asignarTotal(totalIva.toDefaultMoneyString())
         view.asignarPelicula(viewPeli.state.value.pelicula)
     }
 

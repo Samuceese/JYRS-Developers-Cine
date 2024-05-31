@@ -58,7 +58,7 @@ class TestVentaRepository {
         ventaRepo = VentasRepositoryImpl(dbManager, clienteRepo, butacaRepo, complementoRepo)
 
         cliente = Cliente(
-            id = 55,
+            id = 2,
             nombre="User",
             apellidos = "user",
             email = "user@gmail.com",
@@ -100,7 +100,7 @@ class TestVentaRepository {
 
     @AfterEach
     fun deletData(){
-        dbManager.clearData()
+        dbManager.databaseQueries.removeAllVentas()
     }
 
     @Test
@@ -110,7 +110,7 @@ class TestVentaRepository {
         ))
         val ventas=ventaRepo.getAll()
 
-        assertEquals(1,ventas.size)
+        assertEquals(3,ventas.size)
     }
 
     @Test

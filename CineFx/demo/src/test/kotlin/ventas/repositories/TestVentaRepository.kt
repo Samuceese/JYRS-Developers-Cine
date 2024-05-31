@@ -73,7 +73,7 @@ class TestVentaRepository {
             imagen = "agua.png",
             precio = 2.0
         )
-        dbManager.databaseQueries.insertComplemento("BEBIDA",complemento.id, precio = 2.0.toLong(), imagen = "agua.png", nombre = "AGUA"
+        dbManager.databaseQueries.insertComplemento("BEBIDA",complemento.id, precio = 2.0, imagen = "agua.png", nombre = "AGUA"
         )
         butaca = Butaca(
             id="A1",

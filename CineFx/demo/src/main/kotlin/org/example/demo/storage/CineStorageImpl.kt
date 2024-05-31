@@ -24,6 +24,7 @@ import java.nio.file.StandardCopyOption
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 import java.util.zip.ZipOutputStream
+import kotlin.io.path.Path
 import kotlin.io.path.name
 import kotlin.io.path.pathString
 
@@ -45,22 +46,15 @@ class CineStorageImpl  (
         complementos: List<Complemento>,
         usuarios: List<Usuario>,
         ventas: List<Venta>
-    ): Result<File, ErrorStorage> { //dataVentas: List<Venta>
+    ): Result<File, ErrorStorage> {
         logger.debug { "Exportando a ZIPp $file" }
         val tempDir = Files.createTempDirectory(dirName)
         return try {
-
-
-            complementos.forEach {
-                logger.debug { "Exportando imagenes a ZIP $file" }
-                val filee = storageImages.loadImage(it.imagen).value
-                if (filee.exists()) {
-                    logger.debug { "guardando imagenes a ZIP ${filee.name}" }
-                    storageImages.saveImageTemp(tempDir.pathString,filee)
-                }else{
-                    logger.error { "imagen no existente ${filee.name}" }
+            val dir=Files.createDirectories(Path( config.imagenesDirectory))
+            Files.walk(dir).forEach {
+                if (Files.isRegularFile(it)) {
+                    storageImages.saveImageTemp(tempDir.pathString,it.toFile())
                 }
-
             }
             logger.debug { "guardando butacas " }
             storageButacas.saveJson(File("$tempDir","butacas.json"), butacas)
@@ -164,6 +158,5 @@ class CineStorageImpl  (
             Err(ErrorStorage.FicheroError("Error al importar desde ZIP: ${e.message}"))
         }
     }
-
 
 }

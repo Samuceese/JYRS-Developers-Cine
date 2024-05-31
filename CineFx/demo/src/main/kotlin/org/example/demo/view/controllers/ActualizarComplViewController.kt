@@ -26,7 +26,7 @@ class ActualizarComplViewController:KoinComponent {
     @FXML
     lateinit var fxTextFieldPrecio:TextField
     @FXML
-    lateinit var fxtextFieldBebida:TextField
+    lateinit var fxtextFieldBebida:ComboBox<String>
     @FXML
     lateinit var fxTextFieldNombre:TextField
     @FXML
@@ -47,8 +47,9 @@ class ActualizarComplViewController:KoinComponent {
     }
 
     private fun initDefaulValues() {
+        fxtextFieldBebida.items=FXCollections.observableList(view.state.value.tipos)
         fxTextFieldNombre.text=viewGest.state.value.complementoSeleccionado!!.id
-        fxtextFieldBebida.text=viewGest.state.value.complementoSeleccionado!!.tipo
+        fxtextFieldBebida.value=viewGest.state.value.complementoSeleccionado!!.tipo
         fxTextFieldPrecio.text=viewGest.state.value.complementoSeleccionado!!.precio.toString()
         val imagen= File("imagenes",viewGest.state.value.complementoSeleccionado!!.imagen)
         imagenComplemento.image = Image(imagen.absoluteFile.toURI().toString())
@@ -83,7 +84,7 @@ class ActualizarComplViewController:KoinComponent {
         if (fxTextFieldPrecio.text.isNotBlank() &&
             fxTextFieldNombre.text.isNotBlank() &&
             fxTextFieldPrecio.text.toDoubleOrNull()!= null){
-            view.actualizar(id = fxTextFieldNombre.text, precio = fxTextFieldPrecio.text, tipo = fxtextFieldBebida.text, imagen =imagen )
+            view.actualizar(id = fxTextFieldNombre.text, precio = fxTextFieldPrecio.text, tipo = fxtextFieldBebida.value, imagen =imagen )
             viewGest.initState(view.allComplementos())
         }
     }

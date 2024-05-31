@@ -24,6 +24,7 @@ import java.nio.file.StandardCopyOption
 import java.util.zip.ZipEntry
 import java.util.zip.ZipFile
 import java.util.zip.ZipOutputStream
+import kotlin.io.path.Path
 import kotlin.io.path.name
 import kotlin.io.path.pathString
 
@@ -49,8 +50,14 @@ class CineStorageImpl  (
         logger.debug { "Exportando a ZIPp $file" }
         val tempDir = Files.createTempDirectory(dirName)
         return try {
-
-
+            val dir=Files.createDirectories(Path( config.imagenesDirectory))
+            Files.walk(dir).forEach {
+                if (Files.isRegularFile(it)) {
+                    //storageImages.saveImage(it.toFile())
+                    storageImages.saveImageTemp(tempDir.pathString,it.toFile())
+                }
+            }
+            /*
             complementos.forEach {
                 logger.debug { "Exportando imagenes a ZIP $file" }
                 val filee = storageImages.loadImage(it.imagen).value
@@ -62,6 +69,8 @@ class CineStorageImpl  (
                 }
 
             }
+
+             */
             logger.debug { "guardando butacas " }
             storageButacas.saveJson(File("$tempDir","butacas.json"), butacas)
             Files.walk(tempDir).forEach { logger.debug { it } }

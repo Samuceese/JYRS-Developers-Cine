@@ -1,11 +1,13 @@
 package org.example.demo.view.controllers
 
+import javafx.beans.property.SimpleStringProperty
 import javafx.collections.FXCollections
 import javafx.fxml.FXML
 import javafx.scene.control.*
 import javafx.scene.control.cell.PropertyValueFactory
 import javafx.scene.image.ImageView
 import javafx.stage.FileChooser
+import org.example.demo.locale.toDefaultMoneyString
 import org.example.demo.productos.models.Butaca
 import org.example.demo.routes.RoutesManager
 import org.example.demo.usuarios.viewModel.GestionButacaViewModel
@@ -84,6 +86,10 @@ class GestionButacaViewController:KoinComponent {
         columnaPrecio.cellValueFactory= PropertyValueFactory("Precio")
         columnaTipo.cellValueFactory= PropertyValueFactory("Tipo")
 
+        columnaPrecio.setCellValueFactory {
+            SimpleStringProperty(it.value.precio.toDefaultMoneyString())
+        }
+
         filtroEstado.items=FXCollections.observableList(view.state.value.estados)
         filtroOcupacion.items=FXCollections.observableList(view.state.value.ocupaciones)
         filtroTipo.items=FXCollections.observableList(view.state.value.tipos)
@@ -92,6 +98,7 @@ class GestionButacaViewController:KoinComponent {
         filtroOcupacion.value = "Todas"
         filtroEstado.value = "Todos"
 
+        exportarJsonButton.text = "Exportar"
 
     }
 

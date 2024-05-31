@@ -284,7 +284,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="recaudacionTotal" layoutX="146.0" layoutY="414.0" prefHeight="18.0" prefWidth="40.0" textFill="#fcfafa">
+                  <Label fx:id="recaudacionTotal" layoutX="146.0" layoutY="414.0" prefHeight="20.0" prefWidth="84.0" textFill="#fcfafa">
                      <font>
                         <Font size="14.0" />
                      </font></Label>
@@ -293,12 +293,7 @@
                         <Image url="@../images/logo.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="LocalTime" layoutX="175.0" layoutY="216.0" textFill="WHITE">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="LocalDate" layoutX="43.0" layoutY="217.0" textFill="WHITE">
+                  <Label fx:id="localDate" layoutX="55.0" layoutY="223.0" prefHeight="20.0" prefWidth="181.0" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>

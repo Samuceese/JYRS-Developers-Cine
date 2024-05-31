@@ -70,9 +70,9 @@
                                                         <Font name="Cambria" size="12.0" />
                                                     </font>
                                                 </Label>
-                                                <TextField fx:id="tipoTextfield" layoutX="90.4" layoutY="127.0" AnchorPane.rightAnchor="40.0" />
-                                                <TextField fx:id="nombreTextfield" layoutX="90.4" layoutY="164.0" AnchorPane.rightAnchor="40.0" />
-                                                <TextField fx:id="precioTextfield" layoutX="90.4" layoutY="202.0" AnchorPane.rightAnchor="40.0" />
+                                                <TextField fx:id="tipoTextfield" editable="false" layoutX="90.4" layoutY="127.0" AnchorPane.rightAnchor="40.0" />
+                                                <TextField fx:id="nombreTextfield" editable="false" layoutX="90.4" layoutY="164.0" AnchorPane.rightAnchor="40.0" />
+                                                <TextField fx:id="precioTextfield" editable="false" layoutX="90.4" layoutY="202.0" AnchorPane.rightAnchor="40.0" />
                                                 <Button fx:id="añadirButton" layoutX="32.0" layoutY="267.0" mnemonicParsing="false" style="-fx-background-color: white;" text="Añadir" AnchorPane.leftAnchor="32.0">
                                                     <font>
                                                         <Font name="Bookman Old Style" size="12.0" />

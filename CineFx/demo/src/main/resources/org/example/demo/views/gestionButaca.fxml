@@ -70,9 +70,9 @@
                                                         <Font name="Cambria" size="12.0" />
                                                     </font>
                                                 </Label>
-                                                <TextField fx:id="estadoTextfield" layoutX="107.2" layoutY="119.0" prefHeight="26.0" prefWidth="134.0" AnchorPane.leftAnchor="106.0" />
-                                                <TextField fx:id="textoTextfield" layoutX="104.0" layoutY="156.0" prefHeight="26.0" prefWidth="134.0" AnchorPane.leftAnchor="106.0" />
-                                                <TextField fx:id="precioTextField" layoutX="104.0" layoutY="194.0" prefHeight="26.0" prefWidth="134.0" AnchorPane.leftAnchor="106.0" />
+                                                <TextField fx:id="estadoTextfield" editable="false" layoutX="107.2" layoutY="119.0" prefHeight="26.0" prefWidth="134.0" AnchorPane.leftAnchor="106.0" />
+                                                <TextField fx:id="textoTextfield" editable="false" layoutX="104.0" layoutY="156.0" prefHeight="26.0" prefWidth="134.0" AnchorPane.leftAnchor="106.0" />
+                                                <TextField fx:id="precioTextField" editable="false" layoutX="104.0" layoutY="194.0" prefHeight="26.0" prefWidth="134.0" AnchorPane.leftAnchor="106.0" />
                                                 <Button fx:id="modificarButton" layoutX="113.0" layoutY="282.0" mnemonicParsing="false" style="-fx-background-color: white;" text="Modificar" />
                                                 <ImageView fx:id="butacaImage" fitHeight="54.0" fitWidth="54.0" layoutX="21.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                                                     <image>
@@ -84,8 +84,8 @@
                                                         <Font name="Cambria" size="12.0" />
                                                     </font>
                                                 </Label>
-                                                <TextField fx:id="idTextField" layoutX="108.0" layoutY="81.0" prefHeight="26.0" prefWidth="134.0" AnchorPane.leftAnchor="107.0" />
-                                                <TextField fx:id="ocupacionTextField" layoutX="108.0" layoutY="230.0" prefHeight="26.0" prefWidth="134.0" />
+                                                <TextField fx:id="idTextField" editable="false" layoutX="108.0" layoutY="81.0" prefHeight="26.0" prefWidth="134.0" AnchorPane.leftAnchor="107.0" />
+                                                <TextField fx:id="ocupacionTextField" editable="false" layoutX="108.0" layoutY="230.0" prefHeight="26.0" prefWidth="134.0" />
                                             </children>
                                         </AnchorPane>
                                     </children>

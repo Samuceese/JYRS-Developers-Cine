@@ -4,6 +4,7 @@ import javafx.fxml.FXML
 import javafx.scene.control.Label
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
+import org.example.demo.locale.toShortSpanishFormat
 import org.example.demo.productos.models.Estado
 import org.example.demo.productos.models.Ocupacion
 import org.example.demo.productos.models.Tipo
@@ -12,6 +13,8 @@ import org.example.demo.usuarios.viewModel.EstadoCineViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.lighthousegames.logging.logging
+import java.time.LocalDate
+import java.time.LocalTime
 
 private val logger= logging()
 class EstadoCineViewController: KoinComponent {
@@ -123,6 +126,8 @@ class EstadoCineViewController: KoinComponent {
     lateinit var recaudacionVip:Label
     @FXML
     lateinit var recaudacionNormal:Label
+    @FXML
+    lateinit var localDate:Label
 
     @FXML
     fun initialize(){
@@ -132,6 +137,8 @@ class EstadoCineViewController: KoinComponent {
     }
 
     private fun initDefaultValues() {
+        localDate.text= LocalDate.now().toShortSpanishFormat()
+
         recaudacionNormal.text=view.recaudacionNormal()
         recaudacionTotal.text=view.recaudacionTotal()
         recaudacionVip.text=view.recaudacionVip()

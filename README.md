@@ -1,8 +1,6 @@
 # Aplicación de Cine
 
-<div align="center">
-  <img src="https://github.com/tu_usuario/tu_repositorio/raw/main/mi_foto.png" alt="Mi foto">
-</div>
+![empresa logo](https://github.com/Javierhvicente/JYRS-Developers-Cine/blob/develop/CineFx/demo/src/main/resources/org/example/demo/images/logo.png)
 
 ## Descripción.
 Bienvenido a la aplicación de cine desarrollada por JYRS Developers. Esta aplicación está diseñada para ofrecer una experiencia fluida y agradable a los usuarios que desean explorar películas, ver horarios de proyección y obtener información detallada sobre sus películas favoritas.

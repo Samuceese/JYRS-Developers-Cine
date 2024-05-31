@@ -43,13 +43,16 @@ class TestStorageButaca {
         val butacas= listOf(Butaca("A1", Estado.ACTIVA, Tipo.NORMAL, ocupacion =  Ocupacion.LIBRE, precio = 5.0))
         val result = storage.saveJson(myFileJson, butacas)
         assertTrue(result.isOk)
-        assertEquals(Unit, result.value )
+        assertEquals(butacas.size.toLong(), result.value)
     }
 
     @Test
     fun loadJson(){
+        val butacas = listOf(Butaca("A1", Estado.ACTIVA, Tipo.NORMAL, ocupacion =  Ocupacion.LIBRE, precio = 5.0))
+        storage.saveJson(myFileJson, butacas)
         val result = storage.loadJson(myFileJson)
         assertTrue(result.isOk)
+        assertEquals(butacas.size, result.value.size)
     }
 
     @Test

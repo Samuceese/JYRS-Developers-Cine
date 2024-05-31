@@ -57,8 +57,14 @@ class TestStorageImages {
     }
 
    @Test
-   fun UpdateImage(){
+   fun updateImage(){
        val result = storage.updateImage("sodaTest.png", File("imagenes", "agua.png"))
        assertTrue(result.isOk)
+   }
+
+   @Test
+   fun updateImageError(){
+       val result = storage.updateImage("sodaLoca.png", File("imagenes", "aguaLoca.png"))
+       assertTrue(result.isErr)
    }
 }

@@ -46,7 +46,7 @@ class CineStorageImpl  (
         complementos: List<Complemento>,
         usuarios: List<Usuario>,
         ventas: List<Venta>
-    ): Result<File, ErrorStorage> { //dataVentas: List<Venta>
+    ): Result<File, ErrorStorage> {
         logger.debug { "Exportando a ZIPp $file" }
         val tempDir = Files.createTempDirectory(dirName)
         return try {
@@ -158,6 +158,5 @@ class CineStorageImpl  (
             Err(ErrorStorage.FicheroError("Error al importar desde ZIP: ${e.message}"))
         }
     }
-
 
 }
